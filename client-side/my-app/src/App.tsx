@@ -1,22 +1,20 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 
 import MainRoutes from "./routes/Routes";
 
 function App() {
-  const { email } = useSelector((state: any) => state.user);
   let user = JSON.parse(localStorage.getItem("user") || "{}");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (user.email) {
-      navigate("/check");
+      navigate("/");
     } else {
       navigate("/login");
     }
-  }, [email]);
+  }, [user.email, navigate]);
   return (
     <div className="App">
       <MainRoutes />

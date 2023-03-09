@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import DescriptionAlerts from "../components/Alert";
 import { userActions } from "../store/userSlice/userSlice";

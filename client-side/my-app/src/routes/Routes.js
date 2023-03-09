@@ -12,8 +12,8 @@ function MainRoutes() {
       protected: false,
     },
     {
-      id: "check",
-      path: "/check",
+      id: "home",
+      path: "/",
       component: <Home />,
       protected: true,
     },
