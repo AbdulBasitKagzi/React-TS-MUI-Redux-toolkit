@@ -1,0 +1,42 @@
+.image {
+  width: 240px;
+  height: 219px;
+}
+
+@media (min-width: 1200px) {
+  .image {
+    width: 190px !important;
+    height: 150px;
+  }
+  .icon {
+    width: 20px !important;
+  }
+}
+@media (max-width: 1024px) {
+  .image {
+    width: 140px;
+    height: 119px;
+  }
+  .icon {
+    width: 15px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .image {
+    width: 75px !important;
+    height: 50px !important;
+  }
+  .icon {
+    width: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .image {
+    width: 43px !important;
+    height: 37px !important;
+  }
+  .icon {
+    width: 7px !important;
+  }
+}

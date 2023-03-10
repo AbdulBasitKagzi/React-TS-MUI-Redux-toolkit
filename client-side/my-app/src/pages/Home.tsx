@@ -1,28 +1,63 @@
-import React from "react";
-// import NavBar from "../components/NavBar";
+import React, { useState } from "react";
+import Slider from "../components/Slider";
 import background from "../assets/images/HomeBackgroundImage.png";
 import Layout from "../components/Layout";
+
+// images import
 import ForHer from "../assets/images/ForHer.png";
 import ForHim from "../assets/images/ForHim.png";
+import womenShoeYellow from "../assets/images/womenShoeYellow.png";
+import weddingRing from "../assets/images/weddingRing.png";
+import wallet from "../assets/images/wallet.png";
+import appleWatch from "../assets/images/appleWatch.png";
+import womenStanding from "../assets/images/womenStanding.png";
 
 // mui imports
 import { Box, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import NavBar from "../components/NavBar";
 
 const theme = createTheme();
 
 function Home() {
-  let liEls = document.querySelectorAll("ul .list");
-  let index = 0;
-  const scroll = (increase: string) => {
-    console.log("i", liEls);
-    console.log("inc", increase);
-    index = index + +increase;
-    console.log("index", index);
-    index = Math.min(Math.max(index, 0), liEls.length - 1);
-    liEls[index].scrollIntoView({ behavior: "smooth" });
-  };
+  const [bestDeals, setBestDeals] = useState<
+    {
+      id: string;
+      productName: string;
+      image: string | undefined;
+      price: string;
+      cancelPrice: string;
+    }[]
+  >([
+    {
+      id: "yellowshoeswomen",
+      productName: "Flat Hill Slingback",
+      image: womenShoeYellow,
+      price: "$163",
+      cancelPrice: "$299",
+    },
+    {
+      id: "weddingring",
+      productName: "Ocean Blue Ring",
+      image: weddingRing,
+      price: "$245",
+      cancelPrice: "$269",
+    },
+    {
+      id: "brownleatherwalletr",
+      productName: "Brown Leather Wallet",
+      image: wallet,
+      price: "$144",
+      cancelPrice: "$179",
+    },
+    {
+      id: "Silversidewristwatch",
+      productName: "SilverSide WristWatch",
+      image: appleWatch,
+      price: "$336",
+      cancelPrice: "$379",
+    },
+  ]);
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ position: "relative" }}>
@@ -154,9 +189,30 @@ function Home() {
               </Box>
             </Box>
           </Box>
-          <Box sx={{ position: "absolute", top: "1100px" }}>
-            Best Deals
-            <Box sx={{ msOverflowX: "auto" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "1100px",
+              // width: "100%",
+              overflow: "hidden",
+            }}
+          >
+            <Box
+              sx={{
+                position: "relative",
+                top: 50,
+                marginBottom: "120px",
+                // overflow: "hidden",
+              }}
+            >
+              <Typography
+                variant="h3"
+                sx={{ fontFamily: "Jost", fontSize: "39px", fontWeight: 700 }}
+              >
+                Best Deals
+              </Typography>
+            </Box>
+            {/* <Box sx={{ msOverflowX: "auto" }}>
               <ul
                 style={{
                   display: "flex",
@@ -222,6 +278,140 @@ function Home() {
               </ul>
               <button onClick={() => scroll("+5")}>next</button>
               <button onClick={() => scroll("-1")}>prev</button>
+            </Box> */}
+
+            {/* <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                // msOverflowX: "auto",
+              }}
+            > */}
+            <Slider bestDeals={bestDeals} />
+            <Box sx={{ mt: { xs: 1, sm: 2, lg: 5, xl: 5 } }}>
+              <Button
+                variant="contained"
+                sx={{
+                  background: "#212121",
+                  width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
+                  height: { xl: 61, lg: 50, xs: 30 },
+                }}
+              >
+                View All
+              </Button>
+            </Box>
+
+            {/* </Box> */}
+          </Box>
+
+          <Box
+            position="absolute"
+            sx={{
+              top: { lg: 1800, md: 1700, sm: 1600, xs: 1500 },
+              left: { lg: 169, md: 115, sm: 85, xs: 20 },
+              right: { xs: 20 },
+              alignContent: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: { lg: "flex", md: "flex", sm: "flex" },
+                // justifyContent: "space-between",
+              }}
+            >
+              <Box
+                sx={{
+                  background: "#EEEEEE",
+                  width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                  height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                  mb: { xs: 1 },
+                  mr: 1,
+                  textAlign: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "Jost",
+                    fontSize: {
+                      lg: "29px",
+                      md: "20px",
+                      sm: "20px",
+                      xs: "20px",
+                    },
+                    fontWeight: 700,
+                    color: "#616161",
+                    marginTop: { lg: "100px", md: "80px", sm: "50px" },
+                    paddingTop: { xs: "40px" },
+                  }}
+                >
+                  Exclusive collection 2021
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Jost",
+                    fontSize: {
+                      lg: "61px",
+                      md: "41px",
+                      sm: "31px",
+                      xs: "31px",
+                    },
+                    fontWeight: 700,
+                    color: "#212121",
+                  }}
+                >
+                  Be exclusive
+                </Typography>
+                <Typography
+                  sx={{
+                    textAlign: "center",
+                    fontFamily: "Jost",
+                    fontSize: {
+                      lg: "18px",
+                      md: "14px",
+                      sm: "12px",
+                      xs: "12px",
+                    },
+                    fontWeight: 400,
+                    color: "#212121",
+                  }}
+                >
+                  The best everyday option in a Super Saver range within a
+                  reasonable price. It is our responsibility to keep you 100
+                  percent stylish. Be smart & trendy with us.
+                </Typography>
+                <Box
+                  sx={{
+                    mt: { xs: 1, sm: 2, lg: 5, xl: 5 },
+                    ml: { lg: -18, md: -12 },
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    sx={{
+                      background: "#212121",
+                      width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
+                      height: { xl: 61, lg: 50, xs: 30 },
+                    }}
+                  >
+                    View All
+                  </Button>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  // backgroundImage: `url(${womenStanding})`,
+                  objectFit: "cover",
+                  width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                  height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                }}
+              >
+                <Box position="absolute" sx={{ left: 710, top: 420 }}>
+                  <Button variant="text" color="primary">
+                    <Typography color="#FFFFFF">Outfit</Typography>
+                  </Button>
+                </Box>
+                <img src={womenStanding} width="100%" />
+              </Box>
             </Box>
           </Box>
         </Layout>
