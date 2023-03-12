@@ -19,13 +19,11 @@ function MainRoutes() {
     },
   ];
   return (
-    <div>
-      <Routes>
-        {routes_arr.map((routes) => (
-          <Route path={routes.path} element={routes.component} />
-        ))}
-      </Routes>
-    </div>
+    <Routes>
+      {routes_arr.map((routes) => (
+        <Route path={routes.path} element={routes.component} />
+      ))}
+    </Routes>
   );
 }
 

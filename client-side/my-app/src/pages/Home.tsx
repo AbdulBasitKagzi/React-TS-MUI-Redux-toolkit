@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Slider from "../components/Slider";
 import background from "../assets/images/HomeBackgroundImage.png";
 import Layout from "../components/Layout";
+import StandardImageList from "./ImageList";
 
 // images import
 import ForHer from "../assets/images/ForHer.png";
@@ -60,7 +61,7 @@ function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ position: "relative" }}>
+      <Box>
         <Layout>
           <Box
             className="overlay"
@@ -77,23 +78,37 @@ function Home() {
             <Box
               sx={{
                 backgroundImage: `url(${background})`,
+                backgroundRepeat: "no-repeat",
                 // position: "absolute",
                 width: "100%",
-                height: "809px",
+                height: {
+                  xl: "890px",
+                  lg: "890px",
+                  md: "605px",
+                  sm: "540px",
+                  xs: "340px",
+                },
                 opacity: 0.85,
               }}
             ></Box>
             <Box
               sx={{
+                width: "100%",
                 position: "absolute",
                 top: "154px",
-                left: { md: "125px", sm: "95px", xs: "85px" },
+                // left: { md: "125px", sm: "95px", xs: "85px" },
               }}
             >
               <Typography
                 variant="h3"
                 sx={{
-                  fontSize: { lg: "39px", md: "30px", sm: "15px", xs: "12px" },
+                  // m: "0 auto",
+                  fontSize: {
+                    lg: "39px",
+                    md: "30px",
+                    sm: "15px",
+                    xs: "12px",
+                  },
                   fontWeight: "400px",
                   fontFamily: "Jost",
                 }}
@@ -103,7 +118,12 @@ function Home() {
               <Typography
                 variant="body1"
                 sx={{
-                  fontSize: { lg: "95px", md: "68px", sm: "50px", xs: "20px" },
+                  fontSize: {
+                    lg: "95px",
+                    md: "68px",
+                    sm: "50px",
+                    xs: "20px",
+                  },
                   fontWeight: "700px",
                   fontFamily: "Jost",
                 }}
@@ -111,8 +131,150 @@ function Home() {
                 Exclusively designed for you
               </Typography>
             </Box>
+            <Box
+              sx={{
+                position: "relative",
+                top: {
+                  xl: "-401px",
+                  lg: "-401px",
+                  md: "-235px",
+                  sm: "-195px",
+                  xs: "-95px",
+                },
+                // left: "169px",
+                // right: "170px",
+              }}
+            >
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Box
+                  sx={{
+                    width: {
+                      xl: "691px",
+                      lg: "691px",
+                      md: "491px",
+                      sm: "335px",
+                      xs: "170px",
+                    },
+                    // height: {
+                    //   xl: "689px",
+                    //   lg: "689px",
+                    //   md: "589px",
+                    //   sm: "489px",
+                    // },
+                  }}
+                >
+                  <Button
+                    sx={{
+                      position: "absolute",
+                      top: {
+                        xl: "363px",
+                        lg: "363px",
+                        md: "250px",
+                        sm: "170px",
+                        xs: "88px",
+                      },
+                      left: {
+                        xl: "262px",
+                        lg: "262px",
+                        md: "165px",
+                        sm: "100px",
+                        xs: "100px",
+                      },
+                      // right: "0px",
+                      background: "#FFFFFF",
+                      width: {
+                        xl: "256px",
+                        lg: "256px",
+                        md: "256px",
+                        sm: "185px",
+                        xs: "64px",
+                      },
+                      height: {
+                        xl: "52px",
+                        lg: "52px",
+                        md: "52px",
+                        sm: "30px",
+                        xs: "20px",
+                      },
+                      fontFamily: "Josefin Sans",
+                      fontSize: { xl: 20, lg: 20, md: 20, sm: 15, xs: 8 },
+                      color: "#424242",
+                      fontWeight: 700,
+
+                      // p: "18px, 40px, 14px, 40px",
+                    }}
+                  >
+                    For Her
+                  </Button>
+                  <img src={ForHer} width="100%" />
+                </Box>
+                <Box
+                  sx={{
+                    width: {
+                      xl: "691px",
+                      lg: "691px",
+                      md: "491px",
+                      sm: "335px",
+                      xs: "170px",
+                    },
+
+                    // height: {
+                    //   xl: "689px",
+                    //   lg: "689px",
+                    //   md: "589px",
+                    // },
+                  }}
+                >
+                  <Button
+                    sx={{
+                      position: "absolute",
+                      top: {
+                        xl: "363px",
+                        lg: "363px",
+                        md: "250px",
+                        sm: "170px",
+                        xs: "88px",
+                      },
+                      left: {
+                        xl: "990px",
+                        lg: "990px",
+                        md: "670px",
+                        sm: "481px",
+                        xs: "275px",
+                      },
+                      // right: "0px",
+                      background: "#FFFFFF",
+                      width: {
+                        xl: "256px",
+                        lg: "256px",
+                        md: "256px",
+                        sm: "185px",
+                        xs: "64px",
+                      },
+                      height: {
+                        xl: "52px",
+                        lg: "52px",
+                        md: "52px",
+                        sm: "30px",
+                        xs: "20px",
+                      },
+                      fontFamily: "Josefin Sans",
+                      fontSize: { xl: 20, lg: 20, md: 20, sm: 15, xs: 8 },
+                      color: "#424242",
+                      fontWeight: 700,
+
+                      // p: "18px, 40px, 14px, 40px",
+                    }}
+                  >
+                    For Him
+                  </Button>
+                  <img src={ForHim} width="100%" />
+                </Box>
+              </Box>
+            </Box>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+
+          {/* <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box
               sx={{
                 position: "relative",
@@ -123,6 +285,7 @@ function Home() {
             >
               <Box
                 sx={{
+                  objectFit: "cover",
                   background: `url(${ForHer})`,
                   width: {
                     lg: "600px",
@@ -132,6 +295,7 @@ function Home() {
                   height: {
                     lg: "640px",
                     md: "640px",
+                    sm: "500px",
                   },
                 }}
               >
@@ -157,6 +321,7 @@ function Home() {
             <Box sx={{ position: "relative", top: "325px", mt: "54px" }}>
               <Box
                 sx={{
+                  objectFit: "cover",
                   background: `url(${ForHim})`,
                   width: {
                     lg: "600px",
@@ -166,6 +331,7 @@ function Home() {
                   height: {
                     lg: "640px",
                     md: "640px",
+                    sm: "500px",
                   },
                 }}
               >
@@ -188,8 +354,8 @@ function Home() {
                 </Button>
               </Box>
             </Box>
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             sx={{
               position: "absolute",
               top: "1100px",
@@ -211,8 +377,8 @@ function Home() {
               >
                 Best Deals
               </Typography>
-            </Box>
-            {/* <Box sx={{ msOverflowX: "auto" }}>
+            </Box> */}
+          {/* <Box sx={{ msOverflowX: "auto" }}>
               <ul
                 style={{
                   display: "flex",
@@ -280,15 +446,15 @@ function Home() {
               <button onClick={() => scroll("-1")}>prev</button>
             </Box> */}
 
-            {/* <Box
+          {/* <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 // msOverflowX: "auto",
               }}
             > */}
-            <Slider bestDeals={bestDeals} />
-            <Box sx={{ mt: { xs: 1, sm: 2, lg: 5, xl: 5 } }}>
+          {/* <Slider bestDeals={bestDeals} /> */}
+          {/* <Box sx={{ mt: { xs: 1, sm: 2, lg: 5, xl: 5 } }}>
               <Button
                 variant="contained"
                 sx={{
@@ -299,12 +465,12 @@ function Home() {
               >
                 View All
               </Button>
-            </Box>
+            </Box> */}
 
-            {/* </Box> */}
-          </Box>
+          {/* </Box> */}
+          {/* </Box> */}
 
-          <Box
+          {/* <Box
             position="absolute"
             sx={{
               top: { lg: 1800, md: 1700, sm: 1600, xs: 1500 },
@@ -413,7 +579,8 @@ function Home() {
                 <img src={womenStanding} width="100%" />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
+          {/* <StandardImageList /> */}
         </Layout>
       </Box>
     </ThemeProvider>
