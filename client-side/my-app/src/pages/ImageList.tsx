@@ -1,71 +1,89 @@
 import * as React from "react";
+import { newArrival } from "../assets/Constants";
+
+// icons and images import
+import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
+import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
+
+// mui imports
+import { Box } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 
-export default function StandardImageList() {
-  return (
-    <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            alt={item.title}
-            loading="lazy"
-          />
-        </ImageListItem>
-      ))}
-    </ImageList>
-  );
-}
+import styles from "../css/slider.module.css";
 
-const itemData = [
+const ArrivalSlider: React.FC = () => {
   {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-  },
-];
+  }
+  return (
+    <>
+      <Box
+        position="relative"
+        sx={{
+          top: { xl: 380, lg: 380, md: 350, sm: 250 },
+          left: { xl: -650, lg: -650, md: -450, sm: -350 },
+          display: {
+            xl: "block",
+            lg: "block",
+            md: "block",
+            sm: "block",
+            xs: "none",
+          },
+        }}
+      >
+        <img className={styles.icon} src={leftArrowIcon} />
+      </Box>
+      <Box
+        // position="relative"
+        position="absolute"
+        sx={{
+          top: { xl: 3540, lg: 3540, md: 2800, sm: 2285 },
+          left: { xl: 1400, lg: 1350, md: 965, sm: 730 },
+          display: {
+            xl: "block",
+            lg: "block",
+            md: "block",
+            sm: "block",
+            xs: "none",
+          },
+        }}
+        // sx={{
+        //   position: "absolute",
+        //   top: { xl: 275, lg: 275, md: 250, sm: 250, xs: 220 },
+        //   left: { xl: 1455, lg: 1380, md: 985, sm: 750, xs: 395 },
+        // }}
+      >
+        <img className={styles.icon} src={rightArrowIcon} />
+      </Box>
+      <Box
+        sx={{
+          display: {
+            xl: "flex",
+            lg: "flex",
+            md: "flex",
+            sm: "flex",
+            xs: "grid",
+          },
+          justifyContent: "center",
+          alignContent: "center",
+          overflow: "hidden",
+        }}
+      >
+        {newArrival.map((arr: any) => (
+          <Box
+            sx={{
+              width: { xl: 289, lg: 289, md: 205, sm: 155, xs: 280 },
+              height: { xl: 782, lg: 782, md: 782, sm: 500, xs: 500 },
+              ml: 1,
+              flexShrink: 0,
+              mt: { xs: 2 },
+            }}
+          >
+            <img src={arr.image} alt="images" width="100%" height="100%" />
+          </Box>
+        ))}
+      </Box>
+    </>
+  );
+};
+export default ArrivalSlider;

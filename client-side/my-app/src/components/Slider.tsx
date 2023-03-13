@@ -3,6 +3,7 @@ import React from "react";
 // images and icons imports
 import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
+import womenShoeBlue from "../assets/images/womenShoeBlue.png";
 
 // mui imports
 import { Box } from "@mui/material";
@@ -23,111 +24,115 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
     liEls[index].scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <Box>
+    <>
       <Box
         sx={{
           position: "absolute",
-          left: { xs: 5, sm: 30 },
-          top: { xs: 175, md: 210 },
+          top: { xl: 275, lg: 275, md: 250, sm: 250, xs: 220 },
+          left: { xl: 55, lg: 44, md: 25, xs: 20 },
         }}
-        onClick={() => scroll("-5")}
       >
-        <img src={leftArrowIcon} alt="prev" className={styles.icon} />
+        <img className={styles.icon} src={leftArrowIcon} />
       </Box>
       <Box
         sx={{
           position: "absolute",
-          left: { xs: 380, sm: 725, md: 925, lg: 1260 },
-          top: {
-            xs: 175,
-            md: 210,
-          },
+          top: { xl: 275, lg: 275, md: 250, sm: 250, xs: 220 },
+          left: { xl: 1455, lg: 1380, md: 985, sm: 750, xs: 395 },
         }}
-        onClick={() => scroll("+5")}
       >
-        <img
-          className={styles.icon}
-          src={rightArrowIcon}
-          alt="next"
-          width="20px"
-          height="40px"
-        />
+        <img className={styles.icon} src={rightArrowIcon} />
       </Box>
       <Box
         sx={{
-          display: { lg: "flex", xs: "flex" },
+          display: "flex",
+          overflow: "hidden",
+          justifyContent: "space-between",
+          ml: { xl: 5, lg: 5, md: 5, sm: 3, xs: 2 },
         }}
       >
         {bestDeals?.map((deals: any) => (
-          <Card
-            className="ul"
+          <Box
             sx={{
               width: {
-                // xl: 389,
-                lg: 200,
-                md: 135,
-                sm: 150,
-                xs: 1,
+                xl: "380px",
+                lg: "350px",
+                md: "250px",
+                sm: "189px",
+                xs: "89px",
               },
-              boxShadow: "none",
-              marginLeft: {
-                xs: 0,
-                sm: "38px",
-                md: "100px",
-                lg: "120px",
-                // xl: "92px",
+              height: {
+                xl: "668px",
+                lg: "668px",
+                md: "530px",
+                sm: "515px",
+                xs: "430px",
               },
+              // background: "red",
             }}
           >
-            <Box sx={{ objectFit: "none" }} className="li">
+            <Box
+              sx={{
+                width: {
+                  xl: "380px",
+                  lg: "350px",
+                  md: "250px",
+                  sm: "189px",
+                  xs: "100px",
+                },
+                height: "255px",
+                marginTop: "154px",
+              }}
+            >
               <img className={styles.image} src={deals.image} />
-              <CardContent
-                sx={{
-                  fontFamily: "Jost",
-                  marginTop: { xs: "15px", xl: "140px" },
-                }}
-              >
+              <Box sx={{ textAlign: "left", marginTop: "142px" }}>
                 <Typography
                   sx={{
-                    fontFamily: "Jost",
-                    fontSize: { xs: 7, sm: 10, md: 12, lg: 15, xl: 16 },
+                    fontSize: {
+                      xl: "25px",
+                      lg: "25px",
+                      md: "18px",
+                      sm: "16px",
+                      xs: "8px",
+                    },
                     fontWeight: 700,
+                    fontFamily: "Jost",
                   }}
                 >
                   {deals.productName}
                 </Typography>
-                <Box sx={{ textAlign: "left" }}>
-                  <Typography
-                    sx={{
-                      display: "inline-block",
-                      color: "#9E9E9E",
-                      fontSize: { xs: 8, sm: 12, xl: 20 },
-                      fontWeight: 400,
-                      fontFamily: "Jost",
-                      textDecoration: "line-through",
-                    }}
-                  >
-                    {deals.price}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      ml: 1,
-                      display: "inline-block",
-                      color: "#FF705C",
-                      fontSize: { xs: 9, xl: 20, sm: 12 },
-                      fontWeight: 400,
-                      fontFamily: "Jost",
-                    }}
-                  >
-                    {deals.cancelPrice}
-                  </Typography>
-                </Box>
-              </CardContent>
+              </Box>
+              <Box sx={{ textAlign: "left" }}>
+                <Typography
+                  sx={{
+                    mr: 1,
+                    display: "inline-block",
+                    color: "#9E9E9E",
+                    fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
+                    fontWeight: 400,
+                    fontFamily: "Jost",
+                    textDecoration: "line-through",
+                  }}
+                >
+                  {deals.cancelPrice}
+                </Typography>
+                <Typography
+                  sx={{
+                    display: "inline-block",
+                    color: "#FF705C",
+                    fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
+                    fontWeight: 400,
+                    fontFamily: "Jost",
+                  }}
+                >
+                  {deals.price}
+                </Typography>
+              </Box>
             </Box>
-          </Card>
+          </Box>
         ))}
       </Box>
-    </Box>
+    </>
   );
 };
 
