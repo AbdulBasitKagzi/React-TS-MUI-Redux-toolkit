@@ -6,7 +6,7 @@ import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
 import womenShoeBlue from "../assets/images/womenShoeBlue.png";
 
 // mui imports
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -46,31 +46,28 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
       <Box
         sx={{
           display: "flex",
-          overflow: "hidden",
+          overflow: {
+            xl: "hidden",
+            lg: "hidden",
+            md: "hidden",
+            sm: "hidden",
+            xs: "hidden",
+          },
+          overflowX: {
+            xl: "hidden",
+            lg: "hidden",
+            md: "hidden",
+            sm: "hidden",
+            xs: "auto",
+          },
           justifyContent: "space-between",
           ml: { xl: 5, lg: 5, md: 5, sm: 3, xs: 2 },
         }}
       >
-        {bestDeals?.map((deals: any) => (
-          <Box
-            sx={{
-              width: {
-                xl: "380px",
-                lg: "350px",
-                md: "250px",
-                sm: "189px",
-                xs: "89px",
-              },
-              height: {
-                xl: "668px",
-                lg: "668px",
-                md: "530px",
-                sm: "515px",
-                xs: "430px",
-              },
-              // background: "red",
-            }}
-          >
+        {bestDeals.length === 0 ? (
+          <Typography>No Products found</Typography>
+        ) : (
+          bestDeals?.map((deals: any) => (
             <Box
               sx={{
                 width: {
@@ -78,59 +75,91 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
                   lg: "350px",
                   md: "250px",
                   sm: "189px",
-                  xs: "100px",
+                  xs: "89px",
                 },
-                height: "255px",
-                marginTop: "154px",
+                height: {
+                  xl: "668px",
+                  lg: "668px",
+                  md: "530px",
+                  sm: "515px",
+                  xs: "430px",
+                },
+                // background: "red",
               }}
             >
-              <img className={styles.image} src={deals.image} />
-              <Box sx={{ textAlign: "left", marginTop: "142px" }}>
-                <Typography
-                  sx={{
-                    fontSize: {
-                      xl: "25px",
-                      lg: "25px",
-                      md: "18px",
-                      sm: "16px",
-                      xs: "8px",
-                    },
-                    fontWeight: 700,
-                    fontFamily: "Jost",
-                  }}
-                >
-                  {deals.productName}
-                </Typography>
-              </Box>
-              <Box sx={{ textAlign: "left" }}>
-                <Typography
-                  sx={{
-                    mr: 1,
-                    display: "inline-block",
-                    color: "#9E9E9E",
-                    fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
-                    fontWeight: 400,
-                    fontFamily: "Jost",
-                    textDecoration: "line-through",
-                  }}
-                >
-                  {deals.cancelPrice}
-                </Typography>
-                <Typography
-                  sx={{
-                    display: "inline-block",
-                    color: "#FF705C",
-                    fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
-                    fontWeight: 400,
-                    fontFamily: "Jost",
-                  }}
-                >
-                  {deals.price}
-                </Typography>
+              <Box
+                sx={{
+                  width: {
+                    xl: "380px",
+                    lg: "350px",
+                    md: "250px",
+                    sm: "189px",
+                    xs: "100px",
+                  },
+                  height: "255px",
+                  marginTop: "154px",
+                }}
+              >
+                <img className={styles.image} src={deals.image} />
+                <Box sx={{ textAlign: "left", marginTop: "142px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: {
+                        xl: "25px",
+                        lg: "25px",
+                        md: "18px",
+                        sm: "16px",
+                        xs: "8px",
+                      },
+                      fontWeight: 700,
+                      fontFamily: "Jost",
+                    }}
+                  >
+                    {deals.productName}
+                  </Typography>
+                </Box>
+                <Box sx={{ textAlign: "left" }}>
+                  <Typography
+                    sx={{
+                      mr: 1,
+                      display: "inline-block",
+                      color: "#9E9E9E",
+                      fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
+                      fontWeight: 400,
+                      fontFamily: "Jost",
+                      textDecoration: "line-through",
+                    }}
+                  >
+                    {deals.cancelPrice}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      display: "inline-block",
+                      color: "#FF705C",
+                      fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
+                      fontWeight: 400,
+                      fontFamily: "Jost",
+                    }}
+                  >
+                    {deals.price}
+                  </Typography>
+                </Box>
               </Box>
             </Box>
-          </Box>
-        ))}
+          ))
+        )}
+      </Box>
+      <Box>
+        <Button
+          variant="contained"
+          sx={{
+            background: "#212121",
+            width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
+            height: { xl: 61, lg: 50, xs: 30, md: 40 },
+          }}
+        >
+          View All
+        </Button>
       </Box>
     </>
   );

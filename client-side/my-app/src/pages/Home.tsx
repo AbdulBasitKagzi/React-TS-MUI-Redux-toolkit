@@ -3,9 +3,10 @@ import Slider from "../components/Slider";
 import background from "../assets/images/HomeBackgroundImage.png";
 import Layout from "../components/Layout";
 import CategoryTab from "../components/Tab";
-import ArrivalSlider from "./ImageList";
+import ArrivalSlider from "./ArrivalSlider";
 import { person_tabs } from "../assets/Constants";
 import { product_tabs } from "../assets/Constants";
+import { useSelector } from "react-redux";
 
 // images import
 import ForHer from "../assets/images/ForHer.png";
@@ -19,10 +20,15 @@ import arrowIcon from "../assets/icons/Arrow_Right.svg";
 import handbag from "../assets/images/handBag.png";
 import hats from "../assets/images/hat.png";
 import heels from "../assets/images/heels.png";
+import urbanStories from "../assets/images/urbanStories.png";
+import countryLights from "../assets/images/countryLights.png";
+import formal from "../assets/images/formal.png";
 
 // mui imports
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, ImageList, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Image_List from "../components/ImageList";
+import ReviewCard from "../components/ReviewCard";
 
 const theme = createTheme();
 
@@ -31,6 +37,7 @@ function Home() {
     id: string;
     value: string;
   }
+  const { Products } = useSelector((state: any) => state.product);
   const [bestDeals, setBestDeals] = useState<
     {
       id: string;
@@ -331,7 +338,7 @@ function Home() {
                 </Typography>
               </Box>
               <Slider bestDeals={bestDeals} />
-              <Box>
+              {/* <Box>
                 <Button
                   variant="contained"
                   sx={{
@@ -342,7 +349,7 @@ function Home() {
                 >
                   View All
                 </Button>
-              </Box>
+              </Box> */}
             </Box>
             <Box
               sx={{
@@ -431,7 +438,7 @@ function Home() {
                         height: { xl: 61, lg: 50, xs: 30 },
                       }}
                     >
-                      View All
+                      Explore
                     </Button>
                   </Box>
                 </Box>
@@ -523,7 +530,180 @@ function Home() {
               <Box>
                 <CategoryTab tabs={product_tabs} />
               </Box>
+              <Box>
+                <Slider bestDeals={Products} />
+              </Box>
             </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                mt: { xl: 12, lg: 12, md: 12, sm: 8, xs: 5 },
+              }}
+            >
+              <Box
+                sx={{
+                  display: { lg: "flex", md: "flex", sm: "flex" },
+                }}
+              >
+                <Box
+                  sx={{
+                    background: "#EEEEEE",
+                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    mb: { xs: 1 },
+                    mr: 1,
+                    textAlign: "center",
+                  }}
+                >
+                  <img src={urbanStories} alt="urban" width="100%" />
+                </Box>
+                <Box
+                  sx={{
+                    // backgroundImage: `url(${womenStanding})`,
+                    objectFit: "cover",
+                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                  }}
+                >
+                  <img src={countryLights} width="100%" />
+                  {/* <Box position="relative" sx={{ bottom: 70 }}>
+                    <Button variant="text">
+                      <Typography color="#FFFFFF">
+                        Outfit
+                        <img src={arrowIcon} alt="arrow" width="15px" />
+                      </Typography>
+                    </Button>
+                  </Box> */}
+                </Box>
+              </Box>
+            </Box>
+            <Box sx={{ mt: 12 }}>
+              <Box>
+                <Typography
+                  variant="h3"
+                  sx={{ fontFamily: "Jost", fontSize: "39px", fontWeight: 700 }}
+                >
+                  Best Sellers
+                </Typography>
+              </Box>
+              <Slider bestDeals={bestDeals} />
+            </Box>
+            <Box
+              sx={{
+                // maxWidth: "90%",
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                mx: "auto",
+              }}
+            >
+              <Image_List />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                mt: { xl: 12, xs: 5 },
+              }}
+            >
+              <Box
+                sx={{
+                  display: { lg: "flex", md: "flex", sm: "flex" },
+                }}
+              >
+                <Box
+                  sx={{
+                    background: {
+                      xs: "#eeeeee",
+                      xl: "#FFFFFFF",
+                      lg: "#FFFFFF",
+                      md: "#FFFFFF",
+                      sm: "#FFFFFF",
+                    },
+                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    mb: { xs: 1 },
+                    mr: 1,
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: "Jost",
+                      fontSize: {
+                        lg: "45px",
+                        md: "34px",
+                        sm: "25px",
+                        xs: "22px",
+                      },
+                      marginTop: { lg: "160px", md: "135px", sm: "110px" },
+                      paddingTop: {
+                        xs: "90px",
+                        sm: "0px",
+                        md: "0px",
+                        lg: "0px",
+                        xl: "0px",
+                      },
+                      fontWeight: 700,
+                      color: "#212121",
+                    }}
+                  >
+                    Gentle Formal Looks
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                      fontFamily: "Jost",
+                      fontSize: {
+                        lg: "18px",
+                        md: "14px",
+                        sm: "10px",
+                        xs: "10px",
+                      },
+                      px: 5,
+                      fontWeight: 400,
+                      color: "#212121",
+                    }}
+                  >
+                    We provide the top formal apparel package to make your job
+                    look confident and comfortable. Stay connect.
+                  </Typography>
+                  <Box
+                    sx={{
+                      mt: { xs: 1, sm: 2, lg: 5, xl: 5 },
+                      ml: { lg: -18, md: -12 },
+                    }}
+                  >
+                    <Button
+                      variant="contained"
+                      sx={{
+                        background: "#212121",
+                        width: { xl: 256, lg: 200, md: 150, xs: 128, sm: 128 },
+                        height: { xl: 61, lg: 50, xs: 30 },
+                        fontSize: { sm: 8, xs: 8, xl: 15, lg: 12 },
+                      }}
+                    >
+                      Explore Collection
+                    </Button>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    // backgroundImage: `url(${womenStanding})`,
+                    objectFit: "cover",
+                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                  }}
+                >
+                  <img src={formal} width="100%" />
+                </Box>
+              </Box>
+            </Box>
+            <ReviewCard />
+            {/* enter new content here above the comment */}
           </Box>
         </Layout>
       </Box>
