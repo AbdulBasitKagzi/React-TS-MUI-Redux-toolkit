@@ -1,20 +1,37 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./App.css";
 
 import MainRoutes from "./routes/Routes";
 
 function App() {
-  let user = JSON.parse(localStorage.getItem("user") || "{}");
+  const { User } = useSelector((state: any) => state.user);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [save, setSave] = useState<string>(
+    localStorage.getItem("isAuth") || ""
+  );
 
   useEffect(() => {
-    if (user.email) {
-      navigate("/");
+    setSave(localStorage.getItem("isAuth") || "");
+  }, [User]);
+
+  console.log(User, save);
+
+  useEffect(() => {
+    // to protect routes
+    if (save === "true") {
+      if (location.pathname === "/login") {
+        navigate("/");
+      } else {
+        navigate(location.pathname);
+      }
     } else {
       navigate("/login");
     }
-  }, [user.email, navigate]);
+  }, [save, navigate, location.pathname]);
   return (
     <div className="App">
       <MainRoutes />

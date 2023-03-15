@@ -1,4 +1,12 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
+
+// images and icons import
+import callVector from "../assets/icons/callVector.svg";
+import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
+import likeVector from "../assets/icons/likeVector.svg";
+
+// mui imports
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,9 +20,6 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import callVector from "../assets/icons/callVector.svg";
-import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
-import likeVector from "../assets/icons/likeVector.svg";
 
 interface Props {
   /**
@@ -25,11 +30,43 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ["Majestic", "Women", "Men", "Collection", "Outlet"];
+const navItems = [
+  {
+    id: "majestic",
+    value: "Majestic",
+    action: "#",
+  },
+  {
+    id: "women",
+    value: "Women",
+    action: "#",
+  },
+  {
+    id: "men",
+    value: "Men",
+    action: "#",
+  },
+  {
+    id: "collection",
+    value: "Collection",
+    action: "#",
+  },
+  {
+    id: "outlet",
+    value: "Outlet",
+    action: "#",
+  },
+  {
+    id: "categorydetail",
+    value: "Categorydetail",
+    action: "/categorydetail",
+  },
+];
 const navIcons = [callVector, shoppingcartVector, likeVector];
 
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -44,10 +81,10 @@ export default function DrawerAppBar(props: Props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText
-                primary={item}
+                primary={item.value}
                 sx={{
                   color: "#212121",
                   fontFamily: "Josefin Sans",
@@ -120,7 +157,7 @@ export default function DrawerAppBar(props: Props) {
             >
               {navItems.map((item) => (
                 <Typography
-                  key={item}
+                  key={item.id}
                   sx={{
                     color: "#212121",
                     fontFamily: "Josefin Sans",
@@ -129,8 +166,9 @@ export default function DrawerAppBar(props: Props) {
                     mr: "32px",
                     mt: "27px",
                   }}
+                  onClick={() => navigate(item.action)}
                 >
-                  {item}
+                  {item.value}
                 </Typography>
               ))}
             </Box>
@@ -157,7 +195,7 @@ export default function DrawerAppBar(props: Props) {
                     mt: "27px",
                   }}
                 >
-                  <img src={item} />
+                  <img src={item} alt="item" />
                 </Typography>
               ))}
             </Box>

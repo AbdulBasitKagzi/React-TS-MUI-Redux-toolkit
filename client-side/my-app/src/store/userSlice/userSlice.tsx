@@ -1,27 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type user = {
-  email: string;
-  password: string;
-};
+interface userstate {
+  User: Object;
+  //   id: string;
+  //   type: string;
+  //   category: string;
+  //   image: string | undefined;
+  //   name: string;
+  //   price: string;
+  //   cancelPrice: string;
+}
 
-const User: user = {
-  email: "",
-  password: "",
+// type user = {
+//   email: string;
+//   password: string;
+// };
+
+// const User: user = {
+//   email: "",
+//   password: "",
+// };
+const userState: userstate = {
+  User: {},
 };
 
 const userSlice = createSlice({
   name: "user",
-  initialState: User,
+  initialState: userState,
   reducers: {
     login: (state, action) => {
-      state.email = action.payload.userCredentials.email;
-      state.password = action.payload.userCredentials.password;
-
-      localStorage.setItem(
-        "user",
-        JSON.stringify(action.payload.userCredentials)
-      );
+      state.User = action.payload.userCredentials;
+      localStorage.setItem("isAuth", "true");
+      localStorage.setItem("user", JSON.stringify(state.User));
     },
   },
 });

@@ -27,7 +27,7 @@ import countryLights from "../assets/images/countryLights.png";
 import formal from "../assets/images/formal.png";
 
 // mui imports
-import { Box, Button, ImageList, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Image_List from "../components/ImageList";
 import Footer from "../components/Footer";
@@ -35,11 +35,8 @@ import Footer from "../components/Footer";
 const theme = createTheme();
 
 function Home() {
-  interface tabs {
-    id: string;
-    value: string;
-  }
   const { Products } = useSelector((state: any) => state.product);
+
   const [bestDeals, setBestDeals] = useState<
     {
       id: string;
@@ -246,7 +243,7 @@ function Home() {
                   >
                     For Her
                   </Button>
-                  <img src={ForHer} width="100%" />
+                  <img src={ForHer} alt="forher" width="100%" />
                 </Box>
                 <Box
                   sx={{
@@ -308,7 +305,7 @@ function Home() {
                   >
                     For Him
                   </Button>
-                  <img src={ForHim} width="100%" />
+                  <img src={ForHim} alt="forhim" width="100%" />
                 </Box>
               </Box>
             </Box>
@@ -452,7 +449,7 @@ function Home() {
                     height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
                   }}
                 >
-                  <img src={womenStanding} width="100%" />
+                  <img src={womenStanding} alt="womenstanding" width="100%" />
                   <Box position="relative" sx={{ bottom: 70 }}>
                     <Button variant="text">
                       <Typography color="#FFFFFF">
@@ -569,7 +566,7 @@ function Home() {
                     height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
                   }}
                 >
-                  <img src={countryLights} width="100%" />
+                  <img src={countryLights} alt="countylights" width="100%" />
                   {/* <Box position="relative" sx={{ bottom: 70 }}>
                     <Button variant="text">
                       <Typography color="#FFFFFF">
@@ -700,7 +697,7 @@ function Home() {
                     height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
                   }}
                 >
-                  <img src={formal} width="100%" />
+                  <img src={formal} alt="formal" width="100%" />
                 </Box>
               </Box>
             </Box>

@@ -85,7 +85,7 @@ const ReviewCard: React.FC = () => {
             >
               <img
                 src={arr.image}
-                alt="image"
+                alt="leathershoe"
                 width="100%"
                 height={arr.height}
               />
@@ -103,7 +103,7 @@ const ReviewCard: React.FC = () => {
                   <img
                     className={styles.reviwer_image}
                     src={arr.image_1}
-                    alt="image"
+                    alt="women_1"
                     // width="89px"
                     // height="89px"
                   />

@@ -1,7 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import { ReactNode } from "react";
-import Footer from "./Footer";
 
 const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (

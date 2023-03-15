@@ -193,3 +193,39 @@ export const Image_Lsit = [
     cols: 1,
   },
 ];
+
+export const humanFilter = [
+  { id: "women", value: "Women" },
+  { id: "ladies", value: "Ladies" },
+  { id: "girls", value: "Girls" },
+  { id: "babies", value: "Babies" },
+];
+
+export const brandFilter = [
+  { id: "h&m", value: "H & M" },
+  { id: "mark&spencer", value: "Mark & Spencer" },
+  { id: "victoria'ssecret", value: "Victoria's Secret" },
+  { id: "dior", value: "Dior" },
+  { id: "gucci", value: "Gucci" },
+  { id: "fendi", value: "Fendi" },
+  { id: "prada", value: "Prada" },
+  { id: "chanel", value: "Chanel" },
+  { id: "versace", value: "Versace" },
+  { id: "dolce&gabbana", value: "Dolce & Gabbana" },
+  { id: "zara", value: "Zara" },
+];
+
+export const categoriesFilter = [
+  { id: "dresses", value: "Dresses" },
+  { id: "tops", value: "Tops" },
+  { id: "lingerie&loungewear", value: "Lingerie & Lounge Wear" },
+  { id: "blouse", value: "Blouse" },
+  { id: "vintage", value: "Vintage" },
+];
+
+export const sizeFilter = [
+  { id: "Medium", value: "Medium" },
+  { id: "Large", value: "Large" },
+  { id: "Plus Size", value: "Plus Size" },
+  { id: "Sexy Plus Size", value: "Sexy Plus Size" },
+];

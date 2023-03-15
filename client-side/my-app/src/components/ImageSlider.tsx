@@ -1,5 +1,3 @@
-import React, { useRef, useState } from "react";
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
@@ -70,7 +68,7 @@ const ImageSlider: React.FC = () => {
               </Typography>
             </Typography>
           </Box>
-          <img src={outletBerlin} />
+          <img src={outletBerlin} alt="berlin" />
         </SwiperSlide>
         <SwiperSlide>
           <Box
@@ -122,7 +120,7 @@ const ImageSlider: React.FC = () => {
               </Typography>
             </Typography>
           </Box>
-          <img src={outletBerlin} />
+          <img src={outletBerlin} alt="india" />
         </SwiperSlide>
       </Swiper>
     </Box>
