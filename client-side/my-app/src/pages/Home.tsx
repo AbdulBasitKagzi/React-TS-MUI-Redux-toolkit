@@ -7,6 +7,8 @@ import ArrivalSlider from "./ArrivalSlider";
 import { person_tabs } from "../assets/Constants";
 import { product_tabs } from "../assets/Constants";
 import { useSelector } from "react-redux";
+import ReviewCard from "../components/ReviewCard";
+import ImageSlider from "../components/ImageSlider";
 
 // images import
 import ForHer from "../assets/images/ForHer.png";
@@ -28,7 +30,7 @@ import formal from "../assets/images/formal.png";
 import { Box, Button, ImageList, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Image_List from "../components/ImageList";
-import ReviewCard from "../components/ReviewCard";
+import Footer from "../components/Footer";
 
 const theme = createTheme();
 
@@ -703,6 +705,8 @@ function Home() {
               </Box>
             </Box>
             <ReviewCard />
+            <ImageSlider />
+            <Footer />
             {/* enter new content here above the comment */}
           </Box>
         </Layout>

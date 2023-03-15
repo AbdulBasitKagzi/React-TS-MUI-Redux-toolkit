@@ -8,6 +8,7 @@ import women_3 from "../assets/images/women-3.png";
 import eye from "../assets/icons/eye.svg";
 import heart from "../assets/icons/heart.svg";
 import share from "../assets/icons/share.svg";
+import blackArrowicon from "../assets/icons/blackArrowicon.svg";
 
 // mui imports
 import { Box, Typography } from "@mui/material";
@@ -22,6 +23,7 @@ const ReviewCard: React.FC = () => {
     name: string;
     profession: string;
     title: string;
+    height: string;
   }[];
   arr = [
     {
@@ -31,6 +33,7 @@ const ReviewCard: React.FC = () => {
       name: "Kelly Hudson",
       profession: "Fashion Activist",
       title: "How important are shoes in your style?",
+      height: "414px",
     },
     {
       id: "2",
@@ -39,6 +42,7 @@ const ReviewCard: React.FC = () => {
       name: "Judy Garland",
       profession: "Fashion Activist",
       title: "Fashion trend forecast for  Summer 2021",
+      height: "414px",
     },
     {
       id: "3",
@@ -47,6 +51,7 @@ const ReviewCard: React.FC = () => {
       name: "Rachel Green",
       profession: "Fashion Activist",
       title: "Spring exclusive collection for Men & Women",
+      height: "414px",
     },
   ];
   return (
@@ -54,7 +59,13 @@ const ReviewCard: React.FC = () => {
       <Box
         sx={{
           maxWidth: "90%",
-          display: "flex",
+          display: {
+            xl: "flex",
+            lg: "flex",
+            md: "flex",
+            sm: "flex",
+            xs: "block",
+          },
           justifyContent: "center",
           mx: "auto",
         }}
@@ -62,25 +73,27 @@ const ReviewCard: React.FC = () => {
         {arr.map((arr: any) => (
           <Box
             sx={{
-              border: 2,
               maxWidth: { xl: 521, lg: 521, md: 521, sm: 236 },
               maxHeight: 1009,
             }}
           >
             <Box
               sx={{
-                border: 2,
                 maxWidth: { xl: 521, lg: 521, md: 521, sm: 236 },
-                maxHeight: 521,
+                maxHeight: { xl: 521, lg: 521, md: 521, sm: 521, xs: 465 },
               }}
             >
-              <img src={arr.image} alt="image" width="100%" height="110%" />
+              <img
+                src={arr.image}
+                alt="image"
+                width="100%"
+                height={arr.height}
+              />
               <Box
                 sx={{
                   position: "relative",
                   top: -60,
                   left: { xl: 89, lg: 89, md: 1 },
-                  border: 2,
                   background: "#FCFCFC",
                   maxWidth: 304,
                   height: { xl: 89, lg: 89, md: 89, sm: 63 },
@@ -103,12 +116,14 @@ const ReviewCard: React.FC = () => {
                           lg: "20.5px",
                           md: "20.5px",
                           sm: "4.5px",
+                          xs: "4.5px",
                         },
                         pt: {
                           xl: "37.5px",
                           lg: "37.5px",
                           md: "37.5px",
                           sm: "21px",
+                          xs: "21px",
                         },
                       }}
                     >
@@ -123,12 +138,14 @@ const ReviewCard: React.FC = () => {
                           lg: "20.5px",
                           md: "20.5px",
                           sm: "4.5px",
+                          xs: "4.5px",
                         },
                         pt: {
                           xl: "37.5px",
                           lg: "37.5px",
                           md: "37.5px",
                           sm: "21px",
+                          xs: "21px",
                         },
                       }}
                     >
@@ -143,12 +160,14 @@ const ReviewCard: React.FC = () => {
                           lg: "20.5px",
                           md: "20.5px",
                           sm: "4.5px",
+                          xs: "4.5px",
                         },
                         pt: {
                           xl: "37.5px",
                           lg: "37.5px",
                           md: "37.5px",
                           sm: "21px",
+                          xs: "21px",
                         },
                       }}
                     >
@@ -198,7 +217,7 @@ const ReviewCard: React.FC = () => {
             <Box
               sx={{
                 mt: { xl: 7, lg: 7, md: 4, sm: 4 },
-                mx: { xl: 8, lg: 8, md: 1, sm: 1 },
+                mx: { xl: 8, lg: 8, md: 1, sm: 1, xs: 1 },
               }}
             >
               <Typography
@@ -207,11 +226,44 @@ const ReviewCard: React.FC = () => {
                 sx={{
                   fontFamily: "Jost",
                   fontWeight: 700,
-                  fontSize: { xl: 31, lg: 31, md: 21, sm: 21 },
+                  fontSize: { xl: 26, lg: 23, md: 21, sm: 16, xs: 20 },
+                  wordBreak: "inherit",
                 }}
               >
                 {arr.title}
               </Typography>
+              <Typography
+                sx={{
+                  wordBreak: "break-word",
+                  fontSize: "16px",
+                  fontFamily: "Lato",
+                  textAlign: "left",
+                  lineHeight: "22.4px",
+                  mt: { Xl: 4, lg: 4, md: 4, sm: 4 },
+                }}
+              >
+                Is it possible to assess a person just on the basis of their
+                footwear? Obviously, nobody should criticize, but certainly,
+                shoes say a lot about someone. It matters for the outsiders that
+                we meet every day...
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                textAlign: "left",
+                ml: { xl: 8, lg: 8, md: 1, sm: 1, xs: 1 },
+                my: { xl: 8, lg: 8, md: 8, sm: 8, xs: 2 },
+              }}
+            >
+              <Typography>Read More</Typography>
+              <img
+                src={blackArrowicon}
+                alt="arrowicon"
+                width="18px"
+                height="18px"
+                style={{ marginLeft: "16px", marginTop: "3px" }}
+              />
             </Box>
           </Box>
         ))}
