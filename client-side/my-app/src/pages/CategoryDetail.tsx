@@ -1,7 +1,9 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { useParams } from "react-router-dom";
-import FilterSlider from "./Filter";
+import FilterSlider from "../components/Filter";
+import FilterGrid from "../components/FilterGrid";
+import { Box } from "@mui/system";
 
 const CategoryDetail: React.FC = () => {
   const params = useParams();
@@ -10,7 +12,10 @@ const CategoryDetail: React.FC = () => {
     <>
       <Layout>
         Category detail page
-        <FilterSlider />
+        <Box sx={{ display: "flex" }}>
+          <FilterSlider />
+          <FilterGrid />
+        </Box>
       </Layout>
     </>
   );

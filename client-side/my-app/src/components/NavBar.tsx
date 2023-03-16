@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { gender } from "../assets/Constants";
 
 // images and icons import
 import callVector from "../assets/icons/callVector.svg";
@@ -17,9 +18,11 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+// import MenuIcon from "@mui/icons-material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import NavbarModel from "./NavbarModel";
 
 interface Props {
   /**
@@ -80,7 +83,7 @@ export default function DrawerAppBar(props: Props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
+        {gender.map((item) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText
@@ -93,6 +96,7 @@ export default function DrawerAppBar(props: Props) {
                   // mr: "32px",
                   // mt: "27px",
                 }}
+                onClick={() => setOpenModel(true)}
               />
             </ListItemButton>
           </ListItem>
@@ -104,9 +108,13 @@ export default function DrawerAppBar(props: Props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  const [openModel, setOpenModel] = React.useState<boolean>(false);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+      {openModel && (
+        <NavbarModel openModel={openModel} setOpenModel={setOpenModel} />
+      )}
       <AppBar
         component="nav"
         sx={{
@@ -155,7 +163,7 @@ export default function DrawerAppBar(props: Props) {
                 ml: "173px",
               }}
             >
-              {navItems.map((item) => (
+              {gender.map((item) => (
                 <Typography
                   key={item.id}
                   sx={{
@@ -166,7 +174,7 @@ export default function DrawerAppBar(props: Props) {
                     mr: "32px",
                     mt: "27px",
                   }}
-                  onClick={() => navigate(item.action)}
+                  onClick={() => setOpenModel(true)}
                 >
                   {item.value}
                 </Typography>

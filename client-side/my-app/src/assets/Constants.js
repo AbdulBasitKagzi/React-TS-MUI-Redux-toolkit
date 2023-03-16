@@ -16,6 +16,34 @@ import footwear from "../assets/images/footwear.png";
 import hat_1 from "../assets/images/hat_1.png";
 import watches from "../assets/images/watches.png";
 
+export const gender = [
+  {
+    id: 0,
+    value: "Majestic",
+    slug: "majestic",
+  },
+  {
+    id: 1,
+    value: "Women",
+    slug: "women",
+  },
+  {
+    id: 2,
+    value: "Men",
+    slug: "men",
+  },
+  {
+    id: 3,
+    value: "Collection",
+    slug: "/",
+  },
+  {
+    id: 4,
+    value: "Outlet",
+    slug: "/",
+  },
+];
+
 export const newArrival = [
   {
     id: "b/w",
@@ -195,37 +223,65 @@ export const Image_Lsit = [
 ];
 
 export const humanFilter = [
-  { id: "women", value: "Women" },
-  { id: "ladies", value: "Ladies" },
-  { id: "girls", value: "Girls" },
-  { id: "babies", value: "Babies" },
+  { id: 1, value: "Women" },
+  { id: 2, value: "Ladies" },
+  { id: 3, value: "Girls" },
+  { id: 4, value: "Babies" },
 ];
 
 export const brandFilter = [
-  { id: "h&m", value: "H & M" },
-  { id: "mark&spencer", value: "Mark & Spencer" },
-  { id: "victoria'ssecret", value: "Victoria's Secret" },
-  { id: "dior", value: "Dior" },
-  { id: "gucci", value: "Gucci" },
-  { id: "fendi", value: "Fendi" },
-  { id: "prada", value: "Prada" },
-  { id: "chanel", value: "Chanel" },
-  { id: "versace", value: "Versace" },
-  { id: "dolce&gabbana", value: "Dolce & Gabbana" },
-  { id: "zara", value: "Zara" },
+  { id: 1, value: "H & M" },
+  { id: 2, value: "Mark & Spencer" },
+  { id: 3, value: "Victoria's Secret" },
+  { id: 4, value: "Dior" },
+  { id: 5, value: "Gucci" },
+  { id: 6, value: "Fendi" },
+  { id: 7, value: "Prada" },
+  { id: 8, value: "Chanel" },
+  { id: 9, value: "Versace" },
+  { id: 10, value: "Dolce & Gabbana" },
+  { id: 11, value: "Zara" },
 ];
 
 export const categoriesFilter = [
-  { id: "dresses", value: "Dresses" },
-  { id: "tops", value: "Tops" },
-  { id: "lingerie&loungewear", value: "Lingerie & Lounge Wear" },
-  { id: "blouse", value: "Blouse" },
-  { id: "vintage", value: "Vintage" },
+  { id: 1, value: "Dresses" },
+  { id: 2, value: "Tops" },
+  { id: 3, value: "Lingerie & Lounge Wear" },
+  { id: 4, value: "Blouse" },
+  { id: 5, value: "Vintage" },
 ];
 
 export const sizeFilter = [
-  { id: "Medium", value: "Medium" },
-  { id: "Large", value: "Large" },
-  { id: "Plus Size", value: "Plus Size" },
-  { id: "Sexy Plus Size", value: "Sexy Plus Size" },
+  { id: 1, value: "Medium" },
+  { id: 2, value: "Large" },
+  { id: 3, value: "Plus Size" },
+  { id: 4, value: "Sexy Plus Size" },
+];
+
+export const colorLists = [
+  {
+    id: 1,
+    name: "Blue",
+    haxValue: "#1B2437",
+  },
+  {
+    id: 2,
+    name: "Green",
+    haxValue: "#32E0C4",
+  },
+  {
+    id: 3,
+    name: "Purple",
+    haxValue: "#127681",
+  },
+  {
+    id: 4,
+    name: "White",
+    haxValue: "#FFFFFF",
+  },
+  {
+    id: 5,
+    name: "Black",
+    haxValue: "#000000",
+  },
 ];
