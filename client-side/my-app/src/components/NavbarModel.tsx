@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { brandFilter, categoriesFilter } from "../assets/Constants";
 import photo from "../assets/images/photo.png";
@@ -6,10 +8,10 @@ import photo from "../assets/images/photo.png";
 // images and icon import
 // mui imports
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import { RootState } from "../store/userSlice/store";
 
 const style = {
   //   position: "absolute",
@@ -30,7 +32,9 @@ type props = {
 
 const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
   //   const handleOpen = () => setOpenModel(true);
-  const handleClose = () => setOpenModel(!openModel);
+  const handleClose = () => setOpenModel(false);
+  const { routeValue } = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -72,6 +76,12 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                           fontSize: "16px",
                           fontWeight: 400,
                         }}
+                        onClick={() => {
+                          handleClose();
+                          navigate(
+                            `/categorydetail/${routeValue}/${category.id}`
+                          );
+                        }}
                       >
                         {category.value}
                       </ListItem>
@@ -95,6 +105,10 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                           fontFamily: "Inter",
                           fontSize: "16px",
                           fontWeight: 400,
+                        }}
+                        onClick={() => {
+                          handleClose();
+                          navigate(`/categorydetail/${routeValue}/${brand.id}`);
                         }}
                       >
                         {brand.value}
@@ -140,7 +154,7 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                   },
                 }}
               >
-                <img src={photo} alt="photo" />
+                <img src={photo} alt="abdul" />
               </Box>
             </Box>
           </Box>

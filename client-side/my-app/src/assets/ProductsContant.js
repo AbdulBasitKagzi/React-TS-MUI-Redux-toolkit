@@ -1426,7 +1426,7 @@ export const productLists = [
     productCurrentPrice: 330,
     gender: 2,
     human: 4,
-    category: 9,
+    category: 5,
     brand: 10,
     size: [1, 2, 3],
     color: [2, 5],

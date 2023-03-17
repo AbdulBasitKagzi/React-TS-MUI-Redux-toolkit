@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { productActions } from "../store/userSlice/productSlice";
+import { MouseEvent } from "react";
 
 import {
   humanFilter,
@@ -17,22 +19,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";
 import { Drawer } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 // function valuetext(value: number) {
 //   return `${value}°C`;
 // }
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-}
-
-const drawerWidth = 240;
+const drawerWidth = 275;
 
 export default function FilterSlider() {
   const [filterState, setFilterState] = useState<number[]>([]);
@@ -40,39 +33,65 @@ export default function FilterSlider() {
   const [CategoriesFilter, setCategoriesFilter] = useState<number[]>([]);
   const [SizeFilter, setSizeFilter] = useState<number[]>([]);
   const [click, setClick] = useState<boolean>(false);
+  const params = useParams();
 
   const dispatch = useDispatch();
 
-  const handleFilter = (value: number) => {
-    setFilterState((prev) => [...prev, value]);
+  // const handleFilter = (value: number, isChecked: boolean) => {
+  //   if (isChecked) {
+  //     setFilterState((prev) => [...prev, value]);
+  //   } else {
+  //     setFilterState(filterState.filter((state) => state !== value));
+  //   }
+  // };
+  const handleBrandFilter = (value: number, isChecked: boolean) => {
+    if (isChecked) {
+      setBrandFilter((prev) => [...prev, value]);
+    } else {
+      setBrandFilter(BrandFilter.filter((state) => state !== value));
+    }
   };
-  const handleBrandFilter = (value: number) => {
-    setBrandFilter((prev) => [...prev, value]);
+  const handleCategoriesFilter = (value: number, isChecked: boolean) => {
+    if (isChecked) {
+      setCategoriesFilter((prev) => [...prev, value]);
+    } else {
+      setCategoriesFilter(CategoriesFilter.filter((state) => state !== value));
+    }
   };
-  const handleCategoriesFilter = (value: number) => {
-    setCategoriesFilter((prev) => [...prev, value]);
+  const handleSizeFilter = (value: number, isChecked: boolean) => {
+    if (isChecked) {
+      setSizeFilter((prev) => [...prev, value]);
+    } else {
+      setSizeFilter(SizeFilter.filter((state) => state !== value));
+    }
   };
-  const handleSizeFilter = (value: number) => {
-    setSizeFilter((prev) => [...prev, value]);
-  };
+  useEffect(() => {
+    console.log("state", filterState);
+    console.log("brand", BrandFilter);
+    console.log("size", SizeFilter);
+    console.log("category", CategoriesFilter);
+  }, [filterState, BrandFilter, SizeFilter, CategoriesFilter]);
 
-  console.log("value", filterState, BrandFilter, CategoriesFilter, SizeFilter);
+  useEffect(() => {
+    console.log("I am dispatching");
+    dispatch(productActions.filterByHuman(params.type));
+  }, [params.type, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterByHuman(filterState));
-  }, [filterState]);
+  }, [filterState, click, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterByBrand(BrandFilter));
-  }, [BrandFilter]);
+  }, [BrandFilter, click, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterByCategory(CategoriesFilter));
-  }, [CategoriesFilter]);
+  }, [CategoriesFilter, click, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterBySize(SizeFilter));
-  }, [SizeFilter]);
+  }, [SizeFilter, click, dispatch]);
   // const [value, setValue] = React.useState<number[]>([120, 300]);
 
   // const handleChange = (event: Event, newValue: number | number[]) => {
@@ -97,7 +116,7 @@ export default function FilterSlider() {
           backgroundColor: "#F9FAFB",
         }}
       >
-        <Box sx={{ width: "400px", ml: 2 }}>
+        <Box sx={{ mx: 4 }}>
           <Typography
             sx={{
               fontFamily: "Jost",
@@ -142,14 +161,13 @@ export default function FilterSlider() {
               }}
             >
               {/* ${priceFilter[0]}-$
-            {priceFilter[1]} */}
-              ${10}-$
-              {100}
+              {priceFilter[1]} */}
             </Typography>
           </Box>
           <Slider
             sx={{
               color: "#EB5757",
+              width: { xl: "376px", lg: "376px", md: "115px", sm: "115px" },
             }}
             // value={priceFilter}
             // onChange={(_, value) => setPriceFilter(value as [number, number])}
@@ -191,7 +209,7 @@ export default function FilterSlider() {
               sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
               onClick={() => {
                 setClick(true);
-                handleFilter(human.id);
+                // handleFilter(human.id);
               }}
             />
           ))}
@@ -214,9 +232,12 @@ export default function FilterSlider() {
               control={<Checkbox />}
               label={brand.value}
               sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 setClick(true);
-                handleBrandFilter(brand.id);
+                handleBrandFilter(
+                  brand.id,
+                  (e.target as unknown as { checked: boolean }).checked
+                );
               }}
             />
           ))}
@@ -238,9 +259,12 @@ export default function FilterSlider() {
               control={<Checkbox />}
               label={category.value}
               sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 setClick(true);
-                handleCategoriesFilter(category.id);
+                handleCategoriesFilter(
+                  category.id,
+                  (e.target as unknown as { checked: boolean }).checked
+                );
               }}
             />
           ))}
@@ -262,9 +286,12 @@ export default function FilterSlider() {
               control={<Checkbox />}
               label={size.value}
               sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 setClick(true);
-                handleSizeFilter(size.id);
+                handleSizeFilter(
+                  size.id,
+                  (e.target as unknown as { checked: boolean }).checked
+                );
               }}
             />
           ))}
@@ -289,10 +316,12 @@ export default function FilterSlider() {
             lg: "none",
             xl: "none",
           },
+          mt: { xs: "-4000px" },
         }}
       >
         <FilterListIcon />
       </IconButton>
+
       <Box
         sx={{
           maxWidth: {
@@ -302,6 +331,7 @@ export default function FilterSlider() {
             sm: "255px",
             xs: "160px",
           },
+          maxHeight: { xl: "2000px", lg: "2000px" },
           display: {
             xl: "block",
             lg: "block",
@@ -313,7 +343,7 @@ export default function FilterSlider() {
           backgroundColor: "#F9FAFB",
         }}
       >
-        <Box sx={{ width: "400px", ml: 2 }}>
+        <Box sx={{ mx: 4 }}>
           <Typography
             sx={{
               fontFamily: "Jost",
@@ -358,14 +388,13 @@ export default function FilterSlider() {
               }}
             >
               {/* ${priceFilter[0]}-$
-            {priceFilter[1]} */}
-              ${10}-$
-              {100}
+              {priceFilter[1]} */}
             </Typography>
           </Box>
           <Slider
             sx={{
               color: "#EB5757",
+              width: { xl: "376px", lg: "376px", md: "115px", sm: "115px" },
             }}
             // value={priceFilter}
             // onChange={(_, value) => setPriceFilter(value as [number, number])}
@@ -395,30 +424,6 @@ export default function FilterSlider() {
               fontWeight: 600,
               fontSize: "16px",
               color: "Grey/grey-800",
-              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
-            }}
-          >
-            Filters
-          </Typography>
-          {humanFilter.map((human) => (
-            <FormControlLabel
-              control={<Checkbox />}
-              label={human.value}
-              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
-                setClick(true);
-                handleFilter(human.id);
-              }}
-            />
-          ))}
-
-          <Typography
-            textAlign="left"
-            sx={{
-              fontFamily: "Jost",
-              fontWeight: 600,
-              fontSize: "16px",
-              color: "Grey/grey-800",
               mt: 10,
               ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
             }}
@@ -430,9 +435,12 @@ export default function FilterSlider() {
               control={<Checkbox />}
               label={brand.value}
               sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 setClick(true);
-                handleBrandFilter(brand.id);
+                handleBrandFilter(
+                  brand.id,
+                  (e.target as unknown as { checked: boolean }).checked
+                );
               }}
             />
           ))}
@@ -454,9 +462,12 @@ export default function FilterSlider() {
               control={<Checkbox />}
               label={category.value}
               sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 setClick(true);
-                handleCategoriesFilter(category.id);
+                handleCategoriesFilter(
+                  category.id,
+                  (e.target as unknown as { checked: boolean }).checked
+                );
               }}
             />
           ))}
@@ -478,9 +489,12 @@ export default function FilterSlider() {
               control={<Checkbox />}
               label={size.value}
               sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 setClick(true);
-                handleSizeFilter(size.id);
+                handleSizeFilter(
+                  size.id,
+                  (e.target as unknown as { checked: boolean }).checked
+                );
               }}
             />
           ))}

@@ -1,5 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userActions } from "../store/userSlice/userSlice";
 import { gender } from "../assets/Constants";
 
 // images and icons import
@@ -33,44 +35,45 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = [
-  {
-    id: "majestic",
-    value: "Majestic",
-    action: "#",
-  },
-  {
-    id: "women",
-    value: "Women",
-    action: "#",
-  },
-  {
-    id: "men",
-    value: "Men",
-    action: "#",
-  },
-  {
-    id: "collection",
-    value: "Collection",
-    action: "#",
-  },
-  {
-    id: "outlet",
-    value: "Outlet",
-    action: "#",
-  },
-  {
-    id: "categorydetail",
-    value: "Categorydetail",
-    action: "/categorydetail",
-  },
-];
+// const navItems = [
+//   {
+//     id: "majestic",
+//     value: "Majestic",
+//     action: "#",
+//   },
+//   {
+//     id: "women",
+//     value: "Women",
+//     action: "#",
+//   },
+//   {
+//     id: "men",
+//     value: "Men",
+//     action: "#",
+//   },
+//   {
+//     id: "collection",
+//     value: "Collection",
+//     action: "#",
+//   },
+//   {
+//     id: "outlet",
+//     value: "Outlet",
+//     action: "#",
+//   },
+//   {
+//     id: "categorydetail",
+//     value: "Categorydetail",
+//     action: "/categorydetail",
+//   },
+// ];
 const navIcons = [callVector, shoppingcartVector, likeVector];
 
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -83,7 +86,7 @@ export default function DrawerAppBar(props: Props) {
       </Typography>
       <Divider />
       <List>
-        {gender.map((item) => (
+        {gender.map((item: { id: number; value: string; slug: string }) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText
@@ -96,7 +99,10 @@ export default function DrawerAppBar(props: Props) {
                   // mr: "32px",
                   // mt: "27px",
                 }}
-                onClick={() => setOpenModel(true)}
+                onClick={() => {
+                  dispatch(userActions.makeRoute(item.slug));
+                  setOpenModel(true);
+                }}
               />
             </ListItemButton>
           </ListItem>
@@ -163,22 +169,27 @@ export default function DrawerAppBar(props: Props) {
                 ml: "173px",
               }}
             >
-              {gender.map((item) => (
-                <Typography
-                  key={item.id}
-                  sx={{
-                    color: "#212121",
-                    fontFamily: "Josefin Sans",
-                    fontSize: "16px",
-                    display: "inline-block",
-                    mr: "32px",
-                    mt: "27px",
-                  }}
-                  onClick={() => setOpenModel(true)}
-                >
-                  {item.value}
-                </Typography>
-              ))}
+              {gender.map(
+                (item: { id: number; value: string; slug: string }) => (
+                  <Typography
+                    key={item.id}
+                    sx={{
+                      color: "#212121",
+                      fontFamily: "Josefin Sans",
+                      fontSize: "16px",
+                      display: "inline-block",
+                      mr: "32px",
+                      mt: "27px",
+                    }}
+                    onClick={() => {
+                      dispatch(userActions.makeRoute(item.slug));
+                      setOpenModel(true);
+                    }}
+                  >
+                    {item.value}
+                  </Typography>
+                )
+              )}
             </Box>
             <Box
               sx={{

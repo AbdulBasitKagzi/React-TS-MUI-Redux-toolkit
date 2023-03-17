@@ -70,203 +70,223 @@ const ReviewCard: React.FC = () => {
           mx: "auto",
         }}
       >
-        {arr.map((arr: any) => (
-          <Box
-            sx={{
-              maxWidth: { xl: 521, lg: 521, md: 521, sm: 236 },
-              maxHeight: 1009,
-            }}
-          >
+        {arr.map(
+          (arr: {
+            id: string;
+            image: string | undefined;
+            image_1: string | undefined;
+            name: string;
+            profession: string;
+            title: string;
+            height: string;
+          }) => (
             <Box
               sx={{
                 maxWidth: { xl: 521, lg: 521, md: 521, sm: 236 },
-                maxHeight: { xl: 521, lg: 521, md: 521, sm: 521, xs: 465 },
+                maxHeight: 1009,
               }}
             >
-              <img
-                src={arr.image}
-                alt="leathershoe"
-                width="100%"
-                height={arr.height}
-              />
               <Box
                 sx={{
-                  position: "relative",
-                  top: -60,
-                  left: { xl: 89, lg: 89, md: 1 },
-                  background: "#FCFCFC",
-                  maxWidth: 304,
-                  height: { xl: 89, lg: 89, md: 89, sm: 63 },
+                  maxWidth: { xl: 521, lg: 521, md: 521, sm: 236 },
+                  maxHeight: { xl: 521, lg: 521, md: 521, sm: 521, xs: 465 },
                 }}
               >
-                <Box sx={{ display: "flex" }}>
-                  <img
-                    className={styles.reviwer_image}
-                    src={arr.image_1}
-                    alt="women_1"
-                    // width="89px"
-                    // height="89px"
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        pl: {
-                          xl: "20.5px",
-                          lg: "20.5px",
-                          md: "20.5px",
-                          sm: "4.5px",
-                          xs: "4.5px",
-                        },
-                        pt: {
-                          xl: "37.5px",
-                          lg: "37.5px",
-                          md: "37.5px",
-                          sm: "21px",
-                          xs: "21px",
-                        },
-                      }}
-                    >
-                      <img src={eye} alt="eye" width="24px" height="22px" />
-                      <Typography sx={{ ml: 1 }}>35</Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        pl: {
-                          xl: "20.5px",
-                          lg: "20.5px",
-                          md: "20.5px",
-                          sm: "4.5px",
-                          xs: "4.5px",
-                        },
-                        pt: {
-                          xl: "37.5px",
-                          lg: "37.5px",
-                          md: "37.5px",
-                          sm: "21px",
-                          xs: "21px",
-                        },
-                      }}
-                    >
-                      <img src={heart} alt="heart" width="24px" height="22px" />
-                      <Typography sx={{ ml: 1 }}>35</Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        pl: {
-                          xl: "20.5px",
-                          lg: "20.5px",
-                          md: "20.5px",
-                          sm: "4.5px",
-                          xs: "4.5px",
-                        },
-                        pt: {
-                          xl: "37.5px",
-                          lg: "37.5px",
-                          md: "37.5px",
-                          sm: "21px",
-                          xs: "21px",
-                        },
-                      }}
-                    >
-                      <img src={share} alt="share" width="24px" height="22px" />
-                      <Typography sx={{ ml: "2px" }}>35</Typography>
-                    </Box>
-                  </Box>
-                </Box>
+                <img
+                  src={arr.image}
+                  alt="leathershoe"
+                  width="100%"
+                  height={arr.height}
+                />
                 <Box
                   sx={{
-                    textAlign: "left",
-                    mt: { xl: "25px", lg: "25px", md: "25px", sm: "10px" },
+                    position: "relative",
+                    top: -60,
+                    left: { xl: 89, lg: 89, md: 1 },
+                    background: "#FCFCFC",
+                    maxWidth: 304,
+                    height: { xl: 89, lg: 89, md: 89, sm: 63 },
                   }}
                 >
-                  <Typography
+                  <Box sx={{ display: "flex" }}>
+                    <img
+                      className={styles.reviwer_image}
+                      src={arr.image_1}
+                      alt="women_1"
+                      // width="89px"
+                      // height="89px"
+                    />
+                    <Box sx={{ display: "flex" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          pl: {
+                            xl: "20.5px",
+                            lg: "20.5px",
+                            md: "20.5px",
+                            sm: "4.5px",
+                            xs: "4.5px",
+                          },
+                          pt: {
+                            xl: "37.5px",
+                            lg: "37.5px",
+                            md: "37.5px",
+                            sm: "21px",
+                            xs: "21px",
+                          },
+                        }}
+                      >
+                        <img src={eye} alt="eye" width="24px" height="22px" />
+                        <Typography sx={{ ml: 1 }}>35</Typography>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          pl: {
+                            xl: "20.5px",
+                            lg: "20.5px",
+                            md: "20.5px",
+                            sm: "4.5px",
+                            xs: "4.5px",
+                          },
+                          pt: {
+                            xl: "37.5px",
+                            lg: "37.5px",
+                            md: "37.5px",
+                            sm: "21px",
+                            xs: "21px",
+                          },
+                        }}
+                      >
+                        <img
+                          src={heart}
+                          alt="heart"
+                          width="24px"
+                          height="22px"
+                        />
+                        <Typography sx={{ ml: 1 }}>35</Typography>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          pl: {
+                            xl: "20.5px",
+                            lg: "20.5px",
+                            md: "20.5px",
+                            sm: "4.5px",
+                            xs: "4.5px",
+                          },
+                          pt: {
+                            xl: "37.5px",
+                            lg: "37.5px",
+                            md: "37.5px",
+                            sm: "21px",
+                            xs: "21px",
+                          },
+                        }}
+                      >
+                        <img
+                          src={share}
+                          alt="share"
+                          width="24px"
+                          height="22px"
+                        />
+                        <Typography sx={{ ml: "2px" }}>35</Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
                     sx={{
-                      display: "inline-block",
-                      fontFamily: "Jost",
-                      fontSize: {
-                        xl: "16px",
-                        lg: "16px",
-                        md: "16px",
-                        sm: "12px",
-                      },
-                      fontWeight: 700,
+                      textAlign: "left",
+                      mt: { xl: "25px", lg: "25px", md: "25px", sm: "10px" },
                     }}
                   >
-                    {arr.name}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      display: "inline-block",
-                      ml: "21px",
-                      fontSize: {
-                        xl: "16px",
-                        lg: "16px",
-                        md: "16px",
-                        sm: "12px",
-                      },
-                    }}
-                  >
-                    {arr.profession}
-                  </Typography>
+                    <Typography
+                      sx={{
+                        display: "inline-block",
+                        fontFamily: "Jost",
+                        fontSize: {
+                          xl: "16px",
+                          lg: "16px",
+                          md: "16px",
+                          sm: "12px",
+                        },
+                        fontWeight: 700,
+                      }}
+                    >
+                      {arr.name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        display: "inline-block",
+                        ml: "21px",
+                        fontSize: {
+                          xl: "16px",
+                          lg: "16px",
+                          md: "16px",
+                          sm: "12px",
+                        },
+                      }}
+                    >
+                      {arr.profession}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-            <Box
-              sx={{
-                mt: { xl: 7, lg: 7, md: 4, sm: 4 },
-                mx: { xl: 8, lg: 8, md: 1, sm: 1, xs: 1 },
-              }}
-            >
-              <Typography
-                variant="h4"
-                textAlign="left"
+              <Box
                 sx={{
-                  fontFamily: "Jost",
-                  fontWeight: 700,
-                  fontSize: { xl: 26, lg: 23, md: 21, sm: 16, xs: 20 },
-                  wordBreak: "inherit",
+                  mt: { xl: 7, lg: 7, md: 4, sm: 4 },
+                  mx: { xl: 8, lg: 8, md: 1, sm: 1, xs: 1 },
                 }}
               >
-                {arr.title}
-              </Typography>
-              <Typography
+                <Typography
+                  variant="h4"
+                  textAlign="left"
+                  sx={{
+                    fontFamily: "Jost",
+                    fontWeight: 700,
+                    fontSize: { xl: 26, lg: 23, md: 21, sm: 16, xs: 20 },
+                    wordBreak: "inherit",
+                  }}
+                >
+                  {arr.title}
+                </Typography>
+                <Typography
+                  sx={{
+                    wordBreak: "break-word",
+                    fontSize: "16px",
+                    fontFamily: "Lato",
+                    textAlign: "left",
+                    lineHeight: "22.4px",
+                    mt: { Xl: 4, lg: 4, md: 4, sm: 4 },
+                  }}
+                >
+                  Is it possible to assess a person just on the basis of their
+                  footwear? Obviously, nobody should criticize, but certainly,
+                  shoes say a lot about someone. It matters for the outsiders
+                  that we meet every day...
+                </Typography>
+              </Box>
+              <Box
                 sx={{
-                  wordBreak: "break-word",
-                  fontSize: "16px",
-                  fontFamily: "Lato",
+                  display: "flex",
                   textAlign: "left",
-                  lineHeight: "22.4px",
-                  mt: { Xl: 4, lg: 4, md: 4, sm: 4 },
+                  ml: { xl: 8, lg: 8, md: 1, sm: 1, xs: 1 },
+                  my: { xl: 8, lg: 8, md: 8, sm: 8, xs: 2 },
                 }}
               >
-                Is it possible to assess a person just on the basis of their
-                footwear? Obviously, nobody should criticize, but certainly,
-                shoes say a lot about someone. It matters for the outsiders that
-                we meet every day...
-              </Typography>
+                <Typography>Read More</Typography>
+                <img
+                  src={blackArrowicon}
+                  alt="arrowicon"
+                  width="18px"
+                  height="18px"
+                  style={{ marginLeft: "16px", marginTop: "3px" }}
+                />
+              </Box>
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                textAlign: "left",
-                ml: { xl: 8, lg: 8, md: 1, sm: 1, xs: 1 },
-                my: { xl: 8, lg: 8, md: 8, sm: 8, xs: 2 },
-              }}
-            >
-              <Typography>Read More</Typography>
-              <img
-                src={blackArrowicon}
-                alt="arrowicon"
-                width="18px"
-                height="18px"
-                style={{ marginLeft: "16px", marginTop: "3px" }}
-              />
-            </Box>
-          </Box>
-        ))}
+          )
+        )}
       </Box>
     </>
   );

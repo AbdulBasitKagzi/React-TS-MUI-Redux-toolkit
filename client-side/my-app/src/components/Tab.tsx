@@ -9,7 +9,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 interface Props {
-  tabs: Array<Object>;
+  tabs: {
+    id: string;
+    value: string;
+  }[];
 }
 const CategoryTab: FC<Props> = ({ tabs }) => {
   const [value, setValue] = React.useState(0);
@@ -29,7 +32,7 @@ const CategoryTab: FC<Props> = ({ tabs }) => {
         onChange={handleChange}
         centered
       >
-        {tabs?.map((tab: any) => (
+        {tabs?.map((tab: { id: string; value: string }) => (
           <Tab
             sx={{
               color: "#212121",

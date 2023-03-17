@@ -3,17 +3,20 @@ import React from "react";
 // images and icons imports
 import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
-import womenShoeBlue from "../assets/images/womenShoeBlue.png";
 
 // mui imports
 import { Box, Button } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 import styles from "../css/slider.module.css";
 type Props = {
-  bestDeals: {}[];
+  bestDeals: {
+    id: string;
+    productName: string;
+    image: string | undefined;
+    price: string;
+    cancelPrice: string;
+  }[];
 };
 const Slider: React.FC<Props> = ({ bestDeals }) => {
   let liEls = document.querySelectorAll(".ul .li");
@@ -32,7 +35,11 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
           left: { xl: 55, lg: 44, md: 25, xs: 20 },
         }}
       >
-        <img className={styles.icon} src={leftArrowIcon} />
+        <img
+          className={styles.icon}
+          src={leftArrowIcon}
+          alt="left arrow icon"
+        />
       </Box>
       <Box
         sx={{
@@ -41,7 +48,7 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
           left: { xl: 1455, lg: 1380, md: 985, sm: 750, xs: 395 },
         }}
       >
-        <img className={styles.icon} src={rightArrowIcon} />
+        <img className={styles.icon} src={rightArrowIcon} alt="right arrow" />
       </Box>
       <Box
         sx={{
@@ -67,26 +74,14 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
         {bestDeals.length === 0 ? (
           <Typography>No Products found</Typography>
         ) : (
-          bestDeals?.map((deals: any) => (
-            <Box
-              sx={{
-                width: {
-                  xl: "380px",
-                  lg: "350px",
-                  md: "250px",
-                  sm: "189px",
-                  xs: "89px",
-                },
-                height: {
-                  xl: "668px",
-                  lg: "668px",
-                  md: "530px",
-                  sm: "515px",
-                  xs: "430px",
-                },
-                // background: "red",
-              }}
-            >
+          bestDeals?.map(
+            (deals: {
+              id: string;
+              productName: string;
+              image: string | undefined;
+              price: string;
+              cancelPrice: string;
+            }) => (
               <Box
                 sx={{
                   width: {
@@ -94,59 +89,79 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
                     lg: "350px",
                     md: "250px",
                     sm: "189px",
-                    xs: "100px",
+                    xs: "89px",
                   },
-                  height: "255px",
-                  marginTop: "154px",
+                  height: {
+                    xl: "668px",
+                    lg: "668px",
+                    md: "530px",
+                    sm: "515px",
+                    xs: "430px",
+                  },
+                  // background: "red",
                 }}
               >
-                <img className={styles.image} src={deals.image} />
-                <Box sx={{ textAlign: "left", marginTop: "142px" }}>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xl: "25px",
-                        lg: "25px",
-                        md: "18px",
-                        sm: "16px",
-                        xs: "8px",
-                      },
-                      fontWeight: 700,
-                      fontFamily: "Jost",
-                    }}
-                  >
-                    {deals.productName}
-                  </Typography>
-                </Box>
-                <Box sx={{ textAlign: "left" }}>
-                  <Typography
-                    sx={{
-                      mr: 1,
-                      display: "inline-block",
-                      color: "#9E9E9E",
-                      fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
-                      fontWeight: 400,
-                      fontFamily: "Jost",
-                      textDecoration: "line-through",
-                    }}
-                  >
-                    {deals.cancelPrice}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      display: "inline-block",
-                      color: "#FF705C",
-                      fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
-                      fontWeight: 400,
-                      fontFamily: "Jost",
-                    }}
-                  >
-                    {deals.price}
-                  </Typography>
+                <Box
+                  sx={{
+                    width: {
+                      xl: "380px",
+                      lg: "350px",
+                      md: "250px",
+                      sm: "189px",
+                      xs: "100px",
+                    },
+                    height: "255px",
+                    marginTop: "154px",
+                  }}
+                >
+                  <img className={styles.image} src={deals.image} alt="deals" />
+                  <Box sx={{ textAlign: "left", marginTop: "142px" }}>
+                    <Typography
+                      sx={{
+                        fontSize: {
+                          xl: "25px",
+                          lg: "25px",
+                          md: "18px",
+                          sm: "16px",
+                          xs: "8px",
+                        },
+                        fontWeight: 700,
+                        fontFamily: "Jost",
+                      }}
+                    >
+                      {deals.productName}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ textAlign: "left" }}>
+                    <Typography
+                      sx={{
+                        mr: 1,
+                        display: "inline-block",
+                        color: "#9E9E9E",
+                        fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
+                        fontWeight: 400,
+                        fontFamily: "Jost",
+                        textDecoration: "line-through",
+                      }}
+                    >
+                      {deals.cancelPrice}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        display: "inline-block",
+                        color: "#FF705C",
+                        fontSize: { xs: 9, xl: 25, lg: 25, md: 18, sm: 12 },
+                        fontWeight: 400,
+                        fontFamily: "Jost",
+                      }}
+                    >
+                      {deals.price}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          ))
+            )
+          )
         )}
       </Box>
       <Box>

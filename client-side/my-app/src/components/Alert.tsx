@@ -1,7 +1,13 @@
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 
-function DescriptionAlerts(props: any) {
+type props = {
+  type: any;
+  title: string;
+  message: string;
+};
+
+function DescriptionAlerts(props: props) {
   return (
     <div>
       <Alert severity={props.type}>

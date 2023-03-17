@@ -34,8 +34,19 @@ import Footer from "../components/Footer";
 
 const theme = createTheme();
 
+// interface tabs {
+//   id: string;
+//   value: string;
+// }
+
 function Home() {
   const { Products } = useSelector((state: any) => state.product);
+  // const [tabs, setTabs] = useState<
+  //   {
+  //     id: string;
+  //     value: string;
+  //   }[]
+  // >();
 
   const [bestDeals, setBestDeals] = useState<
     {

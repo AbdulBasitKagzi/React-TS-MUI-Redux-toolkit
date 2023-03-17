@@ -7,14 +7,10 @@ import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
 
 // mui imports
 import { Box } from "@mui/material";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 
 import styles from "../css/slider.module.css";
 
 const ArrivalSlider: React.FC = () => {
-  {
-  }
   return (
     <>
       <Box
@@ -31,7 +27,7 @@ const ArrivalSlider: React.FC = () => {
           },
         }}
       >
-        <img className={styles.icon} src={leftArrowIcon} />
+        <img className={styles.icon} src={leftArrowIcon} alt="left arrow" />
       </Box>
       <Box
         // position="relative"
@@ -53,7 +49,7 @@ const ArrivalSlider: React.FC = () => {
         //   left: { xl: 1455, lg: 1380, md: 985, sm: 750, xs: 395 },
         // }}
       >
-        <img className={styles.icon} src={rightArrowIcon} />
+        <img className={styles.icon} src={rightArrowIcon} alt="right arrow" />
       </Box>
       <Box
         sx={{
@@ -69,19 +65,27 @@ const ArrivalSlider: React.FC = () => {
           overflow: "hidden",
         }}
       >
-        {newArrival.map((arr: any) => (
-          <Box
-            sx={{
-              width: { xl: 289, lg: 289, md: 205, sm: 155, xs: 280 },
-              height: { xl: 782, lg: 782, md: 782, sm: 500, xs: 500 },
-              ml: 1,
-              flexShrink: 0,
-              mt: { xs: 2 },
-            }}
-          >
-            <img src={arr.image} alt="images" width="100%" height="100%" />
-          </Box>
-        ))}
+        {newArrival.map(
+          (arr: {
+            id: string;
+            image: string;
+            title: string;
+            subTitle: string;
+            price: string;
+          }) => (
+            <Box
+              sx={{
+                width: { xl: 289, lg: 289, md: 205, sm: 155, xs: 280 },
+                height: { xl: 782, lg: 782, md: 782, sm: 500, xs: 500 },
+                ml: 1,
+                flexShrink: 0,
+                mt: { xs: 2 },
+              }}
+            >
+              <img src={arr.image} alt="images" width="100%" height="100%" />
+            </Box>
+          )
+        )}
       </Box>
     </>
   );

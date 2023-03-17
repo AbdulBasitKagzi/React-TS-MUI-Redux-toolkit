@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface userstate {
   User: Object;
+  routeValue: string;
   //   id: string;
   //   type: string;
   //   category: string;
@@ -22,6 +23,7 @@ interface userstate {
 // };
 const userState: userstate = {
   User: {},
+  routeValue: "",
 };
 
 const userSlice = createSlice({
@@ -32,6 +34,9 @@ const userSlice = createSlice({
       state.User = action.payload.userCredentials;
       localStorage.setItem("isAuth", "true");
       localStorage.setItem("user", JSON.stringify(state.User));
+    },
+    makeRoute: (state, action) => {
+      state.routeValue = action.payload;
     },
   },
 });

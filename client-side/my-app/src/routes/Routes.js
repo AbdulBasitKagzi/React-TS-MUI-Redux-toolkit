@@ -21,7 +21,7 @@ function MainRoutes() {
     },
     {
       id: "categorydetal",
-      path: "/categorydetail",
+      path: "/categorydetail/:id/:type",
       component: <CategoryDetail />,
       protected: true,
     },
