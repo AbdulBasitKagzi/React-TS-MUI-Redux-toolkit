@@ -65,21 +65,21 @@ export default function FilterSlider() {
       setSizeFilter(SizeFilter.filter((state) => state !== value));
     }
   };
-  useEffect(() => {
-    console.log("state", filterState);
-    console.log("brand", BrandFilter);
-    console.log("size", SizeFilter);
-    console.log("category", CategoriesFilter);
-  }, [filterState, BrandFilter, SizeFilter, CategoriesFilter]);
+  // useEffect(() => {
+  //   console.log("state", filterState);
+  //   console.log("brand", BrandFilter);
+  //   console.log("size", SizeFilter);
+  //   console.log("category", CategoriesFilter);
+  // }, [filterState, BrandFilter, SizeFilter, CategoriesFilter]);
 
-  useEffect(() => {
-    console.log("I am dispatching");
-    dispatch(productActions.filterByHuman(params.type));
-  }, [params.type, dispatch]);
+  // useEffect(() => {
+  //   console.log("I am dispatching");
+  //   dispatch(productActions.filterByHuman(params.type));
+  // }, [params.type, dispatch]);
 
-  useEffect(() => {
-    click && dispatch(productActions.filterByHuman(filterState));
-  }, [filterState, click, dispatch]);
+  // useEffect(() => {
+  //   click && dispatch(productActions.filterByHuman(filterState));
+  // }, [filterState, click, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterByBrand(BrandFilter));

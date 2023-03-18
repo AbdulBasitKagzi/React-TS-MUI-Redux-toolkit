@@ -1,6 +1,9 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { products } from "../../assets/Constants";
 import { productLists } from "../../assets/ProductsContant";
+import { gender } from "../../assets/Constants";
+import { brandFilter } from "../../assets/Constants";
+import { categoriesFilter } from "../../assets/Constants";
 
 interface productstate {
   Products: Array<Object>;
@@ -11,6 +14,12 @@ interface productstate {
   filterBySize: Array<Object>;
   filterByCategory: Array<Object>;
   filterByBrand: Array<Object>;
+  filteredGender: any;
+  filteredCategory: any;
+  fitleredBrand: any;
+  gender: Array<Object>;
+  brand: Array<Object>;
+  category: Array<object>;
 }
 
 const productState: productstate = {
@@ -22,6 +31,12 @@ const productState: productstate = {
   filterBySize: [],
   filterByCategory: [],
   filterByBrand: [],
+  gender: gender,
+  filteredGender: {},
+  filteredCategory: {},
+  fitleredBrand: {},
+  brand: brandFilter,
+  category: categoriesFilter,
 };
 
 // const Product: product = products;
@@ -47,21 +62,60 @@ const productSlice = createSlice({
       //   return current(state.ProductsList).filter(
       //     (prod: any) => prod.human === +pay
       //   );
-
       // });
-      state.filterByHuman = current(state.ProductsList).filter(
-        (prod: any) => prod.category === +action.payload
+      // console.log("action", action);
+      // state.filterByHuman = state.ProductsList.filter(
+      //   (product: any) => product.gender === state.filteredGender.id
+      // );
+      // console.log("human", state.filterByHuman);
+      state.filteredGender = state.gender.find(
+        (gender: any) => gender.slug === action.payload.id
       );
-      state.filterByHuman = state.filterByHuman.flatMap((i) => i);
-      // state.filteredProducts = state.filter.flatMap((i) => i);
-      state.filter = state.filterByHuman;
-      console.log("filteredData", state.filterByHuman);
+      state.fitleredBrand = state.brand.find(
+        (brand: any) => brand.slug === action.payload.type
+      );
+      state.filteredCategory = state.category.find(
+        (category: any) => category.slug === action.payload.type
+      );
+      console.log("brand", state.fitleredBrand);
+      console.log("category", state.filteredCategory);
+      // console.log("gender", current(state.filteredGender));
+      console.log(action.payload);
+      state.filterByHuman = current(state.ProductsList).filter(
+        (product: any) => product.gender === state.filteredGender.id
+      );
+      console.log("gender", state.filterByHuman);
+
+      if (state.fitleredBrand) {
+        console.log("brandif");
+        state.filterByHuman = state.filterByHuman.filter(
+          (product: any) => product.brand === state.fitleredBrand.id
+        );
+        console.log("prod", state.filterByHuman);
+        state.filter = state.filterByHuman;
+      } else {
+        console.log("brand else");
+        state.filterByHuman = state.filterByHuman.filter(
+          (product: any) => product.category === state.filteredCategory.id
+        );
+        console.log("prod", state.filterByHuman);
+        state.filter = state.filterByHuman;
+      }
+
+      // need to uncomment below code
+      // state.filterByHuman = current(state.ProductsList).filter(
+      //   (prod: any) => prod.category === +action.payload
+      // );
+      // state.filterByHuman = state.filterByHuman.flatMap((i) => i);
+      // // state.filteredProducts = state.filter.flatMap((i) => i);
+      // state.filter = state.filterByHuman;
+      // console.log("filteredData", state.filterByHuman);
     },
 
     filterByBrand: (state, action) => {
       // console.log("brand", action);
       if (state.filterByCategory.length && !state.filterBySize.length) {
-        console.log("here1");
+        console.log("brand here1");
         state.filterByBrand = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterByCategory).filter(

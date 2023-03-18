@@ -230,25 +230,25 @@ export const humanFilter = [
 ];
 
 export const brandFilter = [
-  { id: 1, value: "H & M" },
-  { id: 2, value: "Mark & Spencer" },
-  { id: 3, value: "Victoria's Secret" },
-  { id: 4, value: "Dior" },
-  { id: 5, value: "Gucci" },
-  { id: 6, value: "Fendi" },
-  { id: 7, value: "Prada" },
-  { id: 8, value: "Chanel" },
-  { id: 9, value: "Versace" },
-  { id: 10, value: "Dolce & Gabbana" },
-  { id: 11, value: "Zara" },
+  { id: 1, value: "H & M", slug: "h&m" },
+  { id: 2, value: "Mark & Spencer", slug: "mark&spencer" },
+  { id: 3, value: "Victoria's Secret", slug: "victoria'ssecret" },
+  { id: 4, value: "Dior", slug: "dior" },
+  { id: 5, value: "Gucci", slug: "gucci" },
+  { id: 6, value: "Fendi", slug: "fendi" },
+  { id: 7, value: "Prada", slug: "prada" },
+  { id: 8, value: "Chanel", slug: "chanel" },
+  { id: 9, value: "Versace", slug: "versace" },
+  { id: 10, value: "Dolce & Gabbana", slug: "delce&gabbana" },
+  { id: 11, value: "Zara", slug: "zara" },
 ];
 
 export const categoriesFilter = [
-  { id: 1, value: "Dresses" },
-  { id: 2, value: "Tops" },
-  { id: 3, value: "Lingerie & Lounge Wear" },
-  { id: 4, value: "Blouse" },
-  { id: 5, value: "Vintage" },
+  { id: 1, value: "Dresses", slug: "dresses" },
+  { id: 2, value: "Tops", slug: "tops" },
+  { id: 3, value: "Lingerie & Lounge Wear", slug: "lingerie&loungewear" },
+  { id: 4, value: "Blouse", slug: "blouse" },
+  { id: 5, value: "Vintage", slug: "vintage" },
 ];
 
 export const sizeFilter = [

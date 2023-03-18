@@ -20,8 +20,6 @@ function App() {
     setSave(localStorage.getItem("isAuth") || "");
   }, [User]);
 
-  console.log(User, save);
-
   useEffect(() => {
     // to protect routes
     if (save === "true") {

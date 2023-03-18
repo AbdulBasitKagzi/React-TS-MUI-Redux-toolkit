@@ -9,20 +9,26 @@ import { categoriesFilter } from "../assets/Constants";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { RootState } from "../store/userSlice/store";
+import { useDispatch } from "react-redux";
+import { productActions } from "../store/userSlice/productSlice";
 
 const CategoryDetail: React.FC = () => {
   const { id, type } = useParams();
-
-  const [category, setCategory] = useState<{ id: number; value: string }>();
+  const dispatch = useDispatch();
   useEffect(() => {
-    setCategory(
-      categoriesFilter?.find(
-        (category: { id: number; value: string }) =>
-          category?.id === Number(type)
-      )
-    );
-  }, [type]);
-  console.log(category);
+    dispatch(productActions.filterByHuman({ id, type }));
+  }, [id, type, dispatch]);
+
+  // const [category, setCategory] = useState<{ id: number; value: string }>();
+  // useEffect(() => {
+  //   setCategory(
+  //     categoriesFilter?.find(
+  //       (category: { id: number; value: string }) =>
+  //         category?.id === Number(type)
+  //     )
+  //   );
+  // }, [type]);
+  // console.log(category);
   const { filter } = useSelector((state: RootState) => state.product);
   return (
     <>
@@ -42,7 +48,7 @@ const CategoryDetail: React.FC = () => {
             mt: { xl: 8, lg: 8, md: 8, sm: -4, xs: -4 },
           }}
         >
-          {id?.toUpperCase()} {category?.value}
+          {/* {id?.toUpperCase()} {category?.value} */}
         </Box>
         <Box
           sx={{

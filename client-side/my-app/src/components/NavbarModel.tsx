@@ -79,7 +79,7 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                         onClick={() => {
                           handleClose();
                           navigate(
-                            `/categorydetail/${routeValue}/${category.id}`
+                            `/categorydetail/${routeValue}/${category.slug}`
                           );
                         }}
                       >
@@ -108,7 +108,9 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                         }}
                         onClick={() => {
                           handleClose();
-                          navigate(`/categorydetail/${routeValue}/${brand.id}`);
+                          navigate(
+                            `/categorydetail/${routeValue}/${brand.slug}`
+                          );
                         }}
                       >
                         {brand.value}

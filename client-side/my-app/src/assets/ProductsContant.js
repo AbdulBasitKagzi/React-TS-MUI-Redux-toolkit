@@ -2212,4 +2212,46 @@ export const productLists = [
     reviewRate: 4,
     slug: "redgemearrings",
   },
+
+  {
+    id: 55,
+    productName: "Red Gem Earrings",
+    productImages: [
+      {
+        id: 1,
+        productImage: "/images/womenproduct5.png",
+      },
+      {
+        id: 2,
+        productImage: "/images/womenproduct2.png",
+      },
+      {
+        id: 3,
+        productImage: "/images/womenproduct3.png",
+      },
+      {
+        id: 4,
+        productImage: "/images/womenproduct4.png",
+      },
+      {
+        id: 5,
+        productImage: "/images/womenproduct5.png",
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png",
+      },
+    ],
+    productDescription: ["desc 1", "desc 2"],
+    productOriginalPrice: 400,
+    productCurrentPrice: 330,
+    gender: 2,
+    human: 3,
+    category: 1,
+    brand: 1,
+    size: [2, 3],
+    color: [2, 5],
+    reviewRate: 4,
+    slug: "redgemearrings",
+  },
 ];
