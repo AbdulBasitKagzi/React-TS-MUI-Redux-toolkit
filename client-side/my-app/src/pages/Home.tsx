@@ -92,13 +92,41 @@ function Home() {
       price: "$336",
       cancelPrice: "$379",
     },
-    // {
-    //   id: "Silversidewristwatch",
-    //   productName: "SilverSide WristWatch",
-    //   image: appleWatch,
-    //   price: "$336",
-    //   cancelPrice: "$379",
-    // },
+    {
+      id: "Silversidewristwatch",
+      productName: "SilverSide WristWatch",
+      image: appleWatch,
+      price: "$336",
+      cancelPrice: "$379",
+    },
+    {
+      id: "Silversidewristwatch",
+      productName: "SilverSide WristWatch",
+      image: appleWatch,
+      price: "$336",
+      cancelPrice: "$379",
+    },
+    {
+      id: "Silversidewristwatch",
+      productName: "SilverSide WristWatch",
+      image: appleWatch,
+      price: "$336",
+      cancelPrice: "$379",
+    },
+    {
+      id: "Silversidewristwatch",
+      productName: "SilverSide WristWatch",
+      image: appleWatch,
+      price: "$336",
+      cancelPrice: "$379",
+    },
+    {
+      id: "Silversidewristwatch",
+      productName: "SilverSide WristWatch",
+      image: appleWatch,
+      price: "$336",
+      cancelPrice: "$379",
+    },
   ]);
 
   return (
@@ -116,7 +144,13 @@ function Home() {
                 sm: "100%",
                 xs: "107%",
               },
-              height: "809px",
+              height: {
+                xl: "809px",
+                lg: "809px",
+                md: "809px",
+                sm: "809px",
+                xs: "300px",
+              },
               left: "0px",
               top: "0px",
               background: "#FFFFFF",
@@ -125,25 +159,34 @@ function Home() {
           >
             <Box
               sx={{
-                backgroundImage: `url(${background})`,
+                // backgroundImage: `url(${background})`,
                 backgroundRepeat: "no-repeat",
                 // position: "absolute",
                 width: "100%",
                 height: {
-                  xl: "890px",
-                  lg: "890px",
-                  md: "605px",
+                  xl: "809px",
+                  lg: "809px",
+                  md: "609px",
                   sm: "540px",
                   xs: "340px",
                 },
+
                 opacity: 0.85,
               }}
-            ></Box>
+            >
+              <img src={background} width="100%" />
+            </Box>
             <Box
               sx={{
                 width: "100%",
                 position: "absolute",
-                top: "154px",
+                top: {
+                  xl: "154px",
+                  lg: "154px",
+                  md: "115px",
+                  sm: "55px",
+                  xs: "40px",
+                },
                 // left: { md: "125px", sm: "95px", xs: "85px" },
               }}
             >
@@ -153,7 +196,7 @@ function Home() {
                   // m: "0 auto",
                   fontSize: {
                     lg: "39px",
-                    md: "30px",
+                    md: "25px",
                     sm: "15px",
                     xs: "12px",
                   },
@@ -168,8 +211,8 @@ function Home() {
                 sx={{
                   fontSize: {
                     lg: "95px",
-                    md: "68px",
-                    sm: "50px",
+                    md: "55px",
+                    sm: "45px",
                     xs: "20px",
                   },
                   fontWeight: "700px",
@@ -185,10 +228,12 @@ function Home() {
                 top: {
                   xl: "-401px",
                   lg: "-401px",
-                  md: "-235px",
-                  sm: "-195px",
-                  xs: "-95px",
+                  md: "-365px",
+                  sm: "-370px",
+                  xs: "-235px",
                 },
+                maxWidth: "90%",
+                mx: "auto",
                 // left: "169px",
                 // right: "170px",
               }}
@@ -197,18 +242,20 @@ function Home() {
                 <Box
                   sx={{
                     width: {
-                      xl: "691px",
+                      xl: "791px",
                       lg: "691px",
                       md: "491px",
                       sm: "335px",
                       xs: "170px",
                     },
-                    // height: {
-                    //   xl: "689px",
-                    //   lg: "689px",
-                    //   md: "589px",
-                    //   sm: "489px",
-                    // },
+                    // maxWidth: "90%",
+                    // mx: "auto",
+                    height: {
+                      xl: "789px",
+                      lg: "689px",
+                      md: "589px",
+                      sm: "489px",
+                    },
                   }}
                 >
                   <Button
@@ -222,13 +269,14 @@ function Home() {
                         xs: "88px",
                       },
                       left: {
-                        xl: "262px",
+                        xl: "390px",
                         lg: "262px",
-                        md: "165px",
+                        md: "125px",
                         sm: "100px",
-                        xs: "100px",
+                        xs: "60px",
                       },
-                      // right: "0px",
+                      right: "0px",
+
                       background: "#FFFFFF",
                       width: {
                         xl: "256px",
@@ -259,18 +307,21 @@ function Home() {
                 <Box
                   sx={{
                     width: {
-                      xl: "691px",
+                      xl: "791px",
                       lg: "691px",
                       md: "491px",
                       sm: "335px",
                       xs: "170px",
                     },
+                    // maxWidth: "90%",
+                    // mx: "auto",
 
-                    // height: {
-                    //   xl: "689px",
-                    //   lg: "689px",
-                    //   md: "589px",
-                    // },
+                    height: {
+                      xl: "789px",
+                      lg: "689px",
+                      md: "589px",
+                    },
+                    overflow: "hidden",
                   }}
                 >
                   <Button
@@ -284,11 +335,11 @@ function Home() {
                         xs: "88px",
                       },
                       left: {
-                        xl: "990px",
-                        lg: "990px",
-                        md: "670px",
-                        sm: "481px",
-                        xs: "275px",
+                        xl: "1100px",
+                        lg: "915px",
+                        md: "590px",
+                        sm: "455px",
+                        xs: "220px",
                       },
                       // right: "0px",
                       background: "#FFFFFF",
@@ -327,26 +378,20 @@ function Home() {
                 top: {
                   xl: "-275px",
                   lg: "-275px",
-                  md: "-150px",
-                  sm: "-130px",
+                  md: "-350px",
+                  sm: "-400px",
+                  xs: "-180px",
                   // xs: "0px",
                 },
               }}
             >
-              <Box
-                sx={
-                  {
-                    // overflow: "hidden",
-                  }
-                }
+              <Typography
+                variant="h3"
+                sx={{ fontFamily: "Jost", fontSize: "39px", fontWeight: 700 }}
               >
-                <Typography
-                  variant="h3"
-                  sx={{ fontFamily: "Jost", fontSize: "39px", fontWeight: 700 }}
-                >
-                  Best Deals
-                </Typography>
-              </Box>
+                Best Deals
+              </Typography>
+
               <Slider bestDeals={bestDeals} />
               {/* <Box>
                 <Button
@@ -367,18 +412,22 @@ function Home() {
                 justifyContent: "center",
                 alignContent: "center",
                 mt: { xl: -24, lg: -24, md: -13, sm: -10, xs: 5 },
+                maxWidth: "90%",
+                mx: "auto",
               }}
             >
               <Box
                 sx={{
                   display: { lg: "flex", md: "flex", sm: "flex" },
+                  justifyContent: "center",
+                  width: "100%",
                 }}
               >
                 <Box
                   sx={{
                     background: "#EEEEEE",
-                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
-                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    width: { xl: 786, lg: 500, md: 400, sm: 300, xs: 330 },
+                    height: { xl: 782, lg: 500, md: 400, sm: 300, xs: 280 },
                     mb: { xs: 1 },
                     mr: 1,
                     textAlign: "center",
@@ -395,7 +444,12 @@ function Home() {
                       },
                       fontWeight: 700,
                       color: "#616161",
-                      marginTop: { lg: "100px", md: "80px", sm: "50px" },
+                      marginTop: {
+                        xl: "202px",
+                        lg: "100px",
+                        md: "80px",
+                        sm: "50px",
+                      },
                       paddingTop: { xs: "40px" },
                     }}
                   >
@@ -418,7 +472,7 @@ function Home() {
                   </Typography>
                   <Typography
                     sx={{
-                      textAlign: "center",
+                      textAlign: "left",
                       fontFamily: "Jost",
                       fontSize: {
                         lg: "18px",
@@ -428,6 +482,14 @@ function Home() {
                       },
                       fontWeight: 400,
                       color: "#212121",
+                      maxWidth: {
+                        xl: "423px",
+                        lg: "423px",
+                        md: "275px",
+                        sm: "235px",
+                        xs: "235px",
+                      },
+                      ml: { xl: 25, lg: 10, md: 10, sm: 6, xs: 8 },
                     }}
                   >
                     The best everyday option in a Super Saver range within a
@@ -456,11 +518,16 @@ function Home() {
                   sx={{
                     // backgroundImage: `url(${womenStanding})`,
                     objectFit: "cover",
-                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
-                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    width: { xl: 786, lg: 500, md: 400, sm: 300, xs: 330 },
+                    height: { xl: 782, lg: 500, md: 400, sm: 300, xs: 280 },
                   }}
                 >
-                  <img src={womenStanding} alt="womenstanding" width="100%" />
+                  <img
+                    src={womenStanding}
+                    alt="womenstanding"
+                    width="100%"
+                    height="100%"
+                  />
                   <Box position="relative" sx={{ bottom: 70 }}>
                     <Button variant="text">
                       <Typography color="#FFFFFF">
@@ -482,23 +549,31 @@ function Home() {
                   sm: "flex",
                   xs: "grid",
                 },
-                justifyContent: "center",
+                justifyContent: {
+                  xl: "center",
+                  lg: "center",
+                  md: "center",
+                  sm: "center",
+                  xs: "space-between",
+                },
+                maxWidth: "90%",
+                mx: "auto",
               }}
             >
               <Box
                 sx={{
-                  width: { xl: 336, lg: 336, md: 270, sm: 203, xs: 280 },
-                  height: { xl: 336, lg: 336, md: 270, sm: 203, xs: 280 },
+                  width: { xl: 519, lg: 336, md: 270, sm: 203, xs: 330 },
+                  height: { xl: 519, lg: 336, md: 270, sm: 203, xs: 280 },
                   mr: 1,
-                  mt: 1,
+                  mt: { xl: 1, lg: 1, md: 1, sm: 1, xs: 8 },
                 }}
               >
                 <img src={handbag} alt="handbag" width="100%" />
               </Box>
               <Box
                 sx={{
-                  width: { xl: 336, lg: 336, md: 270, sm: 203, xs: 280 },
-                  height: { xl: 336, lg: 336, md: 270, sm: 203, xs: 280 },
+                  width: { xl: 519, lg: 336, md: 270, sm: 203, xs: 330 },
+                  height: { xl: 519, lg: 336, md: 270, sm: 203, xs: 280 },
                   mr: 1,
                   mt: 1,
                 }}
@@ -507,8 +582,8 @@ function Home() {
               </Box>
               <Box
                 sx={{
-                  width: { xl: 336, lg: 336, md: 270, sm: 203, xs: 280 },
-                  height: { xl: 336, lg: 336, md: 270, sm: 203, xs: 280 },
+                  width: { xl: 519, lg: 336, md: 270, sm: 203, xs: 330 },
+                  height: { xl: 519, lg: 336, md: 270, sm: 203, xs: 280 },
                   mr: 1,
                   mt: 1,
                 }}
@@ -533,7 +608,7 @@ function Home() {
               >
                 Shop By Category
               </Typography>
-              {/* tabs */}
+
               <Box sx={{ mt: 7, mb: 7 }}>
                 <CategoryTab tabs={person_tabs} />
               </Box>
@@ -550,34 +625,48 @@ function Home() {
                 justifyContent: "center",
                 alignContent: "center",
                 mt: { xl: 12, lg: 12, md: 12, sm: 8, xs: 5 },
+                maxWidth: "90%",
+                mx: "auto",
               }}
             >
               <Box
                 sx={{
                   display: { lg: "flex", md: "flex", sm: "flex" },
+                  justifyContent: "center",
+                  width: "100%",
                 }}
               >
                 <Box
                   sx={{
                     background: "#EEEEEE",
-                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
-                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    width: { xl: 782, lg: 500, md: 400, sm: 300, xs: 330 },
+                    height: { xl: 782, lg: 500, md: 400, sm: 300, xs: 280 },
                     mb: { xs: 1 },
                     mr: 1,
                     textAlign: "center",
                   }}
                 >
-                  <img src={urbanStories} alt="urban" width="100%" />
+                  <img
+                    src={urbanStories}
+                    alt="urban"
+                    width="100%"
+                    height="100%"
+                  />
                 </Box>
                 <Box
                   sx={{
                     // backgroundImage: `url(${womenStanding})`,
                     objectFit: "cover",
-                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
-                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    width: { xl: 782, lg: 500, md: 400, sm: 300, xs: 330 },
+                    height: { xl: 782, lg: 500, md: 400, sm: 300, xs: 280 },
                   }}
                 >
-                  <img src={countryLights} alt="countylights" width="100%" />
+                  <img
+                    src={countryLights}
+                    alt="countylights"
+                    width="100%"
+                    height="100%"
+                  />
                   {/* <Box position="relative" sx={{ bottom: 70 }}>
                     <Button variant="text">
                       <Typography color="#FFFFFF">
@@ -602,7 +691,7 @@ function Home() {
             </Box>
             <Box
               sx={{
-                // maxWidth: "90%",
+                maxWidth: "90%",
                 display: "flex",
                 justifyContent: "center",
                 alignContent: "center",
@@ -622,6 +711,8 @@ function Home() {
               <Box
                 sx={{
                   display: { lg: "flex", md: "flex", sm: "flex" },
+                  maxWidth: "90%",
+                  mx: "auto",
                 }}
               >
                 <Box
@@ -633,8 +724,8 @@ function Home() {
                       md: "#FFFFFF",
                       sm: "#FFFFFF",
                     },
-                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
-                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    width: { xl: 786, lg: 500, md: 400, sm: 300, xs: 330 },
+                    height: { xl: 786, lg: 500, md: 400, sm: 300, xs: 280 },
                     mb: { xs: 1 },
                     mr: 1,
                     textAlign: "center",
@@ -655,7 +746,7 @@ function Home() {
                         sm: "0px",
                         md: "0px",
                         lg: "0px",
-                        xl: "0px",
+                        xl: "96px",
                       },
                       fontWeight: 700,
                       color: "#212121",
@@ -665,17 +756,26 @@ function Home() {
                   </Typography>
                   <Typography
                     sx={{
+                      width: {
+                        xl: "628px",
+                        lg: "500px",
+                        md: "400px",
+                        sm: "300px",
+                        xs: "315px",
+                      },
                       textAlign: "left",
                       fontFamily: "Jost",
                       fontSize: {
+                        xl: "24px",
                         lg: "18px",
                         md: "14px",
-                        sm: "10px",
-                        xs: "10px",
+                        sm: "12px",
+                        xs: "12px",
                       },
                       px: 5,
                       fontWeight: 400,
                       color: "#212121",
+                      ml: { xl: 16.5, xs: 2, sm: -1 },
                     }}
                   >
                     We provide the top formal apparel package to make your job
@@ -704,8 +804,8 @@ function Home() {
                   sx={{
                     // backgroundImage: `url(${womenStanding})`,
                     objectFit: "cover",
-                    width: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
-                    height: { xl: 500, lg: 500, md: 400, sm: 300, xs: 280 },
+                    width: { xl: 786, lg: 500, md: 400, sm: 300, xs: 330 },
+                    height: { xl: 786, lg: 500, md: 400, sm: 300, xs: 280 },
                   }}
                 >
                   <img src={formal} alt="formal" width="100%" />

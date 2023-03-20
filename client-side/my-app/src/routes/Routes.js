@@ -1,9 +1,9 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import SignIn from "../pages/Login";
 import Home from "../pages/Home";
 import CategoryDetail from "../pages/CategoryDetail";
 import NoPage from "../pages/NoPage";
+import ItemDetailView from "../pages/ItemDetailView";
 
 function MainRoutes() {
   const routes_arr = [
@@ -23,6 +23,12 @@ function MainRoutes() {
       id: "categorydetal",
       path: "/categorydetail/:id/:type",
       component: <CategoryDetail />,
+      protected: true,
+    },
+    {
+      id: "itemdetailview",
+      path: "/itemdetailview/:id",
+      component: <ItemDetailView />,
       protected: true,
     },
   ];

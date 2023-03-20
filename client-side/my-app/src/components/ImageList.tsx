@@ -17,7 +17,7 @@ const Image_List = () => {
     <>
       <ImageList
         sx={{
-          width: { xl: 1400, lg: 1300, md: 900, sm: 700, xs: 300 },
+          width: { xl: 1570, lg: 1300, md: 900, sm: 700, xs: 330 },
           //   height: 786,
           display: {
             xs: "block",

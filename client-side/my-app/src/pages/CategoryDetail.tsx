@@ -4,51 +4,101 @@ import Layout from "../components/Layout";
 import { useParams } from "react-router-dom";
 import FilterSlider from "../components/Filter";
 import FilterGrid from "../components/FilterGrid";
-import { categoriesFilter } from "../assets/Constants";
+import { gender, brandFilter, categoriesFilter } from "../assets/Constants";
+
 // mui imports
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { RootState } from "../store/userSlice/store";
 import { useDispatch } from "react-redux";
 import { productActions } from "../store/userSlice/productSlice";
+import Footer from "../components/Footer";
 
 const CategoryDetail: React.FC = () => {
+  const [foundGender, setFoundGender] = useState<{
+    id: number;
+    value: string;
+    slug: string;
+  }>();
+  const [foundBrand, setFoundBrand] = useState<{
+    id: number;
+    value: string;
+    slug: string;
+  }>();
+  const [foundCategory, setFoundCategory] = useState<{
+    id: number;
+    value: string;
+    slug: string;
+  }>();
   const { id, type } = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(productActions.filterByHuman({ id, type }));
   }, [id, type, dispatch]);
 
+  useEffect(() => {
+    setFoundGender(
+      gender.find(
+        (gender: { id: number; value: string; slug: string }) =>
+          gender.slug === id
+      )
+    );
+  }, [id, type]);
+
+  useEffect(() => {
+    setFoundBrand(
+      brandFilter.find(
+        (brand: { id: number; value: string; slug: string }) =>
+          brand.slug === type
+      )
+    );
+  }, [id, type]);
+
+  useEffect(() => {
+    console.log("new", foundBrand, foundGender, foundCategory);
+  }, [foundBrand, foundGender, foundCategory]);
+
   // const [category, setCategory] = useState<{ id: number; value: string }>();
-  // useEffect(() => {
-  //   setCategory(
-  //     categoriesFilter?.find(
-  //       (category: { id: number; value: string }) =>
-  //         category?.id === Number(type)
-  //     )
-  //   );
-  // }, [type]);
+  useEffect(() => {
+    setFoundCategory(
+      categoriesFilter?.find(
+        (category: { id: number; value: string; slug: string }) =>
+          category?.slug === type
+      )
+    );
+  }, [id, type]);
   // console.log(category);
+
   const { filter } = useSelector((state: RootState) => state.product);
   return (
     <>
       <Layout>
         <Box
           sx={{
-            fontFamily: "Jost",
-            fontSize: {
-              xl: "50px",
-              lg: "50px",
-
-              md: "50px",
-              sm: "50px",
-              xs: "32px",
-            },
-            fontWeight: 700,
-            mt: { xl: 8, lg: 8, md: 8, sm: -4, xs: -4 },
+            mt: { xl: 8, lg: 8, md: 8, sm: -4, xs: 2 },
+            width: { xl: "509px", lg: "509px" },
           }}
         >
-          {/* {id?.toUpperCase()} {category?.value} */}
+          <Typography
+            sx={{
+              position: "relative",
+              left: { xl: "495px", lg: "445px", md: "-50px", sm: "15px" },
+              // textAlign: "center",
+              fontFamily: "Jost",
+              fontSize: {
+                xl: "44px",
+                lg: "44px",
+                md: "44px",
+                sm: "35px",
+                xs: "28px",
+              },
+              fontWeight: 700,
+            }}
+          >
+            {foundGender?.value} {foundCategory?.value} {foundBrand?.value}{" "}
+            {foundBrand?.value ? "Products" : ""}
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -56,10 +106,10 @@ const CategoryDetail: React.FC = () => {
             width: "97px",
             height: "27px",
             ml: {
-              xl: "560px",
-              lg: "515px",
-              md: "305px",
-              sm: "243px",
+              xl: "570px",
+              lg: "525px",
+              md: "285px",
+              sm: "260px",
               xs: "45px",
             },
           }}
@@ -88,6 +138,7 @@ const CategoryDetail: React.FC = () => {
           <FilterSlider />
           <FilterGrid />
         </Box>
+        <Footer />
       </Layout>
     </>
   );

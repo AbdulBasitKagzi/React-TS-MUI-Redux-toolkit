@@ -67,7 +67,9 @@ const ReviewCard: React.FC = () => {
             xs: "block",
           },
           justifyContent: "center",
+          // alignContent: "center",
           mx: "auto",
+          mt: { xs: 8 },
         }}
       >
         {arr.map(
@@ -82,13 +84,13 @@ const ReviewCard: React.FC = () => {
           }) => (
             <Box
               sx={{
-                maxWidth: { xl: 521, lg: 521, md: 521, sm: 236 },
+                maxWidth: { xl: 521, lg: 521, md: 521, sm: 236, xs: 330 },
                 maxHeight: 1009,
               }}
             >
               <Box
                 sx={{
-                  maxWidth: { xl: 521, lg: 521, md: 521, sm: 236 },
+                  maxWidth: { xl: 521, lg: 521, md: 521, sm: 236, xs: 330 },
                   maxHeight: { xl: 521, lg: 521, md: 521, sm: 521, xs: 465 },
                 }}
               >

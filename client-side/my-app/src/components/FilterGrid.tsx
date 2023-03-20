@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { productActions } from "../store/userSlice/productSlice";
+import { useNavigate } from "react-router-dom";
 
 // images and icons import
 import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
@@ -41,6 +43,8 @@ interface arr {
 
 function FilterGrid() {
   const { filter } = useSelector((state: RootState) => state.product);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log("filteredData", filter);
   }, [filter]);
@@ -54,7 +58,7 @@ function FilterGrid() {
         // mx: "auto",
       }}
     >
-      <Grid container spacing={0}>
+      <Grid container spacing={4}>
         {filter.map((arr: any) => (
           <Grid item xs={8} sm={6} md={4} lg={4} xl={4}>
             <Box
@@ -69,8 +73,16 @@ function FilterGrid() {
                 border: 1,
                 borderColor: "#E5E7EB",
               }}
+              onClick={() => {
+                dispatch(productActions.selectedProduct(arr));
+                navigate(`/itemdetailview/${arr.slug}`);
+              }}
             >
-              <img width="100%" src={womenStanding} alt="women" />
+              <img
+                width="100%"
+                src={arr.productImages[0].productImage}
+                alt="women"
+              />
               <Box
                 sx={{
                   display: "flex",

@@ -1,3 +1,21 @@
+import blackdress from "../assets/images/blackdress.png";
+import dolce_gabbana from "../assets/images/dolce&gabbana.png";
+import elgantdress from "../assets/images/elgantdress.png";
+import louisactivewear from "../assets/images/louisactivewear.png";
+import reddressvalentino from "../assets/images/reddressvalentino.png";
+import shinydressgivenchy from "../assets/images/shinydressgivenchy.png";
+import womenblackgucci from "../assets/images/womenblackgucci.png";
+import womenwhitejacket from "../assets/images/womenwhitejacket.png";
+import weddingRing from "../assets/images/weddingRing.png";
+import wallet from "../assets/images/wallet.png";
+import handBag from "../assets/images/handBag.png";
+import earring from "../assets/images/redgemearrring.png";
+import shoes_1 from "../assets/images/shoes-1.png";
+import shoes_2 from "../assets/images/shoes-2.png";
+import womenShoeBlue from "../assets/images/womenShoeBlue.png";
+import womenShoeYellow from "../assets/images/womenShoeYellow.png";
+import leatherShoe from "../assets/images/leatherShoe.png";
+
 export const productLists = [
   {
     id: 1,
@@ -5,33 +23,33 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/shandle.png",
+        productImage: louisactivewear,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: louisactivewear,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: louisactivewear,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: louisactivewear,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: louisactivewear,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: louisactivewear,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 0,
+    gender: 1,
     human: 1,
     category: 4,
     brand: 4,
@@ -46,27 +64,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/bangles.png",
+        productImage: weddingRing,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: weddingRing,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: weddingRing,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: weddingRing,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: weddingRing,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: weddingRing,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -87,27 +105,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: wallet,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: wallet,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: wallet,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: wallet,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -128,27 +146,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/watch.png",
+        productImage: wallet,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: wallet,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: wallet,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: wallet,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -169,27 +187,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: wallet,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: wallet,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: wallet,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: wallet,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -210,27 +228,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: handBag,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: handBag,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: handBag,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: handBag,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: handBag,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: handBag,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -251,27 +269,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/earning.png",
+        productImage: earring,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: earring,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: earring,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: earring,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -292,27 +310,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/watch1.png",
+        productImage: wallet,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: wallet,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: wallet,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: wallet,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: wallet,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -329,31 +347,31 @@ export const productLists = [
   },
   {
     id: 9,
-    productName: "Earning",
+    productName: "Earring",
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct1.png",
+        productImage: earring,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: earring,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: earring,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: earring,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -374,27 +392,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/earning.png",
+        productImage: earring,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: earring,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: earring,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: earring,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -415,33 +433,33 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/Card1.jpg",
+        productImage: earring,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: earring,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: earring,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: earring,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 0,
+    gender: 1,
     human: 4,
     category: 2,
     brand: 0,
@@ -456,33 +474,33 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/Card2.png",
+        productImage: earring,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: earring,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: earring,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: earring,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 0,
+    gender: 1,
     human: 2,
     category: 2,
     brand: 0,
@@ -497,33 +515,33 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/Card3.png",
+        productImage: earring,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: earring,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: earring,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: earring,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 0,
+    gender: 1,
     human: 1,
     category: 2,
     brand: 0,
@@ -538,33 +556,33 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/Card4.png",
+        productImage: earring,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: earring,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: earring,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: earring,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: earring,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 0,
+    gender: 1,
     human: 4,
     category: 2,
     brand: 0,
@@ -579,27 +597,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/shoes1.png",
+        productImage: shoes_1,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shoes_1,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shoes_1,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shoes_1,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_1,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_1,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -608,7 +626,7 @@ export const productLists = [
     gender: 2,
     human: 4,
     category: 4,
-    brand: 4,
+    brand: 1,
     size: [1, 3],
     color: [2, 5],
     reviewRate: 4,
@@ -620,27 +638,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/shoes2.png",
+        productImage: shoes_2,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shoes_2,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shoes_2,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shoes_2,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -661,27 +679,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/shoes3.png",
+        productImage: shoes_2,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shoes_2,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shoes_2,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shoes_2,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -702,27 +720,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/shoes4.png",
+        productImage: shoes_2,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shoes_2,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shoes_2,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shoes_2,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -743,27 +761,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/shoes1.png",
+        productImage: shoes_2,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shoes_2,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shoes_2,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shoes_2,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shoes_2,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -784,27 +802,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct1.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -825,27 +843,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -866,27 +884,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -895,7 +913,7 @@ export const productLists = [
     gender: 1,
     human: 3,
     category: 3,
-    brand: 9,
+    brand: 5,
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
@@ -907,27 +925,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -948,27 +966,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -977,7 +995,7 @@ export const productLists = [
     gender: 1,
     human: 1,
     category: 3,
-    brand: 9,
+    brand: 4,
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
@@ -989,27 +1007,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct6.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1030,27 +1048,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct7.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1071,27 +1089,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct8.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1100,7 +1118,7 @@ export const productLists = [
     gender: 1,
     human: 4,
     category: 3,
-    brand: 8,
+    brand: 5,
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
@@ -1112,27 +1130,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct9.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1141,7 +1159,7 @@ export const productLists = [
     gender: 1,
     human: 4,
     category: 3,
-    brand: 8,
+    brand: 5,
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
@@ -1153,27 +1171,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeYellow,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1194,27 +1212,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1235,27 +1253,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1275,27 +1293,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1312,31 +1330,31 @@ export const productLists = [
   },
   {
     id: 33,
-    productName: "Flat Hill Slingback",
+    productName: "Leather Shoe",
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: leatherShoe,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: leatherShoe,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: leatherShoe,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: leatherShoe,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: leatherShoe,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: leatherShoe,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1345,52 +1363,52 @@ export const productLists = [
     gender: 2,
     human: 4,
     category: 2,
-    brand: 2,
+    brand: 10,
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "leathershoe",
   },
   {
     id: 34,
-    productName: "Flat Hill Slingback",
+    productName: "Leather Shoe",
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse.png",
+        productImage: leatherShoe,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: leatherShoe,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: leatherShoe,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: leatherShoe,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: leatherShoe,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: leatherShoe,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 2,
+    gender: 1,
     human: 3,
     category: 2,
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "leathershoe",
   },
   {
     id: 35,
@@ -1398,27 +1416,27 @@ export const productLists = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/watch.png",
+        productImage: leatherShoe,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: leatherShoe,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: leatherShoe,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: leatherShoe,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: leatherShoe,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: leatherShoe,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1435,31 +1453,31 @@ export const productLists = [
   },
   {
     id: 36,
-    productName: "Flat Hill Slingback",
+    productName: "Shoe Blue",
     productImages: [
       {
         id: 1,
-        productImage: "/images/watch1.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1472,35 +1490,35 @@ export const productLists = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "shoeblue",
   },
   {
     id: 37,
-    productName: "Flat Hill Slingback",
+    productName: "Shoe Blue",
     productImages: [
       {
         id: 1,
-        productImage: "/images/watches.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenShoeBlue,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1517,72 +1535,72 @@ export const productLists = [
   },
   {
     id: 38,
-    productName: "Flat Hill Slingback",
+    productName: "Red dress valentino",
     productImages: [
       {
         id: 1,
-        productImage: "/images/watch.png",
+        productImage: reddressvalentino,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: reddressvalentino,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: reddressvalentino,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: reddressvalentino,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: reddressvalentino,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: reddressvalentino,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 2,
+    gender: 1,
     human: 1,
-    category: 5,
+    category: 1,
     brand: 10,
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "reddressvalentino",
   },
   {
     id: 39,
-    productName: "Flat Hill Slingback",
+    productName: "Red dress valentino",
     productImages: [
       {
         id: 1,
-        productImage: "/images/watch1.png",
+        productImage: reddressvalentino,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: reddressvalentino,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: reddressvalentino,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: reddressvalentino,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: reddressvalentino,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: reddressvalentino,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1595,35 +1613,35 @@ export const productLists = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "reddressvalentino",
   },
   {
     id: 40,
-    productName: "Flat Hill Slingback",
+    productName: "Red dress Valentino",
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse2.png",
+        productImage: reddressvalentino,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: reddressvalentino,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: reddressvalentino,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: reddressvalentino,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: reddressvalentino,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: reddressvalentino,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1636,35 +1654,35 @@ export const productLists = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "reddressvalentino",
   },
   {
     id: 41,
-    productName: "Flat Hill Slingback",
+    productName: "Shiny dress givenchy",
     productImages: [
       {
         id: 1,
-        productImage: "/images/Item2.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shinydressgivenchy,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1677,35 +1695,35 @@ export const productLists = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "shinydressgivenchy",
   },
   {
     id: 42,
-    productName: "Flat Hill Slingback",
+    productName: "Shiny dress givenchy",
     productImages: [
       {
         id: 1,
-        productImage: "/images/Item1.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shinydressgivenchy,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1718,35 +1736,35 @@ export const productLists = [
     size: [3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "shinydressgivenchy",
   },
   {
     id: 43,
-    productName: "Flat Hill Slingback",
+    productName: "Shiny dress givenchy",
     productImages: [
       {
         id: 1,
-        productImage: "/images/purse2.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: shinydressgivenchy,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: shinydressgivenchy,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1759,35 +1777,35 @@ export const productLists = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "shinydressgivenchy",
   },
   {
     id: 44,
-    productName: "Flat Hill Slingback",
+    productName: "Women black gucci",
     productImages: [
       {
         id: 1,
-        productImage: "/images/Item2.png",
+        productImage: womenblackgucci,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenblackgucci,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenblackgucci,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenblackgucci,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenblackgucci,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenblackgucci,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1800,35 +1818,35 @@ export const productLists = [
     size: [1],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "womenblackgucci",
   },
   {
     id: 45,
-    productName: "Flat Hill Slingback",
+    productName: "Women black gucci",
     productImages: [
       {
         id: 1,
-        productImage: "/images/earning.png",
+        productImage: womenblackgucci,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenblackgucci,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenblackgucci,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenblackgucci,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenblackgucci,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenblackgucci,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1841,35 +1859,35 @@ export const productLists = [
     size: [2],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "womenblackgucci",
   },
   {
     id: 46,
-    productName: "Flat Hill Slingback",
+    productName: "Women black gucci",
     productImages: [
       {
         id: 1,
-        productImage: "/images/bangles.png",
+        productImage: womenblackgucci,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenblackgucci,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenblackgucci,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenblackgucci,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenblackgucci,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenblackgucci,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1882,35 +1900,35 @@ export const productLists = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "womenblackgucci",
   },
   {
     id: 47,
-    productName: "Flat Hill Slingback",
+    productName: "Women white jacket",
     productImages: [
       {
         id: 1,
-        productImage: "/images/earning.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenwhitejacket,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1923,35 +1941,35 @@ export const productLists = [
     size: [1, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "womenwhitejacket",
   },
   {
     id: 48,
-    productName: "Flat Hill Slingback",
+    productName: "Women white jacekt",
     productImages: [
       {
         id: 1,
-        productImage: "/images/earning.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenwhitejacket,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1964,35 +1982,35 @@ export const productLists = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "womenwhitejacket",
   },
   {
     id: 49,
-    productName: "Flat Hill Slingback",
+    productName: "Women white jacket",
     productImages: [
       {
         id: 1,
-        productImage: "/images/bangles.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenwhitejacket,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: womenwhitejacket,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -2005,35 +2023,35 @@ export const productLists = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "flat-hill-slingback",
+    slug: "womenwhitejacket",
   },
   {
     id: 50,
-    productName: "Red Gem Earrings",
+    productName: "Elegent dress",
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct4.png",
+        productImage: elgantdress,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: elgantdress,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: elgantdress,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: elgantdress,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: elgantdress,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: elgantdress,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -2046,35 +2064,35 @@ export const productLists = [
     size: [1, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemearrings",
+    slug: "elgantdress",
   },
   {
     id: 51,
-    productName: "Red Gem Earrings",
+    productName: "Elegent dress",
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct1.png",
+        productImage: elgantdress,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: elgantdress,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: elgantdress,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: elgantdress,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: elgantdress,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: elgantdress,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -2087,35 +2105,35 @@ export const productLists = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemearrings",
+    slug: "elegentdress",
   },
   {
     id: 52,
-    productName: "Red Gem Earrings",
+    productName: "Dolce & Gabbana",
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct7.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: dolce_gabbana,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -2128,35 +2146,35 @@ export const productLists = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemearrings",
+    slug: "dolce_gabbana",
   },
   {
     id: 53,
-    productName: "Red Gem Earrings",
+    productName: "Dolce & Gabbana",
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct2.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: dolce_gabbana,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: dolce_gabbana,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -2169,35 +2187,35 @@ export const productLists = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemearrings",
+    slug: "dolce_gabbana",
   },
   {
     id: 54,
-    productName: "Red Gem Earrings",
+    productName: "Black Dress",
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct5.png",
+        productImage: blackdress,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: blackdress,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: blackdress,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: blackdress,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: blackdress,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: blackdress,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -2210,36 +2228,36 @@ export const productLists = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemearrings",
+    slug: "blackdress",
   },
 
   {
     id: 55,
-    productName: "Red Gem Earrings",
+    productName: "Black Dress",
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct5.png",
+        productImage: blackdress,
       },
       {
         id: 2,
-        productImage: "/images/womenproduct2.png",
+        productImage: blackdress,
       },
       {
         id: 3,
-        productImage: "/images/womenproduct3.png",
+        productImage: blackdress,
       },
       {
         id: 4,
-        productImage: "/images/womenproduct4.png",
+        productImage: blackdress,
       },
       {
         id: 5,
-        productImage: "/images/womenproduct5.png",
+        productImage: blackdress,
       },
       {
         id: 6,
-        productImage: "/images/womenproduct5.png",
+        productImage: blackdress,
       },
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -2252,6 +2270,6 @@ export const productLists = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemearrings",
+    slug: "blackdress",
   },
 ];

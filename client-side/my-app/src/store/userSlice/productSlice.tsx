@@ -20,6 +20,22 @@ interface productstate {
   gender: Array<Object>;
   brand: Array<Object>;
   category: Array<object>;
+  selectedProduct: {
+    id: number;
+    productName: string;
+    productImages: { id: number; productImage: string | undefined }[];
+    productDescription: string;
+    productOriginalPrice: number;
+    productCurrentPrice: number;
+    gender: number;
+    human: number;
+    category: number;
+    brand: number;
+    size: Array<Number>;
+    color: Array<Number>;
+    reviewRate: number;
+    slug: string;
+  }[];
 }
 
 const productState: productstate = {
@@ -37,6 +53,7 @@ const productState: productstate = {
   fitleredBrand: {},
   brand: brandFilter,
   category: categoriesFilter,
+  selectedProduct: [],
 };
 
 // const Product: product = products;
@@ -48,6 +65,9 @@ const productSlice = createSlice({
   name: "productSlice",
   initialState: productState,
   reducers: {
+    selectedProduct: (state, action) => {
+      state.selectedProduct = { ...state.selectedProduct, ...action.payload };
+    },
     filterProduct: (state, action) => {
       state.Products = products;
       let filteredProducts = state.Products.filter(
@@ -55,6 +75,7 @@ const productSlice = createSlice({
       );
       state.Products = filteredProducts;
     },
+
     filterByHuman: (state, action) => {
       // console.log("human", action);
       // state.filterByHuman = action.payload.map((pay: string) => {
@@ -77,28 +98,28 @@ const productSlice = createSlice({
       state.filteredCategory = state.category.find(
         (category: any) => category.slug === action.payload.type
       );
-      console.log("brand", state.fitleredBrand);
-      console.log("category", state.filteredCategory);
+      // console.log("brand", state.fitleredBrand);
+      // console.log("category", state.filteredCategory);
       // console.log("gender", current(state.filteredGender));
-      console.log(action.payload);
+      // console.log(action.payload);
       state.filterByHuman = current(state.ProductsList).filter(
         (product: any) => product.gender === state.filteredGender.id
       );
-      console.log("gender", state.filterByHuman);
+      // console.log("gender", state.filterByHuman);
 
       if (state.fitleredBrand) {
-        console.log("brandif");
+        // console.log("brandif");
         state.filterByHuman = state.filterByHuman.filter(
           (product: any) => product.brand === state.fitleredBrand.id
         );
-        console.log("prod", state.filterByHuman);
+        // console.log("prod", state.filterByHuman);
         state.filter = state.filterByHuman;
       } else {
-        console.log("brand else");
+        // console.log("brand else");
         state.filterByHuman = state.filterByHuman.filter(
           (product: any) => product.category === state.filteredCategory.id
         );
-        console.log("prod", state.filterByHuman);
+        // console.log("prod", state.filterByHuman);
         state.filter = state.filterByHuman;
       }
 
@@ -115,7 +136,7 @@ const productSlice = createSlice({
     filterByBrand: (state, action) => {
       // console.log("brand", action);
       if (state.filterByCategory.length && !state.filterBySize.length) {
-        console.log("brand here1");
+        // console.log("brand here1");
         state.filterByBrand = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterByCategory).filter(
@@ -129,7 +150,7 @@ const productSlice = createSlice({
           state.filter = state.filterByBrand;
         }
       } else if (state.filterBySize.length && !state.filterByCategory.length) {
-        console.log("here2");
+        // console.log("here2");
 
         state.filterByBrand = action.payload.map((pay: number) => {
           // console.log(pay);
@@ -143,7 +164,7 @@ const productSlice = createSlice({
           state.filter = state.filterByBrand.flatMap((i) => i);
         }
       } else {
-        console.log("here3");
+        // console.log("here3");
 
         state.filterByBrand = action.payload.map((pay: number) => {
           // console.log(pay);

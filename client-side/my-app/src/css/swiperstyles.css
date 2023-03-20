@@ -45,7 +45,7 @@ body {
 }
 
 .swiper-button-next {
-  top: var(--swiper-navigation-top-offset, 40%) !important;
+  top: var(--swiper-navigation-top-offset, 40%);
   /* background-color: "#FFFFFF"; */
 }
 
@@ -54,7 +54,7 @@ body {
   left: 170px;
 }
 .swiper-button-prev {
-  top: var(--swiper-navigation-top-offset, 40%) !important;
+  top: var(--swiper-navigation-top-offset, 40%);
 }
 
 @media (max-width: 1024px) {
@@ -65,7 +65,7 @@ body {
   }
 
   .swiper-button-next {
-    top: var(--swiper-navigation-top-offset, 45%) !important;
+    top: var(--swiper-navigation-top-offset, 45%);
     /* background-color: "#FFFFFF"; */
   }
   .swiper-button-prev::after {
@@ -73,7 +73,7 @@ body {
     left: 115px;
   }
   .swiper-button-prev {
-    top: var(--swiper-navigation-top-offset, 45%) !important;
+    top: var(--swiper-navigation-top-offset, 45%);
   }
 }
 
@@ -85,7 +85,7 @@ body {
   }
 
   .swiper-button-next {
-    top: var(--swiper-navigation-top-offset, 50%) !important;
+    top: var(--swiper-navigation-top-offset, 50%);
     /* background-color: "#FFFFFF"; */
   }
   .swiper-button-prev::after {
@@ -93,7 +93,7 @@ body {
     left: 75px;
   }
   .swiper-button-prev {
-    top: var(--swiper-navigation-top-offset, 50%) !important;
+    top: var(--swiper-navigation-top-offset, 50%);
   }
 }
 
@@ -105,7 +105,7 @@ body {
   }
 
   .swiper-button-next {
-    top: var(--swiper-navigation-top-offset, 50%) !important;
+    top: var(--swiper-navigation-top-offset, 50%);
     /* background-color: "#FFFFFF"; */
   }
   .swiper-button-prev::after {
@@ -113,6 +113,6 @@ body {
     left: 25px;
   }
   .swiper-button-prev {
-    top: var(--swiper-navigation-top-offset, 50%) !important;
+    top: var(--swiper-navigation-top-offset, 50%);
   }
 }

@@ -65,21 +65,6 @@ export default function FilterSlider() {
       setSizeFilter(SizeFilter.filter((state) => state !== value));
     }
   };
-  // useEffect(() => {
-  //   console.log("state", filterState);
-  //   console.log("brand", BrandFilter);
-  //   console.log("size", SizeFilter);
-  //   console.log("category", CategoriesFilter);
-  // }, [filterState, BrandFilter, SizeFilter, CategoriesFilter]);
-
-  // useEffect(() => {
-  //   console.log("I am dispatching");
-  //   dispatch(productActions.filterByHuman(params.type));
-  // }, [params.type, dispatch]);
-
-  // useEffect(() => {
-  //   click && dispatch(productActions.filterByHuman(filterState));
-  // }, [filterState, click, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterByBrand(BrandFilter));
@@ -92,11 +77,6 @@ export default function FilterSlider() {
   useEffect(() => {
     click && dispatch(productActions.filterBySize(SizeFilter));
   }, [SizeFilter, click, dispatch]);
-  // const [value, setValue] = React.useState<number[]>([120, 300]);
-
-  // const handleChange = (event: Event, newValue: number | number[]) => {
-  //   setValue(newValue as number[]);
-  // };
 
   // to open menu in mobile view
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -114,6 +94,8 @@ export default function FilterSlider() {
           },
           border: 2,
           backgroundColor: "#F9FAFB",
+          ml: { xs: 2 },
+          mt: { xs: 2 },
         }}
       >
         <Box sx={{ mx: 4 }}>
@@ -180,15 +162,7 @@ export default function FilterSlider() {
             getAriaLabel={() => "Minimum distance"}
           />
         </Box>
-        {/* <Box sx={{ width: 500 }}>
-        <Slider
-          getAriaLabel={() => "Temperature range"}
-          value={value}
-          onChange={handleChange}
-          valueLabelDisplay="auto"
-          getAriaValueText={valuetext}
-        />
-      </Box> */}
+
         <FormGroup>
           <Typography
             textAlign="left"
@@ -341,6 +315,7 @@ export default function FilterSlider() {
           },
           border: 2,
           backgroundColor: "#F9FAFB",
+          ml: { xl: 8, lg: 6, md: 4, sm: 2 },
         }}
       >
         <Box sx={{ mx: 4 }}>

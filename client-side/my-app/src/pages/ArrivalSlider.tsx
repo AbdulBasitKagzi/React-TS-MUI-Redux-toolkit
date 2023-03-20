@@ -61,8 +61,10 @@ const ArrivalSlider: React.FC = () => {
             xs: "grid",
           },
           justifyContent: "center",
-          alignContent: "center",
+          // alignContent: "center",
           overflow: "hidden",
+          maxWidth: "90%",
+          mx: "auto",
         }}
       >
         {newArrival.map(
@@ -75,7 +77,7 @@ const ArrivalSlider: React.FC = () => {
           }) => (
             <Box
               sx={{
-                width: { xl: 289, lg: 289, md: 205, sm: 155, xs: 280 },
+                width: { xl: 389, lg: 289, md: 205, sm: 155, xs: 330 },
                 height: { xl: 782, lg: 782, md: 782, sm: 500, xs: 500 },
                 ml: 1,
                 flexShrink: 0,
