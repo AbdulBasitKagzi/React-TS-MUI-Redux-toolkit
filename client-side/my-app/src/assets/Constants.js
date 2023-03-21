@@ -252,10 +252,10 @@ export const categoriesFilter = [
 ];
 
 export const sizeFilter = [
-  { id: 1, value: "Medium" },
-  { id: 2, value: "Large" },
-  { id: 3, value: "Plus Size" },
-  { id: 4, value: "Sexy Plus Size" },
+  { id: 1, value: "Medium", slug: "M" },
+  { id: 2, value: "Large", slug: "L" },
+  { id: 3, value: "Plus Size", slug: "XL" },
+  { id: 4, value: "Sexy Plus Size", slug: "XXL" },
 ];
 
 export const colorLists = [

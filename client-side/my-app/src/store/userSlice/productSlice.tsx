@@ -5,6 +5,23 @@ import { gender } from "../../assets/Constants";
 import { brandFilter } from "../../assets/Constants";
 import { categoriesFilter } from "../../assets/Constants";
 
+interface SelectedProductProps {
+  id?: number;
+  productName?: string;
+  productImages?: { id: number; productImage: string | undefined }[];
+  productDescription?: string;
+  productOriginalPrice?: number;
+  productCurrentPrice?: number;
+  gender?: number;
+  human?: number;
+  category?: number;
+  brand?: number;
+  size?: Array<Number>;
+  color?: Array<Number>;
+  reviewRate?: number;
+  slug?: string;
+}
+
 interface productstate {
   Products: Array<Object>;
   ProductsList: Array<Object>;
@@ -20,22 +37,7 @@ interface productstate {
   gender: Array<Object>;
   brand: Array<Object>;
   category: Array<object>;
-  selectedProduct: {
-    id: number;
-    productName: string;
-    productImages: { id: number; productImage: string | undefined }[];
-    productDescription: string;
-    productOriginalPrice: number;
-    productCurrentPrice: number;
-    gender: number;
-    human: number;
-    category: number;
-    brand: number;
-    size: Array<Number>;
-    color: Array<Number>;
-    reviewRate: number;
-    slug: string;
-  }[];
+  selectedProduct: SelectedProductProps;
 }
 
 const productState: productstate = {
@@ -53,7 +55,7 @@ const productState: productstate = {
   fitleredBrand: {},
   brand: brandFilter,
   category: categoriesFilter,
-  selectedProduct: [],
+  selectedProduct: {},
 };
 
 // const Product: product = products;

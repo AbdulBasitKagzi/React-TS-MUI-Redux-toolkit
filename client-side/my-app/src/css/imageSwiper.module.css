@@ -1,0 +1,20 @@
+.sliderImage {
+  width: 280px !important;
+  height: 436px;
+}
+.abdul {
+  display: flex;
+}
+
+.prev_arrow {
+  position: absolute;
+  /* bottom: 92px; */
+  left: 165px;
+  top: 260px;
+}
+.next_arrow {
+  position: absolute;
+  /* bottom: 92px; */
+  left: 965px;
+  top: 260px;
+}

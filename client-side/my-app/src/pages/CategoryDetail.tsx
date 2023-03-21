@@ -77,19 +77,19 @@ const CategoryDetail: React.FC = () => {
         <Box
           sx={{
             mt: { xl: 8, lg: 8, md: 8, sm: -4, xs: 2 },
-            width: { xl: "509px", lg: "509px" },
+            width: { xl: "509px", lg: "509px", md: "509px", sm: "509px" },
           }}
         >
           <Typography
             sx={{
               position: "relative",
-              left: { xl: "495px", lg: "445px", md: "-50px", sm: "15px" },
+              left: { xl: "565px", lg: "530px", md: "260px", sm: "211px" },
               // textAlign: "center",
               fontFamily: "Jost",
               fontSize: {
                 xl: "44px",
                 lg: "44px",
-                md: "44px",
+                md: "40px",
                 sm: "35px",
                 xs: "28px",
               },

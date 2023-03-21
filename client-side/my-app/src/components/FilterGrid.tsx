@@ -11,17 +11,8 @@ import heart from "../assets/icons/heartGroup.svg";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import womenStanding from "../assets/images/womenStanding.png";
 import Typography from "@mui/material/Typography";
 import { RootState } from "../store/userSlice/store";
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: "center",
-//   color: theme.palette.text.secondary,
-// }));
 
 interface arr {
   id: number;
@@ -54,7 +45,7 @@ function FilterGrid() {
         flexGrow: 1,
         ml: { xl: 10, lg: 6, md: 10, sm: 10, xs: 2 },
         mr: 10,
-        // maxWidth: "0%",
+        // maxWidth: "55%",
         // mx: "auto",
       }}
     >
@@ -70,6 +61,12 @@ function FilterGrid() {
                   sm: "205px",
                   xs: "278px",
                 },
+                height: {
+                  xl: "599px",
+                  lg: "515px",
+                  md: "435px",
+                  sm: "385px",
+                },
                 border: 1,
                 borderColor: "#E5E7EB",
               }}
@@ -80,6 +77,7 @@ function FilterGrid() {
             >
               <img
                 width="100%"
+                // height="100%"
                 src={arr.productImages[0].productImage}
                 alt="women"
               />

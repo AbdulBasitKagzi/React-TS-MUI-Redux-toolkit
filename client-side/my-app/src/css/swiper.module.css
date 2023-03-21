@@ -1,0 +1,44 @@
+.selectedImage {
+  width: 128px !important;
+  display: flex;
+  align-content: center;
+  position: relative;
+}
+
+.selectedImage img {
+  width: 68px !important;
+  height: 108px;
+}
+
+.prev_arrow {
+  position: absolute;
+  bottom: 11px;
+  left: -25px;
+}
+.next_arrow {
+  position: absolute;
+  bottom: 11px;
+  left: 770px;
+}
+
+.position {
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .next_arrow {
+    left: 512px;
+  }
+}
+
+@media (max-width: 900px) {
+  .next_arrow {
+    left: 385px;
+  }
+}
+
+@media (max-width: 600px) {
+  .next_arrow {
+    left: 190px;
+  }
+}
