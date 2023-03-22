@@ -74,69 +74,80 @@ const CategoryDetail: React.FC = () => {
   return (
     <>
       <Layout>
-        <Box
-          sx={{
-            mt: { xl: 8, lg: 8, md: 8, sm: -4, xs: 2 },
-            width: { xl: "509px", lg: "509px", md: "509px", sm: "509px" },
-          }}
-        >
-          <Typography
+        <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
+          <Box
             sx={{
-              position: "relative",
-              left: { xl: "565px", lg: "530px", md: "260px", sm: "211px" },
-              // textAlign: "center",
-              fontFamily: "Jost",
-              fontSize: {
-                xl: "44px",
-                lg: "44px",
-                md: "40px",
-                sm: "35px",
-                xs: "28px",
-              },
-              fontWeight: 700,
+              mt: { xl: 8, lg: 8, md: 8, sm: -4, xs: 2 },
+              // width: { xl: "509px", lg: "509px", md: "509px", sm: "509px" },
+              // width: "100%",
+              // display: "inline-block",
             }}
           >
-            {foundGender?.value} {foundCategory?.value} {foundBrand?.value}{" "}
-            {foundBrand?.value ? "Products" : ""}
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            width: "97px",
-            height: "27px",
-            ml: {
-              xl: "570px",
-              lg: "525px",
-              md: "285px",
-              sm: "260px",
-              xs: "45px",
-            },
-          }}
-        >
-          <Typography>{filter.length} results</Typography>
-        </Box>
-        <Box
-          sx={{
-            mr: 205,
-            display: {
-              xl: "block",
-              lg: "block",
-              md: "block",
-              sm: "block",
-              xs: "none",
-            },
-          }}
-        >
-          <Typography
-            sx={{ fontFamily: "Jost", fontSize: "25px", fontWeight: 700 }}
+            <Typography
+              sx={{
+                position: "relative",
+                display: "inline-block",
+                // left: { xl: "565px", lg: "530px", md: "260px", sm: "211px" },
+                textAlign: "center",
+                fontFamily: "Jost",
+                fontSize: {
+                  xl: "44px",
+                  lg: "44px",
+                  md: "40px",
+                  sm: "35px",
+                  xs: "28px",
+                },
+                fontWeight: 700,
+              }}
+            >
+              {foundGender?.value} {foundCategory?.value} {foundBrand?.value}{" "}
+              {foundBrand?.value ? "Products" : ""}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "inline-block",
+              // textAlign: "center",
+              textAlign: "left",
+              // width: "97px",
+              // height: "27px",
+              mr: {
+                xl: "250px",
+                lg: "260px",
+                md: "225px",
+                sm: "185px",
+                xs: "135px",
+              },
+            }}
           >
-            Filter
-          </Typography>
-        </Box>
-        <Box sx={{ display: "flex" }}>
-          <FilterSlider />
-          <FilterGrid />
+            <Typography sx={{ display: "inline-block" }}>
+              {filter.length} results
+            </Typography>
+          </Box>
+          <Box>
+            <Typography
+              sx={{
+                fontFamily: "Jost",
+                fontWeight: 700,
+                fontSize: "25px",
+                textAlign: "left",
+                ml: "4%",
+                display: {
+                  xl: "block",
+                  lg: "block",
+                  md: "block",
+                  sm: "block",
+                  xs: "none",
+                },
+              }}
+            >
+              Filter
+            </Typography>
+            <Box sx={{ display: "flex" }}>
+              <FilterSlider />
+              <FilterGrid />
+            </Box>
+          </Box>
         </Box>
         <Footer />
       </Layout>

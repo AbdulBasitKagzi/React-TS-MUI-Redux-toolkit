@@ -127,6 +127,8 @@ export default function DrawerAppBar(props: Props) {
           background: "transparent",
           boxShadow: "none",
           position: "static",
+          maxWidth: "1600px",
+          mx: "auto",
         }}
       >
         <Toolbar sx={{ display: "block" }}>
@@ -182,7 +184,9 @@ export default function DrawerAppBar(props: Props) {
                       mt: "27px",
                     }}
                     onClick={() => {
-                      dispatch(userActions.makeRoute(item.slug));
+                      item.id === 0
+                        ? navigate("/")
+                        : dispatch(userActions.makeRoute(item.slug));
                       setOpenModel(true);
                     }}
                   >

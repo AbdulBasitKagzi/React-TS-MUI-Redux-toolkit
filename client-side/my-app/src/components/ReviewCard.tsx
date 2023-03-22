@@ -58,7 +58,7 @@ const ReviewCard: React.FC = () => {
     <>
       <Box
         sx={{
-          maxWidth: "90%",
+          // maxWidth: "100%",
           display: {
             xl: "flex",
             lg: "flex",

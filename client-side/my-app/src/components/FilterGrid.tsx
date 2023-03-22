@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { productActions } from "../store/userSlice/productSlice";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../store/userSlice/store";
 
 // images and icons import
 import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
@@ -12,7 +13,7 @@ import heart from "../assets/icons/heartGroup.svg";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { RootState } from "../store/userSlice/store";
+import Pagination from "@mui/material/Pagination";
 
 interface arr {
   id: number;
@@ -36,14 +37,21 @@ function FilterGrid() {
   const { filter } = useSelector((state: RootState) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [totalPage, setTotalPage] = useState<number>();
   useEffect(() => {
     console.log("filteredData", filter);
+  }, [filter]);
+
+  useEffect(() => {
+    const page = Math.ceil(filter.length / 9);
+    setTotalPage(page);
   }, [filter]);
   return (
     <Box
       sx={{
         flexGrow: 1,
-        ml: { xl: 10, lg: 6, md: 10, sm: 10, xs: 2 },
+        // ml: { xl: 4, lg: 6, md: 10, sm: 10, xs: 2 },
+        ml: 4,
         mr: 10,
         // maxWidth: "55%",
         // mx: "auto",
@@ -51,16 +59,12 @@ function FilterGrid() {
     >
       <Grid container spacing={4}>
         {filter.map((arr: any) => (
-          <Grid item xs={8} sm={6} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
             <Box
               sx={{
-                width: {
-                  xl: "362px",
-                  lg: "278px",
-                  md: "220px",
-                  sm: "205px",
-                  xs: "278px",
-                },
+                // width: { xs: 278 },
+                position: "relative",
+
                 height: {
                   xl: "599px",
                   lg: "515px",
@@ -69,6 +73,7 @@ function FilterGrid() {
                 },
                 border: 1,
                 borderColor: "#E5E7EB",
+                // mx: "auto",
               }}
               onClick={() => {
                 dispatch(productActions.selectedProduct(arr));
@@ -81,6 +86,37 @@ function FilterGrid() {
                 src={arr.productImages[0].productImage}
                 alt="women"
               />
+              <Box sx={{ position: "absolute", top: 12, right: 15 }}>
+                <img src={heart} alt="heartgroup" />
+              </Box>
+              {/* <Box
+                sx={{
+                  width: {
+                    xl: "58px",
+                    lg: "40px",
+                    md: "35px",
+                    sm: "35px",
+                    xs: "45px",
+                  },
+                  position: "absolute",
+                  top: {
+                    xl: "-498px",
+                    lg: "-420px",
+                    md: "-348px",
+                    sm: "-330px",
+                    xs: "-415px",
+                  },
+                  left: {
+                    xl: "285px",
+                    lg: "225px",
+                    md: "175px",
+                    sm: "160px",
+                    xs: "225px",
+                  },
+                }}
+              >
+               
+              </Box> */}
               <Box
                 sx={{
                   display: "flex",
@@ -97,9 +133,10 @@ function FilterGrid() {
                       lg: "30px",
                       md: "26px",
                       sm: "24px",
-                      xs: "30px",
+                      xs: "22px",
                     },
                     fontWeight: 400,
+                    wordBreak: "break-all",
                   }}
                 >
                   {arr.productName}
@@ -130,50 +167,13 @@ function FilterGrid() {
               >
                 $ {arr.productCurrentPrice}
               </Typography>
-              <Box
-                sx={{
-                  width: {
-                    xl: "58px",
-                    lg: "40px",
-                    md: "35px",
-                    sm: "35px",
-                    xs: "45px",
-                  },
-                  position: "relative",
-                  top: {
-                    xl: "-498px",
-                    lg: "-420px",
-                    md: "-348px",
-                    sm: "-330px",
-                    xs: "-415px",
-                  },
-                  left: {
-                    xl: "285px",
-                    lg: "225px",
-                    md: "175px",
-                    sm: "160px",
-                    xs: "225px",
-                  },
-                }}
-              >
-                <img src={heart} width="100%" alt="heartgroup" />
-              </Box>
             </Box>
           </Grid>
         ))}
-        {/* <Grid item xs={8} sm={6} md={6} lg={3} xl={3}>
-          <Item>xs=8</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={8}>
-          <Item>xs=8</Item>
-        </Grid> */}
       </Grid>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Pagination count={totalPage} variant="outlined" shape="rounded" />
+      </Box>
     </Box>
   );
 }

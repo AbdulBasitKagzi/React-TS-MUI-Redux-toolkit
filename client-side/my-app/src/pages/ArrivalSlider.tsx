@@ -13,7 +13,7 @@ import styles from "../css/slider.module.css";
 const ArrivalSlider: React.FC = () => {
   return (
     <>
-      <Box
+      {/* <Box
         position="relative"
         sx={{
           top: { xl: 380, lg: 380, md: 350, sm: 250 },
@@ -50,7 +50,7 @@ const ArrivalSlider: React.FC = () => {
         // }}
       >
         <img className={styles.icon} src={rightArrowIcon} alt="right arrow" />
-      </Box>
+      </Box> */}
       <Box
         sx={{
           display: {

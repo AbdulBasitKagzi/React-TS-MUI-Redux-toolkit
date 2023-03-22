@@ -276,25 +276,20 @@ export default function FilterSlider() {
 
   return (
     <>
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        edge="start"
+      <Box
         onClick={handleDrawerToggle}
         sx={{
-          mr: 2,
           display: {
-            xs: "flex",
+            xs: "block",
             sm: "none",
             md: "none",
             lg: "none",
             xl: "none",
           },
-          mt: { xs: "-4000px" },
         }}
       >
         <FilterListIcon />
-      </IconButton>
+      </Box>
 
       <Box
         sx={{

@@ -37,6 +37,8 @@ const ItemDetailView: React.FC = () => {
     "Brand",
     "Delivery",
   ]);
+  const sliderRef = useRef<any>(null);
+  const slider = useRef<any>(null);
 
   const [stars, setStars] = useState<number>(5);
   const [sizes, setSizes] = useState<
@@ -75,20 +77,24 @@ const ItemDetailView: React.FC = () => {
     if (selectedProduct?.reviewRate) {
       setStars(stars - selectedProduct.reviewRate);
     }
-  }, [selectedProduct, stars]);
+  }, [selectedProduct]);
 
   useEffect(() => {
     console.log("selected", selectedProduct);
   }, [selectedProduct]);
 
-  const sliderRef = useRef<any>(null);
-
-  const handlePrev = useCallback(() => {
+  const handlePrev = useCallback((value: string) => {
+    if (value === "slider") {
+      slider.current.swiper.slidePrev();
+    }
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slidePrev();
   }, []);
 
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback((value: string) => {
+    if (value === "slider") {
+      slider.current.swiper.slideNext();
+    }
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slideNext();
   }, []);
@@ -156,315 +162,491 @@ const ItemDetailView: React.FC = () => {
   return (
     <div>
       <Layout>
-        <Box
-          sx={{
-            width: "100%",
-            display: { xl: "flex", lg: "flex", md: "flex" },
-          }}
-        >
+        <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
           <Box
             sx={{
-              maxWidth: "50%",
-              mx: "auto",
-              border: 2,
-              position: "relative",
+              width: "100%",
+              display: { xl: "flex", lg: "flex", md: "flex", sm: "flex" },
             }}
           >
-            <Box>
-              <Swiper
-                navigation={true}
-                // ref={slideRef}
-                modules={[Navigation]}
-                className="mySwiper"
-              >
-                {selectedProduct?.productImages?.map(
-                  (images: {
-                    id: number;
-                    productImage: string | undefined;
-                  }) => (
-                    <SwiperSlide className={style.abdul}>
-                      <img
-                        className={style.sliderImage}
-                        src={images.productImage}
-                        alt="women"
-                      />
-                    </SwiperSlide>
-                  )
-                )}
-              </Swiper>
-            </Box>
-
-            <Box sx={{ position: "relative" }}>
-              <div className={classes.prev_arrow} onClick={() => handlePrev()}>
-                <img src={leftArrowIcon} alt="previous" />
-              </div>
-              <div className={classes.next_arrow} onClick={() => handleNext()}>
-                <img src={rightArrowIcon} alt="right" />
-              </div>
-              <Swiper
-                ref={sliderRef}
-                // navigation={true}
-                // modules={[Navigation]}
-                className={`mySwiper ${classes.position}`}
-              >
-                {selectedProduct?.productImages?.map(
-                  (images: {
-                    id: number;
-                    productImage: string | undefined;
-                  }) => (
-                    <SwiperSlide className={classes.selectedImage}>
-                      <img src={images.productImage} alt="women" />
-                    </SwiperSlide>
-                  )
-                )}
-              </Swiper>
-            </Box>
-          </Box>
-          <Box sx={{ maxWidth: "50%", mx: "auto", border: 2 }}>
             <Box
               sx={{
-                width: "142px",
-                height: "48px",
-                background: "#E5E5EA",
-                borderRadius: 3,
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
+                maxWidth: {
+                  xl: "50%",
+                  lg: "50%",
+                  md: "50%",
+                  sm: "50%",
+                  xs: "100%",
+                },
+                mx: "auto",
+
+                position: "relative",
               }}
             >
-              <Typography
+              <Box
                 sx={{
-                  fontFamily: "Inter",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  my: "auto",
+                  position: "relative",
+                  top: { xl: "100px", lg: "100px", md: "100px", sm: "100px" },
                 }}
               >
-                Popular
-              </Typography>
-            </Box>
-            <Box sx={{ width: "498px", height: "85px", textAlign: "left" }}>
-              <Typography
-                sx={{
-                  mt: 3,
-                  fontFamily: "Inter",
-                  fontWeight: 400,
-                  fontSize: "48px",
-                }}
-              >
-                {selectedProduct?.productName}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex" }}>
-              {printStars(selectedProduct?.reviewRate)}
-              {printRemainingStars(stars)}
-              <Typography
-                sx={{ fontFamily: "Inter", fontWeight: 400, fontSize: "14px" }}
-              >
-                132 Reviews
-              </Typography>
-            </Box>
-            <Box sx={{ width: "693px", mt: 6 }}>
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="basic tabs example"
-                  variant="fullWidth"
+                <Swiper
+                  // navigation={true}
+                  ref={slider}
+                  modules={[Navigation]}
+                  className="mySwiper"
                 >
-                  {tabs.map((tab: string, index: number) =>
-                    value === index ? (
-                      <Tab
-                        label={tab}
-                        sx={{
-                          fontFamily: "Inter",
-                          fontSize: "16px",
-                          fontWeight: 700,
-                          color: "#111827",
-                        }}
-                      />
-                    ) : (
-                      <Tab label={tab} />
+                  {selectedProduct?.productImages?.map(
+                    (images: {
+                      id: number;
+                      productImage: string | undefined;
+                    }) => (
+                      <SwiperSlide className={style.abdul}>
+                        <img
+                          className={style.sliderImage}
+                          src={images.productImage}
+                          alt="women"
+                        />
+                      </SwiperSlide>
                     )
                   )}
-                </Tabs>
+                </Swiper>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    zIndex: 2,
+                    display: {
+                      xl: "block",
+                      lg: "block",
+                      md: "block",
+                      sm: "block",
+                      xs: "none",
+                    },
+                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
+                    left: { xl: "2%", lg: "2%", md: "2%" },
+                  }}
+                  // className={classes.prev_arrow}
+                  onClick={() => handlePrev("slider")}
+                >
+                  <img src={leftArrowIcon} alt="previous" />
+                </Box>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    zIndex: 2,
+                    display: {
+                      xl: "block",
+                      lg: "block",
+                      md: "block",
+                      sm: "block",
+                      xs: "none",
+                    },
+
+                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
+                    left: { xl: "94%", lg: "96%", md: "96%", sm: "96%" },
+                  }}
+                  // className={classes.next_arrow}
+                  onClick={() => handleNext("slider")}
+                >
+                  <img src={rightArrowIcon} alt="right" />
+                </Box>
               </Box>
-              {tabs.map((tab: string, index: number) => (
-                <TabPanel value={value} index={index}>
-                  <Typography
-                    sx={{
-                      fontFamily: "Inter",
-                      fontWeight: 400,
-                      fontSize: "16px",
-                      textAlign: "left",
-                    }}
-                  >
-                    Dress with tulle and collar Peter Pan from REDValentino (Red
-                    Valentino). Peter Pan collar, tulle panels, sleeveless
-                    model, concealed back zipper and pleated skirt. Black
-                    colour.
-                  </Typography>
-                </TabPanel>
-              ))}
+
+              <Box
+                sx={{
+                  position: "relative",
+                  top: {
+                    xl: "255px",
+                    lg: "255px",
+                    md: "280px",
+                    sm: "345px",
+                    // xs: "510px",
+                  },
+                }}
+              >
+                <Swiper
+                  slidesPerView={4}
+                  spaceBetween={10}
+                  ref={sliderRef}
+                  // navigation={true}
+                  // modules={[Navigation]}
+                  className={`mySwiper ${classes.position}`}
+                >
+                  {selectedProduct?.productImages?.map(
+                    (images: {
+                      id: number;
+                      productImage: string | undefined;
+                    }) => (
+                      <SwiperSlide className={classes.selectedImage}>
+                        <img src={images.productImage} alt="women" />
+                      </SwiperSlide>
+                    )
+                  )}
+                </Swiper>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    zIndex: 2,
+                    display: {
+                      xl: "block",
+                      lg: "block",
+                      md: "block",
+                      sm: "block",
+                      xs: "none",
+                    },
+                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
+                    left: { xl: "2%", lg: "2%", md: "2%" },
+                  }}
+                  // className={classes.prev_arrow}
+                  onClick={() => handlePrev("sliderRef")}
+                >
+                  <img src={leftArrowIcon} alt="previous" />
+                </Box>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    zIndex: 2,
+                    display: {
+                      xl: "block",
+                      lg: "block",
+                      md: "block",
+                      sm: "block",
+                      xs: "none",
+                    },
+
+                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
+                    left: { xl: "94%", lg: "96%", md: "96%", sm: "96%" },
+                  }}
+                  // className={classes.next_arrow}
+                  onClick={() => handleNext("sliderRef")}
+                >
+                  <img src={rightArrowIcon} alt="right" />
+                </Box>
+              </Box>
             </Box>
-            <Box sx={{ display: "flex" }}>
-              <Box>
+            <Box
+              sx={{
+                maxWidth: {
+                  xl: "50%",
+                  lg: "50%",
+                  md: "50%",
+                  sm: "50%",
+                  xs: "100%",
+                },
+                mx: "auto",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "142px",
+                  height: "48px",
+                  background: "#E5E5EA",
+                  borderRadius: 3,
+                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
                 <Typography
                   sx={{
                     fontFamily: "Inter",
-                    fontSize: "16px",
-                    fontWeight: 400,
-                    color: "#1B2437",
-                    textAlign: "left",
-                    mt: 4,
-                    mb: 4,
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    my: "auto",
                   }}
                 >
-                  Sizes
+                  Popular
                 </Typography>
-                <Box>
+              </Box>
+              <Box
+                sx={{
+                  // width: { xl: "498px", lg: "498px", md: "498px", sm: "392px" },
+                  // height: "85px",
+                  textAlign: "left",
+                  wordBreak: "break-all",
+                }}
+              >
+                <Typography
+                  sx={{
+                    mt: 3,
+                    fontFamily: "Inter",
+                    fontWeight: 400,
+                    fontSize: {
+                      xl: "48px",
+                      lg: "48px",
+                      md: "48px",
+                      sm: "35px",
+                      xs: "28px",
+                    },
+                  }}
+                >
+                  {selectedProduct?.productName}
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                {printStars(selectedProduct?.reviewRate)}
+                {printRemainingStars(stars)}
+                <Typography
+                  sx={{
+                    fontFamily: "Inter",
+                    fontWeight: 400,
+                    fontSize: "14px",
+                  }}
+                >
+                  132 Reviews
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  // width: {
+                  //   xl: "693px",
+                  //   lg: "575px",
+                  //   md: "100%",
+                  //   sm: "100%",
+                  //   xs: "100%",
+                  // },
+                  width: "100%",
+                  mt: 6,
+                }}
+              >
+                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                   <Tabs
-                    value={sizeValue}
-                    onChange={handleSizeChange}
+                    value={value}
+                    onChange={handleChange}
                     aria-label="basic tabs example"
+                    variant="fullWidth"
                   >
-                    {sizes?.map((size: any, index: number) =>
-                      sizeValue === index ? (
+                    {tabs.map((tab: string, index: number) =>
+                      value === index ? (
                         <Tab
-                          label={size.slug}
+                          label={tab}
                           sx={{
                             fontFamily: "Inter",
                             fontSize: "16px",
                             fontWeight: 700,
                             color: "#111827",
-                            background: "#1B2437",
-                            mr: 4,
                           }}
                         />
                       ) : (
-                        <Tab
-                          label={size.slug}
-                          sx={{ border: 1, borderColor: "#000000", mr: 4 }}
-                        />
+                        <Tab label={tab} />
                       )
                     )}
                   </Tabs>
                 </Box>
+                {tabs.map((tab: string, index: number) => (
+                  <TabPanel value={value} index={index}>
+                    <Typography
+                      sx={{
+                        fontFamily: "Inter",
+                        fontWeight: 400,
+                        fontSize: {
+                          xl: "16px",
+                          lg: "16px",
+                          md: "16px",
+                          sm: "14px",
+                        },
+                        textAlign: "left",
+                        wordBreak: "break-all",
+                      }}
+                    >
+                      Dress with tulle and collar Peter Pan from REDValentino
+                      (Red Valentino). Peter Pan collar, tulle panels,
+                      sleeveless model, concealed back zipper and pleated skirt.
+                      Black colour.
+                    </Typography>
+                  </TabPanel>
+                ))}
               </Box>
+              <Box sx={{ display: "flex" }}>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: 400,
+                      color: "#1B2437",
+                      textAlign: "left",
+                      mt: 4,
+                      mb: 4,
+                    }}
+                  >
+                    Sizes
+                  </Typography>
+                  <Box
+                    // value={sizeValue}
+                    // onChange={handleSizeChange}
+                    // aria-label="basic tabs example"
+                    sx={{ display: "flex", flexWrap: "wrap" }}
+                  >
+                    {sizes?.map((size: any, index: number) =>
+                      sizeValue === index ? (
+                        <Box
+                          // label={size.slug}
+                          sx={{
+                            width: "81px",
+                            // height: "45px",
+                            fontFamily: "Inter",
+                            fontSize: "16px",
+                            fontWeight: 700,
+                            color: "#FFFFFF",
+                            background: "#1B2437",
+                            mr: 4,
+                            mb: 2,
+                          }}
+                          onClick={(event) => handleSizeChange(event, index)}
+                        >
+                          {size.slug}
+                        </Box>
+                      ) : (
+                        <Box
+                          // label={size.slug}
+                          sx={{
+                            width: "81px",
+                            border: 1,
+                            borderColor: "#000000",
+                            mr: 4,
+                            mb: 2,
+                          }}
+                          onClick={(event) => handleSizeChange(event, index)}
+                        >
+                          {size.slug}
+                        </Box>
+                      )
+                    )}
+                  </Box>
+                </Box>
 
-              <Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: "16px",
+                      fontWeight: 400,
+                      color: "#1B2437",
+                      textAlign: "left",
+                      mt: 4,
+                      mb: 4,
+                    }}
+                  >
+                    Colors
+                  </Typography>
+                  <Box className="colorBox">
+                    <Box
+                      // value={colorValue}
+                      // onClick={()=>handleColorChange}
+                      // aria-label="basic tabs example"
+                      sx={{ display: "flex", flexWrap: "wrap" }}
+                    >
+                      {color?.map((col: any, index: number) =>
+                        colorValue === index ? (
+                          <Box
+                            sx={{
+                              width: "50px",
+                              height: "50px",
+                              background: `${col.haxValue}`,
+                              mr: 4,
+                              mb: 4,
+                            }}
+                            onClick={(event) => handleColorChange(event, index)}
+                          />
+                        ) : (
+                          <Box
+                            sx={{
+                              width: "35px",
+                              height: "35px",
+                              border: 1,
+                              background: `${col.haxValue}`,
+                              borderColor: `${col.haxValue}`,
+                              mr: 4,
+                              mb: 4,
+                            }}
+                            onClick={(event) => handleColorChange(event, index)}
+                          />
+                        )
+                      )}
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+              <Box sx={{ textAlign: "left" }}>
                 <Typography
                   sx={{
+                    display: "inline-block",
                     fontFamily: "Inter",
-                    fontSize: "16px",
+                    fontSize: "24px",
                     fontWeight: 400,
                     color: "#1B2437",
-                    textAlign: "left",
                     mt: 4,
                     mb: 4,
                   }}
                 >
-                  Colors
+                  $
                 </Typography>
-                <Box>
-                  <Tabs
-                    value={colorValue}
-                    onChange={handleColorChange}
-                    aria-label="basic tabs example"
-                  >
-                    {color?.map((col: any, index: number) =>
-                      colorValue === index ? (
-                        <Box
-                          sx={{
-                            width: "50px",
-                            height: "50px",
-                            background: `${col.haxValue}`,
-                            mr: 4,
-                          }}
-                          onClick={(event) => handleColorChange(event, index)}
-                        />
-                      ) : (
-                        <Box
-                          sx={{
-                            width: "35px",
-                            maxHeight: "35px",
-                            border: 1,
-                            background: `${col.haxValue}`,
-                            borderColor: `${col.haxValue}`,
-                            mr: 4,
-                          }}
-                          onClick={(event) => handleColorChange(event, index)}
-                        />
-                      )
-                    )}
-                  </Tabs>
-                </Box>
+                <Typography
+                  sx={{
+                    display: "inline-block",
+                    fontFamily: "Inter",
+                    fontSize: "34px",
+                    fontWeight: 400,
+                    color: "#1B2437",
+                    mt: 4,
+                    mb: 4,
+                    ml: 1,
+                  }}
+                >
+                  {selectedProduct.productCurrentPrice}
+                </Typography>
               </Box>
+              <Box
+                sx={{
+                  display: {
+                    xl: "flex",
+                    lg: "flex",
+                    md: "flex",
+                    sm: "flex",
+                    xs: "block",
+                  },
+                  justifyContent: "left",
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  sx={{
+                    background: "#1B2437",
+                    maxWidth: "167px",
+                    height: "54px",
+                    fontSize: "18px",
+                    fontFamily: "Inter",
+                    fontWeight: 700,
+                    color: "#FFFFFF",
+                    mr: { xl: 7, lg: 7, md: 7, sm: 7, xs: 1 },
+                    ml: { sm: 1 },
+                    mt: { xl: 14.5, lg: 14.5, md: 14.5, sm: 14.5, xs: 4 },
+                    mb: 2,
+                  }}
+                >
+                  Shop Now
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    border: 1,
+                    borderColor: "#111827",
+                    maxWidth: "167px",
+                    height: "54px",
+                    fontSize: "18px",
+                    fontFamily: "Inter",
+                    fontWeight: 700,
+                    color: "#111827",
+                    mr: { sm: 1 },
+                    mt: { xl: 14.5, lg: 14.5, md: 14.5, sm: 14.5, xs: 4 },
+                    mb: 2,
+                  }}
+                >
+                  Add to cart
+                </Button>
+              </Box>
+              {/* add new element above */}
             </Box>
-            <Box sx={{ textAlign: "left" }}>
-              <Typography
-                sx={{
-                  display: "inline-block",
-                  fontFamily: "Inter",
-                  fontSize: "24px",
-                  fontWeight: 400,
-                  color: "#1B2437",
-                  mt: 4,
-                  mb: 4,
-                }}
-              >
-                $
-              </Typography>
-              <Typography
-                sx={{
-                  display: "inline-block",
-                  fontFamily: "Inter",
-                  fontSize: "34px",
-                  fontWeight: 400,
-                  color: "#1B2437",
-                  mt: 4,
-                  mb: 4,
-                  ml: 1,
-                }}
-              >
-                {selectedProduct.productCurrentPrice}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "left" }}>
-              <Button
-                variant="outlined"
-                sx={{
-                  background: "#1B2437",
-                  maxWidth: "167px",
-                  height: "54px",
-                  fontSize: "20px",
-                  fontFamily: "Inter",
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                  mr: 7,
-                  mt: 14.5,
-                }}
-              >
-                Shop Now
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{
-                  border: 1,
-                  borderColor: "#111827",
-                  maxWidth: "167px",
-                  height: "54px",
-                  fontSize: "18px",
-                  fontFamily: "Inter",
-                  fontWeight: 700,
-                  color: "#111827",
-                  mt: 14.5,
-                }}
-              >
-                Add to cart
-              </Button>
-            </Box>
-            {/* add new element above */}
           </Box>
         </Box>
       </Layout>

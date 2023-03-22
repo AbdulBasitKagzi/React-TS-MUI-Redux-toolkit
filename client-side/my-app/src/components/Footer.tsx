@@ -24,7 +24,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 const Footer: React.FC = () => {
   return (
-    <Box sx={{ maxWidth: "100%" }}>
+    <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
       <Box sx={{ maxWidth: "90%", mx: "auto", mt: 5 }}>
         <Box
           sx={{

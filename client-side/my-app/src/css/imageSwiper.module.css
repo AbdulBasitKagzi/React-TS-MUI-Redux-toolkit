@@ -18,3 +18,10 @@
   left: 965px;
   top: 260px;
 }
+
+@media (max-width: 600px) {
+  .sliderImage {
+    width: 250px !important;
+    padding: 20px;
+  }
+}
