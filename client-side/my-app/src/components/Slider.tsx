@@ -45,7 +45,7 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
   return (
     <Box sx={{ mx: 5 }}>
       <Swiper
-        onSwiper={setSwiperRef}
+        // onSwiper={setSwiperRef}
         slidesPerView={4}
         centeredSlides={false}
         spaceBetween={30}

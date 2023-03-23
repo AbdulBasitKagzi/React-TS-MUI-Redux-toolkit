@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import CategoryDetail from "../pages/CategoryDetail";
 import NoPage from "../pages/NoPage";
 import ItemDetailView from "../pages/ItemDetailView";
+import ShippingPage from "../pages/ShippingPage";
 
 function MainRoutes() {
   const routes_arr = [
@@ -29,6 +30,12 @@ function MainRoutes() {
       id: "itemdetailview",
       path: "/itemdetailview/:id",
       component: <ItemDetailView />,
+      protected: true,
+    },
+    {
+      id: "shippingpage",
+      path: "/shippingpage",
+      component: <ShippingPage />,
       protected: true,
     },
   ];

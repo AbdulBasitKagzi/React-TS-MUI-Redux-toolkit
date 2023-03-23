@@ -1,8 +1,10 @@
 import { useEffect, useRef, useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../store/userSlice/cartSlice";
 import Layout from "../components/Layout";
 import { RootState } from "../store/userSlice/store";
 import { sizeFilter, colorLists } from "../assets/Constants";
+import DescriptionAlerts from "../components/Alert";
 
 import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
@@ -31,7 +33,9 @@ interface TabPanelProps {
 }
 
 const ItemDetailView: React.FC = () => {
+  const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state: RootState) => state.product);
+  const { cartProducts } = useSelector((state: RootState) => state.cart);
   const [tabs, setTabs] = useState<Array<string>>([
     "Info",
     "Brand",
@@ -79,9 +83,9 @@ const ItemDetailView: React.FC = () => {
     }
   }, [selectedProduct]);
 
-  useEffect(() => {
-    console.log("selected", selectedProduct);
-  }, [selectedProduct]);
+  // useEffect(() => {
+  //   console.log("selected", selectedProduct);
+  // }, [selectedProduct]);
 
   const handlePrev = useCallback((value: string) => {
     if (value === "slider") {
@@ -163,6 +167,15 @@ const ItemDetailView: React.FC = () => {
     <div>
       <Layout>
         <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
+          {cartProducts.length && (
+            <DescriptionAlerts
+              type="success"
+              title="Success"
+              message="Product successfully added to cart"
+              openUp={true}
+              closeDuration={6000}
+            />
+          )}
           <Box
             sx={{
               width: "100%",
@@ -640,6 +653,9 @@ const ItemDetailView: React.FC = () => {
                     mr: { sm: 1 },
                     mt: { xl: 14.5, lg: 14.5, md: 14.5, sm: 14.5, xs: 4 },
                     mb: 2,
+                  }}
+                  onClick={() => {
+                    dispatch(cartActions.addProductToCart(selectedProduct));
                   }}
                 >
                   Add to cart

@@ -38,9 +38,9 @@ function FilterGrid() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [totalPage, setTotalPage] = useState<number>();
-  useEffect(() => {
-    console.log("filteredData", filter);
-  }, [filter]);
+  // useEffect(() => {
+  //   console.log("filteredData", filter);
+  // }, [filter]);
 
   useEffect(() => {
     const page = Math.ceil(filter.length / 9);

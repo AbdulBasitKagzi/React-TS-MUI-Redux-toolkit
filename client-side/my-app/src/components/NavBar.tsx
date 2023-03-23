@@ -67,7 +67,6 @@ const drawerWidth = 240;
 //     action: "/categorydetail",
 //   },
 // ];
-const navIcons = [callVector, shoppingcartVector, likeVector];
 
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
@@ -78,6 +77,12 @@ export default function DrawerAppBar(props: Props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const navIcons = [
+    { id: 1, value: callVector },
+    { id: 2, value: shoppingcartVector },
+    { id: 3, value: likeVector },
+  ];
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -208,7 +213,7 @@ export default function DrawerAppBar(props: Props) {
             >
               {navIcons.map((item) => (
                 <Typography
-                  key={item}
+                  key={item.id}
                   sx={{
                     color: "#212121",
                     fontFamily: "Josefin Sans",
@@ -217,8 +222,13 @@ export default function DrawerAppBar(props: Props) {
                     mr: "32px",
                     mt: "27px",
                   }}
+                  onClick={() => {
+                    item.id === 2
+                      ? navigate("/shippingpage")
+                      : console.log("hi");
+                  }}
                 >
-                  <img src={item} alt="item" />
+                  <img src={item.value} alt="item" />
                 </Typography>
               ))}
             </Box>

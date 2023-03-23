@@ -74,6 +74,8 @@ export default function SignIn() {
           type="error"
           title="Error"
           message="Please fill all the fields"
+          openUp={true}
+          closeDuration={6000}
         />
       )}
       <Container component="main" maxWidth="xs">
