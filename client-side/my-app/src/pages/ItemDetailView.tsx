@@ -53,6 +53,8 @@ const ItemDetailView: React.FC = () => {
     }[]
   >();
   const [color, setColor] = useState<[]>();
+  const [openUp, setOpenUp] = useState<boolean>(true);
+
   useEffect(() => {
     let fitleredata;
     if (selectedProduct.size) {
@@ -172,7 +174,8 @@ const ItemDetailView: React.FC = () => {
               type="success"
               title="Success"
               message="Product successfully added to cart"
-              openUp={true}
+              openUp={openUp}
+              setOpenUp={setOpenUp}
               closeDuration={6000}
             />
           )}

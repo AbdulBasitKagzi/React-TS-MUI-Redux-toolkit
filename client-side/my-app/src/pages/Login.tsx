@@ -45,6 +45,7 @@ export default function SignIn() {
   });
   let empty: boolean | undefined = undefined;
   const [alert, setAlert] = useState<boolean>();
+  const [openUp, setOpenUp] = useState<boolean>(true);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -75,6 +76,7 @@ export default function SignIn() {
           title="Error"
           message="Please fill all the fields"
           openUp={true}
+          setOpenUp={setOpenUp}
           closeDuration={6000}
         />
       )}

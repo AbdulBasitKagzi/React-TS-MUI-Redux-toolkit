@@ -4,7 +4,7 @@ interface cartProducts {
   id: number;
   productName: string;
   productImages: { id: number; productImage: string | undefined }[];
-  productDescription: string;
+  productDescription: Array<string>;
   productOriginalPrice: number;
   productCurrentPrice: number;
   gender: number;
@@ -49,6 +49,7 @@ const cartSlice = createSlice({
       }
     },
     increment: (state, action) => {
+      console.log(action);
       const data = state.cartProducts.find(
         (product: cartProducts) => product.id === action.payload.id
       );
@@ -59,18 +60,27 @@ const cartSlice = createSlice({
       }
     },
     decrement: (state, action) => {
+      let index: number = 0;
+
       const data = state.cartProducts.find(
         (product: cartProducts) => product.id === action.payload.id
       );
       if (data) {
-        const index = state.cartProducts.indexOf(data);
+        index = state.cartProducts.indexOf(data);
         state.cartProducts[index].quantity--;
         console.log("incrementstack", current(state.cartProducts));
       }
+      if (state.cartProducts[index].quantity === 0) {
+        console.log("here");
+        state.cartProducts = state.cartProducts.filter(
+          (product: cartProducts) => product.id !== action.payload.id
+        );
+      }
     },
     removeProduct: (state, action) => {
-      state.cartProducts.filter(
-        (product: cartProducts) => product.id === action.payload.id
+      console.log(action);
+      state.cartProducts = state.cartProducts.filter(
+        (product: cartProducts) => product.id !== action.payload.id
       );
     },
   },

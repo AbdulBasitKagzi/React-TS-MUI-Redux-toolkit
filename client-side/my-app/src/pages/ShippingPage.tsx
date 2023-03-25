@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../store/userSlice/cartSlice";
 import { RootState } from "../store/userSlice/store";
 
 // images and icons
@@ -27,12 +28,28 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { TimePicker } from "@mui/x-date-pickers";
 
 const ShippingPage: React.FC = () => {
   const steps = ["Shipping", "Billing", "Confirmation"];
   const { cartProducts } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
 
   const [page, setPage] = useState<number>(1);
+  const [date_time, setDate_Time] = useState(dayjs());
+  const [userInformation, setUserInformation] = useState<{
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    convinienttime: string;
+    city: string;
+    address: string;
+    zipCode: string;
+    date: string;
+    time: string;
+  }>();
+
   useEffect(() => {
     console.log("cartProducts", cartProducts);
   }, [cartProducts]);
@@ -41,6 +58,35 @@ const ShippingPage: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(event.target.value);
   };
+  const handleDate = (newValue: any) => {
+    setDate_Time(newValue);
+    setUserInformation((prev: any) => ({
+      ...prev,
+      date: newValue,
+    }));
+  };
+  const handleTime = (newValue: any) => {
+    setDate_Time(newValue);
+    setUserInformation((prev: any) => ({
+      ...prev,
+      time: newValue,
+    }));
+  };
+  // const handleSubmit = () => {
+  //   const hasEmptyFields = Object.values(userInformation:any).some(
+  //     (element) => element === ""
+  //   );
+  // };
+
+  const handleUserInformation = (e: any) => {
+    setUserInformation((prev: any) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  useEffect(() => {
+    console.log("user", userInformation);
+  }, [userInformation, date_time]);
   return (
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
       <Box
@@ -52,9 +98,10 @@ const ShippingPage: React.FC = () => {
             sm: "flex",
             xs: "block",
           },
-          flexWrap: "wrap",
+          // flexWrap: "wrap",
           //   maxWidth: "100%",
           //   justifyContent: "space-between",
+          justifyContent: "space-evenly",
         }}
       >
         <Box
@@ -66,7 +113,7 @@ const ShippingPage: React.FC = () => {
               sm: "50%",
               xs: "100%",
             },
-            border: 2,
+            // border: 2,
           }}
         >
           <Box
@@ -76,9 +123,10 @@ const ShippingPage: React.FC = () => {
                 lg: "608px",
                 md: "608px",
                 sm: "608px",
-                xs: "375px",
+                xs: "300px",
               },
               paddingTop: "43px",
+              mx: "auto",
             }}
           >
             <Stepper activeStep={page} alternativeLabel>
@@ -113,6 +161,7 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handleUserInformation}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -127,6 +176,7 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handleUserInformation}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -142,12 +192,13 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handleUserInformation}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     id="address2"
-                    name="phonenumber"
+                    name="phoneNumber"
                     label="Phone Number"
                     fullWidth
                     autoComplete="shipping address-line2"
@@ -156,6 +207,7 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handleUserInformation}
                   />
                 </Grid>
               </Grid>
@@ -180,14 +232,14 @@ const ShippingPage: React.FC = () => {
                   >
                     <DesktopDatePicker
                       label="Delivery Date"
-                      defaultValue={dayjs(new Date())}
-
-                      // minValue={new Date()}
+                      value={date_time}
+                      onChange={handleDate}
+                      // minValue={dayjs()}
                     />
                   </LocalizationProvider>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                  {/* <TextField
                     required
                     id="convinienttime"
                     name="convinienttime"
@@ -198,22 +250,35 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
-                  />
+                    onChange={handleUserInformation}
+                  /> */}
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    sx={{ display: "inherit" }}
+                  >
+                    <TimePicker
+                      label="PickUp Time"
+                      value={date_time}
+                      onChange={handleTime}
+                      // renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     City
                   </InputLabel>
                   <NativeSelect
-                    defaultValue={30}
+                    defaultValue="india"
                     inputProps={{
                       name: "city",
                       id: "uncontrolled-native",
                     }}
+                    onChange={handleUserInformation}
                   >
-                    <option value={10}>Australia</option>
-                    <option value={20}>India</option>
-                    <option value={30}>United Kingdom</option>
+                    <option value="australia">Australia</option>
+                    <option value="india">India</option>
+                    <option value="unitedkingdom">United Kingdom</option>
                   </NativeSelect>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -228,12 +293,13 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handleUserInformation}
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <TextField
                     id="zipcode"
-                    name="zpcode"
+                    name="zipCode"
                     label="Zip Code"
                     fullWidth
                     autoComplete="zip code"
@@ -242,6 +308,7 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handleUserInformation}
                   />
                 </Grid>
               </Grid>
@@ -405,6 +472,30 @@ const ShippingPage: React.FC = () => {
               </Box>
             </Box>
           )}
+          {page === 3 && (
+            <Box sx={{ mt: 11 }}>
+              <Typography
+                sx={{ fontFamily: "Roboto", fontSize: "24px", fontWeight: 700 }}
+              >
+                Your order is confirmed
+              </Typography>
+              <Box sx={{ mx: "auto", mt: 2 }}>
+                <Typography
+                  sx={{
+                    py: 4,
+                    textAlign: "center",
+                    wordBreak: "break-all",
+                    fontFamily: "Roboto",
+                    fontSize: "22px",
+                    fontWeight: 400,
+                  }}
+                >
+                  Thank you for shopping with us Your order will reach you on 18
+                  Jan 2022.
+                </Typography>
+              </Box>
+            </Box>
+          )}
 
           <Box
             sx={{
@@ -438,185 +529,433 @@ const ShippingPage: React.FC = () => {
                 backgroundColor: "#111827",
                 color: "#FFFFFF",
                 borderRadius: 0,
-                ml: "10%",
+                // ml: "50%",
+                mx: "auto",
                 // mt: 15,
               }}
               onClick={() => setPage(page + 1)}
             >
               <Typography sx={{ ml: 5, mr: 5 }}>
-                {page === 2 ? "Confirm Payment" : "Proceed to Payment"}
+                {page === 2
+                  ? "Confirm Payment"
+                  : page === 3
+                  ? "Continue Shopping"
+                  : "Proceed to Payment"}
               </Typography>
             </Button>
           </Box>
         </Box>
 
         {/*product card  */}
-        <Box sx={{ maxWidth: "50%", border: 2, mt: 9 }}>
-          <Box sx={{ backgroundColor: "#EFEFF4", borderRadius: 8 }}>
-            <Box sx={{ pt: 2, mb: 2 }}>
-              <Typography
-                sx={{
-                  fontFamily: "Inter",
-                  fontWeight: 700,
-                  fontSize: "18px",
-                  color: "#616161",
-                }}
-              >
-                Your Order
-              </Typography>
-            </Box>
-            <Divider />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography
-                sx={{
-                  fontFamily: "Inter",
-                  fontWeight: 800,
-                  fontSize: "18px",
-                  color: "#616161",
-                  p: 5,
-                  wordBreak: "break-all",
-                }}
-              >
-                Product Name
-              </Typography>
-              <Box sx={{ p: 5 }}>
-                <DeleteOutlineIcon />
-              </Box>
-            </Box>
-            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-              <Box sx={{ width: "56px", height: "65px", pl: 3 }}>
-                <img
-                  src={womenStandig}
-                  alt="product"
-                  width="100%"
-                  height="100%"
-                />
-              </Box>
-              <Box>
+        {page !== 3 && (
+          <Box
+            sx={{
+              maxWidth: {
+                xl: "50%",
+                lg: "50%",
+                md: "50%",
+                sm: "50%",
+                xs: "100%",
+              },
+              // border: 2,
+              mt: 14.5,
+            }}
+          >
+            <Box sx={{ backgroundColor: "#EFEFF4", borderRadius: 8 }}>
+              <Box sx={{ pt: 2, mb: 2 }}>
                 <Typography
                   sx={{
                     fontFamily: "Inter",
-                    fontSize: "14px",
-                    color: "#616161",
-                    wordBreak: "break-all",
-                    pl: 6,
-                    pt: 1,
-                  }}
-                >
-                  Product Description
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: "Inter",
-                    fontSize: "14px",
-                    color: "#616161",
-                    wordBreak: "break-all",
-                    pl: 6,
-                    pt: 1,
-                  }}
-                >
-                  Product Description
-                </Typography>
-              </Box>
-              <Box>
-                <Typography
-                  sx={{
-                    fontFamily: "Inter",
-                    fontSize: "14px",
                     fontWeight: 700,
-                    color: "#616161",
-                    wordBreak: "break-all",
-                    pl: 6,
-                    pr: 9,
-                    pt: 1,
-                  }}
-                >
-                  Quantity
-                </Typography>
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
-                  <Box
-                    sx={{
-                      width: "26px",
-                      height: "26px",
-                      border: 1,
-                      borderColor: "#E15113",
-                      borderRadius: 2,
-                    }}
-                  >
-                    <Typography sx={{ fontSize: "18px", color: "#E15113" }}>
-                      -
-                    </Typography>
-                  </Box>
-                  <Typography sx={{ pl: 1, pr: 1 }}>2</Typography>
-                  <Box
-                    sx={{
-                      width: "26px",
-                      height: "26px",
-                      border: 1,
-                      borderColor: "#E15113",
-                      borderRadius: 2,
-                    }}
-                  >
-                    <Typography sx={{ fontSize: "18px", color: "#E15113" }}>
-                      +
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              sx={{ display: "flex", justifyContent: "space-between", pb: 2 }}
-            >
-              <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
-                {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                <Box sx={{ pl: 2, pr: 2 }}>
-                  <Typography sx={{ color: "#616161" }}>Size</Typography>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    // value={age}
-                    label="Age"
-                    value={10}
-                    autoWidth
-                    // onChange={handleChange}
-                  >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirtyssddssdfdfs</MenuItem>
-                  </Select>
-                </Box>
-                <Box>
-                  <Typography sx={{ color: "#616161" }}>Color</Typography>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    // value={age}
-                    label="Age"
-                    value={10}
-                    // onChange={handleChange}
-                  >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </Box>
-              </Box>
-              <Box sx={{ mr: 6, mt: 7 }}>
-                <Typography
-                  sx={{
                     fontSize: "18px",
-                    fontFamily: "Jost",
-                    fontWeight: 700,
                     color: "#616161",
                   }}
                 >
-                  $ 165.00
+                  Your Order
                 </Typography>
               </Box>
+              <Divider />
+              {cartProducts.length ? (
+                cartProducts.map((product: any) => (
+                  <>
+                    <Box
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: "18px",
+                          color: "#616161",
+                          p: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        {product.productName}
+                      </Typography>
+                      <Box
+                        sx={{ p: 5 }}
+                        onClick={() =>
+                          dispatch(
+                            cartActions.removeProduct({ id: product.id })
+                          )
+                        }
+                      >
+                        <DeleteOutlineIcon />
+                      </Box>
+                    </Box>
+                    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                      <Box sx={{ width: "56px", height: "65px", pl: 3 }}>
+                        <img
+                          src={product.productImages[0].productImage}
+                          alt="product"
+                          width="100%"
+                          height="100%"
+                        />
+                      </Box>
+                      <Box>
+                        {product.productDescription.length &&
+                          product.productDescription.map((desc: any) => (
+                            <Typography
+                              sx={{
+                                fontFamily: "Inter",
+                                fontSize: "14px",
+                                color: "#616161",
+                                wordBreak: "break-all",
+                                pl: { xl: 6, lg: 6, md: 6, sm: 6, xs: 3 },
+                                pt: 1,
+                              }}
+                            >
+                              {desc}
+                            </Typography>
+                          ))}
+                      </Box>
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontFamily: "Inter",
+                            fontSize: "14px",
+                            fontWeight: 700,
+                            color: "#616161",
+                            wordBreak: "break-all",
+                            pl: 6,
+                            pr: 9,
+                            pt: 1,
+                          }}
+                        >
+                          Quantity
+                        </Typography>
+                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                          <Box
+                            sx={{
+                              width: "26px",
+                              height: "26px",
+                              border: 1,
+                              borderColor: "#E15113",
+                              borderRadius: 2,
+                            }}
+                            onClick={() =>
+                              dispatch(
+                                cartActions.decrement({ id: product.id })
+                              )
+                            }
+                          >
+                            <Typography
+                              sx={{ fontSize: "18px", color: "#E15113" }}
+                            >
+                              -
+                            </Typography>
+                          </Box>
+                          <Typography sx={{ pl: 1, pr: 1 }}>
+                            {product.quantity}
+                          </Typography>
+                          <Box
+                            sx={{
+                              width: "26px",
+                              height: "26px",
+                              border: 1,
+                              borderColor: "#E15113",
+                              borderRadius: 2,
+                            }}
+                            onClick={() =>
+                              dispatch(
+                                cartActions.increment({ id: product.id })
+                              )
+                            }
+                          >
+                            <Typography
+                              sx={{ fontSize: "18px", color: "#E15113" }}
+                            >
+                              +
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        pb: 2,
+                      }}
+                    >
+                      <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                        {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                        <Box sx={{ pl: 2, pr: 2 }}>
+                          <Typography sx={{ color: "#616161" }}>
+                            Size
+                          </Typography>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            // value={age}
+                            label="Age"
+                            value={10}
+                            autoWidth
+                            // onChange={handleChange}
+                          >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirtyssddssdfdfs</MenuItem>
+                          </Select>
+                        </Box>
+                        <Box sx={{ pl: 0.5 }}>
+                          <Typography sx={{ color: "#616161" }}>
+                            Color
+                          </Typography>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            // value={age}
+                            label="Age"
+                            value={10}
+                            // onChange={handleChange}
+                          >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                          </Select>
+                        </Box>
+                      </Box>
+                      <Box
+                        sx={{
+                          mr: { xl: 6, lg: 6, md: 6, sm: 3, xs: 3 },
+                          mt: 7,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: "18px",
+                            fontFamily: "Jost",
+                            fontWeight: 700,
+                            color: "#616161",
+                          }}
+                        >
+                          $ {product.quantity * product.productCurrentPrice}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </>
+                ))
+              ) : (
+                <Typography>No Products to Order</Typography>
+              )}
+              <Divider />
+              {cartProducts.length ? (
+                <>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "18px",
+                            lg: "18px",
+                            md: "18px",
+                            sm: "16px",
+                            xs: "16px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        Subtotal
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "18px",
+                            lg: "18px",
+                            md: "18px",
+                            sm: "16px",
+                            xs: "16px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        $ 654.00
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "18px",
+                            lg: "18px",
+                            md: "18px",
+                            sm: "16px",
+                            xs: "16px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        Shipping
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "18px",
+                            lg: "18px",
+                            md: "18px",
+                            sm: "16px",
+                            xs: "16px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        $ 064.00
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "18px",
+                            lg: "18px",
+                            md: "18px",
+                            sm: "16px",
+                            xs: "16px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        Vat,tax
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "18px",
+                            lg: "18px",
+                            md: "18px",
+                            sm: "16px",
+                            xs: "16px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        $ 064.00
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Divider />
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "24px",
+                            lg: "24px",
+                            md: "24px",
+                            sm: "20px",
+                            xs: "20px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        Total
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "Inter",
+                          fontWeight: 800,
+                          fontSize: {
+                            xl: "24px",
+                            lg: "24px",
+                            md: "24px",
+                            sm: "20px",
+                            xs: "20px",
+                          },
+                          color: "#616161",
+                          py: 2,
+                          px: 5,
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        $ 778.00
+                      </Typography>
+                    </Box>
+                  </Box>
+                </>
+              ) : (
+                <Typography></Typography>
+              )}
+              {/* enter code above */}
             </Box>
-            {/* enter code above */}
           </Box>
-        </Box>
+        )}
       </Box>
     </Box>
   );
