@@ -15,6 +15,10 @@ import sunglasses from "../assets/images/sunglasses.png";
 import footwear from "../assets/images/footwear.png";
 import hat_1 from "../assets/images/hat_1.png";
 import watches from "../assets/images/watches.png";
+import womenShoeYellow from "../assets/images/womenShoeYellow.png";
+import weddingRing from "../assets/images/weddingRing.png";
+import wallet from "../assets/images/wallet.png";
+import appleWatch from "../assets/images/appleWatch.png";
 
 export const gender = [
   {
@@ -79,10 +83,12 @@ export const person_tabs = [
   {
     id: "forwomen",
     value: "For Women",
+    slug: "women",
   },
   {
     id: "formen",
     value: "For men",
+    slug: "men",
   },
 ];
 

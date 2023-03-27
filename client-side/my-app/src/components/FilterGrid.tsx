@@ -52,7 +52,7 @@ function FilterGrid() {
         flexGrow: 1,
         // ml: { xl: 4, lg: 6, md: 10, sm: 10, xs: 2 },
         ml: 4,
-        mr: 10,
+        mr: 6.25,
         // maxWidth: "55%",
         // mx: "auto",
       }}
@@ -61,6 +61,7 @@ function FilterGrid() {
         {filter.map((arr: any) => (
           <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
             <Box
+              id={arr.id}
               sx={{
                 // width: { xs: 278 },
                 position: "relative",

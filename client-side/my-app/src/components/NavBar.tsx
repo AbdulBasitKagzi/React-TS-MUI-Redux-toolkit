@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice/userSlice";
 import { gender } from "../assets/Constants";
 
@@ -25,6 +25,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import NavbarModel from "./NavbarModel";
+import { RootState } from "../store/userSlice/store";
 
 interface Props {
   /**
@@ -69,6 +70,7 @@ const drawerWidth = 240;
 // ];
 
 export default function DrawerAppBar(props: Props) {
+  const { cartProducts } = useSelector((state: RootState) => state.cart);
   const { window } = props;
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -157,23 +159,40 @@ export default function DrawerAppBar(props: Props) {
           </IconButton>
           <Box
             sx={{
-              justifyContent: "space-between",
               display: {
-                xs: "none",
-                sm: "none",
+                xs: "flex",
+                sm: "flex",
                 md: "flex",
                 lg: "flex",
                 xl: "flex",
               },
+              justifyContent: {
+                xl: "space-between",
+                lg: "space-between",
+                md: "space-between",
+                sm: "end",
+                xs: "end",
+              },
+              mt: { xl: 0, lg: 0, md: 0, sm: "-8%", xs: -6 },
+              mr: { xl: 0, lg: 0, md: 0, sm: 0, xs: -5 },
             }}
           >
             <Box
+              className="class"
               sx={{
                 color: "#fff",
                 fontFamily: "Josefin Sans",
-                display: "inline-block",
+                // display: "inline-block",
                 // mr: "32px",
                 ml: "173px",
+                cursor: "pointer",
+                display: {
+                  xs: "none",
+                  sm: "none",
+                  md: "flex",
+                  lg: "flex",
+                  xl: "flex",
+                },
               }}
             >
               {gender.map(
@@ -192,7 +211,9 @@ export default function DrawerAppBar(props: Props) {
                       item.id === 0
                         ? navigate("/")
                         : dispatch(userActions.makeRoute(item.slug));
-                      setOpenModel(true);
+                      if (item.id !== 0) {
+                        setOpenModel(true);
+                      }
                     }}
                   >
                     {item.value}
@@ -202,13 +223,15 @@ export default function DrawerAppBar(props: Props) {
             </Box>
             <Box
               sx={{
-                display: {
-                  xs: "none",
-                  sm: "none",
-                  md: "flex",
-                  lg: "flex",
-                  xl: "flex",
-                },
+                // display: {
+                //   xs: "flex",
+                //   sm: "flex",
+                //   md: "flex",
+                //   lg: "flex",
+                //   xl: "flex",
+                // },
+                display: "flex",
+                // justifyContent: "left",
               }}
             >
               {navIcons.map((item) => (
@@ -221,9 +244,10 @@ export default function DrawerAppBar(props: Props) {
                     display: "inline-block",
                     mr: "32px",
                     mt: "27px",
+                    cursor: "pointer",
                   }}
                   onClick={() => {
-                    item.id === 2
+                    item.id === 2 && cartProducts.length !== 0
                       ? navigate("/shippingpage")
                       : console.log("hi");
                   }}

@@ -83,8 +83,9 @@ const ReviewCard: React.FC = () => {
             height: string;
           }) => (
             <Box
+              key={arr.id}
               sx={{
-                maxWidth: { xl: 521, lg: 521, md: 521, sm: 236, xs: 330 },
+                maxWidth: { xl: 521, lg: 521, md: 521, sm: 190, xs: 330 },
                 maxHeight: 1009,
               }}
             >

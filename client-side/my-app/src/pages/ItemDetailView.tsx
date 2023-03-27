@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import { RootState } from "../store/userSlice/store";
 import { sizeFilter, colorLists } from "../assets/Constants";
 import DescriptionAlerts from "../components/Alert";
+import { useNavigate } from "react-router-dom";
 
 import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
@@ -33,6 +34,7 @@ interface TabPanelProps {
 }
 
 const ItemDetailView: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state: RootState) => state.product);
   const { cartProducts } = useSelector((state: RootState) => state.cart);
@@ -53,7 +55,9 @@ const ItemDetailView: React.FC = () => {
     }[]
   >();
   const [color, setColor] = useState<[]>();
-  const [openUp, setOpenUp] = useState<boolean>(true);
+  const [openUp, setOpenUp] = useState<boolean>(false);
+  const [image, setImage] = useState<string | undefined>();
+  const [imageValue, setImageValue] = useState<number>(0);
 
   useEffect(() => {
     let fitleredata;
@@ -85,6 +89,12 @@ const ItemDetailView: React.FC = () => {
     }
   }, [selectedProduct]);
 
+  useEffect(() => {
+    if (cartProducts.length !== 0) {
+      setOpenUp(true);
+    }
+  }, [cartProducts]);
+
   // useEffect(() => {
   //   console.log("selected", selectedProduct);
   // }, [selectedProduct]);
@@ -99,6 +109,7 @@ const ItemDetailView: React.FC = () => {
 
   const handleNext = useCallback((value: string) => {
     if (value === "slider") {
+      setImage("");
       slider.current.swiper.slideNext();
     }
     if (!sliderRef.current) return;
@@ -164,19 +175,22 @@ const ItemDetailView: React.FC = () => {
   const handleColorChange = (event: React.SyntheticEvent, newValue: number) => {
     setColorValue(newValue);
   };
+  useEffect(() => {
+    console.log("image", image);
+  }, [image]);
 
   return (
     <div>
       <Layout>
         <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
-          {cartProducts.length && (
+          {openUp && (
             <DescriptionAlerts
               type="success"
               title="Success"
               message="Product successfully added to cart"
               openUp={openUp}
               setOpenUp={setOpenUp}
-              closeDuration={6000}
+              closeDuration={2000}
             />
           )}
           <Box
@@ -217,11 +231,31 @@ const ItemDetailView: React.FC = () => {
                       productImage: string | undefined;
                     }) => (
                       <SwiperSlide className={style.abdul}>
-                        <img
-                          className={style.sliderImage}
-                          src={images.productImage}
-                          alt="women"
-                        />
+                        {image ? (
+                          <img
+                            className={style.sliderImage}
+                            src={image}
+                            alt="women"
+                            style={{
+                              borderInlineColor: "black",
+                              border: 2,
+                              borderColor: "#E5E5EA",
+                              borderStyle: "solid",
+                              borderRadius: 10,
+                              boxShadow: "0px 10px 10px",
+                              marginBottom: "10px",
+                            }}
+                          />
+                        ) : (
+                          <img
+                            className={style.sliderImage}
+                            src={images.productImage}
+                            alt="women"
+                            style={{
+                              objectFit: "contain",
+                            }}
+                          />
+                        )}
                       </SwiperSlide>
                     )
                   )}
@@ -288,12 +322,44 @@ const ItemDetailView: React.FC = () => {
                   className={`mySwiper ${classes.position}`}
                 >
                   {selectedProduct?.productImages?.map(
-                    (images: {
-                      id: number;
-                      productImage: string | undefined;
-                    }) => (
+                    (
+                      images: {
+                        id: number;
+                        productImage: string | undefined;
+                      },
+                      index: number
+                    ) => (
                       <SwiperSlide className={classes.selectedImage}>
-                        <img src={images.productImage} alt="women" />
+                        {index === imageValue ? (
+                          <img
+                            src={images.productImage}
+                            alt="women"
+                            style={{
+                              borderInlineColor: "black",
+                              border: 2,
+                              borderColor: "#E5E5EA",
+                              borderStyle: "solid",
+                              borderRadius: 10,
+                              boxShadow: "0px 10px 10px",
+                              marginBottom: "10px",
+                              objectFit: "contain",
+                              cursor: "pointer",
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src={images.productImage}
+                            alt="women"
+                            style={{
+                              objectFit: "contain",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => {
+                              setImage(images.productImage);
+                              setImageValue(index);
+                            }}
+                          />
+                        )}
                       </SwiperSlide>
                     )
                   )}
@@ -507,6 +573,7 @@ const ItemDetailView: React.FC = () => {
                             background: "#1B2437",
                             mr: 4,
                             mb: 2,
+                            cursor: "pointer",
                           }}
                           onClick={(event) => handleSizeChange(event, index)}
                         >
@@ -521,6 +588,7 @@ const ItemDetailView: React.FC = () => {
                             borderColor: "#000000",
                             mr: 4,
                             mb: 2,
+                            cursor: "pointer",
                           }}
                           onClick={(event) => handleSizeChange(event, index)}
                         >
@@ -561,6 +629,7 @@ const ItemDetailView: React.FC = () => {
                               background: `${col.haxValue}`,
                               mr: 4,
                               mb: 4,
+                              cursor: "pointer",
                             }}
                             onClick={(event) => handleColorChange(event, index)}
                           />
@@ -574,6 +643,7 @@ const ItemDetailView: React.FC = () => {
                               borderColor: `${col.haxValue}`,
                               mr: 4,
                               mb: 4,
+                              cursor: "pointer",
                             }}
                             onClick={(event) => handleColorChange(event, index)}
                           />
@@ -638,6 +708,10 @@ const ItemDetailView: React.FC = () => {
                     ml: { sm: 1 },
                     mt: { xl: 14.5, lg: 14.5, md: 14.5, sm: 14.5, xs: 4 },
                     mb: 2,
+                  }}
+                  onClick={() => {
+                    dispatch(cartActions.addProductToCart(selectedProduct));
+                    navigate("/shippingpage");
                   }}
                 >
                   Shop Now

@@ -176,17 +176,6 @@ export default function FilterSlider() {
           >
             Filters
           </Typography>
-          {humanFilter.map((human) => (
-            <FormControlLabel
-              control={<Checkbox />}
-              label={human.value}
-              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={() => {
-                setClick(true);
-                // handleFilter(human.id);
-              }}
-            />
-          ))}
 
           <Typography
             textAlign="left"
@@ -201,20 +190,22 @@ export default function FilterSlider() {
           >
             Brands
           </Typography>
-          {brandFilter.map((brand) => (
-            <FormControlLabel
-              control={<Checkbox />}
-              label={brand.value}
-              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                setClick(true);
-                handleBrandFilter(
-                  brand.id,
-                  (e.target as unknown as { checked: boolean }).checked
-                );
-              }}
-            />
-          ))}
+          {brandFilter.map(
+            (brand: { id: number; value: string; slug: string }) => (
+              <FormControlLabel
+                control={<Checkbox />}
+                label={brand.value}
+                sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
+                onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                  setClick(true);
+                  handleBrandFilter(
+                    brand.id,
+                    (e.target as unknown as { checked: boolean }).checked
+                  );
+                }}
+              />
+            )
+          )}
           <Typography
             textAlign="left"
             sx={{

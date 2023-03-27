@@ -27,22 +27,22 @@ function MainRoutes() {
       protected: true,
     },
     {
-      id: "itemdetailview",
-      path: "/itemdetailview/:id",
-      component: <ItemDetailView />,
-      protected: true,
-    },
-    {
       id: "shippingpage",
       path: "/shippingpage",
       component: <ShippingPage />,
+      protected: true,
+    },
+    {
+      id: "itemdetailview",
+      path: "/itemdetailview/:id",
+      component: <ItemDetailView />,
       protected: true,
     },
   ];
   return (
     <Routes>
       {routes_arr.map((routes) => (
-        <Route path={routes.path} element={routes.component} />
+        <Route key={routes.id} path={routes.path} element={routes.component} />
       ))}
       <Route path="*" element={<NoPage />} />
     </Routes>

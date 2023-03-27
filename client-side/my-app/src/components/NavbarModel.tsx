@@ -46,7 +46,20 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
       >
         <Box sx={style}>
           <Box>
-            <Box sx={{ maxWidth: "90%", display: "flex", mx: "auto" }}>
+            <Box
+              sx={{
+                maxWidth: "90%",
+                display: "flex",
+                mx: "auto",
+                justifyContent: {
+                  xl: "space-between",
+                  lg: "space-between",
+                  md: "space-between",
+                  sm: "space-between",
+                  xs: "center",
+                },
+              }}
+            >
               <Box
                 sx={{
                   display: {
@@ -54,8 +67,9 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                     lg: "flex",
                     md: "flex",
                     sm: "flex",
-                    xs: "block",
+                    xs: "flex",
                   },
+                  flexWrap: "wrap",
                 }}
               >
                 <Box>
@@ -71,10 +85,12 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                     </ListItem>
                     {categoriesFilter.map((category) => (
                       <ListItem
+                        key={category.id}
                         sx={{
                           fontFamily: "Inter",
                           fontSize: "16px",
                           fontWeight: 400,
+                          cursor: "pointer",
                         }}
                         onClick={() => {
                           handleClose();
@@ -101,10 +117,12 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                     </ListItem>
                     {brandFilter.map((brand) => (
                       <ListItem
+                        key={brand.id}
                         sx={{
                           fontFamily: "Inter",
                           fontSize: "16px",
                           fontWeight: 400,
+                          cursor: "pointer",
                         }}
                         onClick={() => {
                           handleClose();
@@ -135,6 +153,7 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                           fontFamily: "Inter",
                           fontSize: "16px",
                           fontWeight: 400,
+                          cursor: "pointer",
                         }}
                       >
                         {category.value}
@@ -156,7 +175,7 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                   },
                 }}
               >
-                <img src={photo} alt="abdul" />
+                <img src={photo} alt="abdul" width="100%" />
               </Box>
             </Box>
           </Box>

@@ -10,6 +10,7 @@ const ImageSlider: React.FC = () => {
   return (
     <Box
       sx={{
+        position: "relative",
         width: "100%",
         opacity: "70%",
         background: "#212121",
@@ -21,20 +22,22 @@ const ImageSlider: React.FC = () => {
           <Box
             sx={{
               position: "absolute",
-              left: {
-                xl: "641px",
-                lg: "641px",
-                md: "410px",
-                sm: "310px",
-                xs: "150px",
-              },
-              top: {
-                xl: "175px",
-                lg: "175px",
-                md: "125px",
-                sm: "100px",
-                xs: "50px",
-              },
+              left: "40%",
+              top: "35%",
+              // left: {
+              //   xl: "641px",
+              //   lg: "641px",
+              //   md: "410px",
+              //   sm: "310px",
+              //   xs: "150px",
+              // },
+              // top: {
+              //   xl: "175px",
+              //   lg: "175px",
+              //   md: "125px",
+              //   sm: "100px",
+              //   xs: "50px",
+              // },
             }}
           >
             <Typography
@@ -74,20 +77,22 @@ const ImageSlider: React.FC = () => {
           <Box
             sx={{
               position: "absolute",
-              left: {
-                xl: "641px",
-                lg: "641px",
-                md: "410px",
-                sm: "310px",
-                xs: "150px",
-              },
-              top: {
-                xl: "175px",
-                lg: "175px",
-                md: "125px",
-                sm: "100px",
-                xs: "50px",
-              },
+              left: "40%",
+              top: "35%",
+              // left: {
+              //   xl: "641px",
+              //   lg: "641px",
+              //   md: "410px",
+              //   sm: "310px",
+              //   xs: "150px",
+              // },
+              // top: {
+              //   xl: "175px",
+              //   lg: "175px",
+              //   md: "125px",
+              //   sm: "100px",
+              //   xs: "50px",
+              // },
             }}
           >
             <Typography

@@ -74,7 +74,12 @@ const CategoryDetail: React.FC = () => {
   return (
     <>
       <Layout>
-        <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
+        <Box
+          sx={{
+            maxWidth: "1600px",
+            mx: "auto",
+          }}
+        >
           <Box
             sx={{
               mt: { xl: 8, lg: 8, md: 8, sm: -4, xs: 2 },

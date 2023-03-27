@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../store/userSlice/cartSlice";
 import { RootState } from "../store/userSlice/store";
+import { useNavigate } from "react-router-dom";
+import { sizeFilter, colorLists } from "../assets/Constants";
 
 // images and icons
 import creditCard from "../assets/icons/creditCard.svg";
 import paypal_icon from "../assets/icons/paypal-icon.svg";
 import bitcoin from "../assets/icons/bitcoin.svg";
-import womenStandig from "../assets/images/womenStanding.png";
 
 // mui imports
 import Stepper from "@mui/material/Stepper";
@@ -29,66 +30,158 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { TimePicker } from "@mui/x-date-pickers";
+import DescriptionAlerts from "../components/Alert";
 
 const ShippingPage: React.FC = () => {
+  const navigate = useNavigate();
   const steps = ["Shipping", "Billing", "Confirmation"];
   const { cartProducts } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-
   const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
+  let shipping: number = 64.0;
+  let vat_tax: number = 64.0;
+  const [selectedValue, setSelectedValue] = useState("creditCard");
   const [date_time, setDate_Time] = useState(dayjs());
   const [userInformation, setUserInformation] = useState<{
     firstName: string;
     lastName: string;
-    email: string;
+    emailaddress: string;
     phoneNumber: string;
-    convinienttime: string;
     city: string;
     address: string;
     zipCode: string;
     date: string;
     time: string;
-  }>();
+  }>({
+    firstName: "",
+    lastName: "",
+    emailaddress: "",
+    phoneNumber: "",
+    city: "",
+    address: "",
+    zipCode: "",
+    date: date_time.toString(),
+    time: date_time.toString(),
+  });
+  const [paymentInformation, setPaymentInformation] = useState<{
+    radio_buttons: string;
+    cardName: string;
+    cardNumber: string;
+    expiration: string;
+    cvv: string;
+  }>({
+    cardName: "",
+    cardNumber: "",
+    expiration: "",
+    cvv: "",
+    radio_buttons: selectedValue,
+  });
 
-  useEffect(() => {
-    console.log("cartProducts", cartProducts);
-  }, [cartProducts]);
-  const [selectedValue, setSelectedValue] = useState("creditCard");
+  const [openUp, setOpenUp] = useState<boolean>(false);
+  const [age, setAge] = useState("0" || "1" || "2");
+  const [color, setColor] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("here");
     setSelectedValue(event.target.value);
+    setPaymentInformation((prev) => ({
+      ...prev,
+      radio_buttons: event.target.value,
+    }));
+  };
+  const handleSelection = (event: any) => {
+    setAge(event.target.value as string);
+  };
+
+  const handleColor = (event: any) => {
+    setColor(event.target.value as string);
   };
   const handleDate = (newValue: any) => {
     setDate_Time(newValue);
     setUserInformation((prev: any) => ({
       ...prev,
-      date: newValue,
+      date: newValue.toString(),
     }));
   };
   const handleTime = (newValue: any) => {
     setDate_Time(newValue);
     setUserInformation((prev: any) => ({
       ...prev,
-      time: newValue,
+      time: newValue.toString(),
     }));
   };
-  // const handleSubmit = () => {
-  //   const hasEmptyFields = Object.values(userInformation:any).some(
-  //     (element) => element === ""
-  //   );
-  // };
+  const handleSubmit = (information: Object) => {
+    const hasEmptyFields = Object.values(information).some(
+      (element) => element === ""
+    );
+    if (hasEmptyFields) {
+      setOpenUp(hasEmptyFields);
+    } else {
+      setPage(page + 1);
+    }
+  };
 
   const handleUserInformation = (e: any) => {
-    setUserInformation((prev: any) => ({
+    setUserInformation((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handlePaymentInformation = (e: any) => {
+    setPaymentInformation((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const filteration = (
+    data: Array<number>,
+    array: {
+      id?: number;
+      value?: string;
+      slug?: string;
+      haxValue?: string;
+      name?: string;
+    }[]
+  ) => {
+    let filteredata;
+    filteredata = data.map((data: number) => {
+      return array.filter(
+        (fill: {
+          id?: number;
+          value?: string;
+          slug?: string;
+          haxValue?: string;
+          name?: string;
+        }) => fill.id === data
+      );
+    });
+
+    return filteredata;
+  };
+
   useEffect(() => {
-    console.log("user", userInformation);
-  }, [userInformation, date_time]);
+    let totalAmount: number;
+    totalAmount = cartProducts.reduce((acc: number, curr: any) => {
+      totalAmount = acc + curr.quantity * curr.productCurrentPrice;
+      return totalAmount;
+    }, 0);
+    setTotal(totalAmount);
+  }, [cartProducts]);
   return (
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
+      {openUp && (
+        <DescriptionAlerts
+          openUp={openUp}
+          setOpenUp={setOpenUp}
+          type="error"
+          title="Error"
+          message="Please fill all the fields correcty"
+          closeDuration={2000}
+        />
+      )}
       <Box
         sx={{
           display: {
@@ -155,6 +248,7 @@ const ShippingPage: React.FC = () => {
                     id="firstName"
                     name="firstName"
                     label="First name"
+                    value={userInformation.firstName}
                     fullWidth
                     autoComplete="given-name"
                     variant="standard"
@@ -170,6 +264,7 @@ const ShippingPage: React.FC = () => {
                     id="lastName"
                     name="lastName"
                     label="Last name"
+                    value={userInformation.lastName}
                     fullWidth
                     autoComplete="family-name"
                     variant="standard"
@@ -185,6 +280,7 @@ const ShippingPage: React.FC = () => {
                     id="address1"
                     name="emailaddress"
                     label="Email Address"
+                    value={userInformation.emailaddress}
                     fullWidth
                     autoComplete="shipping address-line1"
                     variant="standard"
@@ -200,6 +296,7 @@ const ShippingPage: React.FC = () => {
                     id="address2"
                     name="phoneNumber"
                     label="Phone Number"
+                    value={userInformation.phoneNumber}
                     fullWidth
                     autoComplete="shipping address-line2"
                     variant="standard"
@@ -225,7 +322,7 @@ const ShippingPage: React.FC = () => {
                 </Typography>
               </Box>
               <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
                     sx={{ display: "inherit" }}
@@ -234,24 +331,12 @@ const ShippingPage: React.FC = () => {
                       label="Delivery Date"
                       value={date_time}
                       onChange={handleDate}
+                      sx={{ width: "500px" }}
                       // minValue={dayjs()}
                     />
                   </LocalizationProvider>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  {/* <TextField
-                    required
-                    id="convinienttime"
-                    name="convinienttime"
-                    label="Convinient Time"
-                    fullWidth
-                    autoComplete="family-name"
-                    variant="standard"
-                    sx={{
-                      paddingBottom: 4,
-                    }}
-                    onChange={handleUserInformation}
-                  /> */}
+                <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
                     sx={{ display: "inherit" }}
@@ -260,7 +345,7 @@ const ShippingPage: React.FC = () => {
                       label="PickUp Time"
                       value={date_time}
                       onChange={handleTime}
-                      // renderInput={(params) => <TextField {...params} />}
+                      sx={{ width: "500px" }}
                     />
                   </LocalizationProvider>
                 </Grid>
@@ -269,7 +354,9 @@ const ShippingPage: React.FC = () => {
                     City
                   </InputLabel>
                   <NativeSelect
-                    defaultValue="india"
+                    // defaultValue="india"
+                    value={userInformation.city}
+                    // sx={{ width: { xs: "500px" } }}
                     inputProps={{
                       name: "city",
                       id: "uncontrolled-native",
@@ -286,6 +373,7 @@ const ShippingPage: React.FC = () => {
                     id="address"
                     name="address"
                     label="Address"
+                    value={userInformation.address}
                     fullWidth
                     autoComplete="shipping address-line2"
                     variant="standard"
@@ -301,6 +389,7 @@ const ShippingPage: React.FC = () => {
                     id="zipcode"
                     name="zipCode"
                     label="Zip Code"
+                    value={userInformation.zipCode}
                     fullWidth
                     autoComplete="zip code"
                     variant="standard"
@@ -335,7 +424,7 @@ const ShippingPage: React.FC = () => {
                   checked={selectedValue === "creditCard"}
                   onChange={handleChange}
                   value="creditCard"
-                  name="radio-buttons"
+                  name="radio_buttons"
                   inputProps={{ "aria-label": "A" }}
                   sx={{
                     color: "#111827",
@@ -354,7 +443,7 @@ const ShippingPage: React.FC = () => {
                   checked={selectedValue === "paypal"}
                   onChange={handleChange}
                   value="paypal"
-                  name="radio-buttons"
+                  name="radio_buttons"
                   inputProps={{ "aria-label": "B" }}
                   sx={{
                     color: "#111827",
@@ -374,7 +463,7 @@ const ShippingPage: React.FC = () => {
                   checked={selectedValue === "bitcoin"}
                   onChange={handleChange}
                   value="bitcoin"
-                  name="radio-buttons"
+                  name="radio_buttons"
                   inputProps={{ "aria-label": "B" }}
                   sx={{
                     color: "#111827",
@@ -406,12 +495,15 @@ const ShippingPage: React.FC = () => {
                     id="cardName"
                     name="cardName"
                     label="Enter Name Card"
+                    value={paymentInformation.cardName}
                     fullWidth
+                    placeholder="alex patel"
                     autoComplete="given-name"
                     variant="standard"
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handlePaymentInformation}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -420,12 +512,15 @@ const ShippingPage: React.FC = () => {
                     id="cardNumber"
                     name="cardNumber"
                     label="Card Number"
+                    value={paymentInformation.cardNumber}
                     fullWidth
                     autoComplete="card number"
+                    placeholder="4444 4444 4444 4444"
                     variant="standard"
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handlePaymentInformation}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -435,12 +530,14 @@ const ShippingPage: React.FC = () => {
                     name="expiration"
                     label="Expiration"
                     fullWidth
+                    value={paymentInformation.expiration}
                     autoComplete="shipping address-line1"
                     variant="standard"
-                    // placeholder="Youremail@gmail.com"
+                    placeholder="1/23"
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handlePaymentInformation}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -448,6 +545,7 @@ const ShippingPage: React.FC = () => {
                     id="cvv"
                     name="cvv"
                     label="CVV Code"
+                    value={paymentInformation.cvv}
                     fullWidth
                     autoComplete="shipping address-line2"
                     variant="standard"
@@ -455,6 +553,7 @@ const ShippingPage: React.FC = () => {
                     sx={{
                       paddingBottom: 4,
                     }}
+                    onChange={handlePaymentInformation}
                   />
                 </Grid>
               </Grid>
@@ -533,11 +632,20 @@ const ShippingPage: React.FC = () => {
                 mx: "auto",
                 // mt: 15,
               }}
-              onClick={() => setPage(page + 1)}
+              onClick={() => {
+                page === 1
+                  ? handleSubmit(userInformation)
+                  : page === 2
+                  ? handleSubmit(paymentInformation)
+                  : page === 3
+                  ? navigate("/")
+                  : setPage(page + 1);
+                // setPage(page + 1)
+              }}
             >
               <Typography sx={{ ml: 5, mr: 5 }}>
                 {page === 2
-                  ? "Confirm Payment"
+                  ? `Confirm Payment of: $ ${total + vat_tax + shipping}.00`
                   : page === 3
                   ? "Continue Shopping"
                   : "Proceed to Payment"}
@@ -594,7 +702,7 @@ const ShippingPage: React.FC = () => {
                         {product.productName}
                       </Typography>
                       <Box
-                        sx={{ p: 5 }}
+                        sx={{ p: 5, cursor: "pointer" }}
                         onClick={() =>
                           dispatch(
                             cartActions.removeProduct({ id: product.id })
@@ -653,6 +761,7 @@ const ShippingPage: React.FC = () => {
                               border: 1,
                               borderColor: "#E15113",
                               borderRadius: 2,
+                              cursor: "pointer",
                             }}
                             onClick={() =>
                               dispatch(
@@ -676,6 +785,7 @@ const ShippingPage: React.FC = () => {
                               border: 1,
                               borderColor: "#E15113",
                               borderRadius: 2,
+                              cursor: "pointer",
                             }}
                             onClick={() =>
                               dispatch(
@@ -708,15 +818,20 @@ const ShippingPage: React.FC = () => {
                           <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            // value={age}
+                            value={age}
                             label="Age"
-                            value={10}
-                            autoWidth
-                            // onChange={handleChange}
+                            onChange={handleSelection}
+                            placeholder="Select Size"
                           >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirtyssddssdfdfs</MenuItem>
+                            {filteration(product?.size, sizeFilter)
+                              .flatMap((i: any) => i)
+                              .map((data: any) => {
+                                return (
+                                  <MenuItem value={data.id}>
+                                    {data.slug}
+                                  </MenuItem>
+                                );
+                              })}
                           </Select>
                         </Box>
                         <Box sx={{ pl: 0.5 }}>
@@ -728,12 +843,19 @@ const ShippingPage: React.FC = () => {
                             id="demo-simple-select"
                             // value={age}
                             label="Age"
-                            value={10}
+                            value={color}
                             // onChange={handleChange}
+                            onChange={handleColor}
                           >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            {filteration(product?.color, colorLists)
+                              .flatMap((i: any) => i)
+                              .map((data: any) => {
+                                return (
+                                  <MenuItem value={data.id}>
+                                    {data.name}
+                                  </MenuItem>
+                                );
+                              })}
                           </Select>
                         </Box>
                       </Box>
@@ -751,7 +873,7 @@ const ShippingPage: React.FC = () => {
                             color: "#616161",
                           }}
                         >
-                          $ {product.quantity * product.productCurrentPrice}
+                          $ {product.quantity * product.productCurrentPrice}.00
                         </Typography>
                       </Box>
                     </Box>
@@ -805,7 +927,7 @@ const ShippingPage: React.FC = () => {
                           wordBreak: "break-all",
                         }}
                       >
-                        $ 654.00
+                        $ {total}.00
                       </Typography>
                     </Box>
                   </Box>
@@ -851,7 +973,7 @@ const ShippingPage: React.FC = () => {
                           wordBreak: "break-all",
                         }}
                       >
-                        $ 064.00
+                        $ 0{shipping}.00
                       </Typography>
                     </Box>
                   </Box>
@@ -897,7 +1019,7 @@ const ShippingPage: React.FC = () => {
                           wordBreak: "break-all",
                         }}
                       >
-                        $ 064.00
+                        $ 0{vat_tax}.00
                       </Typography>
                     </Box>
                   </Box>
@@ -944,7 +1066,7 @@ const ShippingPage: React.FC = () => {
                           wordBreak: "break-all",
                         }}
                       >
-                        $ 778.00
+                        $ {total + vat_tax + shipping}.00
                       </Typography>
                     </Box>
                   </Box>

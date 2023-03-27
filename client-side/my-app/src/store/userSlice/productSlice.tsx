@@ -79,18 +79,6 @@ const productSlice = createSlice({
     },
 
     filterByHuman: (state, action) => {
-      // console.log("human", action);
-      // state.filterByHuman = action.payload.map((pay: string) => {
-      //   console.log(pay);
-      //   return current(state.ProductsList).filter(
-      //     (prod: any) => prod.human === +pay
-      //   );
-      // });
-      // console.log("action", action);
-      // state.filterByHuman = state.ProductsList.filter(
-      //   (product: any) => product.gender === state.filteredGender.id
-      // );
-      // console.log("human", state.filterByHuman);
       state.filteredGender = state.gender.find(
         (gender: any) => gender.slug === action.payload.id
       );
@@ -100,10 +88,7 @@ const productSlice = createSlice({
       state.filteredCategory = state.category.find(
         (category: any) => category.slug === action.payload.type
       );
-      // console.log("brand", state.fitleredBrand);
-      // console.log("category", state.filteredCategory);
-      // console.log("gender", current(state.filteredGender));
-      // console.log(action.payload);
+
       state.filterByHuman = current(state.ProductsList).filter(
         (product: any) => product.gender === state.filteredGender.id
       );

@@ -9,14 +9,11 @@ import { product_tabs } from "../assets/Constants";
 import { useSelector } from "react-redux";
 import ReviewCard from "../components/ReviewCard";
 import ImageSlider from "../components/ImageSlider";
+import CategorySlider from "../components/CategoryTab";
 
 // images import
 import ForHer from "../assets/images/ForHer.png";
 import ForHim from "../assets/images/ForHim.png";
-import womenShoeYellow from "../assets/images/womenShoeYellow.png";
-import weddingRing from "../assets/images/weddingRing.png";
-import wallet from "../assets/images/wallet.png";
-import appleWatch from "../assets/images/appleWatch.png";
 import womenStanding from "../assets/images/womenStanding.png";
 import arrowIcon from "../assets/icons/Arrow_Right.svg";
 import handbag from "../assets/images/handBag.png";
@@ -25,12 +22,14 @@ import heels from "../assets/images/heels.png";
 import urbanStories from "../assets/images/urbanStories.png";
 import countryLights from "../assets/images/countryLights.png";
 import formal from "../assets/images/formal.png";
+import { productLists } from "../assets/ProductsContant";
 
 // mui imports
 import { Box, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Image_List from "../components/ImageList";
 import Footer from "../components/Footer";
+import { RootState } from "../store/userSlice/store";
 
 const theme = createTheme();
 
@@ -41,99 +40,12 @@ const theme = createTheme();
 
 function Home() {
   const { Products } = useSelector((state: any) => state.product);
-  // const [tabs, setTabs] = useState<
-  //   {
-  //     id: string;
-  //     value: string;
-  //   }[]
-  // >();
-
-  const [bestDeals, setBestDeals] = useState<
-    {
-      id: string;
-      productName: string;
-      image: string | undefined;
-      price: string;
-      cancelPrice: string;
-    }[]
-  >([
-    {
-      id: "yellowshoeswomen",
-      productName: "Flat Hill Slingback",
-      image: womenShoeYellow,
-      price: "$163",
-      cancelPrice: "$299",
-    },
-    {
-      id: "weddingring",
-      productName: "Ocean Blue Ring",
-      image: weddingRing,
-      price: "$245",
-      cancelPrice: "$269",
-    },
-    {
-      id: "brownleatherwalletr",
-      productName: "Brown Leather Wallet",
-      image: wallet,
-      price: "$144",
-      cancelPrice: "$179",
-    },
-    {
-      id: "Silversidewristwatch",
-      productName: "SilverSide WristWatch",
-      image: appleWatch,
-      price: "$336",
-      cancelPrice: "$379",
-    },
-    {
-      id: "Silversidewristwatch",
-      productName: "SilverSide WristWatch",
-      image: appleWatch,
-      price: "$336",
-      cancelPrice: "$379",
-    },
-    {
-      id: "Silversidewristwatch",
-      productName: "SilverSide WristWatch",
-      image: appleWatch,
-      price: "$336",
-      cancelPrice: "$379",
-    },
-    {
-      id: "Silversidewristwatch",
-      productName: "SilverSide WristWatch",
-      image: appleWatch,
-      price: "$336",
-      cancelPrice: "$379",
-    },
-    {
-      id: "Silversidewristwatch",
-      productName: "SilverSide WristWatch",
-      image: appleWatch,
-      price: "$336",
-      cancelPrice: "$379",
-    },
-    {
-      id: "Silversidewristwatch",
-      productName: "SilverSide WristWatch",
-      image: appleWatch,
-      price: "$336",
-      cancelPrice: "$379",
-    },
-    {
-      id: "Silversidewristwatch",
-      productName: "SilverSide WristWatch",
-      image: appleWatch,
-      price: "$336",
-      cancelPrice: "$379",
-    },
-  ]);
 
   return (
     <ThemeProvider theme={theme}>
       <Box>
         <Layout>
-          <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
+          <Box sx={{ maxWidth: "1600px", mx: "auto", backgroundColor: "red" }}>
             <Box
               className="overlay"
               sx={{
@@ -395,19 +307,7 @@ function Home() {
                   Best Deals
                 </Typography>
 
-                <Slider bestDeals={bestDeals} />
-                {/* <Box>
-                <Button
-                  variant="contained"
-                  sx={{
-                    background: "#212121",
-                    width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
-                    height: { xl: 61, lg: 50, xs: 30, md: 40 },
-                  }}
-                >
-                  View All
-                </Button>
-              </Box> */}
+                <Slider bestDeals={productLists} />
               </Box>
               <Box
                 sx={{
@@ -423,7 +323,8 @@ function Home() {
                   sx={{
                     display: { lg: "flex", md: "flex", sm: "flex" },
                     justifyContent: "center",
-                    width: "100%",
+                    width: { xl: "100%" },
+                    pl: 2,
                   }}
                 >
                   <Box
@@ -625,7 +526,7 @@ function Home() {
                   <CategoryTab tabs={product_tabs} />
                 </Box>
                 <Box>
-                  <Slider bestDeals={Products} />
+                  <CategorySlider bestDeals={Products} />
                 </Box>
               </Box>
               <Box
@@ -642,7 +543,8 @@ function Home() {
                   sx={{
                     display: { lg: "flex", md: "flex", sm: "flex" },
                     justifyContent: "center",
-                    width: "100%",
+                    width: { xl: "100%" },
+                    pl: 2,
                   }}
                 >
                   <Box
@@ -664,7 +566,6 @@ function Home() {
                   </Box>
                   <Box
                     sx={{
-                      // backgroundImage: `url(${womenStanding})`,
                       objectFit: "cover",
                       width: { xl: 782, lg: 500, md: 400, sm: 300, xs: 330 },
                       height: { xl: 782, lg: 500, md: 400, sm: 300, xs: 280 },
@@ -676,14 +577,6 @@ function Home() {
                       width="100%"
                       height="100%"
                     />
-                    {/* <Box position="relative" sx={{ bottom: 70 }}>
-                    <Button variant="text">
-                      <Typography color="#FFFFFF">
-                        Outfit
-                        <img src={arrowIcon} alt="arrow" width="15px" />
-                      </Typography>
-                    </Button>
-                  </Box> */}
                   </Box>
                 </Box>
               </Box>
@@ -700,7 +593,7 @@ function Home() {
                     Best Sellers
                   </Typography>
                 </Box>
-                <Slider bestDeals={bestDeals} />
+                <Slider bestDeals={productLists} />
               </Box>
               <Box
                 sx={{

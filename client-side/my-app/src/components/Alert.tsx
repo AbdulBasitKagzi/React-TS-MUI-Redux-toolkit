@@ -14,12 +14,9 @@ type props = {
 
 function DescriptionAlerts(props: props) {
   useEffect(() => {
-    console.log(" i am here");
     setTimeout(() => {
-      console.log("here");
       props.setOpenUp(false);
-      console.log(props.openUp);
-    }, 6000);
+    }, props.closeDuration);
   }, []);
   return (
     <div>
