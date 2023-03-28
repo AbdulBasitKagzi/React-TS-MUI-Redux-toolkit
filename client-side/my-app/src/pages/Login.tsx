@@ -44,8 +44,7 @@ export default function SignIn() {
     password: "",
   });
   let empty: boolean | undefined = undefined;
-  const [alert, setAlert] = useState<boolean>();
-  const [openUp, setOpenUp] = useState<boolean>(true);
+  const [alert, setAlert] = useState<boolean>(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -59,7 +58,7 @@ export default function SignIn() {
     }
   };
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserCredentials((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
@@ -75,8 +74,8 @@ export default function SignIn() {
           type="error"
           title="Error"
           message="Please fill all the fields"
-          openUp={true}
-          setOpenUp={setOpenUp}
+          openUp={alert}
+          setOpenUp={setAlert}
           closeDuration={6000}
         />
       )}
@@ -108,7 +107,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(event) => handleChange(event)}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -119,7 +118,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(event) => handleChange(event)}
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

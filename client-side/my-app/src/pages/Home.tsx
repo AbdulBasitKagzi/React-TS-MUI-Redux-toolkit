@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Slider from "../components/Slider";
 import background from "../assets/images/HomeBackgroundImage.png";
 import Layout from "../components/Layout";
@@ -10,6 +9,9 @@ import { useSelector } from "react-redux";
 import ReviewCard from "../components/ReviewCard";
 import ImageSlider from "../components/ImageSlider";
 import CategorySlider from "../components/CategoryTab";
+import ImageListt from "../components/ImageList";
+import Footer from "../components/Footer";
+import { RootState } from "../store/userSlice/store";
 
 // images import
 import ForHer from "../assets/images/ForHer.png";
@@ -27,9 +29,6 @@ import { productLists } from "../assets/ProductsContant";
 // mui imports
 import { Box, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Image_List from "../components/ImageList";
-import Footer from "../components/Footer";
-import { RootState } from "../store/userSlice/store";
 
 const theme = createTheme();
 
@@ -39,7 +38,7 @@ const theme = createTheme();
 // }
 
 function Home() {
-  const { Products } = useSelector((state: any) => state.product);
+  const { Products } = useSelector((state: RootState) => state.product);
 
   return (
     <ThemeProvider theme={theme}>
@@ -75,7 +74,7 @@ function Home() {
                   // backgroundImage: `url(${background})`,
                   backgroundRepeat: "no-repeat",
                   // position: "absolute",
-                  // width: "100%",
+                  width: "100%",
                   height: {
                     xl: "809px",
                     lg: "809px",
@@ -87,7 +86,7 @@ function Home() {
                   opacity: 0.85,
                 }}
               >
-                <img src={background} width="100%" />
+                <img src={background} width="100%" alt="backgorund" />
               </Box>
               <Box
                 sx={{
@@ -604,7 +603,7 @@ function Home() {
                   mx: "auto",
                 }}
               >
-                <Image_List />
+                <ImageListt />
               </Box>
               <Box
                 sx={{

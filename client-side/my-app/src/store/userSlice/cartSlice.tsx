@@ -1,6 +1,6 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface cartProducts {
+export interface cartProducts {
   id: number;
   productName: string;
   productImages: { id: number; productImage: string | undefined }[];
@@ -11,11 +11,13 @@ interface cartProducts {
   human: number;
   category: number;
   brand: number;
-  size: Array<Number>;
-  color: Array<Number>;
+  size: Array<number>;
+  color: Array<number>;
   reviewRate: number;
   slug: string;
   quantity: number;
+  selectedSize?: number;
+  selectedColor?: number;
 }
 
 interface cartSliceState {
@@ -34,18 +36,14 @@ const cartSlice = createSlice({
   initialState: cartSliceState,
   reducers: {
     addProductToCart: (state, action) => {
-      console.log("cart", action);
-      const product = action.payload;
       const data = state.cartProducts.find(
         (product: cartProducts) => product.id === action.payload.id
       );
       if (data) {
         const index = state.cartProducts.indexOf(data);
         state.cartProducts[index].quantity++;
-        console.log("stack", current(state.cartProducts));
       } else {
         state.cartProducts.push({ ...action.payload, quantity: 1 });
-        console.log("from else cart", current(state.cartProducts));
       }
     },
     increment: (state, action) => {
@@ -56,7 +54,6 @@ const cartSlice = createSlice({
       if (data) {
         const index = state.cartProducts.indexOf(data);
         state.cartProducts[index].quantity++;
-        console.log("incrementstack", current(state.cartProducts));
       }
     },
     decrement: (state, action) => {
@@ -68,10 +65,8 @@ const cartSlice = createSlice({
       if (data) {
         index = state.cartProducts.indexOf(data);
         state.cartProducts[index].quantity--;
-        console.log("incrementstack", current(state.cartProducts));
       }
       if (state.cartProducts[index].quantity === 0) {
-        console.log("here");
         state.cartProducts = state.cartProducts.filter(
           (product: cartProducts) => product.id !== action.payload.id
         );
@@ -82,6 +77,9 @@ const cartSlice = createSlice({
       state.cartProducts = state.cartProducts.filter(
         (product: cartProducts) => product.id !== action.payload.id
       );
+    },
+    emptyCart: (state) => {
+      state.cartProducts = [];
     },
   },
 });

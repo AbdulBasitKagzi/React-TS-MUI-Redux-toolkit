@@ -6,6 +6,7 @@ import { RootState } from "../store/userSlice/store";
 import { sizeFilter, colorLists } from "../assets/Constants";
 import DescriptionAlerts from "../components/Alert";
 import { useNavigate } from "react-router-dom";
+import { productActions } from "../store/userSlice/productSlice";
 
 import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
@@ -26,6 +27,7 @@ import { Navigation } from "swiper";
 import { Box, Button, Typography } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import WarningModel from "../components/WarningModel";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,8 +45,8 @@ const ItemDetailView: React.FC = () => {
     "Brand",
     "Delivery",
   ]);
-  const sliderRef = useRef<any>(null);
-  const slider = useRef<any>(null);
+  const sliderRef = useRef<any>();
+  const slider = useRef<any>();
 
   const [stars, setStars] = useState<number>(5);
   const [sizes, setSizes] = useState<
@@ -54,11 +56,21 @@ const ItemDetailView: React.FC = () => {
       slug: string;
     }[]
   >();
-  const [color, setColor] = useState<[]>();
+  const [color, setColor] = useState<
+    {
+      id: number;
+      name: string;
+      haxValue: string;
+    }[]
+  >();
   const [openUp, setOpenUp] = useState<boolean>(false);
   const [image, setImage] = useState<string | undefined>();
   const [imageValue, setImageValue] = useState<number>(0);
 
+  const [save, setSave] = useState<string>(
+    localStorage.getItem("isAuth") || ""
+  );
+  const [open, setOpen] = useState<boolean>(false);
   useEffect(() => {
     let fitleredata;
     if (selectedProduct.size) {
@@ -71,13 +83,15 @@ const ItemDetailView: React.FC = () => {
 
   useEffect(() => {
     if (selectedProduct.color) {
-      let filteredColor: any = [];
+      let filteredColor: { id: number; name: string; haxValue: string }[] = [];
       selectedProduct.color.map((col) => {
-        return colorLists.map((color: any) => {
-          if (color.id === col) {
-            return filteredColor.push(color);
+        return colorLists.map(
+          (color: { id: number; name: string; haxValue: string }) => {
+            if (color.id === col) {
+              return filteredColor.push(color);
+            }
           }
-        });
+        );
       });
       setColor(filteredColor);
     }
@@ -95,9 +109,9 @@ const ItemDetailView: React.FC = () => {
     }
   }, [cartProducts]);
 
-  // useEffect(() => {
-  //   console.log("selected", selectedProduct);
-  // }, [selectedProduct]);
+  useEffect(() => {
+    console.log("selected", selectedProduct);
+  }, [selectedProduct]);
 
   const handlePrev = useCallback((value: string) => {
     if (value === "slider") {
@@ -110,6 +124,7 @@ const ItemDetailView: React.FC = () => {
   const handleNext = useCallback((value: string) => {
     if (value === "slider") {
       setImage("");
+      console.log("slider", slider.current.swiper.slideNext);
       slider.current.swiper.slideNext();
     }
     if (!sliderRef.current) return;
@@ -193,6 +208,7 @@ const ItemDetailView: React.FC = () => {
               closeDuration={2000}
             />
           )}
+          {open && <WarningModel open={open} setOpen={setOpen} />}
           <Box
             sx={{
               width: "100%",
@@ -559,42 +575,56 @@ const ItemDetailView: React.FC = () => {
                     // aria-label="basic tabs example"
                     sx={{ display: "flex", flexWrap: "wrap" }}
                   >
-                    {sizes?.map((size: any, index: number) =>
-                      sizeValue === index ? (
-                        <Box
-                          // label={size.slug}
-                          sx={{
-                            width: "81px",
-                            // height: "45px",
-                            fontFamily: "Inter",
-                            fontSize: "16px",
-                            fontWeight: 700,
-                            color: "#FFFFFF",
-                            background: "#1B2437",
-                            mr: 4,
-                            mb: 2,
-                            cursor: "pointer",
-                          }}
-                          onClick={(event) => handleSizeChange(event, index)}
-                        >
-                          {size.slug}
-                        </Box>
-                      ) : (
-                        <Box
-                          // label={size.slug}
-                          sx={{
-                            width: "81px",
-                            border: 1,
-                            borderColor: "#000000",
-                            mr: 4,
-                            mb: 2,
-                            cursor: "pointer",
-                          }}
-                          onClick={(event) => handleSizeChange(event, index)}
-                        >
-                          {size.slug}
-                        </Box>
-                      )
+                    {sizes?.map(
+                      (
+                        size: { id: number; value: string; slug: string },
+                        index: number
+                      ) =>
+                        sizeValue === index ? (
+                          <Box
+                            // label={size.slug}
+                            sx={{
+                              width: "81px",
+                              // height: "45px",
+                              fontFamily: "Inter",
+                              fontSize: "16px",
+                              fontWeight: 700,
+                              color: "#FFFFFF",
+                              background: "#1B2437",
+                              mr: 4,
+                              mb: 2,
+                              cursor: "pointer",
+                            }}
+                            onClick={(event) => {
+                              dispatch(
+                                productActions.addSize({ size: size.id })
+                              );
+                              handleSizeChange(event, index);
+                            }}
+                          >
+                            {size.slug}
+                          </Box>
+                        ) : (
+                          <Box
+                            // label={size.slug}
+                            sx={{
+                              width: "81px",
+                              border: 1,
+                              borderColor: "#000000",
+                              mr: 4,
+                              mb: 2,
+                              cursor: "pointer",
+                            }}
+                            onClick={(event) => {
+                              dispatch(
+                                productActions.addSize({ size: size.id })
+                              );
+                              handleSizeChange(event, index);
+                            }}
+                          >
+                            {size.slug}
+                          </Box>
+                        )
                     )}
                   </Box>
                 </Box>
@@ -620,34 +650,49 @@ const ItemDetailView: React.FC = () => {
                       // aria-label="basic tabs example"
                       sx={{ display: "flex", flexWrap: "wrap" }}
                     >
-                      {color?.map((col: any, index: number) =>
-                        colorValue === index ? (
-                          <Box
-                            sx={{
-                              width: "50px",
-                              height: "50px",
-                              background: `${col.haxValue}`,
-                              mr: 4,
-                              mb: 4,
-                              cursor: "pointer",
-                            }}
-                            onClick={(event) => handleColorChange(event, index)}
-                          />
-                        ) : (
-                          <Box
-                            sx={{
-                              width: "35px",
-                              height: "35px",
-                              border: 1,
-                              background: `${col.haxValue}`,
-                              borderColor: `${col.haxValue}`,
-                              mr: 4,
-                              mb: 4,
-                              cursor: "pointer",
-                            }}
-                            onClick={(event) => handleColorChange(event, index)}
-                          />
-                        )
+                      {color?.map(
+                        (
+                          col: { id: number; name: string; haxValue: string },
+                          index: number
+                        ) =>
+                          colorValue === index ? (
+                            <Box
+                              sx={{
+                                width: "50px",
+                                height: "50px",
+                                background: `${col.haxValue}`,
+                                mr: 4,
+                                mb: 4,
+                                cursor: "pointer",
+                              }}
+                              onClick={(event) => {
+                                dispatch(
+                                  productActions.addColor({ color: col.id })
+                                );
+                                handleColorChange(event, index);
+                              }}
+                            />
+                          ) : (
+                            <Box
+                              sx={{
+                                width: "35px",
+                                height: "35px",
+                                border: 1,
+                                background: `${col.haxValue}`,
+                                borderColor: `${col.haxValue}`,
+                                mr: 4,
+                                mb: 4,
+                                cursor: "pointer",
+                              }}
+                              onClick={(event) => {
+                                dispatch(
+                                  productActions.addColor({ color: col.id })
+                                );
+
+                                handleColorChange(event, index);
+                              }}
+                            />
+                          )
                       )}
                     </Box>
                   </Box>
@@ -710,8 +755,12 @@ const ItemDetailView: React.FC = () => {
                     mb: 2,
                   }}
                   onClick={() => {
-                    dispatch(cartActions.addProductToCart(selectedProduct));
-                    navigate("/shippingpage");
+                    if (!save) {
+                      setOpen(true);
+                    } else {
+                      dispatch(cartActions.addProductToCart(selectedProduct));
+                      navigate("/shippingpage");
+                    }
                   }}
                 >
                   Shop Now
@@ -732,7 +781,11 @@ const ItemDetailView: React.FC = () => {
                     mb: 2,
                   }}
                   onClick={() => {
-                    dispatch(cartActions.addProductToCart(selectedProduct));
+                    if (!save) {
+                      setOpen(true);
+                    } else {
+                      dispatch(cartActions.addProductToCart(selectedProduct));
+                    }
                   }}
                 >
                   Add to cart

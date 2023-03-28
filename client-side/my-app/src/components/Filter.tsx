@@ -1,25 +1,21 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { productActions } from "../store/userSlice/productSlice";
 import { MouseEvent } from "react";
 
-import {
-  humanFilter,
-  brandFilter,
-  categoriesFilter,
-  sizeFilter,
-} from "../assets/Constants";
+import { brandFilter, categoriesFilter, sizeFilter } from "../assets/Constants";
 
 // mui imports
 import Box from "@mui/material/Box";
-import { IconButton, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";
 import { Drawer } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { RootState } from "../store/userSlice/store";
 
 // function valuetext(value: number) {
 //   return `${value}°C`;
@@ -28,14 +24,16 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 const drawerWidth = 275;
 
 export default function FilterSlider() {
-  const [filterState, setFilterState] = useState<number[]>([]);
   const [BrandFilter, setBrandFilter] = useState<number[]>([]);
   const [CategoriesFilter, setCategoriesFilter] = useState<number[]>([]);
   const [SizeFilter, setSizeFilter] = useState<number[]>([]);
   const [click, setClick] = useState<boolean>(false);
-  const params = useParams();
+  const [value, setValue] = useState<number[]>([20, 100]);
 
   const dispatch = useDispatch();
+  const { minValue, maxValue } = useSelector(
+    (state: RootState) => state.product
+  );
 
   // const handleFilter = (value: number, isChecked: boolean) => {
   //   if (isChecked) {
@@ -84,13 +82,19 @@ export default function FilterSlider() {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+  useEffect(() => {
+    console.log("filter", minValue, maxValue);
+    setValue((prev) => [minValue, maxValue]);
+  }, [minValue, maxValue]);
+
+  console.log("value", value);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box
         sx={{
           maxWidth: {
-            xs: "160px",
+            xs: "240px",
           },
           border: 2,
           backgroundColor: "#F9FAFB",
@@ -112,6 +116,7 @@ export default function FilterSlider() {
           >
             PRICES
           </Typography>
+
           <Box
             sx={{
               display: "flex",
@@ -144,18 +149,26 @@ export default function FilterSlider() {
             >
               {/* ${priceFilter[0]}-$
               {priceFilter[1]} */}
+              ${minValue}-${maxValue}
             </Typography>
           </Box>
           <Slider
             sx={{
               color: "#EB5757",
-              width: { xl: "376px", lg: "376px", md: "115px", sm: "115px" },
+              width: {
+                xl: "376px",
+                lg: "376px",
+                md: "180px",
+                sm: "180px",
+                xs: "180px",
+              },
             }}
             // value={priceFilter}
             // onChange={(_, value) => setPriceFilter(value as [number, number])}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
-            max={2000}
+            value={value}
+            max={1000}
             min={1}
             name="price"
             disableSwap
@@ -289,7 +302,7 @@ export default function FilterSlider() {
             lg: "450px",
             md: "450px",
             sm: "255px",
-            xs: "160px",
+            xs: "230px",
           },
           maxHeight: { xl: "2000px", lg: "2000px" },
           display: {
@@ -348,20 +361,26 @@ export default function FilterSlider() {
                 color: "#1F2937",
               }}
             >
-              {/* ${priceFilter[0]}-$
-              {priceFilter[1]} */}
+              ${minValue}-${maxValue}
             </Typography>
           </Box>
           <Slider
             sx={{
               color: "#EB5757",
-              width: { xl: "376px", lg: "376px", md: "115px", sm: "115px" },
+              width: {
+                xl: "376px",
+                lg: "376px",
+                md: "180px",
+                sm: "180px",
+                xs: "180px",
+              },
             }}
             // value={priceFilter}
             // onChange={(_, value) => setPriceFilter(value as [number, number])}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
-            max={2000}
+            value={value}
+            max={1000}
             min={1}
             name="price"
             disableSwap

@@ -15,12 +15,15 @@ import sunglasses from "../assets/images/sunglasses.png";
 import footwear from "../assets/images/footwear.png";
 import hat_1 from "../assets/images/hat_1.png";
 import watches from "../assets/images/watches.png";
-import womenShoeYellow from "../assets/images/womenShoeYellow.png";
-import weddingRing from "../assets/images/weddingRing.png";
-import wallet from "../assets/images/wallet.png";
-import appleWatch from "../assets/images/appleWatch.png";
 
-export const gender = [
+import {
+  brandProps,
+  categoryProps,
+  genderProps,
+  product,
+} from "../store/userSlice/productSlice";
+
+export const gender: Array<genderProps> = [
   {
     id: 0,
     value: "Majestic",
@@ -119,7 +122,7 @@ export const product_tabs = [
   },
 ];
 
-export const products = [
+export const products: Array<product> = [
   {
     id: "shirt-1",
     type: "shirt",
@@ -235,7 +238,7 @@ export const humanFilter = [
   { id: 4, value: "Babies" },
 ];
 
-export const brandFilter = [
+export const brandFilter: Array<brandProps> = [
   { id: 1, value: "H & M", slug: "h&m" },
   { id: 2, value: "Mark & Spencer", slug: "mark&spencer" },
   { id: 3, value: "Victoria's Secret", slug: "victoria'ssecret" },
@@ -249,7 +252,7 @@ export const brandFilter = [
   { id: 11, value: "Zara", slug: "zara" },
 ];
 
-export const categoriesFilter = [
+export const categoriesFilter: Array<categoryProps> = [
   { id: 1, value: "Dresses", slug: "dresses" },
   { id: 2, value: "Tops", slug: "tops" },
   { id: 3, value: "Lingerie & Lounge Wear", slug: "lingerie&loungewear" },

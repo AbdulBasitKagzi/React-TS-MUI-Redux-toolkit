@@ -4,6 +4,7 @@ import { cartActions } from "../store/userSlice/cartSlice";
 import { RootState } from "../store/userSlice/store";
 import { useNavigate } from "react-router-dom";
 import { sizeFilter, colorLists } from "../assets/Constants";
+import { cartProducts } from "../store/userSlice/cartSlice";
 
 // images and icons
 import creditCard from "../assets/icons/creditCard.svg";
@@ -37,6 +38,7 @@ const ShippingPage: React.FC = () => {
   const steps = ["Shipping", "Billing", "Confirmation"];
   const { cartProducts } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
   let shipping: number = 64.0;
@@ -79,34 +81,34 @@ const ShippingPage: React.FC = () => {
   });
 
   const [openUp, setOpenUp] = useState<boolean>(false);
-  const [age, setAge] = useState("0" || "1" || "2");
-  const [color, setColor] = useState("");
+  // const [age, setAge] = useState("0" || "1" || "2");
+  // const [color, setColor] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("here");
+    // console.log("here");
     setSelectedValue(event.target.value);
     setPaymentInformation((prev) => ({
       ...prev,
       radio_buttons: event.target.value,
     }));
   };
-  const handleSelection = (event: any) => {
-    setAge(event.target.value as string);
-  };
+  // const handleSelection = (event: any) => {
+  //   setAge(event.target.value as string);
+  // };
 
-  const handleColor = (event: any) => {
-    setColor(event.target.value as string);
-  };
+  // const handleColor = (event: any) => {
+  //   setColor(event.target.value as string);
+  // };
   const handleDate = (newValue: any) => {
     setDate_Time(newValue);
-    setUserInformation((prev: any) => ({
+    setUserInformation((prev) => ({
       ...prev,
       date: newValue.toString(),
     }));
   };
   const handleTime = (newValue: any) => {
     setDate_Time(newValue);
-    setUserInformation((prev: any) => ({
+    setUserInformation((prev) => ({
       ...prev,
       time: newValue.toString(),
     }));
@@ -122,14 +124,18 @@ const ShippingPage: React.FC = () => {
     }
   };
 
-  const handleUserInformation = (e: any) => {
+  const handleUserInformation = (
+    event:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setUserInformation((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     }));
   };
 
-  const handlePaymentInformation = (e: any) => {
+  const handlePaymentInformation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentInformation((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -164,7 +170,7 @@ const ShippingPage: React.FC = () => {
 
   useEffect(() => {
     let totalAmount: number;
-    totalAmount = cartProducts.reduce((acc: number, curr: any) => {
+    totalAmount = cartProducts.reduce((acc: number, curr: cartProducts) => {
       totalAmount = acc + curr.quantity * curr.productCurrentPrice;
       return totalAmount;
     }, 0);
@@ -512,6 +518,9 @@ const ShippingPage: React.FC = () => {
                     id="cardNumber"
                     name="cardNumber"
                     label="Card Number"
+                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      e.target.value = e.target.value.toString().slice(0, 16);
+                    }}
                     value={paymentInformation.cardNumber}
                     fullWidth
                     autoComplete="card number"
@@ -529,6 +538,9 @@ const ShippingPage: React.FC = () => {
                     id="expiration"
                     name="expiration"
                     label="Expiration"
+                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      e.target.value = e.target.value.toString().slice(0, 4);
+                    }}
                     fullWidth
                     value={paymentInformation.expiration}
                     autoComplete="shipping address-line1"
@@ -545,6 +557,9 @@ const ShippingPage: React.FC = () => {
                     id="cvv"
                     name="cvv"
                     label="CVV Code"
+                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      e.target.value = e.target.value.toString().slice(0, 3);
+                    }}
                     value={paymentInformation.cvv}
                     fullWidth
                     autoComplete="shipping address-line2"
@@ -585,12 +600,18 @@ const ShippingPage: React.FC = () => {
                     textAlign: "center",
                     wordBreak: "break-all",
                     fontFamily: "Roboto",
-                    fontSize: "22px",
+                    fontSize: {
+                      xl: "22px",
+                      lg: "22px",
+                      md: "22px",
+                      sm: "22px",
+                      xs: "16px",
+                    },
                     fontWeight: 400,
                   }}
                 >
-                  Thank you for shopping with us Your order will reach you on 18
-                  Jan 2022.
+                  Thank you for shopping with us Your order will reach you on{" "}
+                  {new Date(userInformation.date).toDateString()}
                 </Typography>
               </Box>
             </Box>
@@ -633,14 +654,16 @@ const ShippingPage: React.FC = () => {
                 // mt: 15,
               }}
               onClick={() => {
-                page === 1
-                  ? handleSubmit(userInformation)
-                  : page === 2
-                  ? handleSubmit(paymentInformation)
-                  : page === 3
-                  ? navigate("/")
-                  : setPage(page + 1);
-                // setPage(page + 1)
+                if (page === 1) {
+                  handleSubmit(userInformation);
+                  // setPage(page + 1);
+                } else if (page === 2) {
+                  handleSubmit(paymentInformation);
+                  // setPage(page + 1);
+                } else {
+                  dispatch(cartActions.emptyCart());
+                  navigate("/");
+                }
               }}
             >
               <Typography sx={{ ml: 5, mr: 5 }}>
@@ -684,7 +707,7 @@ const ShippingPage: React.FC = () => {
               </Box>
               <Divider />
               {cartProducts.length ? (
-                cartProducts.map((product: any) => (
+                cartProducts.map((product: cartProducts) => (
                   <>
                     <Box
                       sx={{ display: "flex", justifyContent: "space-between" }}
@@ -723,7 +746,7 @@ const ShippingPage: React.FC = () => {
                       </Box>
                       <Box>
                         {product.productDescription.length &&
-                          product.productDescription.map((desc: any) => (
+                          product.productDescription.map((desc: string) => (
                             <Typography
                               sx={{
                                 fontFamily: "Inter",
@@ -818,20 +841,27 @@ const ShippingPage: React.FC = () => {
                           <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={age}
+                            defaultValue={product.selectedSize}
+                            // value={product.selectedSize}
                             label="Age"
-                            onChange={handleSelection}
+                            // onChange={handleSelection}
                             placeholder="Select Size"
                           >
                             {filteration(product?.size, sizeFilter)
-                              .flatMap((i: any) => i)
-                              .map((data: any) => {
-                                return (
-                                  <MenuItem value={data.id}>
-                                    {data.slug}
-                                  </MenuItem>
-                                );
-                              })}
+                              .flatMap((i) => i)
+                              .map(
+                                (data: {
+                                  id?: number;
+                                  value?: string;
+                                  slug?: string;
+                                }) => {
+                                  return (
+                                    <MenuItem value={data.id}>
+                                      {data.slug}
+                                    </MenuItem>
+                                  );
+                                }
+                              )}
                           </Select>
                         </Box>
                         <Box sx={{ pl: 0.5 }}>
@@ -841,21 +871,28 @@ const ShippingPage: React.FC = () => {
                           <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
+                            defaultValue={product.selectedColor}
                             // value={age}
                             label="Age"
-                            value={color}
+                            // value={color}
                             // onChange={handleChange}
-                            onChange={handleColor}
+                            // onChange={handleColor}
                           >
                             {filteration(product?.color, colorLists)
-                              .flatMap((i: any) => i)
-                              .map((data: any) => {
-                                return (
-                                  <MenuItem value={data.id}>
-                                    {data.name}
-                                  </MenuItem>
-                                );
-                              })}
+                              .flatMap((i) => i)
+                              .map(
+                                (data: {
+                                  id?: number;
+                                  name?: string;
+                                  slug?: string;
+                                }) => {
+                                  return (
+                                    <MenuItem value={data.id}>
+                                      {data.name}
+                                    </MenuItem>
+                                  );
+                                }
+                              )}
                           </Select>
                         </Box>
                       </Box>

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { productActions } from "../store/userSlice/productSlice";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../store/userSlice/store";
+import { productProps } from "../store/userSlice/productSlice";
 
 // images and icons import
 import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
@@ -18,9 +19,8 @@ import Pagination from "@mui/material/Pagination";
 interface arr {
   id: number;
   productName: string;
-
-  productImages: Array<Object>;
-  productDescription: Array<string>;
+  productImages: { id: number; productImage: string | undefined }[];
+  productDescription: string[];
   productOriginalPrice: number;
   productCurrentPrice: number;
   gender: number;
@@ -38,14 +38,38 @@ function FilterGrid() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [totalPage, setTotalPage] = useState<number>();
-  // useEffect(() => {
-  //   console.log("filteredData", filter);
-  // }, [filter]);
+  const [postPerPage, setPostPerPage] = useState<number>(9);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentposts, setCurrentPosts] = useState<productProps[]>(filter);
 
   useEffect(() => {
-    const page = Math.ceil(filter.length / 9);
+    const page = Math.ceil(filter.length / postPerPage);
     setTotalPage(page);
-  }, [filter]);
+  }, [filter, postPerPage]);
+
+  useEffect(() => {
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    setCurrentPosts(filter.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentPage, filter]);
+
+  useEffect(() => {
+    let minValue: number;
+    minValue = currentposts.reduce((min, curr) => {
+      return curr.productCurrentPrice < min ? curr.productCurrentPrice : min;
+    }, currentposts[0]?.productCurrentPrice);
+
+    dispatch(productActions.setMinValue(minValue));
+  }, [currentposts, filter, dispatch]);
+
+  useEffect(() => {
+    let maxValue: number;
+    maxValue = currentposts.reduce((max, curr) => {
+      return curr.productCurrentPrice > max ? curr.productCurrentPrice : max;
+    }, currentposts[0]?.productCurrentPrice);
+    dispatch(productActions.setMaxValue(maxValue));
+  }, [currentposts, filter, dispatch]);
+
   return (
     <Box
       sx={{
@@ -58,10 +82,9 @@ function FilterGrid() {
       }}
     >
       <Grid container spacing={4}>
-        {filter.map((arr: any) => (
+        {currentposts.map((arr: arr) => (
           <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
             <Box
-              id={arr.id}
               sx={{
                 // width: { xs: 278 },
                 position: "relative",
@@ -88,7 +111,7 @@ function FilterGrid() {
                 alt="women"
               />
               <Box sx={{ position: "absolute", top: 12, right: 15 }}>
-                <img src={heart} alt="heartgroup" />
+                <img src={heart} alt="heartgroup" width="40px" />
               </Box>
               {/* <Box
                 sx={{
@@ -172,8 +195,15 @@ function FilterGrid() {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Pagination count={totalPage} variant="outlined" shape="rounded" />
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 10 }}>
+        <Pagination
+          count={totalPage}
+          variant="outlined"
+          shape="rounded"
+          onChange={(event: React.ChangeEvent<unknown>, page: number) => {
+            setCurrentPage(page);
+          }}
+        />
       </Box>
     </Box>
   );

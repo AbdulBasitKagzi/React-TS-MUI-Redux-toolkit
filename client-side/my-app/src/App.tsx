@@ -28,9 +28,10 @@ function App() {
       } else {
         navigate(location.pathname);
       }
-    } else {
-      navigate("/login");
     }
+    // else {
+    //   navigate("/login");
+    // }
   }, [save, navigate, location.pathname]);
   return (
     <div className="App">

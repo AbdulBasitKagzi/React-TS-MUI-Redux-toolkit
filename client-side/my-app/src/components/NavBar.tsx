@@ -20,6 +20,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+
+// import MenuIcon from "@mui/icons-material/Menu";
 // import MenuIcon from "@mui/icons-material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
@@ -36,38 +38,6 @@ interface Props {
 }
 
 const drawerWidth = 240;
-// const navItems = [
-//   {
-//     id: "majestic",
-//     value: "Majestic",
-//     action: "#",
-//   },
-//   {
-//     id: "women",
-//     value: "Women",
-//     action: "#",
-//   },
-//   {
-//     id: "men",
-//     value: "Men",
-//     action: "#",
-//   },
-//   {
-//     id: "collection",
-//     value: "Collection",
-//     action: "#",
-//   },
-//   {
-//     id: "outlet",
-//     value: "Outlet",
-//     action: "#",
-//   },
-//   {
-//     id: "categorydetail",
-//     value: "Categorydetail",
-//     action: "/categorydetail",
-//   },
-// ];
 
 export default function DrawerAppBar(props: Props) {
   const { cartProducts } = useSelector((state: RootState) => state.cart);
@@ -75,6 +45,7 @@ export default function DrawerAppBar(props: Props) {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const [background, setBackground] = React.useState<string>("transparent");
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -126,12 +97,16 @@ export default function DrawerAppBar(props: Props) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       {openModel && (
-        <NavbarModel openModel={openModel} setOpenModel={setOpenModel} />
+        <NavbarModel
+          openModel={openModel}
+          setOpenModel={setOpenModel}
+          setBackground={setBackground}
+        />
       )}
       <AppBar
         component="nav"
         sx={{
-          background: "transparent",
+          background: background,
           boxShadow: "none",
           position: "static",
           maxWidth: "1600px",
@@ -153,6 +128,7 @@ export default function DrawerAppBar(props: Props) {
                 lg: "none",
                 xl: "none",
               },
+              color: "black",
             }}
           >
             <MenuIcon />
@@ -212,7 +188,9 @@ export default function DrawerAppBar(props: Props) {
                         ? navigate("/")
                         : dispatch(userActions.makeRoute(item.slug));
                       if (item.id !== 0) {
-                        setOpenModel(true);
+                        console.log("clicked");
+                        setBackground("#FFFFFF");
+                        setOpenModel(!openModel);
                       }
                     }}
                   >

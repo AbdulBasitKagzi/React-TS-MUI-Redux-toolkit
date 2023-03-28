@@ -15,8 +15,9 @@ import shoes_2 from "../assets/images/shoes-2.png";
 import womenShoeBlue from "../assets/images/womenShoeBlue.png";
 import womenShoeYellow from "../assets/images/womenShoeYellow.png";
 import leatherShoe from "../assets/images/leatherShoe.png";
+import { productProps } from "../store/userSlice/productSlice";
 
-export const productLists = [
+export const productLists: Array<productProps> = [
   {
     id: 1,
     productName: "Louis Vouiton active wear",
@@ -1279,6 +1280,7 @@ export const productLists = [
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
+    human: 1,
     gender: 2,
     category: 2,
     brand: 2,

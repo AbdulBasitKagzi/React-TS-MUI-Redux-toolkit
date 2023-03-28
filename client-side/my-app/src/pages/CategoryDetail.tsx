@@ -71,6 +71,7 @@ const CategoryDetail: React.FC = () => {
   // console.log(category);
 
   const { filter } = useSelector((state: RootState) => state.product);
+
   return (
     <>
       <Layout>

@@ -1,7 +1,6 @@
 import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { Box } from "@mui/material";
 import { Image_Lsit } from "../assets/Constants";
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
@@ -13,7 +12,7 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
   };
 }
 
-const Image_List = () => {
+const ImageListt = () => {
   return (
     <>
       <ImageList
@@ -56,4 +55,4 @@ const Image_List = () => {
   );
 };
 
-export default Image_List;
+export default ImageListt;

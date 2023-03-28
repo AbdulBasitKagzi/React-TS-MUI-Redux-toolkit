@@ -14,37 +14,57 @@ import ListItem from "@mui/material/ListItem";
 import { RootState } from "../store/userSlice/store";
 
 const style = {
-  //   position: "absolute",
-  mt: { xl: "23%", lg: "25%", md: "40%", sm: "50%", xs: "150%" },
+  position: "relative",
+  mt: { xl: "340px", lg: "340px", md: "484px", sm: "484px", xs: "600px" },
   ml: "50%",
   transform: "translate(-50%, -50%)",
   width: "100%",
   bgcolor: "#FFFFFF",
+  border: 0,
   borderRadius: "0px 0px 25px 25px",
   //   boxShadow: 24,
   p: 4,
+  maxWidth: "1600px",
+  overflow: "auto",
 };
 
 type props = {
   openModel: boolean;
   setOpenModel: (value: boolean) => void;
+  setBackground: (value: string) => void;
 };
 
-const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
+const NavbarModel: React.FC<props> = ({
+  openModel,
+  setOpenModel,
+  setBackground,
+}) => {
   //   const handleOpen = () => setOpenModel(true);
-  const handleClose = () => setOpenModel(false);
+  const handleClose = () => {
+    setBackground("transparent");
+    setOpenModel(false);
+  };
   const { routeValue } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
 
   return (
     <div>
       <Modal
+        sx={{
+          ".MuiModal-backdrop": {
+            background: "none",
+          },
+          // ".MuiModal-root": {
+          //   overflowY: "scroll",
+          //   overflowX: "scroll",
+          // },
+        }}
         open={openModel}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        // style={{ overflow: "scroll" }}
       >
-        <Box sx={style}>
+        <Box sx={style} style={{ overflow: "scroll" }}>
           <Box>
             <Box
               sx={{
@@ -58,6 +78,7 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                   sm: "space-between",
                   xs: "center",
                 },
+                overflow: "auto",
               }}
             >
               <Box
@@ -91,6 +112,10 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                           fontSize: "16px",
                           fontWeight: 400,
                           cursor: "pointer",
+                          "&:hover": {
+                            mb: 2,
+                            textDecoration: "underline",
+                          },
                         }}
                         onClick={() => {
                           handleClose();
@@ -123,6 +148,10 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                           fontSize: "16px",
                           fontWeight: 400,
                           cursor: "pointer",
+                          "&:hover": {
+                            mb: 2,
+                            textDecoration: "underline",
+                          },
                         }}
                         onClick={() => {
                           handleClose();
@@ -154,6 +183,10 @@ const NavbarModel: React.FC<props> = ({ openModel, setOpenModel }) => {
                           fontSize: "16px",
                           fontWeight: 400,
                           cursor: "pointer",
+                          "&:hover": {
+                            mb: 2,
+                            textDecoration: "underline",
+                          },
                         }}
                       >
                         {category.value}
