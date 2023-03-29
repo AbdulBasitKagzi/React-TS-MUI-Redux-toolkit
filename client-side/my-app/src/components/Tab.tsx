@@ -63,7 +63,6 @@ const CategoryTab: FC<Props> = ({ tabs }) => {
             }}
             label={tab.value}
             onClick={() => {
-              console.log("clicked");
               dispatch(productActions.filterProduct(tab.id));
             }}
           />

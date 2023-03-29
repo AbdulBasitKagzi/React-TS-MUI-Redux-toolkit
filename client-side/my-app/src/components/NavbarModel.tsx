@@ -15,17 +15,25 @@ import { RootState } from "../store/userSlice/store";
 
 const style = {
   position: "relative",
-  mt: { xl: "340px", lg: "340px", md: "484px", sm: "484px", xs: "600px" },
+  mt: { xl: "53px", lg: "340px", md: "484px", sm: "484px", xs: "600px" },
+  // top: { xl: "56%", lg: "60%", md: "60%", sm: "55%", xs: "55%" },
   ml: "50%",
   transform: "translate(-50%, -50%)",
-  width: "100%",
-  bgcolor: "#FFFFFF",
+  width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "80%" },
+  height: "100%",
+  bgcolor: {
+    xl: "#FFFFFF",
+    lg: "#FFFFFF",
+    md: "#FFFFFF",
+    sm: "#FFFFFF",
+    xs: "#F9FAFB",
+  },
   border: 0,
   borderRadius: "0px 0px 25px 25px",
   //   boxShadow: 24,
   p: 4,
   maxWidth: "1600px",
-  overflow: "auto",
+  // overflow: "auto",
 };
 
 type props = {
@@ -54,6 +62,7 @@ const NavbarModel: React.FC<props> = ({
           ".MuiModal-backdrop": {
             background: "none",
           },
+          // overflow: "auto",
           // ".MuiModal-root": {
           //   overflowY: "scroll",
           //   overflowX: "scroll",
@@ -79,6 +88,7 @@ const NavbarModel: React.FC<props> = ({
                   xs: "center",
                 },
                 overflow: "auto",
+                // height: "100%",
               }}
             >
               <Box

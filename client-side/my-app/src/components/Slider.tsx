@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { productActions } from "../store/userSlice/productSlice";
@@ -41,19 +41,31 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [swiperRef, setSwiperRef] = React.useState(null);
+  const sliderRef = useRef<any>();
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
   return (
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
-      <Box sx={{ mx: 5 }}>
+      <Box sx={{ mx: 5, position: "relative" }}>
         <Swiper
           // onSwiper={setSwiperRef}
+          ref={sliderRef}
           slidesPerView={4}
           centeredSlides={false}
           spaceBetween={30}
           // pagination={{
           //   type: "fraction",
           // }}
-          navigation={true}
+          // navigation={true}
           modules={[Navigation]}
           className="mySwiper"
         >
@@ -268,6 +280,45 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
           >
             View All
           </Button>
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            zIndex: 2,
+            display: {
+              xl: "block",
+              lg: "block",
+              md: "block",
+              sm: "none",
+              xs: "none",
+            },
+            top: { xl: "32%", lg: "32%", md: "40%", sm: "40%" },
+            left: { xl: "2%", lg: "2%", md: "1%" },
+          }}
+          // className={classes.prev_arrow}
+          onClick={handlePrev}
+        >
+          <img src={leftArrowIcon} alt="previous" />
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            zIndex: 2,
+            display: {
+              xl: "block",
+              lg: "block",
+              md: "block",
+              sm: "none",
+              xs: "none",
+            },
+
+            top: { xl: "32%", lg: "32%", md: "40%", sm: "40%" },
+            left: { xl: "98%", lg: "98%", md: "100%", sm: "96%" },
+          }}
+          // className={classes.next_arrow}
+          onClick={handleNext}
+        >
+          <img src={rightArrowIcon} alt="right" />
         </Box>
       </Box>
     </Box>

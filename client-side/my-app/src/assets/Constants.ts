@@ -208,13 +208,13 @@ export const Image_Lsit = [
   {
     img: sunglasses,
     title: "sunglasses",
-    rows: 3,
+    rows: 0,
     cols: 1,
   },
   {
     img: footwear,
     title: "footwear",
-    rows: 3,
+    rows: 0,
     // cols: 1,
   },
   {

@@ -8,6 +8,7 @@ import { gender } from "../assets/Constants";
 import callVector from "../assets/icons/callVector.svg";
 import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
 import likeVector from "../assets/icons/likeVector.svg";
+import W from "../assets/icons/W.svg";
 
 // mui imports
 import AppBar from "@mui/material/AppBar";
@@ -21,8 +22,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
-// import MenuIcon from "@mui/icons-material/Menu";
-// import MenuIcon from "@mui/icons-material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -78,8 +77,12 @@ export default function DrawerAppBar(props: Props) {
                   // mt: "27px",
                 }}
                 onClick={() => {
-                  dispatch(userActions.makeRoute(item.slug));
-                  setOpenModel(true);
+                  if (item.id === 0) {
+                    navigate("/");
+                  } else {
+                    dispatch(userActions.makeRoute(item.slug));
+                    setOpenModel(true);
+                  }
                 }}
               />
             </ListItemButton>
@@ -188,7 +191,6 @@ export default function DrawerAppBar(props: Props) {
                         ? navigate("/")
                         : dispatch(userActions.makeRoute(item.slug));
                       if (item.id !== 0) {
-                        console.log("clicked");
                         setBackground("#FFFFFF");
                         setOpenModel(!openModel);
                       }

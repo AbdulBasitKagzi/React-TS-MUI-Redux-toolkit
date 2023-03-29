@@ -74,7 +74,13 @@ function Home() {
                   // backgroundImage: `url(${background})`,
                   backgroundRepeat: "no-repeat",
                   // position: "absolute",
-                  width: "100%",
+                  width: {
+                    xl: "100%",
+                    lg: "100%",
+                    md: "100%",
+                    sm: "100%",
+                    xs: "107%",
+                  },
                   height: {
                     xl: "809px",
                     lg: "809px",
@@ -122,7 +128,8 @@ function Home() {
                   variant="body1"
                   sx={{
                     fontSize: {
-                      lg: "95px",
+                      xl: "80px",
+                      lg: "80px",
                       md: "55px",
                       sm: "45px",
                       xs: "20px",

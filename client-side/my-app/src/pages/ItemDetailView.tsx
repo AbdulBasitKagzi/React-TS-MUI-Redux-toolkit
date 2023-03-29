@@ -232,7 +232,7 @@ const ItemDetailView: React.FC = () => {
               <Box
                 sx={{
                   position: "relative",
-                  top: { xl: "100px", lg: "100px", md: "100px", sm: "100px" },
+                  top: { xl: "40px", lg: "40px", md: "40px", sm: "40px" },
                 }}
               >
                 <Swiper
@@ -321,10 +321,10 @@ const ItemDetailView: React.FC = () => {
                 sx={{
                   position: "relative",
                   top: {
-                    xl: "255px",
-                    lg: "255px",
-                    md: "280px",
-                    sm: "345px",
+                    xl: "120px",
+                    lg: "50px",
+                    md: "50px",
+                    sm: "45px",
                     // xs: "510px",
                   },
                 }}
@@ -442,6 +442,8 @@ const ItemDetailView: React.FC = () => {
                   textAlign: "center",
                   display: "flex",
                   justifyContent: "center",
+                  ml: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
+                  mt: { xl: 0, lg: 0, md: 2, sm: 0, xs: 2 },
                 }}
               >
                 <Typography
@@ -461,6 +463,7 @@ const ItemDetailView: React.FC = () => {
                   // height: "85px",
                   textAlign: "left",
                   wordBreak: "break-all",
+                  pl: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
                 }}
               >
                 <Typography
@@ -480,7 +483,7 @@ const ItemDetailView: React.FC = () => {
                   {selectedProduct?.productName}
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", pl: 2, pt: 2 }}>
                 {printStars(selectedProduct?.reviewRate)}
                 {printRemainingStars(stars)}
                 <Typography
@@ -504,6 +507,8 @@ const ItemDetailView: React.FC = () => {
                   // },
                   width: "100%",
                   mt: 6,
+                  pr: { xl: 2, lg: 2, md: 2, sm: 2, xs: 2 },
+                  pl: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
                 }}
               >
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -512,6 +517,15 @@ const ItemDetailView: React.FC = () => {
                     onChange={handleChange}
                     aria-label="basic tabs example"
                     variant="fullWidth"
+                    sx={{
+                      ".MuiTab-root": {
+                        color: "#1B2437",
+                      },
+                      ".MuiTab-root.Mui-selected": {
+                        color: "#111827",
+                        pb: 2.5,
+                      },
+                    }}
                   >
                     {tabs.map((tab: string, index: number) =>
                       value === index ? (
@@ -554,7 +568,13 @@ const ItemDetailView: React.FC = () => {
                   </TabPanel>
                 ))}
               </Box>
-              <Box sx={{ display: "flex" }}>
+              <Box
+                sx={{
+                  display: "flex",
+
+                  pl: { xl: 0, lg: 0, md: 2, sm: 2, xs: 2 },
+                }}
+              >
                 <Box>
                   <Typography
                     sx={{
@@ -585,7 +605,7 @@ const ItemDetailView: React.FC = () => {
                             // label={size.slug}
                             sx={{
                               width: "81px",
-                              // height: "45px",
+                              height: "45px",
                               fontFamily: "Inter",
                               fontSize: "16px",
                               fontWeight: 700,
@@ -594,6 +614,9 @@ const ItemDetailView: React.FC = () => {
                               mr: 4,
                               mb: 2,
                               cursor: "pointer",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
                             }}
                             onClick={(event) => {
                               dispatch(
@@ -609,11 +632,15 @@ const ItemDetailView: React.FC = () => {
                             // label={size.slug}
                             sx={{
                               width: "81px",
+                              height: "45px",
                               border: 1,
                               borderColor: "#000000",
                               mr: 4,
                               mb: 2,
                               cursor: "pointer",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
                             }}
                             onClick={(event) => {
                               dispatch(
@@ -629,7 +656,7 @@ const ItemDetailView: React.FC = () => {
                   </Box>
                 </Box>
 
-                <Box>
+                <Box sx={{ ml: 14 }}>
                   <Typography
                     sx={{
                       fontFamily: "Inter",
@@ -648,7 +675,11 @@ const ItemDetailView: React.FC = () => {
                       // value={colorValue}
                       // onClick={()=>handleColorChange}
                       // aria-label="basic tabs example"
-                      sx={{ display: "flex", flexWrap: "wrap" }}
+                      sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                      }}
                     >
                       {color?.map(
                         (
@@ -664,6 +695,7 @@ const ItemDetailView: React.FC = () => {
                                 mr: 4,
                                 mb: 4,
                                 cursor: "pointer",
+                                borderRadius: 2,
                               }}
                               onClick={(event) => {
                                 dispatch(
@@ -683,6 +715,7 @@ const ItemDetailView: React.FC = () => {
                                 mr: 4,
                                 mb: 4,
                                 cursor: "pointer",
+                                borderRadius: 2,
                               }}
                               onClick={(event) => {
                                 dispatch(
@@ -698,7 +731,12 @@ const ItemDetailView: React.FC = () => {
                   </Box>
                 </Box>
               </Box>
-              <Box sx={{ textAlign: "left" }}>
+              <Box
+                sx={{
+                  textAlign: "left",
+                  pl: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
+                }}
+              >
                 <Typography
                   sx={{
                     display: "inline-block",
@@ -751,7 +789,7 @@ const ItemDetailView: React.FC = () => {
                     color: "#FFFFFF",
                     mr: { xl: 7, lg: 7, md: 7, sm: 7, xs: 1 },
                     ml: { sm: 1 },
-                    mt: { xl: 14.5, lg: 14.5, md: 14.5, sm: 14.5, xs: 4 },
+                    mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 4 },
                     mb: 2,
                   }}
                   onClick={() => {
@@ -777,7 +815,7 @@ const ItemDetailView: React.FC = () => {
                     fontWeight: 700,
                     color: "#111827",
                     mr: { sm: 1 },
-                    mt: { xl: 14.5, lg: 14.5, md: 14.5, sm: 14.5, xs: 4 },
+                    mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 4 },
                     mb: 2,
                   }}
                   onClick={() => {

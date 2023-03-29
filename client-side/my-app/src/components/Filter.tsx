@@ -66,15 +66,15 @@ export default function FilterSlider() {
 
   useEffect(() => {
     click && dispatch(productActions.filterByBrand(BrandFilter));
-  }, [BrandFilter, click, dispatch]);
+  }, [BrandFilter, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterByCategory(CategoriesFilter));
-  }, [CategoriesFilter, click, dispatch]);
+  }, [CategoriesFilter, dispatch]);
 
   useEffect(() => {
     click && dispatch(productActions.filterBySize(SizeFilter));
-  }, [SizeFilter, click, dispatch]);
+  }, [SizeFilter, dispatch]);
 
   // to open menu in mobile view
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -83,11 +83,8 @@ export default function FilterSlider() {
     setMobileOpen((prevState) => !prevState);
   };
   useEffect(() => {
-    console.log("filter", minValue, maxValue);
-    setValue((prev) => [minValue, maxValue]);
+    setValue(() => [minValue, maxValue]);
   }, [minValue, maxValue]);
-
-  console.log("value", value);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>

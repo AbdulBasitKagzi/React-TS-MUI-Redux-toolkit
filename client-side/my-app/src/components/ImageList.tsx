@@ -28,25 +28,32 @@ const ImageListt = () => {
           },
           objectFit: {
             xs: "contain",
-            md: "fill",
+            md: "contain",
+            sm: "contain",
           },
         }}
         variant="quilted"
         cols={4}
-        rowHeight={121}
+        // rowHeight={121}
       >
         {Image_Lsit.map((item) => (
           <ImageListItem
             key={item.img}
             cols={item.cols || 1}
             rows={item.rows || 1}
-            sx={{ height: { xs: "45%" } }}
+            // sx={{ height: { xs: "45%" } }}
+            sx={{
+              ".MuiImageListItem-img": {
+                objectFit: "contain",
+                height: "unset",
+              },
+            }}
           >
             <img
               {...srcset(item.img, 121, item.rows, item.cols)}
               alt={item.title}
               loading="lazy"
-              style={{ height: "100%", objectFit: "fill" }}
+              style={{}}
             />
           </ImageListItem>
         ))}

@@ -355,7 +355,7 @@ const ShippingPage: React.FC = () => {
                     />
                   </LocalizationProvider>
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={6} sm={4}>
                   <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     City
                   </InputLabel>
@@ -374,7 +374,7 @@ const ShippingPage: React.FC = () => {
                     <option value="unitedkingdom">United Kingdom</option>
                   </NativeSelect>
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={6} sm={4}>
                   <TextField
                     id="address"
                     name="address"
@@ -617,9 +617,16 @@ const ShippingPage: React.FC = () => {
             </Box>
           )}
 
+          {/* button on large screen */}
           <Box
             sx={{
-              display: "flex",
+              display: {
+                xl: "flex",
+                lg: "flex",
+                md: "flex",
+                sm: "flex",
+                xs: "none",
+              },
               justifyContent: "start",
               flexWrap: "wrap",
               mt: 15,
@@ -644,7 +651,7 @@ const ShippingPage: React.FC = () => {
             )}
 
             <Button
-              variant="outlined"
+              variant="contained"
               sx={{
                 backgroundColor: "#111827",
                 color: "#FFFFFF",
@@ -688,8 +695,8 @@ const ShippingPage: React.FC = () => {
                 sm: "50%",
                 xs: "100%",
               },
-              // border: 2,
               mt: 14.5,
+              px: { xl: 0, lg: 0, md: 0, sm: 0, xs: 1.5 },
             }}
           >
             <Box sx={{ backgroundColor: "#EFEFF4", borderRadius: 8 }}>
@@ -917,7 +924,16 @@ const ShippingPage: React.FC = () => {
                   </>
                 ))
               ) : (
-                <Typography>No Products to Order</Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 700,
+                    fontSize: "30px",
+                    fontFamily: "Jost",
+                    p: 2,
+                  }}
+                >
+                  No Products to Order
+                </Typography>
               )}
               <Divider />
               {cartProducts.length ? (
@@ -1111,7 +1127,79 @@ const ShippingPage: React.FC = () => {
               ) : (
                 <Typography></Typography>
               )}
+
               {/* enter code above */}
+            </Box>
+            {/* button on small screen */}
+            <Box
+              sx={{
+                display: {
+                  xs: "block",
+                  xl: "none",
+                  lg: "none",
+                  md: "none",
+                  sm: "none",
+                },
+                justifyContent: "start",
+                flexWrap: "wrap",
+                mt: 15,
+              }}
+            >
+              {page === 2 && (
+                <Box
+                  sx={{
+                    mr: 3,
+                    ml: {
+                      xl: "10%",
+                      lg: "10%",
+                      md: "10%",
+                      sm: "10%",
+                      xs: "35%",
+                    },
+                    mb: { md: 2, sm: 2, xs: 2 },
+                  }}
+                >
+                  <Button
+                    variant="outlined"
+                    sx={{ borderRadius: 0 }}
+                    onClick={() => setPage(page - 1)}
+                  >
+                    <Typography>Back</Typography>
+                  </Button>
+                </Box>
+              )}
+
+              <Button
+                variant="outlined"
+                sx={{
+                  backgroundColor: "#111827",
+                  color: "#FFFFFF",
+                  borderRadius: 0,
+                  // ml: "50%",
+                  mx: "auto",
+                  // mt: 15,
+                }}
+                onClick={() => {
+                  if (page === 1) {
+                    handleSubmit(userInformation);
+                    // setPage(page + 1);
+                  } else if (page === 2) {
+                    handleSubmit(paymentInformation);
+                    // setPage(page + 1);
+                  } else {
+                    dispatch(cartActions.emptyCart());
+                    navigate("/");
+                  }
+                }}
+              >
+                <Typography sx={{ ml: 5, mr: 5 }}>
+                  {page === 2
+                    ? `Confirm Payment of: $ ${total + vat_tax + shipping}.00`
+                    : page === 3
+                    ? "Continue Shopping"
+                    : "Proceed to Payment"}
+                </Typography>
+              </Button>
             </Box>
           </Box>
         )}

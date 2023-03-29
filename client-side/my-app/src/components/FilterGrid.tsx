@@ -4,6 +4,7 @@ import { productActions } from "../store/userSlice/productSlice";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../store/userSlice/store";
 import { productProps } from "../store/userSlice/productSlice";
+import WarningModel from "./WarningModel";
 
 // images and icons import
 import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
@@ -15,6 +16,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Pagination from "@mui/material/Pagination";
+import { cartActions } from "../store/userSlice/cartSlice";
 
 interface arr {
   id: number;
@@ -41,6 +43,10 @@ function FilterGrid() {
   const [postPerPage, setPostPerPage] = useState<number>(9);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentposts, setCurrentPosts] = useState<productProps[]>(filter);
+  const [save, setSave] = useState<string>(
+    localStorage.getItem("isAuth") || ""
+  );
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const page = Math.ceil(filter.length / postPerPage);
@@ -50,7 +56,8 @@ function FilterGrid() {
   useEffect(() => {
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
-    setCurrentPosts(filter.slice(indexOfFirstPost, indexOfLastPost));
+    filter.length !== 0 &&
+      setCurrentPosts(filter.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, filter]);
 
   useEffect(() => {
@@ -81,119 +88,122 @@ function FilterGrid() {
         // mx: "auto",
       }}
     >
+      {open && <WarningModel open={open} setOpen={setOpen} />}
       <Grid container spacing={4}>
-        {currentposts.map((arr: arr) => (
-          <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-            <Box
-              sx={{
-                // width: { xs: 278 },
-                position: "relative",
-
-                height: {
-                  xl: "599px",
-                  lg: "515px",
-                  md: "435px",
-                  sm: "385px",
-                },
-                border: 1,
-                borderColor: "#E5E7EB",
-                // mx: "auto",
-              }}
-              onClick={() => {
-                dispatch(productActions.selectedProduct(arr));
-                navigate(`/itemdetailview/${arr.slug}`);
-              }}
-            >
-              <img
-                width="100%"
-                // height="100%"
-                src={arr.productImages[0].productImage}
-                alt="women"
-              />
-              <Box sx={{ position: "absolute", top: 12, right: 15 }}>
-                <img src={heart} alt="heartgroup" width="40px" />
-              </Box>
-              {/* <Box
-                sx={{
-                  width: {
-                    xl: "58px",
-                    lg: "40px",
-                    md: "35px",
-                    sm: "35px",
-                    xs: "45px",
-                  },
-                  position: "absolute",
-                  top: {
-                    xl: "-498px",
-                    lg: "-420px",
-                    md: "-348px",
-                    sm: "-330px",
-                    xs: "-415px",
-                  },
-                  left: {
-                    xl: "285px",
-                    lg: "225px",
-                    md: "175px",
-                    sm: "160px",
-                    xs: "225px",
-                  },
-                }}
-              >
-               
-              </Box> */}
+        {filter.length !== 0 ? (
+          currentposts.map((arr: arr) => (
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
               <Box
                 sx={{
-                  display: "flex",
-                  textAlign: "left",
-                  mb: { xl: 1, lg: 1 },
-                  ml: { xl: 2, lg: 2 },
+                  // width: { xs: 278 },
+                  position: "relative",
+
+                  height: {
+                    xl: "599px",
+                    lg: "515px",
+                    md: "435px",
+                    sm: "385px",
+                  },
+                  border: 1,
+                  borderColor: "#E5E7EB",
+                  // mx: "auto",
+                }}
+                onClick={() => {
+                  dispatch(productActions.selectedProduct(arr));
+                  navigate(`/itemdetailview/${arr.slug}`);
                 }}
               >
-                <Typography
-                  sx={{
-                    fontFamily: "Inter",
-                    fontSize: {
-                      xl: "30px",
-                      lg: "30px",
-                      md: "26px",
-                      sm: "24px",
-                      xs: "22px",
-                    },
-                    fontWeight: 400,
-                    wordBreak: "break-all",
-                  }}
-                >
-                  {arr.productName}
-                </Typography>
+                {arr?.productImages?.map(
+                  (
+                    image: { id: number; productImage: string | undefined },
+                    index: number
+                  ) => {
+                    if (index === 0) {
+                      return (
+                        <>
+                          <img
+                            src={image.productImage}
+                            width="100%"
+                            alt="women"
+                          />
+                        </>
+                      );
+                    } else {
+                      return;
+                    }
+                  }
+                )}
+
+                <Box sx={{ position: "absolute", top: 12, right: 15 }}>
+                  <img src={heart} alt="heartgroup" width="40px" />
+                </Box>
+
                 <Box
                   sx={{
-                    mr: { xl: 3, lg: 3, md: 3, sm: 3, xs: 3 },
-                    mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
+                    display: "flex",
+                    textAlign: "left",
+                    mb: { xl: 1, lg: 1 },
+                    ml: { xl: 2, lg: 2 },
                   }}
                 >
-                  <img src={shoppingcartVector} alt="cart" />
+                  <Typography
+                    sx={{
+                      fontFamily: "Inter",
+                      fontSize: {
+                        xl: "30px",
+                        lg: "30px",
+                        md: "26px",
+                        sm: "24px",
+                        xs: "22px",
+                      },
+                      fontWeight: 400,
+                      wordBreak: "break-all",
+                    }}
+                  >
+                    {arr.productName}
+                  </Typography>
+                  <Box
+                    sx={{
+                      mr: { xl: 3, lg: 3, md: 3, sm: 3, xs: 3 },
+                      mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
+                    }}
+                    onClick={(
+                      e: React.MouseEvent<HTMLDivElement, MouseEvent>
+                    ) => {
+                      e.stopPropagation();
+                      if (save) {
+                        dispatch(cartActions.addProductToCart(arr));
+                      } else {
+                        setOpen(true);
+                      }
+                    }}
+                  >
+                    <img src={shoppingcartVector} alt="cart" />
+                  </Box>
                 </Box>
+                <Typography
+                  sx={{
+                    textAlign: "left",
+                    fontFamily: "Inter",
+                    fontSize: {
+                      xl: "34px",
+                      lg: "34px",
+                      md: "30px",
+                      sm: "28px",
+                      xs: "34px",
+                    },
+                    fontWeight: 400,
+                    ml: { xl: "16px", lg: "16px" },
+                  }}
+                >
+                  $ {arr.productCurrentPrice}
+                </Typography>
               </Box>
-              <Typography
-                sx={{
-                  textAlign: "left",
-                  fontFamily: "Inter",
-                  fontSize: {
-                    xl: "34px",
-                    lg: "34px",
-                    md: "30px",
-                    sm: "28px",
-                    xs: "34px",
-                  },
-                  fontWeight: 400,
-                  ml: { xl: "16px", lg: "16px" },
-                }}
-              >
-                $ {arr.productCurrentPrice}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
+            </Grid>
+          ))
+        ) : (
+          <Typography>No product Found</Typography>
+        )}
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 10 }}>
         <Pagination

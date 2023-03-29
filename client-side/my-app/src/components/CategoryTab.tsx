@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -6,6 +6,10 @@ import "swiper/css/navigation";
 
 import "../css/swiper.css";
 import { Navigation } from "swiper";
+
+// icons & images
+import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
+import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
 
 // mui imports
 import { Box, Button } from "@mui/material";
@@ -24,15 +28,38 @@ type Props = {
     cancelPrice: string;
   }[];
 };
+
 const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
+  const sliderRef = useRef<any>();
+  const [display, setDisplay] = useState("block");
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  useEffect(() => {
+    if (bestDeals.length === 0) {
+      setDisplay("none");
+    } else {
+      setDisplay("block");
+    }
+  }, [bestDeals.length]);
+
   return (
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
-      <Box sx={{ mx: 5 }}>
+      <Box sx={{ mx: 5, position: "relative" }}>
         <Swiper
+          ref={sliderRef}
           slidesPerView={4}
           centeredSlides={false}
           spaceBetween={30}
-          navigation={true}
+          // navigation={true}
           modules={[Navigation]}
           className="mySwiper"
         >
@@ -80,7 +107,16 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
               }}
             >
               {bestDeals.length === 0 ? (
-                <Typography>No Products found</Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 700,
+                    fontSize: "30px",
+                    fontFamily: "Jost",
+                    p: 2,
+                  }}
+                >
+                  No Products found
+                </Typography>
               ) : (
                 bestDeals?.map(
                   (deals: {
@@ -215,6 +251,45 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
           >
             View All
           </Button>
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            zIndex: 2,
+            display: {
+              xl: display,
+              lg: display,
+              md: display,
+              sm: "none",
+              xs: "none",
+            },
+            top: { xl: "32%", lg: "32%", md: "40%", sm: "40%" },
+            left: { xl: "2%", lg: "2%", md: "1%" },
+          }}
+          // className={classes.prev_arrow}
+          onClick={handlePrev}
+        >
+          <img src={leftArrowIcon} alt="previous" />
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            zIndex: 2,
+            display: {
+              xl: display,
+              lg: display,
+              md: display,
+              sm: "none",
+              xs: "none",
+            },
+
+            top: { xl: "32%", lg: "32%", md: "40%", sm: "40%" },
+            left: { xl: "98%", lg: "98%", md: "100%", sm: "96%" },
+          }}
+          // className={classes.next_arrow}
+          onClick={handleNext}
+        >
+          <img src={rightArrowIcon} alt="right" />
         </Box>
       </Box>
     </Box>
