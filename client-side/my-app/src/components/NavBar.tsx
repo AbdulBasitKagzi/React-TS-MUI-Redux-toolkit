@@ -9,6 +9,8 @@ import callVector from "../assets/icons/callVector.svg";
 import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
 import likeVector from "../assets/icons/likeVector.svg";
 import W from "../assets/icons/W.svg";
+import search from "../assets/icons/search.svg";
+import login from "../assets/icons/Login.svg";
 
 // mui imports
 import AppBar from "@mui/material/AppBar";
@@ -53,7 +55,9 @@ export default function DrawerAppBar(props: Props) {
   const navIcons = [
     { id: 1, value: callVector },
     { id: 2, value: shoppingcartVector },
-    { id: 3, value: likeVector },
+    { id: 3, value: search },
+    { id: 4, value: login },
+    { id: 5, value: likeVector },
   ];
 
   const drawer = (
@@ -99,13 +103,7 @@ export default function DrawerAppBar(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      {openModel && (
-        <NavbarModel
-          openModel={openModel}
-          setOpenModel={setOpenModel}
-          setBackground={setBackground}
-        />
-      )}
+
       <AppBar
         component="nav"
         sx={{
@@ -116,6 +114,13 @@ export default function DrawerAppBar(props: Props) {
           mx: "auto",
         }}
       >
+        {openModel && (
+          <NavbarModel
+            openModel={openModel}
+            setOpenModel={setOpenModel}
+            setBackground={setBackground}
+          />
+        )}
         <Toolbar sx={{ display: "block" }}>
           <IconButton
             color="inherit"
@@ -153,7 +158,7 @@ export default function DrawerAppBar(props: Props) {
                 xs: "end",
               },
               mt: { xl: 0, lg: 0, md: 0, sm: "-8%", xs: -6 },
-              mr: { xl: 0, lg: 0, md: 0, sm: 0, xs: -5 },
+              mr: { xl: 0, lg: 0, md: 0, sm: 0 },
             }}
           >
             <Box
@@ -163,7 +168,7 @@ export default function DrawerAppBar(props: Props) {
                 fontFamily: "Josefin Sans",
                 // display: "inline-block",
                 // mr: "32px",
-                ml: "173px",
+                ml: "105px",
                 cursor: "pointer",
                 display: {
                   xs: "none",
@@ -203,15 +208,8 @@ export default function DrawerAppBar(props: Props) {
             </Box>
             <Box
               sx={{
-                // display: {
-                //   xs: "flex",
-                //   sm: "flex",
-                //   md: "flex",
-                //   lg: "flex",
-                //   xl: "flex",
-                // },
                 display: "flex",
-                // justifyContent: "left",
+                marginRight: { xl: "105px", sm: 0 },
               }}
             >
               {navIcons.map((item) => (
@@ -221,8 +219,14 @@ export default function DrawerAppBar(props: Props) {
                     color: "#212121",
                     fontFamily: "Josefin Sans",
                     fontSize: "16px",
-                    display: "inline-block",
-                    mr: "32px",
+                    display: "block",
+                    mr: {
+                      xl: "32px",
+                      lg: "32px",
+                      md: "32px",
+                      sm: "32px",
+                      xs: "15px",
+                    },
                     mt: "27px",
                     cursor: "pointer",
                   }}
@@ -230,6 +234,12 @@ export default function DrawerAppBar(props: Props) {
                     item.id === 2 && cartProducts.length !== 0
                       ? navigate("/shippingpage")
                       : console.log("hi");
+
+                    if (item.id === 2 && cartProducts.length !== 0) {
+                      navigate("/shippingpage");
+                    } else if (item.id === 4) {
+                      navigate("/login");
+                    }
                   }}
                 >
                   <img src={item.value} alt="item" />

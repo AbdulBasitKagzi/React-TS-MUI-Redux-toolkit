@@ -34,6 +34,8 @@ import { TimePicker } from "@mui/x-date-pickers";
 import DescriptionAlerts from "../components/Alert";
 
 const ShippingPage: React.FC = () => {
+  const regexp = /^((0[1-9])|(1[0-2]))[/]*((2[3-9]))$/;
+  const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const navigate = useNavigate();
   const steps = ["Shipping", "Billing", "Confirmation"];
   const { cartProducts } = useSelector((state: RootState) => state.cart);
@@ -60,7 +62,7 @@ const ShippingPage: React.FC = () => {
     lastName: "",
     emailaddress: "",
     phoneNumber: "",
-    city: "",
+    city: "australia",
     address: "",
     zipCode: "",
     date: date_time.toString(),
@@ -81,24 +83,24 @@ const ShippingPage: React.FC = () => {
   });
 
   const [openUp, setOpenUp] = useState<boolean>(false);
-  // const [age, setAge] = useState("0" || "1" || "2");
-  // const [color, setColor] = useState("");
+  const [alert, setAlert] = useState({
+    type: "",
+    title: "",
+    message: "",
+  });
+
+  useEffect(() => {
+    cartProducts.length === 0 && navigate("/");
+  }, [cartProducts.length]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log("here");
     setSelectedValue(event.target.value);
     setPaymentInformation((prev) => ({
       ...prev,
       radio_buttons: event.target.value,
     }));
   };
-  // const handleSelection = (event: any) => {
-  //   setAge(event.target.value as string);
-  // };
 
-  // const handleColor = (event: any) => {
-  //   setColor(event.target.value as string);
-  // };
   const handleDate = (newValue: any) => {
     setDate_Time(newValue);
     setUserInformation((prev) => ({
@@ -113,12 +115,81 @@ const ShippingPage: React.FC = () => {
       time: newValue.toString(),
     }));
   };
-  const handleSubmit = (information: Object) => {
+  const handleUserDetail = (information: Object) => {
     const hasEmptyFields = Object.values(information).some(
       (element) => element === ""
     );
     if (hasEmptyFields) {
       setOpenUp(hasEmptyFields);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please fill all the fields.",
+      });
+    } else if (!emailRegexp.test(userInformation.emailaddress)) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please enter correct email address.",
+      });
+      return;
+    } else if (userInformation.phoneNumber.length < 10) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please enter 10 digit phone number.",
+      });
+      return;
+    } else if (userInformation.zipCode.length < 6) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please enter 6 digit zip code.",
+      });
+      return;
+    } else {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePaymentDetail = (information: Object) => {
+    const hasEmptyFields = Object.values(information).some(
+      (element) => element === ""
+    );
+    if (hasEmptyFields) {
+      setOpenUp(hasEmptyFields);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please fill all the fields.",
+      });
+    } else if (paymentInformation.cardNumber.length < 16) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please enter 16 digit card number.",
+      });
+      return;
+    } else if (paymentInformation.cvv.length < 3) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please enter 3 digit CVV number.",
+      });
+      return;
+    } else if (!regexp.test(paymentInformation.expiration)) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please enter correct expiration date.",
+      });
+      return;
     } else {
       setPage(page + 1);
     }
@@ -182,9 +253,9 @@ const ShippingPage: React.FC = () => {
         <DescriptionAlerts
           openUp={openUp}
           setOpenUp={setOpenUp}
-          type="error"
-          title="Error"
-          message="Please fill all the fields correcty"
+          type={alert.type}
+          title={alert.title}
+          message={alert.message}
           closeDuration={2000}
         />
       )}
@@ -302,6 +373,10 @@ const ShippingPage: React.FC = () => {
                     id="address2"
                     name="phoneNumber"
                     label="Phone Number"
+                    type="number"
+                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      e.target.value = e.target.value.toString().slice(0, 10);
+                    }}
                     value={userInformation.phoneNumber}
                     fullWidth
                     autoComplete="shipping address-line2"
@@ -395,6 +470,10 @@ const ShippingPage: React.FC = () => {
                     id="zipcode"
                     name="zipCode"
                     label="Zip Code"
+                    type="number"
+                    onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      e.target.value = e.target.value.toString().slice(0, 6);
+                    }}
                     value={userInformation.zipCode}
                     fullWidth
                     autoComplete="zip code"
@@ -539,7 +618,7 @@ const ShippingPage: React.FC = () => {
                     name="expiration"
                     label="Expiration"
                     onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      e.target.value = e.target.value.toString().slice(0, 4);
+                      e.target.value = e.target.value.toString().slice(0, 5);
                     }}
                     fullWidth
                     value={paymentInformation.expiration}
@@ -662,10 +741,10 @@ const ShippingPage: React.FC = () => {
               }}
               onClick={() => {
                 if (page === 1) {
-                  handleSubmit(userInformation);
+                  handleUserDetail(userInformation);
                   // setPage(page + 1);
                 } else if (page === 2) {
-                  handleSubmit(paymentInformation);
+                  handlePaymentDetail(paymentInformation);
                   // setPage(page + 1);
                 } else {
                   dispatch(cartActions.emptyCart());
@@ -1181,10 +1260,10 @@ const ShippingPage: React.FC = () => {
                 }}
                 onClick={() => {
                   if (page === 1) {
-                    handleSubmit(userInformation);
+                    handleUserDetail(userInformation);
                     // setPage(page + 1);
                   } else if (page === 2) {
-                    handleSubmit(paymentInformation);
+                    handlePaymentDetail(paymentInformation);
                     // setPage(page + 1);
                   } else {
                     dispatch(cartActions.emptyCart());

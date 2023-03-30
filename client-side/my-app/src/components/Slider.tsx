@@ -55,7 +55,7 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
 
   return (
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
-      <Box sx={{ mx: 5, position: "relative" }}>
+      <Box sx={{ mx: 5 }}>
         <Swiper
           // onSwiper={setSwiperRef}
           ref={sliderRef}

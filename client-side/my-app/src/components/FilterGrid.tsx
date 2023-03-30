@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { productActions } from "../store/userSlice/productSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../store/userSlice/store";
 import { productProps } from "../store/userSlice/productSlice";
 import WarningModel from "./WarningModel";
@@ -35,7 +35,19 @@ interface arr {
   slug: string;
 }
 
-function FilterGrid() {
+interface data {
+  id: number;
+  value: string;
+  slug: string;
+}
+
+type props = {
+  foundGender: data;
+  foundBrand: data;
+  foundCategory: data;
+};
+
+const FilterGrid: React.FC<props> = (props) => {
   const { filter } = useSelector((state: RootState) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -78,145 +90,196 @@ function FilterGrid() {
   }, [currentposts, filter, dispatch]);
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        // ml: { xl: 4, lg: 6, md: 10, sm: 10, xs: 2 },
-        ml: 4,
-        mr: 6.25,
-        // maxWidth: "55%",
-        // mx: "auto",
-      }}
-    >
-      {open && <WarningModel open={open} setOpen={setOpen} />}
-      <Grid container spacing={4}>
-        {filter.length !== 0 ? (
-          currentposts.map((arr: arr) => (
-            <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-              <Box
-                sx={{
-                  // width: { xs: 278 },
-                  position: "relative",
+    <Box>
+      <Box
+        sx={{
+          mt: { md: -12.9, sm: -11.8, xs: 5 },
+          display: "flex",
+          justifyContent: { xs: "start", sm: "start" },
+          ml: { xs: 4 },
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "Jost",
+            fontSize: {
+              xl: "44px",
+              lg: "44px",
+              md: "40px",
+              sm: "34px",
+              xs: "28px",
+            },
+            fontWeight: 700,
+          }}
+        >
+          {props.foundGender?.value} {props.foundCategory?.value}{" "}
+          {props.foundBrand?.value} {props.foundBrand?.value ? "Products" : ""}
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "start" },
+          ml: { xs: 4 },
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "Jost",
+            fontWeight: "400",
+            fontSize: "20px",
+            pb: 1,
+          }}
+        >
+          {filter.length} results
+        </Typography>
+      </Box>
 
-                  height: {
-                    xl: "599px",
-                    lg: "515px",
-                    md: "435px",
-                    sm: "385px",
-                  },
-                  border: 1,
-                  borderColor: "#E5E7EB",
-                  // mx: "auto",
-                }}
-                onClick={() => {
-                  dispatch(productActions.selectedProduct(arr));
-                  navigate(`/itemdetailview/${arr.slug}`);
-                }}
-              >
-                {arr?.productImages?.map(
-                  (
-                    image: { id: number; productImage: string | undefined },
-                    index: number
-                  ) => {
-                    if (index === 0) {
-                      return (
-                        <>
-                          <img
-                            src={image.productImage}
-                            width="100%"
-                            alt="women"
-                          />
-                        </>
-                      );
-                    } else {
-                      return;
-                    }
-                  }
-                )}
-
-                <Box sx={{ position: "absolute", top: 12, right: 15 }}>
-                  <img src={heart} alt="heartgroup" width="40px" />
-                </Box>
-
+      <Box
+        sx={{
+          flexGrow: 1,
+          ml: 4,
+          mr: 6.25,
+        }}
+      >
+        {open && <WarningModel open={open} setOpen={setOpen} />}
+        <Grid
+          container
+          spacing={4}
+          // sx={{
+          //   ".MuiBox-root": {
+          //     width: "363px",
+          //   },
+          // }}
+        >
+          {filter.length !== 0 ? (
+            currentposts.map((arr: arr) => (
+              <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
                 <Box
                   sx={{
-                    display: "flex",
-                    textAlign: "left",
-                    mb: { xl: 1, lg: 1 },
-                    ml: { xl: 2, lg: 2 },
+                    position: "relative",
+                    height: {
+                      xl: "599px",
+                      lg: "515px",
+                      md: "435px",
+                      sm: "385px",
+                    },
+                    border: 1,
+                    borderColor: "#E5E7EB",
+                  }}
+                  onClick={() => {
+                    dispatch(productActions.selectedProduct(arr));
+                    navigate(`/itemdetailview/${arr.slug}`);
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontFamily: "Inter",
-                      fontSize: {
-                        xl: "30px",
-                        lg: "30px",
-                        md: "26px",
-                        sm: "24px",
-                        xs: "22px",
-                      },
-                      fontWeight: 400,
-                      wordBreak: "break-all",
-                    }}
-                  >
-                    {arr.productName}
-                  </Typography>
+                  {arr?.productImages?.map(
+                    (
+                      image: { id: number; productImage: string | undefined },
+                      index: number
+                    ) => {
+                      if (index === 0) {
+                        return (
+                          <>
+                            <img
+                              src={image.productImage}
+                              width="100%"
+                              height="46%"
+                              alt="women"
+                            />
+                          </>
+                        );
+                      } else {
+                        return;
+                      }
+                    }
+                  )}
+
+                  <Box sx={{ position: "absolute", top: 12, right: 15 }}>
+                    <img src={heart} alt="heartgroup" width="40px" />
+                  </Box>
+
                   <Box
                     sx={{
-                      mr: { xl: 3, lg: 3, md: 3, sm: 3, xs: 3 },
-                      mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
-                    }}
-                    onClick={(
-                      e: React.MouseEvent<HTMLDivElement, MouseEvent>
-                    ) => {
-                      e.stopPropagation();
-                      if (save) {
-                        dispatch(cartActions.addProductToCart(arr));
-                      } else {
-                        setOpen(true);
-                      }
+                      display: "flex",
+                      textAlign: "left",
+                      mb: { xl: 1, lg: 1 },
+                      ml: { xl: 2, lg: 2 },
                     }}
                   >
-                    <img src={shoppingcartVector} alt="cart" />
+                    <Typography
+                      sx={{
+                        fontFamily: "Inter",
+                        fontSize: {
+                          xl: "30px",
+                          lg: "30px",
+                          md: "26px",
+                          sm: "24px",
+                          xs: "22px",
+                        },
+                        fontWeight: 400,
+                        wordBreak: "break-all",
+                        pl: 1,
+                      }}
+                    >
+                      {arr.productName}
+                    </Typography>
+                    <Box
+                      sx={{
+                        mr: { xl: 3, lg: 3, md: 3, sm: 3, xs: 3 },
+                        mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
+                      }}
+                      onClick={(
+                        e: React.MouseEvent<HTMLDivElement, MouseEvent>
+                      ) => {
+                        e.stopPropagation();
+                        if (save) {
+                          dispatch(cartActions.addProductToCart(arr));
+                        } else {
+                          setOpen(true);
+                        }
+                      }}
+                    >
+                      <img src={shoppingcartVector} alt="cart" />
+                    </Box>
                   </Box>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                      fontFamily: "Inter",
+                      fontSize: {
+                        xl: "34px",
+                        lg: "34px",
+                        md: "30px",
+                        sm: "28px",
+                        xs: "34px",
+                      },
+                      pl: 1,
+                      fontWeight: 400,
+                      ml: { xl: "16px", lg: "16px" },
+                    }}
+                  >
+                    $ {arr.productCurrentPrice}
+                  </Typography>
                 </Box>
-                <Typography
-                  sx={{
-                    textAlign: "left",
-                    fontFamily: "Inter",
-                    fontSize: {
-                      xl: "34px",
-                      lg: "34px",
-                      md: "30px",
-                      sm: "28px",
-                      xs: "34px",
-                    },
-                    fontWeight: 400,
-                    ml: { xl: "16px", lg: "16px" },
-                  }}
-                >
-                  $ {arr.productCurrentPrice}
-                </Typography>
-              </Box>
-            </Grid>
-          ))
-        ) : (
-          <Typography>No product Found</Typography>
-        )}
-      </Grid>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 10 }}>
-        <Pagination
-          count={totalPage}
-          variant="outlined"
-          shape="rounded"
-          onChange={(event: React.ChangeEvent<unknown>, page: number) => {
-            setCurrentPage(page);
-          }}
-        />
+              </Grid>
+            ))
+          ) : (
+            <Typography>No product Found</Typography>
+          )}
+        </Grid>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 10 }}>
+          <Pagination
+            count={totalPage}
+            variant="outlined"
+            shape="rounded"
+            onChange={(event: React.ChangeEvent<unknown>, page: number) => {
+              setCurrentPage(page);
+            }}
+          />
+        </Box>
       </Box>
     </Box>
   );
-}
+};
 
 export default FilterGrid;

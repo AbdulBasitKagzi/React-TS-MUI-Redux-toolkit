@@ -28,8 +28,15 @@ const Footer: React.FC = () => {
       <Box sx={{ maxWidth: "90%", mx: "auto", mt: 5 }}>
         <Box
           sx={{
-            display: { xl: "flex", lg: "flex", md: "flex", sm: "flex" },
+            display: {
+              xl: "flex",
+              lg: "flex",
+              md: "flex",
+              sm: "flex",
+              // xs: "flex",
+            },
             justifyContent: "space-between",
+
             // mt: 14,
           }}
         >
@@ -42,6 +49,7 @@ const Footer: React.FC = () => {
                 sm: "flex",
                 xs: "flex",
               },
+              flexWrap: "wrap",
             }}
           >
             <Box sx={{ textAlign: { xs: "center" } }}>

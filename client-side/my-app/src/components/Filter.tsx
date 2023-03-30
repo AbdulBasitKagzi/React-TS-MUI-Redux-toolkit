@@ -93,13 +93,13 @@ export default function FilterSlider() {
           maxWidth: {
             xs: "240px",
           },
-          border: 2,
+
           backgroundColor: "#F9FAFB",
           ml: { xs: 2 },
           mt: { xs: 2 },
         }}
       >
-        <Box sx={{ mx: 4 }}>
+        <Box sx={{ mx: 4, textAlign: "left", mt: 8 }}>
           <Typography
             sx={{
               fontFamily: "Jost",
@@ -108,7 +108,7 @@ export default function FilterSlider() {
               letterSpacing: "0.02em",
               textTransform: "uppercase",
               color: "#1F2937",
-              marginBottom: "10px",
+              mb: 3,
             }}
           >
             PRICES
@@ -144,8 +144,6 @@ export default function FilterSlider() {
                 color: "#1F2937",
               }}
             >
-              {/* ${priceFilter[0]}-$
-              {priceFilter[1]} */}
               ${minValue}-${maxValue}
             </Typography>
           </Box>
@@ -287,6 +285,7 @@ export default function FilterSlider() {
             lg: "none",
             xl: "none",
           },
+          mt: "5rem",
         }}
       >
         <FilterListIcon />
@@ -312,9 +311,10 @@ export default function FilterSlider() {
           border: 2,
           backgroundColor: "#F9FAFB",
           ml: { xl: 8, lg: 6, md: 4, sm: 2 },
+          // mt: { sm: "2rem", md: "9.5rem" },
         }}
       >
-        <Box sx={{ mx: 4 }}>
+        <Box sx={{ mx: 4, textAlign: "left", mt: 8 }}>
           <Typography
             sx={{
               fontFamily: "Jost",
@@ -323,7 +323,8 @@ export default function FilterSlider() {
               letterSpacing: "0.02em",
               textTransform: "uppercase",
               color: "#1F2937",
-              marginBottom: "10px",
+              // marginBottom: "10px",
+              mb: 3,
             }}
           >
             PRICES

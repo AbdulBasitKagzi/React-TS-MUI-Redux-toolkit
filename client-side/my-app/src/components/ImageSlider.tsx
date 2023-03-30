@@ -11,7 +11,7 @@ const ImageSlider: React.FC = () => {
     <Box
       sx={{
         position: "relative",
-        width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "107%" },
+        width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "100%" },
         opacity: "70%",
         background: "#212121",
         mt: 12,

@@ -71,10 +71,20 @@ const ItemDetailView: React.FC = () => {
     localStorage.getItem("isAuth") || ""
   );
   const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    dispatch(
+      productActions.addSize({ selectedSize: selectedProduct?.size[0] })
+    );
+    dispatch(
+      productActions.addSize({ selectedColor: selectedProduct?.color[0] })
+    );
+  }, []);
+
   useEffect(() => {
     let fitleredata;
-    if (selectedProduct.size) {
-      fitleredata = selectedProduct.size.map((data) => {
+    if (selectedProduct?.size) {
+      fitleredata = selectedProduct?.size.map((data) => {
         return sizeFilter.filter((fill) => fill.id === data);
       });
     }
@@ -82,9 +92,9 @@ const ItemDetailView: React.FC = () => {
   }, [selectedProduct]);
 
   useEffect(() => {
-    if (selectedProduct.color) {
+    if (selectedProduct?.color) {
       let filteredColor: { id: number; name: string; haxValue: string }[] = [];
-      selectedProduct.color.map((col) => {
+      selectedProduct?.color.map((col) => {
         return colorLists.map(
           (color: { id: number; name: string; haxValue: string }) => {
             if (color.id === col) {
@@ -388,10 +398,11 @@ const ItemDetailView: React.FC = () => {
                       xl: "block",
                       lg: "block",
                       md: "block",
-                      sm: "block",
+                      sm: "none",
                       xs: "none",
                     },
-                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
+
+                    top: "32%",
                     left: { xl: "2%", lg: "2%", md: "2%" },
                   }}
                   // className={classes.prev_arrow}
@@ -407,14 +418,13 @@ const ItemDetailView: React.FC = () => {
                       xl: "block",
                       lg: "block",
                       md: "block",
-                      sm: "block",
+                      sm: "none",
                       xs: "none",
                     },
 
-                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
+                    top: "32%",
                     left: { xl: "94%", lg: "96%", md: "96%", sm: "96%" },
                   }}
-                  // className={classes.next_arrow}
                   onClick={() => handleNext("sliderRef")}
                 >
                   <img src={rightArrowIcon} alt="right" />
@@ -459,8 +469,6 @@ const ItemDetailView: React.FC = () => {
               </Box>
               <Box
                 sx={{
-                  // width: { xl: "498px", lg: "498px", md: "498px", sm: "392px" },
-                  // height: "85px",
                   textAlign: "left",
                   wordBreak: "break-all",
                   pl: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
@@ -498,13 +506,6 @@ const ItemDetailView: React.FC = () => {
               </Box>
               <Box
                 sx={{
-                  // width: {
-                  //   xl: "693px",
-                  //   lg: "575px",
-                  //   md: "100%",
-                  //   sm: "100%",
-                  //   xs: "100%",
-                  // },
                   width: "100%",
                   mt: 6,
                   pr: { xl: 2, lg: 2, md: 2, sm: 2, xs: 2 },
@@ -589,12 +590,7 @@ const ItemDetailView: React.FC = () => {
                   >
                     Sizes
                   </Typography>
-                  <Box
-                    // value={sizeValue}
-                    // onChange={handleSizeChange}
-                    // aria-label="basic tabs example"
-                    sx={{ display: "flex", flexWrap: "wrap" }}
-                  >
+                  <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                     {sizes?.map(
                       (
                         size: { id: number; value: string; slug: string },
@@ -620,7 +616,9 @@ const ItemDetailView: React.FC = () => {
                             }}
                             onClick={(event) => {
                               dispatch(
-                                productActions.addSize({ size: size.id })
+                                productActions.addSize({
+                                  selectedSize: size.id,
+                                })
                               );
                               handleSizeChange(event, index);
                             }}
@@ -629,7 +627,6 @@ const ItemDetailView: React.FC = () => {
                           </Box>
                         ) : (
                           <Box
-                            // label={size.slug}
                             sx={{
                               width: "81px",
                               height: "45px",
@@ -644,7 +641,9 @@ const ItemDetailView: React.FC = () => {
                             }}
                             onClick={(event) => {
                               dispatch(
-                                productActions.addSize({ size: size.id })
+                                productActions.addSize({
+                                  selectedSize: size.id,
+                                })
                               );
                               handleSizeChange(event, index);
                             }}
@@ -672,9 +671,6 @@ const ItemDetailView: React.FC = () => {
                   </Typography>
                   <Box className="colorBox">
                     <Box
-                      // value={colorValue}
-                      // onClick={()=>handleColorChange}
-                      // aria-label="basic tabs example"
                       sx={{
                         display: "flex",
                         flexWrap: "wrap",
@@ -699,7 +695,9 @@ const ItemDetailView: React.FC = () => {
                               }}
                               onClick={(event) => {
                                 dispatch(
-                                  productActions.addColor({ color: col.id })
+                                  productActions.addColor({
+                                    selectedColor: col.id,
+                                  })
                                 );
                                 handleColorChange(event, index);
                               }}
@@ -719,7 +717,9 @@ const ItemDetailView: React.FC = () => {
                               }}
                               onClick={(event) => {
                                 dispatch(
-                                  productActions.addColor({ color: col.id })
+                                  productActions.addColor({
+                                    selectedColor: col.id,
+                                  })
                                 );
 
                                 handleColorChange(event, index);
@@ -762,7 +762,7 @@ const ItemDetailView: React.FC = () => {
                     ml: 1,
                   }}
                 >
-                  {selectedProduct.productCurrentPrice}
+                  {selectedProduct?.productCurrentPrice}
                 </Typography>
               </Box>
               <Box

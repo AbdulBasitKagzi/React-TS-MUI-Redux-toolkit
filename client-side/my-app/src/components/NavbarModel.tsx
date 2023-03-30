@@ -14,13 +14,10 @@ import ListItem from "@mui/material/ListItem";
 import { RootState } from "../store/userSlice/store";
 
 const style = {
-  position: "relative",
-  mt: { xl: "53px", lg: "340px", md: "484px", sm: "484px", xs: "600px" },
-  // top: { xl: "56%", lg: "60%", md: "60%", sm: "55%", xs: "55%" },
   ml: "50%",
-  transform: "translate(-50%, -50%)",
-  width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "80%" },
-  height: "100%",
+  mt: "53px",
+  height: "550px",
+  width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "90%" },
   bgcolor: {
     xl: "#FFFFFF",
     lg: "#FFFFFF",
@@ -33,6 +30,7 @@ const style = {
   //   boxShadow: 24,
   p: 4,
   maxWidth: "1600px",
+  mx: "auto",
   // overflow: "auto",
 };
 
@@ -47,7 +45,6 @@ const NavbarModel: React.FC<props> = ({
   setOpenModel,
   setBackground,
 }) => {
-  //   const handleOpen = () => setOpenModel(true);
   const handleClose = () => {
     setBackground("transparent");
     setOpenModel(false);
@@ -62,16 +59,10 @@ const NavbarModel: React.FC<props> = ({
           ".MuiModal-backdrop": {
             background: "none",
           },
-          // overflow: "auto",
-          // ".MuiModal-root": {
-          //   overflowY: "scroll",
-          //   overflowX: "scroll",
-          // },
         }}
         open={openModel}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        // style={{ overflow: "scroll" }}
       >
         <Box sx={style} style={{ overflow: "scroll" }}>
           <Box>

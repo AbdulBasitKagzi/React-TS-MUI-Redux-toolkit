@@ -78,14 +78,20 @@ const ArrivalSlider: React.FC = () => {
             <Box
               key={arr.id}
               sx={{
-                width: { xl: 389, lg: 289, md: 205, sm: 155, xs: 330 },
-                height: { xl: 782, lg: 782, md: 782, sm: 500, xs: 500 },
+                width: { xl: 325, lg: 289, md: 205, sm: 155, xs: 330 },
+                height: { xl: 782, lg: 690, md: 500, sm: 390, xs: 500 },
                 ml: 1,
                 flexShrink: 0,
                 mt: { xs: 2 },
               }}
             >
-              <img src={arr.image} alt="images" width="100%" height="100%" />
+              <img
+                src={arr.image}
+                alt="images"
+                width="100%"
+                height="100%"
+                style={{ objectFit: "contain" }}
+              />
             </Box>
           )
         )}

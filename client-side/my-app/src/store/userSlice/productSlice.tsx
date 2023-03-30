@@ -6,22 +6,22 @@ import { brandFilter } from "../../assets/Constants";
 import { categoriesFilter } from "../../assets/Constants";
 
 interface SelectedProductProps {
-  id?: number;
-  productName?: string;
-  productImages?: { id: number; productImage: string | undefined }[];
-  productDescription?: string;
-  productOriginalPrice?: number;
-  productCurrentPrice?: number;
-  gender?: number;
-  human?: number;
-  category?: number;
-  brand?: number;
-  size?: Array<Number>;
-  color?: Array<Number>;
-  reviewRate?: number;
-  slug?: string;
-  selectedSize?: number;
-  selectedColor?: number;
+  id: number;
+  productName: string;
+  productImages: { id: number; productImage: string | undefined }[];
+  productDescription: string;
+  productOriginalPrice: number;
+  productCurrentPrice: number;
+  gender: number;
+  human: number;
+  category: number;
+  brand: number;
+  size: Array<Number>;
+  color: Array<Number>;
+  reviewRate: number;
+  slug: string;
+  selectedSize: number;
+  selectedColor: number;
 }
 
 export interface productProps {
@@ -80,7 +80,7 @@ interface productstate {
   gender: genderProps[];
   brand: brandProps[];
   category: categoryProps[];
-  selectedProduct: SelectedProductProps;
+  selectedProduct: SelectedProductProps | null;
   minValue: number;
   maxValue: number;
 }
@@ -100,7 +100,7 @@ const productState: productstate = {
   gender: gender,
   brand: brandFilter,
   category: categoriesFilter,
-  selectedProduct: {},
+  selectedProduct: null,
   minValue: 0,
   maxValue: 0,
 };
@@ -124,16 +124,12 @@ const productSlice = createSlice({
       state.selectedProduct = { ...state.selectedProduct, ...action.payload };
     },
     addSize: (state, action) => {
-      state.selectedProduct = {
-        ...state.selectedProduct,
-        selectedSize: action.payload.size,
-      };
+      state.selectedProduct = { ...state.selectedProduct, ...action.payload };
+      console.log("patiya", state.selectedProduct);
     },
     addColor: (state, action) => {
-      state.selectedProduct = {
-        ...state.selectedProduct,
-        selectedColor: action.payload.color,
-      };
+      state.selectedProduct = { ...state.selectedProduct, ...action.payload };
+      console.log("patiya", state.selectedProduct);
     },
     filterProduct: (state, action) => {
       state.Products = products;
