@@ -318,7 +318,7 @@ const ItemDetailView: React.FC = () => {
                     },
 
                     top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
-                    left: { xl: "94%", lg: "96%", md: "96%", sm: "96%" },
+                    left: { xl: "94%", lg: "96%", md: "96%", sm: "94%" },
                   }}
                   // className={classes.next_arrow}
                   onClick={() => handleNext("slider")}
@@ -586,11 +586,12 @@ const ItemDetailView: React.FC = () => {
                       textAlign: "left",
                       mt: 4,
                       mb: 4,
+                      p: 1,
                     }}
                   >
                     Sizes
                   </Typography>
-                  <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", p: 1 }}>
                     {sizes?.map(
                       (
                         size: { id: number; value: string; slug: string },
@@ -655,7 +656,7 @@ const ItemDetailView: React.FC = () => {
                   </Box>
                 </Box>
 
-                <Box sx={{ ml: 14 }}>
+                <Box sx={{ ml: { xl: 14, lg: 11, md: 3 } }}>
                   <Typography
                     sx={{
                       fontFamily: "Inter",
@@ -665,6 +666,7 @@ const ItemDetailView: React.FC = () => {
                       textAlign: "left",
                       mt: 4,
                       mb: 4,
+                      p: 1,
                     }}
                   >
                     Colors
@@ -675,6 +677,7 @@ const ItemDetailView: React.FC = () => {
                         display: "flex",
                         flexWrap: "wrap",
                         alignItems: "center",
+                        p: 1,
                       }}
                     >
                       {color?.map(

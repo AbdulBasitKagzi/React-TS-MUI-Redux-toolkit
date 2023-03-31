@@ -54,11 +54,9 @@ const CategoryTab: FC<Props> = ({ tabs }) => {
                 xs: "12px 5px",
               },
               minWidth: {
-                xs: 0,
-                xl: 90,
-                lg: 90,
                 md: 90,
-                sm: 90,
+                sm: 76,
+                xs: 0,
               },
             }}
             label={tab.value}

@@ -55,7 +55,7 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
 
   return (
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
-      <Box sx={{ mx: 5 }}>
+      <Box sx={{ mx: 5, position: "relative" }}>
         <Swiper
           // onSwiper={setSwiperRef}
           ref={sliderRef}
@@ -102,13 +102,13 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
                   sm: "189px",
                   xs: "89px",
                 },
-                height: {
-                  xl: "668px",
-                  lg: "668px",
-                  md: "530px",
-                  sm: "515px",
-                  xs: "250px",
-                },
+                // height: {
+                //   xl: "668px",
+                //   lg: "668px",
+                //   md: "530px",
+                //   sm: "515px",
+                //   xs: "250px",
+                // },
                 // background: "red",
               }}
             >
@@ -140,26 +140,26 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
                         key={deals.id}
                         className="li"
                         sx={{
-                          width: {
-                            xl: "380px",
-                            lg: "350px",
-                            md: "250px",
-                            sm: "189px",
-                            xs: "100px",
-                          },
-                          height: {
-                            xl: "420px",
-                            lg: "420px",
-                            md: "420px",
-                            sm: "290px",
-                            xs: "200px",
-                          },
+                          // width: {
+                          //   xl: "380px",
+                          //   lg: "350px",
+                          //   md: "250px",
+                          //   sm: "189px",
+                          //   xs: "100px",
+                          // },
+                          // height: {
+                          //   xl: "420px",
+                          //   lg: "420px",
+                          //   md: "420px",
+                          //   sm: "290px",
+                          //   xs: "200px",
+                          // },
                           marginTop: {
-                            xl: "115px",
-                            lg: "115px",
-                            md: "225px",
+                            xl: "50px",
+                            lg: "40px",
+                            md: "50px",
                             sm: "56px",
-                            xs: "50px",
+                            xs: "30px",
                           },
                           cursor: "pointer",
                         }}
@@ -217,6 +217,8 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
                               },
                               fontWeight: 700,
                               fontFamily: "Jost",
+                              wordBreak: "break-all",
+                              padding: { xs: "1px" },
                             }}
                           >
                             {deals.productName}
@@ -275,7 +277,8 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
             sx={{
               background: "#212121",
               width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
-              height: { xl: 61, lg: 50, xs: 30, md: 40 },
+              // height: { xl: 61, lg: 50, xs: 30, md: 40 },
+              mt: 8,
             }}
           >
             View All
@@ -292,7 +295,7 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
               sm: "none",
               xs: "none",
             },
-            top: { xl: "32%", lg: "32%", md: "40%", sm: "40%" },
+            top: { xl: "22%", lg: "22%", md: "25%", sm: "40%" },
             left: { xl: "2%", lg: "2%", md: "1%" },
           }}
           // className={classes.prev_arrow}
@@ -312,7 +315,7 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
               xs: "none",
             },
 
-            top: { xl: "32%", lg: "32%", md: "40%", sm: "40%" },
+            top: { xl: "22%", lg: "22%", md: "25%", sm: "40%" },
             left: { xl: "98%", lg: "98%", md: "100%", sm: "96%" },
           }}
           // className={classes.next_arrow}

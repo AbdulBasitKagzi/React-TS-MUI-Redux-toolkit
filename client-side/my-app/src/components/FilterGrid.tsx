@@ -200,14 +200,16 @@ const FilterGrid: React.FC<props> = (props) => {
 
                   <Box
                     sx={{
-                      display: "flex",
+                      // display: "flex",
                       textAlign: "left",
+                      display: "inline-flex",
                       mb: { xl: 1, lg: 1 },
                       ml: { xl: 2, lg: 2 },
                     }}
                   >
                     <Typography
                       sx={{
+                        display: "inline-block",
                         fontFamily: "Inter",
                         fontSize: {
                           xl: "30px",
@@ -226,7 +228,9 @@ const FilterGrid: React.FC<props> = (props) => {
                     <Box
                       sx={{
                         mr: { xl: 3, lg: 3, md: 3, sm: 3, xs: 3 },
-                        mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
+                        // mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
+
+                        my: "auto",
                       }}
                       onClick={(
                         e: React.MouseEvent<HTMLDivElement, MouseEvent>

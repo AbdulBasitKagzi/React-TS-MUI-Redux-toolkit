@@ -9,7 +9,8 @@
     height: 55px;
   }
 }
-@media (max-width: 900px) {
+
+@media (max-width: 600px) {
   .reviwer_image {
     width: 60px;
     height: 60px;

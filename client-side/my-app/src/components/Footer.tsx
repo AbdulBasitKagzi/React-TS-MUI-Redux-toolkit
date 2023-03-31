@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                 lg: "flex",
                 md: "flex",
                 sm: "flex",
-                xs: "flex",
+                xs: "block",
               },
               flexWrap: "wrap",
             }}

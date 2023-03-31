@@ -821,7 +821,9 @@ const ShippingPage: React.FC = () => {
                         <DeleteOutlineIcon />
                       </Box>
                     </Box>
-                    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                    <Box
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    >
                       <Box sx={{ width: "56px", height: "65px", pl: 3 }}>
                         <img
                           src={product.productImages[0].productImage}

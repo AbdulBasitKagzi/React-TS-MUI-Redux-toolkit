@@ -84,15 +84,23 @@ const ReviewCard: React.FC = () => {
           }) => (
             <Box
               key={arr.id}
-              sx={{
-                maxWidth: { xl: 521, lg: 521, md: 521, sm: 190, xs: 330 },
-                maxHeight: 1009,
-              }}
+              sx={
+                {
+                  // maxWidth: { xl: 521, lg: 521, md: 521, sm: 190, xs: 330 },
+                  // maxWidth: { sm: 190, xs: 330 },
+                  // maxHeight: 1009,
+                }
+              }
             >
               <Box
                 sx={{
-                  maxWidth: { xl: 521, lg: 521, md: 521, sm: 236, xs: 330 },
-                  maxHeight: { xl: 521, lg: 521, md: 521, sm: 521, xs: 465 },
+                  // maxWidth: { xl: 521, lg: 521, md: 521, sm: 236, xs: 330 },
+                  // maxHeight: { xl: 521, lg: 521, md: 521, sm: 521, xs: 465 },
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "relative",
                 }}
               >
                 <img
@@ -103,12 +111,16 @@ const ReviewCard: React.FC = () => {
                 />
                 <Box
                   sx={{
-                    position: "relative",
-                    top: -60,
-                    left: { xl: 89, lg: 89, md: 1 },
+                    position: "absolute",
+                    top: "370px",
+                    // left: { xl: 89, lg: 89, md: 1 },
                     background: "#FCFCFC",
                     maxWidth: 304,
-                    height: { xl: 89, lg: 89, md: 89, sm: 63 },
+                    // height: { xl: 89, lg: 89, md: 89, sm: 63 },
+                    // display: "flex",
+                    // justifyContent: "center",
+                    // flexDirection: "column",
+                    // alignItems: "center",
                   }}
                 >
                   <Box sx={{ display: "flex" }}>
@@ -238,8 +250,8 @@ const ReviewCard: React.FC = () => {
               </Box>
               <Box
                 sx={{
-                  mt: { xl: 7, lg: 7, md: 4, sm: 4 },
-                  mx: { xl: 8, lg: 8, md: 1, sm: 1, xs: 1 },
+                  mt: { md: 15, xs: 12 },
+                  mx: { lg: 8, xs: 1 },
                 }}
               >
                 <Typography
@@ -250,6 +262,7 @@ const ReviewCard: React.FC = () => {
                     fontWeight: 700,
                     fontSize: { xl: 26, lg: 23, md: 21, sm: 16, xs: 20 },
                     wordBreak: "inherit",
+                    msWordBreak: "break-all",
                   }}
                 >
                   {arr.title}

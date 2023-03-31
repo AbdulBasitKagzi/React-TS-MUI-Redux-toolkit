@@ -17,18 +17,14 @@ const ImageListt = () => {
     <>
       <ImageList
         sx={{
-          width: { xl: 1570, lg: 1300, md: 900, sm: 700, xs: 330 },
+          // width: { xl: 1570, lg: 1300, md: 1000 },
           //   height: 786,
           display: {
             xs: "block",
-            xl: "grid",
-            lg: "grid",
-            md: "grid",
             sm: "grid",
           },
           objectFit: {
             xs: "contain",
-            md: "contain",
             sm: "contain",
           },
         }}
@@ -42,6 +38,7 @@ const ImageListt = () => {
             cols={item.cols || 1}
             rows={item.rows || 1}
             // sx={{ height: { xs: "45%" } }}
+
             sx={{
               ".MuiImageListItem-img": {
                 objectFit: "contain",

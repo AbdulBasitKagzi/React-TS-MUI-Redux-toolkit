@@ -227,6 +227,7 @@ export default function DrawerAppBar(props: Props) {
                       sm: "32px",
                       xs: "15px",
                     },
+                    // mt: { md: "27px", sm: "40px" },
                     mt: "27px",
                     cursor: "pointer",
                   }}
@@ -242,7 +243,36 @@ export default function DrawerAppBar(props: Props) {
                     }
                   }}
                 >
-                  <img src={item.value} alt="item" />
+                  <Box
+                    sx={
+                      {
+                        // display: "flex",
+                        // flexDirection: "column",
+                        // // justifyContent: "center",
+                        // alignItems: "end",
+                      }
+                    }
+                  >
+                    <img
+                      src={item.value}
+                      alt="item"
+                      style={{ position: "relative" }}
+                    />
+                    {item.id === 2 && (
+                      <Typography
+                        sx={{
+                          position: "relative",
+                          top: "-35px",
+                          left: 15,
+                          backgroundColor: "red",
+                          borderRadius: 4,
+                          fontSize: "16px",
+                        }}
+                      >
+                        {cartProducts.length}
+                      </Typography>
+                    )}
+                  </Box>
                 </Typography>
               ))}
             </Box>

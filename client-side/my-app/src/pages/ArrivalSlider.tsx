@@ -78,10 +78,7 @@ const ArrivalSlider: React.FC = () => {
             <Box
               key={arr.id}
               sx={{
-                width: { xl: 325, lg: 289, md: 205, sm: 155, xs: 330 },
-                height: { xl: 782, lg: 690, md: 500, sm: 390, xs: 500 },
-                ml: 1,
-                flexShrink: 0,
+                mr: { sm: 1 },
                 mt: { xs: 2 },
               }}
             >

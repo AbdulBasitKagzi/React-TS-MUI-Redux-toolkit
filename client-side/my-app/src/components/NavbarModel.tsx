@@ -16,7 +16,7 @@ import { RootState } from "../store/userSlice/store";
 const style = {
   ml: "50%",
   mt: "53px",
-  height: "550px",
+  height: { xl: "400px", xs: "550px" },
   width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "90%" },
   bgcolor: {
     xl: "#FFFFFF",
@@ -89,13 +89,13 @@ const NavbarModel: React.FC<props> = ({
                     lg: "flex",
                     md: "flex",
                     sm: "flex",
-                    xs: "flex",
+                    xs: "block",
                   },
-                  flexWrap: "wrap",
+                  // flexWrap: "wrap",
                 }}
               >
                 <Box>
-                  <List>
+                  <List sx={{ paddingRight: { lg: 10, md: 5 } }}>
                     <ListItem
                       sx={{
                         fontFamily: "Inter",
@@ -131,7 +131,7 @@ const NavbarModel: React.FC<props> = ({
                   </List>
                 </Box>
                 <Box>
-                  <List>
+                  <List sx={{ paddingRight: { lg: 10, md: 5 } }}>
                     <ListItem
                       sx={{
                         fontFamily: "Inter",
@@ -167,7 +167,7 @@ const NavbarModel: React.FC<props> = ({
                   </List>
                 </Box>
                 <Box>
-                  <List>
+                  <List sx={{ paddingRight: { lg: 10, md: 5 } }}>
                     <ListItem
                       sx={{
                         fontFamily: "Inter",

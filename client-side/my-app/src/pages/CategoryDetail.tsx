@@ -104,7 +104,6 @@ const CategoryDetail: React.FC = () => {
             </Box>
           </Box>
         </Box>
-        <Footer />
       </Layout>
     </>
   );
