@@ -753,11 +753,11 @@ function Home() {
           backgroundRepeat: "no-repeat",
           opacity: 0.85,
           height: {
-            xl: "100vh",
-            lg: "105vh",
-            md: "95vh",
-            sm: "75vh",
-            xs: "40vh",
+            xl: "750px",
+            lg: "620px",
+            md: "500px",
+            sm: "410px",
+            xs: "235px",
           },
         }}
       >

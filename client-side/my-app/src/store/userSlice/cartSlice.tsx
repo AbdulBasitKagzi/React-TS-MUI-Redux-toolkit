@@ -22,10 +22,12 @@ export interface cartProducts {
 
 interface cartSliceState {
   cartProducts: cartProducts[];
+  added: boolean;
 }
 
 const cartSliceState: cartSliceState = {
   cartProducts: [],
+  added: false,
 };
 // const cartSliceState: cartSliceState = {
 //   cartProducts: cartProducts[],
@@ -46,6 +48,7 @@ const cartSlice = createSlice({
       } else {
         state.cartProducts.push({ ...action.payload, quantity: 1 });
       }
+      state.added = true;
     },
     increment: (state, action) => {
       console.log(action);
@@ -81,6 +84,9 @@ const cartSlice = createSlice({
     },
     emptyCart: (state) => {
       state.cartProducts = [];
+    },
+    notification: (state) => {
+      state.added = false;
     },
   },
 });

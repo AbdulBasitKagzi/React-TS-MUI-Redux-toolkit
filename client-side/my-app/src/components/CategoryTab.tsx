@@ -130,7 +130,6 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
                   }) => (
                     <SwiperSlide key={deals.id}>
                       <Box
-                        key={deals.id}
                         className="li"
                         sx={{
                           // width: {

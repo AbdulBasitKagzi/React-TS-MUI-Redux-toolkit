@@ -109,6 +109,7 @@ export default function FilterSlider() {
               textTransform: "uppercase",
               color: "#1F2937",
               mb: 3,
+              p: 1,
             }}
           >
             PRICES
@@ -139,7 +140,7 @@ export default function FilterSlider() {
               sx={{
                 fontFamily: "Jost",
                 fontWeight: "500",
-                fontSize: "20px",
+                fontSize: { sm: "20px", xs: "16px" },
                 letterSpacing: "0.02em",
                 color: "#1F2937",
               }}

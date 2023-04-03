@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 
 import style from "../css/imageSwiper.module.css";
 import classes from "../css/swiper.module.css";
+import "../css/imageDetail.css";
 
 // import required modules
 import { Navigation } from "swiper";
@@ -39,7 +40,7 @@ const ItemDetailView: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state: RootState) => state.product);
-  const { cartProducts } = useSelector((state: RootState) => state.cart);
+  const { cartProducts, added } = useSelector((state: RootState) => state.cart);
   const [tabs, setTabs] = useState<Array<string>>([
     "Info",
     "Brand",
@@ -111,17 +112,14 @@ const ItemDetailView: React.FC = () => {
     if (selectedProduct?.reviewRate) {
       setStars(stars - selectedProduct.reviewRate);
     }
-  }, [selectedProduct]);
+  }, []);
 
   useEffect(() => {
-    if (cartProducts.length !== 0) {
-      setOpenUp(true);
-    }
+    // if (cartProducts.length !== 0) {
+    //   setOpenUp(true);
+    // }
+    setOpenUp(added);
   }, [cartProducts]);
-
-  useEffect(() => {
-    console.log("selected", selectedProduct);
-  }, [selectedProduct]);
 
   const handlePrev = useCallback((value: string) => {
     if (value === "slider") {
@@ -200,9 +198,6 @@ const ItemDetailView: React.FC = () => {
   const handleColorChange = (event: React.SyntheticEvent, newValue: number) => {
     setColorValue(newValue);
   };
-  useEffect(() => {
-    console.log("image", image);
-  }, [image]);
 
   return (
     <div>
@@ -256,7 +251,7 @@ const ItemDetailView: React.FC = () => {
                       id: number;
                       productImage: string | undefined;
                     }) => (
-                      <SwiperSlide className={style.abdul}>
+                      <SwiperSlide className={style.abdul} key={images.id}>
                         {image ? (
                           <img
                             className={style.sliderImage}
@@ -298,7 +293,7 @@ const ItemDetailView: React.FC = () => {
                       xs: "none",
                     },
                     top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
-                    left: { xl: "2%", lg: "2%", md: "2%" },
+                    left: { xl: "2%", lg: "2%", md: 0 },
                   }}
                   // className={classes.prev_arrow}
                   onClick={() => handlePrev("slider")}
@@ -355,7 +350,10 @@ const ItemDetailView: React.FC = () => {
                       },
                       index: number
                     ) => (
-                      <SwiperSlide className={classes.selectedImage}>
+                      <SwiperSlide
+                        className={classes.selectedImage}
+                        key={images.id}
+                      >
                         {index === imageValue ? (
                           <img
                             src={images.productImage}
@@ -402,13 +400,13 @@ const ItemDetailView: React.FC = () => {
                       xs: "none",
                     },
 
-                    top: "32%",
-                    left: { xl: "2%", lg: "2%", md: "2%" },
+                    top: "38%",
+                    left: { lg: "2%", md: "1%" },
                   }}
                   // className={classes.prev_arrow}
                   onClick={() => handlePrev("sliderRef")}
                 >
-                  <img src={leftArrowIcon} alt="previous" />
+                  <img src={leftArrowIcon} alt="previous" className="icons" />
                 </Box>
                 <Box
                   sx={{
@@ -422,12 +420,12 @@ const ItemDetailView: React.FC = () => {
                       xs: "none",
                     },
 
-                    top: "32%",
-                    left: { xl: "94%", lg: "96%", md: "96%", sm: "96%" },
+                    top: "38%",
+                    left: { xl: "94%", lg: "96%", md: "97%" },
                   }}
                   onClick={() => handleNext("sliderRef")}
                 >
-                  <img src={rightArrowIcon} alt="right" />
+                  <img src={rightArrowIcon} alt="right" className="icons" />
                 </Box>
               </Box>
             </Box>
@@ -452,8 +450,8 @@ const ItemDetailView: React.FC = () => {
                   textAlign: "center",
                   display: "flex",
                   justifyContent: "center",
-                  ml: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
-                  mt: { xl: 0, lg: 0, md: 2, sm: 0, xs: 2 },
+                  ml: { sm: 1, xs: 2 },
+                  mt: { lg: 1, md: 2, sm: 1, xs: 2 },
                 }}
               >
                 <Typography
@@ -531,6 +529,7 @@ const ItemDetailView: React.FC = () => {
                     {tabs.map((tab: string, index: number) =>
                       value === index ? (
                         <Tab
+                          key={index}
                           label={tab}
                           sx={{
                             fontFamily: "Inter",
@@ -546,7 +545,7 @@ const ItemDetailView: React.FC = () => {
                   </Tabs>
                 </Box>
                 {tabs.map((tab: string, index: number) => (
-                  <TabPanel value={value} index={index}>
+                  <TabPanel value={value} index={index} key={index}>
                     <Typography
                       sx={{
                         fontFamily: "Inter",
@@ -591,7 +590,13 @@ const ItemDetailView: React.FC = () => {
                   >
                     Sizes
                   </Typography>
-                  <Box sx={{ display: "flex", flexWrap: "wrap", p: 1 }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      p: 1,
+                    }}
+                  >
                     {sizes?.map(
                       (
                         size: { id: number; value: string; slug: string },
@@ -600,6 +605,7 @@ const ItemDetailView: React.FC = () => {
                         sizeValue === index ? (
                           <Box
                             // label={size.slug}
+                            key={size.id}
                             sx={{
                               width: "81px",
                               height: "45px",
@@ -628,6 +634,7 @@ const ItemDetailView: React.FC = () => {
                           </Box>
                         ) : (
                           <Box
+                            key={size.id}
                             sx={{
                               width: "81px",
                               height: "45px",
@@ -687,6 +694,7 @@ const ItemDetailView: React.FC = () => {
                         ) =>
                           colorValue === index ? (
                             <Box
+                              key={index}
                               sx={{
                                 width: "50px",
                                 height: "50px",
@@ -707,6 +715,7 @@ const ItemDetailView: React.FC = () => {
                             />
                           ) : (
                             <Box
+                              key={index}
                               sx={{
                                 width: "35px",
                                 height: "35px",

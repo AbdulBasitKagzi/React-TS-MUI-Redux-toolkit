@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                 sm: "flex",
                 xs: "block",
               },
-              flexWrap: "wrap",
+              // flexWrap: "wrap",
             }}
           >
             <Box sx={{ textAlign: { xs: "center" } }}>
@@ -76,6 +76,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   About Us
@@ -92,6 +93,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Affiliate
@@ -108,6 +110,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Fashion Blogger
@@ -138,6 +141,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Shipping Info
@@ -154,6 +158,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Refunds
@@ -170,6 +175,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   How to Order
@@ -186,6 +192,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   How to Track
@@ -202,6 +209,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Size Guides
@@ -232,6 +240,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Contact Us
@@ -248,6 +257,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Payment Methods
@@ -264,6 +274,7 @@ const Footer: React.FC = () => {
                     },
                     fontWeight: 400,
                     color: "#616161",
+                    cursor: "pointer",
                   }}
                 >
                   Bonus Point

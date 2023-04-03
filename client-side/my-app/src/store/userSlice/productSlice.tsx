@@ -83,6 +83,7 @@ interface productstate {
   selectedProduct: SelectedProductProps | null;
   minValue: number;
   maxValue: number;
+  mainArray: productProps[];
 }
 
 const productState: productstate = {
@@ -94,6 +95,7 @@ const productState: productstate = {
   filterBySize: [],
   filterByCategory: [],
   filterByBrand: [],
+  mainArray: [],
   filteredGender: {},
   filteredCategory: {},
   fitleredBrand: {},
@@ -125,11 +127,9 @@ const productSlice = createSlice({
     },
     addSize: (state, action) => {
       state.selectedProduct = { ...state.selectedProduct, ...action.payload };
-      console.log("patiya", state.selectedProduct);
     },
     addColor: (state, action) => {
       state.selectedProduct = { ...state.selectedProduct, ...action.payload };
-      console.log("patiya", state.selectedProduct);
     },
     filterProduct: (state, action) => {
       state.Products = products;
@@ -177,6 +177,8 @@ const productSlice = createSlice({
         // console.log("prod", state.filterByHuman);
         state.filter = state.filterByHuman;
       }
+      state.mainArray = state.filterByHuman;
+      console.log("main human", state.mainArray);
 
       // need to uncomment below code
       // state.filterByHuman = current(state.ProductsList).filter(
@@ -189,9 +191,6 @@ const productSlice = createSlice({
     },
 
     filterByBrand: (state, action) => {
-      // state.filterByHuman = current([]);
-
-      // console.log("brand", action);
       if (state.filterByCategory.length && !state.filterBySize.length) {
         console.log("brand here1");
         state.filterByBrand = action.payload.map((pay: number) => {
@@ -200,6 +199,7 @@ const productSlice = createSlice({
             (prod: productProps) => prod.brand === pay
           );
         });
+        console.log("state", state.filterByBrand.length);
         if (!state.filterByBrand.length) {
           state.filter = state.filterByCategory;
         } else {
@@ -207,13 +207,16 @@ const productSlice = createSlice({
           state.filter = state.filterByBrand;
         }
       } else if (state.filterBySize.length && !state.filterByCategory.length) {
-        console.log("here2");
-        state.filterByBrand = action.payload.map((pay: number) => {
-          // console.log(pay);
-          return current(state.filterBySize).filter(
-            (prod: productProps) => prod.brand === pay
-          );
-        });
+        console.log("brand here2");
+        if (action.payload.length) {
+          state.filterByBrand = action.payload.map((pay: number) => {
+            // console.log(pay);
+            return current(state.filterBySize).filter(
+              (prod: productProps) => prod.brand === pay
+            );
+          });
+        }
+
         if (!state.filterByBrand.length) {
           console.log("if");
           state.filter = state.filterBySize.flatMap((i) => i);
@@ -222,8 +225,7 @@ const productSlice = createSlice({
           state.filter = state.filterByBrand.flatMap((i) => i);
         }
       } else {
-        console.log("here3");
-
+        console.log("brand here3");
         state.filterByBrand = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterByHuman).filter(
@@ -237,31 +239,32 @@ const productSlice = createSlice({
           state.filter = state.filterByBrand;
         }
       }
+
       // let filteredProduct = [];
       // state.filterByBrand = state.filterByHuman;
-
       // console.log("brand", action);
       // if (action.payload.length) {
       //   console.log("if here");
-      //   filteredProduct = action.payload.map((pay: number) => {
-      //     // console.log(pay);
-
-      //     return current(state.filterByHuman).filter(
-      //       (prod: productProps) => prod.brand === pay
-      //     );
-      //   });
-      //   state.filter = filteredProduct.flatMap((i: any) => i);
+      // state.mainArray = action.payload.map((pay: number) => {
+      // console.log(pay);
+      // return current(state.mainArray).filter(
+      //   (prod: productProps) => prod.brand === pay
+      // );
+      // });
+      // console.log("brand", state.mainArray);
+      //   state.filter = state.mainArray.flatMap((i: any) => i);
       // } else {
       //   console.log("else");
-      //   state.filter = state.filterByBrand.flatMap((i) => i);
+      //   state.filter = state.mainArray.flatMap((i) => i);
       // }
-
       // console.log("Brand", state.filterByBrand);
     },
+
     filterByCategory: (state, action) => {
       // console.log("category", action);
 
       if (!state.filterByBrand.length && !state.filterBySize.length) {
+        console.log("category here 1");
         state.filterByCategory = action.payload.map((pay: number) => {
           // console.log(pay, "here");
           return current(state.filterByHuman).filter(
@@ -275,6 +278,8 @@ const productSlice = createSlice({
           state.filter = state.filterByCategory.flatMap((i) => i);
         }
       } else if (!state.filterByBrand.length && state.filterBySize.length) {
+        console.log("category here 2");
+
         state.filterByCategory = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterBySize).filter(
@@ -288,7 +293,8 @@ const productSlice = createSlice({
         }
       } else {
         state.filterByCategory = action.payload.map((pay: number) => {
-          // console.log(pay);
+          console.log("category here 3");
+
           return current(state.filterByBrand).filter(
             (prod: productProps) => prod.category === pay
           );
@@ -300,36 +306,66 @@ const productSlice = createSlice({
           state.filter = state.filterByCategory;
         }
       }
-
-      // if (state.filterByBrand.length) {
-      //   state.filterByHuman = state.filterByBrand;
-      //   state.filterByCategory = state.filterByHuman;
+      // let filteredData: [];
+      // if (action.payload.length) {
+      //   console.log("category action", action.payload);
+      // state.mainArray = action.payload.map((pay: number) => {
+      //   console.log(pay);
+      //   return current(state.mainArray).filter(
+      //     (prod: productProps) => prod.category === pay
+      //   );
+      // });
+      // state.mainArray = state.mainArray.filter((prod: productProps) => {
+      //   action.payload.map((pay: number) => {
+      //     return prod.category === pay;
+      //   });
+      // });
+      // console.log("category", state.mainArray);
+      //   state.filter = state.mainArray.flatMap((i: any) => i);
+      // } else {
+      //   console.log("else");
+      //   state.filter = state.mainArray.flatMap((i) => i);
       // }
-
-      // console.log("category", state.filterByCategory);
+      // console.log("Brand", state.filterByBrand);
     },
+
+    // if (state.filterByBrand.length) {
+    //   state.filterByHuman = state.filterByBrand;
+    //   state.filterByCategory = state.filterByHuman;
+    // }
+
+    // console.log("category", state.filterByCategory);
 
     filterBySize: (state, action) => {
       // console.log("size", action);
       if (!state.filterByBrand.length && !state.filterByCategory.length) {
+        console.log("size here 1");
+
         state.filterBySize = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterByHuman).filter((prod: productProps) =>
             prod.size?.includes(pay)
           );
         });
+        let data = new Set(state.filterBySize.flatMap((i) => i));
+        state.filterBySize = Array.from(data);
+
         if (!state.filterBySize.length) {
           state.filter = state.filterByHuman.flatMap((i) => i);
         } else {
           state.filter = state.filterBySize.flatMap((i) => i);
         }
       } else if (state.filterByBrand.length && !state.filterByCategory.length) {
+        console.log("size here 2");
         state.filterBySize = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterByBrand).filter((prod: productProps) =>
             prod.size?.includes(pay)
           );
         });
+        let data = new Set(state.filterBySize.flatMap((i) => i));
+        state.filterBySize = Array.from(data);
+
         if (!state.filterBySize.length) {
           state.filter = state.filterByBrand.flatMap((i) => i);
         } else {
@@ -338,12 +374,16 @@ const productSlice = createSlice({
       }
       // this condition can be deleted
       else if (!state.filterByBrand.length && state.filterByCategory.length) {
+        console.log("size here 3");
+
         state.filterBySize = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterByCategory).filter((prod: productProps) =>
             prod.size?.includes(pay)
           );
         });
+        let data = new Set(state.filterBySize.flatMap((i) => i));
+        state.filterBySize = Array.from(data);
 
         if (!state.filterBySize.length) {
           state.filter = state.filterByCategory.flatMap((i) => i);
@@ -351,6 +391,7 @@ const productSlice = createSlice({
           state.filter = state.filterBySize.flatMap((i) => i);
         }
       } else {
+        console.log("category here 4");
         state.filterBySize = action.payload.map((pay: number) => {
           // console.log(pay);
           return current(state.filterByCategory).filter((prod: productProps) =>

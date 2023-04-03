@@ -16,7 +16,7 @@ import { RootState } from "../store/userSlice/store";
 const style = {
   ml: "50%",
   mt: "53px",
-  height: { xl: "400px", xs: "550px" },
+  height: { xl: "550px", sm: "350px", xs: "550px" },
   width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "90%" },
   bgcolor: {
     xl: "#FFFFFF",
@@ -38,16 +38,19 @@ type props = {
   openModel: boolean;
   setOpenModel: (value: boolean) => void;
   setBackground: (value: string) => void;
+  setValue: (value: number) => void;
 };
 
 const NavbarModel: React.FC<props> = ({
   openModel,
   setOpenModel,
   setBackground,
+  setValue,
 }) => {
   const handleClose = () => {
     setBackground("transparent");
     setOpenModel(false);
+    setValue(-1);
   };
   const { routeValue } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
@@ -78,7 +81,7 @@ const NavbarModel: React.FC<props> = ({
                   sm: "space-between",
                   xs: "center",
                 },
-                overflow: "auto",
+                overflowX: "auto",
                 // height: "100%",
               }}
             >

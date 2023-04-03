@@ -115,7 +115,7 @@ const ReviewCard: React.FC = () => {
                     top: "370px",
                     // left: { xl: 89, lg: 89, md: 1 },
                     background: "#FCFCFC",
-                    maxWidth: 304,
+                    width: { md: 304 },
                     // height: { xl: 89, lg: 89, md: 89, sm: 63 },
                     // display: "flex",
                     // justifyContent: "center",

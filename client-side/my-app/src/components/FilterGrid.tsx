@@ -154,16 +154,23 @@ const FilterGrid: React.FC<props> = (props) => {
         >
           {filter.length !== 0 ? (
             currentposts.map((arr: arr) => (
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={filter.length === 1 ? "auto" : 4}
+                xl={filter.length === 1 ? "auto" : 4}
+              >
                 <Box
                   sx={{
                     position: "relative",
-                    height: {
-                      xl: "599px",
-                      lg: "515px",
-                      md: "435px",
-                      sm: "385px",
-                    },
+                    // height: {
+                    //   xl: "599px",
+                    //   lg: "515px",
+                    //   md: "435px",
+                    //   sm: "385px",
+                    // },
                     border: 1,
                     borderColor: "#E5E7EB",
                   }}
@@ -183,7 +190,7 @@ const FilterGrid: React.FC<props> = (props) => {
                             <img
                               src={image.productImage}
                               width="100%"
-                              height="46%"
+                              // height="100%"
                               alt="women"
                             />
                           </>
@@ -200,16 +207,17 @@ const FilterGrid: React.FC<props> = (props) => {
 
                   <Box
                     sx={{
-                      // display: "flex",
+                      display: "flex",
                       textAlign: "left",
-                      display: "inline-flex",
+                      // display: "inline-flex",
+                      // flexDirection: "column",
+                      // justifyContent: "center",
                       mb: { xl: 1, lg: 1 },
                       ml: { xl: 2, lg: 2 },
                     }}
                   >
                     <Typography
                       sx={{
-                        display: "inline-block",
                         fontFamily: "Inter",
                         fontSize: {
                           xl: "30px",
@@ -231,6 +239,9 @@ const FilterGrid: React.FC<props> = (props) => {
                         // mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
 
                         my: "auto",
+                        display: "flex",
+                        mt: 6,
+                        ml: { md: 6 },
                       }}
                       onClick={(
                         e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -255,7 +266,7 @@ const FilterGrid: React.FC<props> = (props) => {
                         lg: "34px",
                         md: "30px",
                         sm: "28px",
-                        xs: "34px",
+                        xs: "22px",
                       },
                       pl: 1,
                       fontWeight: 400,
@@ -268,7 +279,16 @@ const FilterGrid: React.FC<props> = (props) => {
               </Grid>
             ))
           ) : (
-            <Typography>No product Found</Typography>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: "30px",
+                fontFamily: "Jost",
+                p: 5,
+              }}
+            >
+              No product Found
+            </Typography>
           )}
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 10 }}>

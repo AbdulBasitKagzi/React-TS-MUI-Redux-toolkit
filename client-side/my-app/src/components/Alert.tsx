@@ -2,6 +2,8 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Snackbar from "@mui/material/Snackbar";
 import { useEffect } from "react";
+import { cartActions } from "../store/userSlice/cartSlice";
+import { useDispatch } from "react-redux";
 
 type props = {
   type: any;
@@ -13,9 +15,11 @@ type props = {
 };
 
 function DescriptionAlerts(props: props) {
+  const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
       props.setOpenUp(false);
+      dispatch(cartActions.notification());
     }, props.closeDuration);
   }, []);
   return (

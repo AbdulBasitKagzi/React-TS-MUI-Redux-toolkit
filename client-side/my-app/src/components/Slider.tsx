@@ -57,15 +57,10 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
       <Box sx={{ mx: 5, position: "relative" }}>
         <Swiper
-          // onSwiper={setSwiperRef}
           ref={sliderRef}
           slidesPerView={4}
           centeredSlides={false}
           spaceBetween={30}
-          // pagination={{
-          //   type: "fraction",
-          // }}
-          // navigation={true}
           modules={[Navigation]}
           className="mySwiper"
         >
@@ -295,8 +290,8 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
               sm: "none",
               xs: "none",
             },
-            top: { xl: "22%", lg: "22%", md: "25%", sm: "40%" },
-            left: { xl: "2%", lg: "2%", md: "1%" },
+            top: { xl: "22%", lg: "20%", md: "22%", sm: "40%" },
+            left: { xl: 0, lg: 0, md: "-2.4%" },
           }}
           // className={classes.prev_arrow}
           onClick={handlePrev}
@@ -315,7 +310,7 @@ const Slider: React.FC<Props> = ({ bestDeals }) => {
               xs: "none",
             },
 
-            top: { xl: "22%", lg: "22%", md: "25%", sm: "40%" },
+            top: { xl: "22%", lg: "20%", md: "22%", sm: "40%" },
             left: { xl: "98%", lg: "98%", md: "100%", sm: "96%" },
           }}
           // className={classes.next_arrow}

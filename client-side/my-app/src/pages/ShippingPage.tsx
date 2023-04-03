@@ -292,7 +292,7 @@ const ShippingPage: React.FC = () => {
                 xl: "608px",
                 lg: "608px",
                 md: "608px",
-                sm: "608px",
+                sm: "400px",
                 xs: "300px",
               },
               paddingTop: "43px",
@@ -505,59 +505,64 @@ const ShippingPage: React.FC = () => {
                 </Typography>
               </Box>
               <Box sx={{ display: "flex" }}>
-                <Radio
-                  checked={selectedValue === "creditCard"}
-                  onChange={handleChange}
-                  value="creditCard"
-                  name="radio_buttons"
-                  inputProps={{ "aria-label": "A" }}
-                  sx={{
-                    color: "#111827",
-                    "&.Mui-checked": {
+                <Box>
+                  <Radio
+                    checked={selectedValue === "creditCard"}
+                    onChange={handleChange}
+                    value="creditCard"
+                    name="radio_buttons"
+                    inputProps={{ "aria-label": "A" }}
+                    sx={{
                       color: "#111827",
-                    },
-                  }}
-                />
+                      "&.Mui-checked": {
+                        color: "#111827",
+                      },
+                    }}
+                  />
 
-                <img
-                  src={creditCard}
-                  alt="creditcard"
-                  style={{ paddingRight: "20px" }}
-                />
-                <Radio
-                  checked={selectedValue === "paypal"}
-                  onChange={handleChange}
-                  value="paypal"
-                  name="radio_buttons"
-                  inputProps={{ "aria-label": "B" }}
-                  sx={{
-                    color: "#111827",
-                    "&.Mui-checked": {
+                  <img
+                    src={creditCard}
+                    alt="creditcard"
+                    style={{ paddingRight: "20px" }}
+                  />
+                </Box>
+                <Box>
+                  <Radio
+                    checked={selectedValue === "paypal"}
+                    onChange={handleChange}
+                    value="paypal"
+                    name="radio_buttons"
+                    inputProps={{ "aria-label": "B" }}
+                    sx={{
                       color: "#111827",
-                    },
-                  }}
-                />
-                <img
-                  src={paypal_icon}
-                  alt="creditcard"
-                  width="90px"
-                  style={{ paddingRight: "20px" }}
-                />
-
-                <Radio
-                  checked={selectedValue === "bitcoin"}
-                  onChange={handleChange}
-                  value="bitcoin"
-                  name="radio_buttons"
-                  inputProps={{ "aria-label": "B" }}
-                  sx={{
-                    color: "#111827",
-                    "&.Mui-checked": {
+                      "&.Mui-checked": {
+                        color: "#111827",
+                      },
+                    }}
+                  />
+                  <img
+                    src={paypal_icon}
+                    alt="creditcard"
+                    width="90px"
+                    style={{ paddingRight: "20px" }}
+                  />
+                </Box>
+                <Box>
+                  <Radio
+                    checked={selectedValue === "bitcoin"}
+                    onChange={handleChange}
+                    value="bitcoin"
+                    name="radio_buttons"
+                    inputProps={{ "aria-label": "B" }}
+                    sx={{
                       color: "#111827",
-                    },
-                  }}
-                />
-                <img src={bitcoin} alt="creditcard" />
+                      "&.Mui-checked": {
+                        color: "#111827",
+                      },
+                    }}
+                  />
+                  <img src={bitcoin} alt="creditcard" />
+                </Box>
               </Box>
               <Box sx={{ textAlign: "left", mt: 10 }}>
                 <Typography
@@ -624,7 +629,7 @@ const ShippingPage: React.FC = () => {
                     value={paymentInformation.expiration}
                     autoComplete="shipping address-line1"
                     variant="standard"
-                    placeholder="1/23"
+                    placeholder="01/23"
                     sx={{
                       paddingBottom: 4,
                     }}
@@ -715,7 +720,7 @@ const ShippingPage: React.FC = () => {
               <Box
                 sx={{
                   mr: 3,
-                  ml: { xl: "10%", lg: "10%", md: "10%", sm: "10%", xs: "35%" },
+                  ml: { xl: "10%", lg: "10%", md: "45%", sm: "40%", xs: "10%" },
                   mb: { md: 2, sm: 2, xs: 2 },
                 }}
               >
@@ -775,7 +780,7 @@ const ShippingPage: React.FC = () => {
                 xs: "100%",
               },
               mt: 14.5,
-              px: { xl: 0, lg: 0, md: 0, sm: 0, xs: 1.5 },
+              px: { xl: 0, lg: 0, md: 0, sm: 2, xs: 1.5 },
             }}
           >
             <Box sx={{ backgroundColor: "#EFEFF4", borderRadius: 8 }}>
@@ -841,7 +846,7 @@ const ShippingPage: React.FC = () => {
                                 fontSize: "14px",
                                 color: "#616161",
                                 wordBreak: "break-all",
-                                pl: { xl: 6, lg: 6, md: 6, sm: 6, xs: 3 },
+                                // pl: { xl: 6, lg: 6, md: 6, sm: 6, xs: 3 },
                                 pt: 1,
                               }}
                             >
@@ -857,8 +862,8 @@ const ShippingPage: React.FC = () => {
                             fontWeight: 700,
                             color: "#616161",
                             wordBreak: "break-all",
-                            pl: 6,
-                            pr: 9,
+                            pl: "19px",
+                            pr: 6,
                             pt: 1,
                           }}
                         >
@@ -916,11 +921,14 @@ const ShippingPage: React.FC = () => {
                     <Box
                       sx={{
                         display: "flex",
-                        justifyContent: "space-between",
+                        justifyContent: {
+                          sm: "space-around",
+                          xs: "space-between",
+                        },
                         pb: 2,
                       }}
                     >
-                      <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                      <Box sx={{ display: "flex", mt: 2 }}>
                         {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
                         <Box sx={{ pl: 2, pr: 2 }}>
                           <Typography sx={{ color: "#616161" }}>
@@ -986,13 +994,18 @@ const ShippingPage: React.FC = () => {
                       </Box>
                       <Box
                         sx={{
-                          mr: { xl: 6, lg: 6, md: 6, sm: 3, xs: 3 },
+                          mr: {
+                            lg: 0,
+                            md: 0,
+                            sm: 0,
+                            xs: "32px",
+                          },
                           mt: 7,
                         }}
                       >
                         <Typography
                           sx={{
-                            fontSize: "18px",
+                            fontSize: { sm: "22px", xs: "18px" },
                             fontFamily: "Jost",
                             fontWeight: 700,
                             color: "#616161",
@@ -1025,7 +1038,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "18px",
@@ -1046,7 +1059,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "18px",
@@ -1071,7 +1084,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "18px",
@@ -1092,7 +1105,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "18px",
@@ -1117,7 +1130,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "18px",
@@ -1138,7 +1151,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "18px",
@@ -1164,7 +1177,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "24px",
@@ -1185,7 +1198,7 @@ const ShippingPage: React.FC = () => {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "Inter",
+                          fontFamily: "Jost",
                           fontWeight: 800,
                           fontSize: {
                             xl: "24px",
@@ -1196,7 +1209,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          px: { md: "16px", xs: "24px" },
                           wordBreak: "break-all",
                         }}
                       >
@@ -1212,78 +1225,78 @@ const ShippingPage: React.FC = () => {
               {/* enter code above */}
             </Box>
             {/* button on small screen */}
-            <Box
-              sx={{
-                display: {
-                  xs: "block",
-                  xl: "none",
-                  lg: "none",
-                  md: "none",
-                  sm: "none",
-                },
-                justifyContent: "start",
-                flexWrap: "wrap",
-                mt: 15,
-              }}
-            >
-              {page === 2 && (
-                <Box
-                  sx={{
-                    mr: 3,
-                    ml: {
-                      xl: "10%",
-                      lg: "10%",
-                      md: "10%",
-                      sm: "10%",
-                      xs: "35%",
-                    },
-                    mb: { md: 2, sm: 2, xs: 2 },
-                  }}
-                >
-                  <Button
-                    variant="outlined"
-                    sx={{ borderRadius: 0 }}
-                    onClick={() => setPage(page - 1)}
-                  >
-                    <Typography>Back</Typography>
-                  </Button>
-                </Box>
-              )}
-
-              <Button
-                variant="outlined"
-                sx={{
-                  backgroundColor: "#111827",
-                  color: "#FFFFFF",
-                  borderRadius: 0,
-                  // ml: "50%",
-                  mx: "auto",
-                  // mt: 15,
-                }}
-                onClick={() => {
-                  if (page === 1) {
-                    handleUserDetail(userInformation);
-                    // setPage(page + 1);
-                  } else if (page === 2) {
-                    handlePaymentDetail(paymentInformation);
-                    // setPage(page + 1);
-                  } else {
-                    dispatch(cartActions.emptyCart());
-                    navigate("/");
-                  }
-                }}
-              >
-                <Typography sx={{ ml: 5, mr: 5 }}>
-                  {page === 2
-                    ? `Confirm Payment of: $ ${total + vat_tax + shipping}.00`
-                    : page === 3
-                    ? "Continue Shopping"
-                    : "Proceed to Payment"}
-                </Typography>
-              </Button>
-            </Box>
           </Box>
         )}
+        <Box
+          sx={{
+            display: {
+              xs: "flex",
+              xl: "none",
+              lg: "none",
+              md: "none",
+              sm: "none",
+            },
+            justifyContent: "start",
+            flexWrap: "wrap",
+            mt: 15,
+          }}
+        >
+          {page === 2 && (
+            <Box
+              sx={{
+                mr: 3,
+                ml: {
+                  xl: "10%",
+                  lg: "10%",
+                  md: "10%",
+                  sm: "10%",
+                  xs: "35%",
+                },
+                mb: { md: 2, sm: 2, xs: 2 },
+              }}
+            >
+              <Button
+                variant="outlined"
+                sx={{ borderRadius: 0 }}
+                onClick={() => setPage(page - 1)}
+              >
+                <Typography>Back</Typography>
+              </Button>
+            </Box>
+          )}
+
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#111827",
+              color: "#FFFFFF",
+              borderRadius: 0,
+              // ml: "50%",
+              mx: "auto",
+              // mt: 15,
+            }}
+            onClick={() => {
+              if (page === 1) {
+                handleUserDetail(userInformation);
+                // setPage(page + 1);
+              } else if (page === 2) {
+                handlePaymentDetail(paymentInformation);
+                // setPage(page + 1);
+              } else {
+                dispatch(cartActions.emptyCart());
+                navigate("/");
+              }
+            }}
+          >
+            <Typography sx={{ ml: 5, mr: 5 }}>
+              {page === 2
+                ? `Confirm Payment of: $ ${total + vat_tax + shipping}.00`
+                : page === 3
+                ? "Continue Shopping"
+                : "Proceed to Payment"}
+            </Typography>
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

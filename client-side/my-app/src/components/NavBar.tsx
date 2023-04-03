@@ -100,6 +100,8 @@ export default function DrawerAppBar(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   const [openModel, setOpenModel] = React.useState<boolean>(false);
+  const [value, setValue] = React.useState<number>(-1);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -119,6 +121,7 @@ export default function DrawerAppBar(props: Props) {
             openModel={openModel}
             setOpenModel={setOpenModel}
             setBackground={setBackground}
+            setValue={setValue}
           />
         )}
         <Toolbar sx={{ display: "block" }}>
@@ -168,7 +171,7 @@ export default function DrawerAppBar(props: Props) {
                 fontFamily: "Josefin Sans",
                 // display: "inline-block",
                 // mr: "32px",
-                ml: "105px",
+                ml: { xl: "105px", lg: "105px", md: "75px" },
                 cursor: "pointer",
                 display: {
                   xs: "none",
@@ -180,7 +183,10 @@ export default function DrawerAppBar(props: Props) {
               }}
             >
               {gender.map(
-                (item: { id: number; value: string; slug: string }) => (
+                (
+                  item: { id: number; value: string; slug: string },
+                  index: number
+                ) => (
                   <Typography
                     key={item.id}
                     sx={{
@@ -190,6 +196,8 @@ export default function DrawerAppBar(props: Props) {
                       display: "inline-block",
                       mr: "32px",
                       mt: "27px",
+                      textDecoration:
+                        item.id === Number(value) ? "underline" : "none",
                     }}
                     onClick={() => {
                       item.id === 0
@@ -197,7 +205,9 @@ export default function DrawerAppBar(props: Props) {
                         : dispatch(userActions.makeRoute(item.slug));
                       if (item.id !== 0) {
                         setBackground("#FFFFFF");
-                        setOpenModel(!openModel);
+                        setOpenModel(true);
+
+                        setValue(item.id);
                       }
                     }}
                   >
@@ -209,7 +219,8 @@ export default function DrawerAppBar(props: Props) {
             <Box
               sx={{
                 display: "flex",
-                marginRight: { xl: "105px", sm: 0 },
+                marginRight: { lg: "58px", md: "30px", sm: 0 },
+                mt: { md: 0, sm: 2 },
               }}
             >
               {navIcons.map((item) => (
