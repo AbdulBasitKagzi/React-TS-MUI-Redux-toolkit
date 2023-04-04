@@ -264,7 +264,7 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
               sm: "none",
               xs: "none",
             },
-            top: { xl: "22%", lg: "22%", md: "25%", sm: "40%" },
+            top: { xl: "22%", lg: "22%", md: "21%", sm: "40%" },
             left: { xl: "2%", lg: "2%", md: "1%" },
           }}
           // className={classes.prev_arrow}
@@ -284,7 +284,7 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
               xs: "none",
             },
 
-            top: { xl: "22%", lg: "22%", md: "25%", sm: "40%" },
+            top: { xl: "22%", lg: "22%", md: "21%", sm: "40%" },
             left: { xl: "98%", lg: "98%", md: "100%", sm: "96%" },
           }}
           // className={classes.next_arrow}

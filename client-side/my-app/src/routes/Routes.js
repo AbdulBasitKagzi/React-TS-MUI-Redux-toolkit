@@ -1,51 +1,64 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import SignIn from "../pages/Login";
-import Home from "../pages/Home";
-import CategoryDetail from "../pages/CategoryDetail";
+// import SignIn from "../pages/Login";
+
 import NoPage from "../pages/NoPage";
-import ItemDetailView from "../pages/ItemDetailView";
-import ShippingPage from "../pages/ShippingPage";
+import Loader from "../components/Loader";
+
+// implementing lazyloading
+const LazyLogIn = lazy(() => import("../pages/Login"));
+const LazyHome = lazy(() => import("../pages/Home"));
+const LazyCategoryDetail = lazy(() => import("../pages/CategoryDetail"));
+const LazyItemDetailView = lazy(() => import("../pages/ItemDetailView"));
+const LazyShippingPage = lazy(() => import("../pages/ShippingPage"));
 
 function MainRoutes() {
   const routes_arr = [
     {
       id: "login",
       path: "/login",
-      component: <SignIn />,
+      component: <LazyLogIn />,
       protected: false,
     },
     {
       id: "home",
       path: "/",
-      component: <Home />,
+      component: <LazyHome />,
       protected: true,
     },
+
     {
       id: "categorydetal",
       path: "/categorydetail/:id/:type",
-      component: <CategoryDetail />,
+      component: <LazyCategoryDetail />,
       protected: true,
     },
     {
       id: "shippingpage",
       path: "/shippingpage",
-      component: <ShippingPage />,
+      component: <LazyShippingPage />,
       protected: true,
     },
     {
       id: "itemdetailview",
       path: "/itemdetailview/:id",
-      component: <ItemDetailView />,
+      component: <LazyItemDetailView />,
       protected: true,
     },
   ];
   return (
-    <Routes>
-      {routes_arr.map((routes) => (
-        <Route key={routes.id} path={routes.path} element={routes.component} />
-      ))}
-      <Route path="*" element={<NoPage />} />
-    </Routes>
+    <Suspense fallback=<Loader />>
+      <Routes>
+        {routes_arr.map((routes) => (
+          <Route
+            key={routes.id}
+            path={routes.path}
+            element={routes.component}
+          />
+        ))}
+        <Route path="*" element={<NoPage />} />
+      </Routes>
+    </Suspense>
   );
 }
 

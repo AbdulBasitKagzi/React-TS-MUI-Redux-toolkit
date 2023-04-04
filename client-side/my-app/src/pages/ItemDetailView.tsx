@@ -8,10 +8,12 @@ import DescriptionAlerts from "../components/Alert";
 import { useNavigate } from "react-router-dom";
 import { productActions } from "../store/userSlice/productSlice";
 
+// images and icons import
 import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
 import star_active from "../assets/icons/star_active.svg";
 import star_disabled from "../assets/icons/star_disabled.svg";
+import add_to_favourite from "../assets/icons/add_to_favorite.svg";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -441,30 +443,34 @@ const ItemDetailView: React.FC = () => {
                 mx: "auto",
               }}
             >
-              <Box
-                sx={{
-                  width: "142px",
-                  height: "48px",
-                  background: "#E5E5EA",
-                  borderRadius: 3,
-                  textAlign: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                  ml: { sm: 1, xs: 2 },
-                  mt: { lg: 1, md: 2, sm: 1, xs: 2 },
-                }}
-              >
-                <Typography
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Box
                   sx={{
-                    fontFamily: "Inter",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    my: "auto",
+                    width: "142px",
+                    height: "48px",
+                    background: "#E5E5EA",
+                    borderRadius: 3,
+                    textAlign: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    ml: { sm: 1, xs: 2 },
+                    mt: { lg: 1, md: 2, sm: 1, xs: 2 },
                   }}
                 >
-                  Popular
-                </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: "Inter",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      my: "auto",
+                    }}
+                  >
+                    Popular
+                  </Typography>
+                </Box>
+                <img className="heart" src={add_to_favourite} alt="heart" />
               </Box>
+
               <Box
                 sx={{
                   textAlign: "left",
@@ -746,7 +752,7 @@ const ItemDetailView: React.FC = () => {
               <Box
                 sx={{
                   textAlign: "left",
-                  pl: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
+                  pl: { sm: 2, xs: 2 },
                 }}
               >
                 <Typography

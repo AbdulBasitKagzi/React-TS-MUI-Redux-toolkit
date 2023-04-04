@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { brandFilter, categoriesFilter } from "../assets/Constants";
 import photo from "../assets/images/photo.png";
 
-// images and icon import
 // mui imports
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -31,7 +30,7 @@ const style = {
   p: 4,
   maxWidth: "1600px",
   mx: "auto",
-  // overflow: "auto",
+  overflowX: "auto",
 };
 
 type props = {
@@ -67,7 +66,7 @@ const NavbarModel: React.FC<props> = ({
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
       >
-        <Box sx={style} style={{ overflow: "scroll" }}>
+        <Box sx={style}>
           <Box>
             <Box
               sx={{
@@ -97,8 +96,8 @@ const NavbarModel: React.FC<props> = ({
                   // flexWrap: "wrap",
                 }}
               >
-                <Box>
-                  <List sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                <Box sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                  <List>
                     <ListItem
                       sx={{
                         fontFamily: "Inter",
@@ -133,8 +132,8 @@ const NavbarModel: React.FC<props> = ({
                     ))}
                   </List>
                 </Box>
-                <Box>
-                  <List sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                <Box sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                  <List>
                     <ListItem
                       sx={{
                         fontFamily: "Inter",
@@ -169,8 +168,8 @@ const NavbarModel: React.FC<props> = ({
                     ))}
                   </List>
                 </Box>
-                <Box>
-                  <List sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                <Box sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                  <List>
                     <ListItem
                       sx={{
                         fontFamily: "Inter",

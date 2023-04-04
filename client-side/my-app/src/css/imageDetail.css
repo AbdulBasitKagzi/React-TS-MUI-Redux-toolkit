@@ -2,10 +2,19 @@
   width: 20px;
   height: 28px;
 }
+.heart {
+  margin-right: 50px;
+}
 
 @media (max-width: 1200px) {
   .icons {
     width: 10px;
     height: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .heart {
+    margin-right: 22px;
   }
 }

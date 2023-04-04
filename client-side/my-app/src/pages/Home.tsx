@@ -1015,6 +1015,7 @@ function Home() {
                         },
                         height: { xl: 61, lg: 50, xs: 30 },
                         mt: 10,
+                        mb: 2,
                       }}
                     >
                       Explore
@@ -1283,6 +1284,7 @@ function Home() {
                         // },
                         // height: { xl: 61, lg: 50, xs: 30 },
                         mt: { sm: 10, xs: 5 },
+
                         mb: 1,
                       }}
                     >

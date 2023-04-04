@@ -11,7 +11,6 @@ import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
 import heart from "../assets/icons/heartGroup.svg";
 
 // mui imports
-
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -179,27 +178,30 @@ const FilterGrid: React.FC<props> = (props) => {
                     navigate(`/itemdetailview/${arr.slug}`);
                   }}
                 >
-                  {arr?.productImages?.map(
-                    (
-                      image: { id: number; productImage: string | undefined },
-                      index: number
-                    ) => {
-                      if (index === 0) {
-                        return (
-                          <>
-                            <img
-                              src={image.productImage}
-                              width="100%"
-                              // height="100%"
-                              alt="women"
-                            />
-                          </>
-                        );
-                      } else {
-                        return;
+                  <Box>
+                    {arr?.productImages?.map(
+                      (
+                        image: { id: number; productImage: string | undefined },
+                        index: number
+                      ) => {
+                        if (index === 0) {
+                          return (
+                            <>
+                              <img
+                                className="product_image"
+                                src={image.productImage}
+                                alt={image.productImage}
+                                width="100%"
+                                height="300px"
+                              />
+                            </>
+                          );
+                        } else {
+                          return;
+                        }
                       }
-                    }
-                  )}
+                    )}
+                  </Box>
 
                   <Box sx={{ position: "absolute", top: 12, right: 15 }}>
                     <img src={heart} alt="heartgroup" width="40px" />
@@ -211,9 +213,10 @@ const FilterGrid: React.FC<props> = (props) => {
                       textAlign: "left",
                       // display: "inline-flex",
                       // flexDirection: "column",
-                      // justifyContent: "center",
+                      justifyContent: "space-between",
                       mb: { xl: 1, lg: 1 },
                       ml: { xl: 2, lg: 2 },
+                      mt: 5,
                     }}
                   >
                     <Typography
@@ -227,8 +230,12 @@ const FilterGrid: React.FC<props> = (props) => {
                           xs: "22px",
                         },
                         fontWeight: 400,
-                        wordBreak: "break-all",
+                        // wordBreak: "break-all",
                         pl: 1,
+                        height: { lg: 120, md: 120, sm: 120 },
+                        // whiteSpace: { lg: "normal", md: "nowrap" },
+                        // overflow: { lg: "block", md: "hidden" },
+                        // textOverflow: { lg: "none", md: "ellipsis" },
                       }}
                     >
                       {arr.productName}

@@ -274,6 +274,202 @@ export default function FilterSlider() {
     </Box>
   );
 
+  const desktop_filter = () => {
+    return (
+      <>
+        <Box
+          sx={{
+            maxWidth: {
+              xl: "450px",
+              lg: "450px",
+              md: "450px",
+              sm: "255px",
+              xs: "230px",
+            },
+            // maxHeight: { xl: "2000px", lg: "2000px" },
+            display: {
+              xl: "block",
+              lg: "block",
+              md: "block",
+              sm: "block",
+              xs: "none",
+            },
+            border: 2,
+            backgroundColor: "#F9FAFB",
+            ml: { xl: 8, lg: 6, md: 4, sm: 2 },
+            // mt: { sm: "2rem", md: "9.5rem" },
+          }}
+        >
+          <Box sx={{ mx: 4, textAlign: "left", mt: 8 }}>
+            <Typography
+              sx={{
+                fontFamily: "Jost",
+                fontWeight: "600",
+                fontSize: "16px",
+                letterSpacing: "0.02em",
+                textTransform: "uppercase",
+                color: "#1F2937",
+                // marginBottom: "10px",
+                mb: 3,
+              }}
+            >
+              PRICES
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography
+                id="range-slider"
+                gutterBottom
+                sx={{
+                  fontFamily: "Jost",
+                  fontWeight: "400",
+                  fontSize: "20px",
+                  letterSpacing: "0.02em",
+                  color: "#4B5563",
+                }}
+              >
+                Range
+              </Typography>
+              <Typography
+                id="range-slider"
+                gutterBottom
+                sx={{
+                  fontFamily: "Jost",
+                  fontWeight: "500",
+                  fontSize: "20px",
+                  letterSpacing: "0.02em",
+                  color: "#1F2937",
+                }}
+              >
+                ${minValue}-${maxValue}
+              </Typography>
+            </Box>
+            <Slider
+              sx={{
+                color: "#EB5757",
+                width: {
+                  xl: "376px",
+                  lg: "376px",
+                  md: "180px",
+                  sm: "180px",
+                  xs: "180px",
+                },
+              }}
+              // value={priceFilter}
+              // onChange={(_, value) => setPriceFilter(value as [number, number])}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              value={value}
+              max={1000}
+              min={1}
+              name="price"
+              disableSwap
+              getAriaLabel={() => "Minimum distance"}
+            />
+          </Box>
+          {/* <Box sx={{ width: 500 }}>
+        <Slider
+          getAriaLabel={() => "Temperature range"}
+          value={value}
+          onChange={handleChange}
+          valueLabelDisplay="auto"
+          getAriaValueText={valuetext}
+        />
+      </Box> */}
+          <FormGroup>
+            <Typography
+              textAlign="left"
+              sx={{
+                fontFamily: "Jost",
+                fontWeight: 600,
+                fontSize: "16px",
+                color: "Grey/grey-800",
+                mt: 10,
+                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
+              }}
+            >
+              Brands
+            </Typography>
+            {brandFilter.map((brand) => (
+              <FormControlLabel
+                control={<Checkbox />}
+                label={brand.value}
+                sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
+                onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                  setClick(true);
+                  handleBrandFilter(
+                    brand.id,
+                    (e.target as unknown as { checked: boolean }).checked
+                  );
+                }}
+              />
+            ))}
+            <Typography
+              textAlign="left"
+              sx={{
+                fontFamily: "Jost",
+                fontWeight: 600,
+                fontSize: "16px",
+                color: "Grey/grey-800",
+                mt: 10,
+                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
+              }}
+            >
+              Categories
+            </Typography>
+            {categoriesFilter.map((category) => (
+              <FormControlLabel
+                control={<Checkbox />}
+                label={category.value}
+                sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
+                onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                  setClick(true);
+                  handleCategoriesFilter(
+                    category.id,
+                    (e.target as unknown as { checked: boolean }).checked
+                  );
+                }}
+              />
+            ))}
+            <Typography
+              textAlign="left"
+              sx={{
+                fontFamily: "Jost",
+                fontWeight: 600,
+                fontSize: "16px",
+                color: "Grey/grey-800",
+                mt: 10,
+                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
+              }}
+            >
+              Size
+            </Typography>
+            {sizeFilter.map((size) => (
+              <FormControlLabel
+                control={<Checkbox />}
+                label={size.value}
+                sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
+                onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                  setClick(true);
+                  handleSizeFilter(
+                    size.id,
+                    (e.target as unknown as { checked: boolean }).checked
+                  );
+                }}
+              />
+            ))}
+          </FormGroup>
+        </Box>
+      </>
+    );
+  };
+
+  let desktop = desktop_filter();
+
   return (
     <>
       <Box
@@ -291,194 +487,8 @@ export default function FilterSlider() {
       >
         <FilterListIcon />
       </Box>
+      {desktop}
 
-      <Box
-        sx={{
-          maxWidth: {
-            xl: "450px",
-            lg: "450px",
-            md: "450px",
-            sm: "255px",
-            xs: "230px",
-          },
-          maxHeight: { xl: "2000px", lg: "2000px" },
-          display: {
-            xl: "block",
-            lg: "block",
-            md: "block",
-            sm: "block",
-            xs: "none",
-          },
-          border: 2,
-          backgroundColor: "#F9FAFB",
-          ml: { xl: 8, lg: 6, md: 4, sm: 2 },
-          // mt: { sm: "2rem", md: "9.5rem" },
-        }}
-      >
-        <Box sx={{ mx: 4, textAlign: "left", mt: 8 }}>
-          <Typography
-            sx={{
-              fontFamily: "Jost",
-              fontWeight: "600",
-              fontSize: "16px",
-              letterSpacing: "0.02em",
-              textTransform: "uppercase",
-              color: "#1F2937",
-              // marginBottom: "10px",
-              mb: 3,
-            }}
-          >
-            PRICES
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography
-              id="range-slider"
-              gutterBottom
-              sx={{
-                fontFamily: "Jost",
-                fontWeight: "400",
-                fontSize: "20px",
-                letterSpacing: "0.02em",
-                color: "#4B5563",
-              }}
-            >
-              Range
-            </Typography>
-            <Typography
-              id="range-slider"
-              gutterBottom
-              sx={{
-                fontFamily: "Jost",
-                fontWeight: "500",
-                fontSize: "20px",
-                letterSpacing: "0.02em",
-                color: "#1F2937",
-              }}
-            >
-              ${minValue}-${maxValue}
-            </Typography>
-          </Box>
-          <Slider
-            sx={{
-              color: "#EB5757",
-              width: {
-                xl: "376px",
-                lg: "376px",
-                md: "180px",
-                sm: "180px",
-                xs: "180px",
-              },
-            }}
-            // value={priceFilter}
-            // onChange={(_, value) => setPriceFilter(value as [number, number])}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            value={value}
-            max={1000}
-            min={1}
-            name="price"
-            disableSwap
-            getAriaLabel={() => "Minimum distance"}
-          />
-        </Box>
-        {/* <Box sx={{ width: 500 }}>
-        <Slider
-          getAriaLabel={() => "Temperature range"}
-          value={value}
-          onChange={handleChange}
-          valueLabelDisplay="auto"
-          getAriaValueText={valuetext}
-        />
-      </Box> */}
-        <FormGroup>
-          <Typography
-            textAlign="left"
-            sx={{
-              fontFamily: "Jost",
-              fontWeight: 600,
-              fontSize: "16px",
-              color: "Grey/grey-800",
-              mt: 10,
-              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
-            }}
-          >
-            Brands
-          </Typography>
-          {brandFilter.map((brand) => (
-            <FormControlLabel
-              control={<Checkbox />}
-              label={brand.value}
-              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                setClick(true);
-                handleBrandFilter(
-                  brand.id,
-                  (e.target as unknown as { checked: boolean }).checked
-                );
-              }}
-            />
-          ))}
-          <Typography
-            textAlign="left"
-            sx={{
-              fontFamily: "Jost",
-              fontWeight: 600,
-              fontSize: "16px",
-              color: "Grey/grey-800",
-              mt: 10,
-              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
-            }}
-          >
-            Categories
-          </Typography>
-          {categoriesFilter.map((category) => (
-            <FormControlLabel
-              control={<Checkbox />}
-              label={category.value}
-              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                setClick(true);
-                handleCategoriesFilter(
-                  category.id,
-                  (e.target as unknown as { checked: boolean }).checked
-                );
-              }}
-            />
-          ))}
-          <Typography
-            textAlign="left"
-            sx={{
-              fontFamily: "Jost",
-              fontWeight: 600,
-              fontSize: "16px",
-              color: "Grey/grey-800",
-              mt: 10,
-              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 },
-            }}
-          >
-            Size
-          </Typography>
-          {sizeFilter.map((size) => (
-            <FormControlLabel
-              control={<Checkbox />}
-              label={size.value}
-              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-              onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                setClick(true);
-                handleSizeFilter(
-                  size.id,
-                  (e.target as unknown as { checked: boolean }).checked
-                );
-              }}
-            />
-          ))}
-        </FormGroup>
-      </Box>
       <Box component="nav">
         <Drawer
           // container={container}

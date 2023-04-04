@@ -24,6 +24,7 @@ import Divider from "@mui/material/Divider";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { MenuItem } from "@mui/material";
 import { Select } from "@mui/material";
+import AdjustIcon from "@mui/icons-material/Adjust";
 
 // for date and time
 import dayjs from "dayjs";
@@ -299,7 +300,18 @@ const ShippingPage: React.FC = () => {
               mx: "auto",
             }}
           >
-            <Stepper activeStep={page} alternativeLabel>
+            <Stepper
+              activeStep={page}
+              alternativeLabel
+              sx={{
+                ".MuiStep-root": {
+                  color: "#111827",
+                },
+                ".Mui-completed": {
+                  color: "#111827",
+                },
+              }}
+            >
               {steps.map((label) => (
                 <Step key={label}>
                   <StepLabel>{label}</StepLabel>
@@ -772,18 +784,24 @@ const ShippingPage: React.FC = () => {
         {page !== 3 && (
           <Box
             sx={{
-              maxWidth: {
-                xl: "50%",
-                lg: "50%",
-                md: "50%",
-                sm: "50%",
-                xs: "100%",
-              },
+              // maxWidth: {
+              //   xl: "50%",
+              //   lg: "50%",
+              //   md: "50%",
+              //   sm: "50%",
+              //   xs: "100%",
+              // },
+              width: { lg: "35%", md: "40%", sm: "50%", xs: "100%" },
               mt: 14.5,
               px: { xl: 0, lg: 0, md: 0, sm: 2, xs: 1.5 },
             }}
           >
-            <Box sx={{ backgroundColor: "#EFEFF4", borderRadius: 8 }}>
+            <Box
+              sx={{
+                backgroundColor: "#EFEFF4",
+                borderRadius: 8,
+              }}
+            >
               <Box sx={{ pt: 2, mb: 2 }}>
                 <Typography
                   sx={{
@@ -829,7 +847,7 @@ const ShippingPage: React.FC = () => {
                     <Box
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <Box sx={{ width: "56px", height: "65px", pl: 3 }}>
+                      <Box sx={{ width: "75px", height: "65px", pl: 3 }}>
                         <img
                           src={product.productImages[0].productImage}
                           alt="product"
@@ -840,18 +858,21 @@ const ShippingPage: React.FC = () => {
                       <Box>
                         {product.productDescription.length &&
                           product.productDescription.map((desc: string) => (
-                            <Typography
-                              sx={{
-                                fontFamily: "Inter",
-                                fontSize: "14px",
-                                color: "#616161",
-                                wordBreak: "break-all",
-                                // pl: { xl: 6, lg: 6, md: 6, sm: 6, xs: 3 },
-                                pt: 1,
-                              }}
-                            >
-                              {desc}
-                            </Typography>
+                            <Box>
+                              <Typography
+                                sx={{
+                                  fontFamily: "Inter",
+                                  fontSize: "14px",
+                                  color: "#616161",
+                                  wordBreak: "break-all",
+                                  textAlign: "left",
+                                  // pl: { xl: 6, lg: 6, md: 6, sm: 6, xs: 3 },
+                                  pt: 1,
+                                }}
+                              >
+                                {desc}
+                              </Typography>
+                            </Box>
                           ))}
                       </Box>
                       <Box>
@@ -922,7 +943,8 @@ const ShippingPage: React.FC = () => {
                       sx={{
                         display: "flex",
                         justifyContent: {
-                          sm: "space-around",
+                          md: "space-between",
+                          sm: "space-between",
                           xs: "space-between",
                         },
                         pb: 2,
@@ -998,7 +1020,7 @@ const ShippingPage: React.FC = () => {
                             lg: 0,
                             md: 0,
                             sm: 0,
-                            xs: "32px",
+                            xs: "20px",
                           },
                           mt: 7,
                         }}
@@ -1009,6 +1031,7 @@ const ShippingPage: React.FC = () => {
                             fontFamily: "Jost",
                             fontWeight: 700,
                             color: "#616161",
+                            pr: { xs: 3 },
                           }}
                         >
                           $ {product.quantity * product.productCurrentPrice}.00
@@ -1049,7 +1072,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          pl: 5,
                           wordBreak: "break-all",
                         }}
                       >
@@ -1070,7 +1093,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          pr: 5,
                           wordBreak: "break-all",
                         }}
                       >
@@ -1091,11 +1114,11 @@ const ShippingPage: React.FC = () => {
                             lg: "18px",
                             md: "18px",
                             sm: "16px",
-                            xs: "16px",
+                            xs: "15px",
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          pl: 5,
                           wordBreak: "break-all",
                         }}
                       >
@@ -1116,7 +1139,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          pr: 5,
                           wordBreak: "break-all",
                         }}
                       >
@@ -1141,7 +1164,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          pl: 5,
                           wordBreak: "break-all",
                         }}
                       >
@@ -1162,7 +1185,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          pr: 5,
                           wordBreak: "break-all",
                         }}
                       >
@@ -1188,7 +1211,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: 5,
+                          pl: 5,
                           wordBreak: "break-all",
                         }}
                       >
@@ -1209,7 +1232,7 @@ const ShippingPage: React.FC = () => {
                           },
                           color: "#616161",
                           py: 2,
-                          px: { md: "16px", xs: "24px" },
+                          pr: { md: "16px", xs: "24px" },
                           wordBreak: "break-all",
                         }}
                       >
