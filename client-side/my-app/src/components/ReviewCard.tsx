@@ -131,46 +131,53 @@ const ReviewCard: React.FC = () => {
                       // width="89px"
                       // height="89px"
                     />
-                    <Box sx={{ display: "flex" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 3,
+                        justifyContent: "space-between",
+                      }}
+                    >
                       <Box
                         sx={{
                           display: "flex",
-                          pl: {
-                            xl: "20.5px",
-                            lg: "20.5px",
-                            md: "20.5px",
-                            sm: "4.5px",
-                            xs: "4.5px",
-                          },
-                          pt: {
-                            xl: "37.5px",
-                            lg: "37.5px",
-                            md: "37.5px",
-                            sm: "21px",
-                            xs: "21px",
-                          },
+                          // pl: {
+                          //   xl: "20.5px",
+                          //   lg: "20.5px",
+                          //   md: "20.5px",
+                          //   sm: "4.5px",
+                          //   xs: "4.5px",
+                          // },
+                          // pt: {
+                          //   xl: "37.5px",
+                          //   lg: "37.5px",
+                          //   md: "37.5px",
+                          //   sm: "21px",
+                          //   xs: "21px",
+                          // },
                         }}
                       >
                         <img src={eye} alt="eye" width="24px" height="22px" />
-                        <Typography sx={{ ml: 1 }}>35</Typography>
+                        <Typography sx={{}}>35</Typography>
                       </Box>
                       <Box
                         sx={{
                           display: "flex",
-                          pl: {
-                            xl: "20.5px",
-                            lg: "20.5px",
-                            md: "20.5px",
-                            sm: "4.5px",
-                            xs: "4.5px",
-                          },
-                          pt: {
-                            xl: "37.5px",
-                            lg: "37.5px",
-                            md: "37.5px",
-                            sm: "21px",
-                            xs: "21px",
-                          },
+                          // pl: {
+                          //   xl: "20.5px",
+                          //   lg: "20.5px",
+                          //   md: "20.5px",
+                          //   sm: "4.5px",
+                          //   xs: "4.5px",
+                          // },
+                          // pt: {
+                          //   xl: "37.5px",
+                          //   lg: "37.5px",
+                          //   md: "37.5px",
+                          //   sm: "21px",
+                          //   xs: "21px",
+                          // },
                         }}
                       >
                         <img
@@ -179,25 +186,25 @@ const ReviewCard: React.FC = () => {
                           width="24px"
                           height="22px"
                         />
-                        <Typography sx={{ ml: 1 }}>35</Typography>
+                        <Typography sx={{}}>35</Typography>
                       </Box>
                       <Box
                         sx={{
                           display: "flex",
-                          pl: {
-                            xl: "20.5px",
-                            lg: "20.5px",
-                            md: "20.5px",
-                            sm: "4.5px",
-                            xs: "4.5px",
-                          },
-                          pt: {
-                            xl: "37.5px",
-                            lg: "37.5px",
-                            md: "37.5px",
-                            sm: "21px",
-                            xs: "21px",
-                          },
+                          // pl: {
+                          //   xl: "20.5px",
+                          //   lg: "20.5px",
+                          //   md: "20.5px",
+                          //   sm: "4.5px",
+                          //   xs: "4.5px",
+                          // },
+                          // pt: {
+                          //   xl: "37.5px",
+                          //   lg: "37.5px",
+                          //   md: "37.5px",
+                          //   sm: "21px",
+                          //   xs: "21px",
+                          // },
                         }}
                       >
                         <img
@@ -206,7 +213,7 @@ const ReviewCard: React.FC = () => {
                           width="24px"
                           height="22px"
                         />
-                        <Typography sx={{ ml: "2px" }}>35</Typography>
+                        <Typography sx={{}}>35</Typography>
                       </Box>
                     </Box>
                   </Box>

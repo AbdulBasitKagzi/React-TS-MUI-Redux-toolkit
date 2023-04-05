@@ -31,6 +31,7 @@ import { Box, Button, Typography } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import WarningModel from "../components/WarningModel";
+import { assets } from "../assets";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -67,8 +68,12 @@ const ItemDetailView: React.FC = () => {
     }[]
   >();
   const [openUp, setOpenUp] = useState<boolean>(false);
+  const [notificationModal, setNotificationModal] = useState<boolean>(false);
   const [image, setImage] = useState<string | undefined>();
   const [imageValue, setImageValue] = useState<number>(0);
+
+  const changeNotificationModal = (isOpen: boolean) =>
+    setNotificationModal(isOpen);
 
   const [save, setSave] = useState<string>(
     localStorage.getItem("isAuth") || ""
@@ -80,7 +85,7 @@ const ItemDetailView: React.FC = () => {
       productActions.addSize({ selectedSize: selectedProduct?.size[0] })
     );
     dispatch(
-      productActions.addSize({ selectedColor: selectedProduct?.color[0] })
+      productActions.addColor({ selectedColor: selectedProduct?.color[0] })
     );
   }, []);
 
@@ -117,9 +122,6 @@ const ItemDetailView: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // if (cartProducts.length !== 0) {
-    //   setOpenUp(true);
-    // }
     setOpenUp(added);
   }, [cartProducts]);
 
@@ -218,8 +220,9 @@ const ItemDetailView: React.FC = () => {
           {open && <WarningModel open={open} setOpen={setOpen} />}
           <Box
             sx={{
-              width: "100%",
+              width: "90%",
               display: { xl: "flex", lg: "flex", md: "flex", sm: "flex" },
+              mx: "auto",
             }}
           >
             <Box
@@ -291,11 +294,11 @@ const ItemDetailView: React.FC = () => {
                       xl: "block",
                       lg: "block",
                       md: "block",
-                      sm: "block",
+                      sm: "none",
                       xs: "none",
                     },
-                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
-                    left: { xl: "2%", lg: "2%", md: 0 },
+                    top: { md: "40%" },
+                    left: { lg: "2%" },
                   }}
                   // className={classes.prev_arrow}
                   onClick={() => handlePrev("slider")}
@@ -310,12 +313,12 @@ const ItemDetailView: React.FC = () => {
                       xl: "block",
                       lg: "block",
                       md: "block",
-                      sm: "block",
+                      sm: "none",
                       xs: "none",
                     },
 
-                    top: { xl: "40%", lg: "40%", md: "40%", sm: "40%" },
-                    left: { xl: "94%", lg: "96%", md: "96%", sm: "94%" },
+                    top: { md: "40%" },
+                    left: { md: "96%" },
                   }}
                   // className={classes.next_arrow}
                   onClick={() => handleNext("slider")}
@@ -468,14 +471,18 @@ const ItemDetailView: React.FC = () => {
                     Popular
                   </Typography>
                 </Box>
-                <img className="heart" src={add_to_favourite} alt="heart" />
+                <img
+                  className="heart"
+                  src={assets.icons.ADD_TO_FAVOURITE}
+                  alt="heart"
+                />
               </Box>
 
               <Box
                 sx={{
                   textAlign: "left",
                   wordBreak: "break-all",
-                  pl: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
+                  pl: { xl: 0, lg: 0, md: 0, sm: 2, xs: 2 },
                 }}
               >
                 <Typography
@@ -513,7 +520,7 @@ const ItemDetailView: React.FC = () => {
                   width: "100%",
                   mt: 6,
                   pr: { xl: 2, lg: 2, md: 2, sm: 2, xs: 2 },
-                  pl: { xl: 0, lg: 0, md: 0, sm: 0, xs: 2 },
+                  pl: { xl: 0, lg: 0, md: 0, sm: 2, xs: 2 },
                 }}
               >
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -577,7 +584,7 @@ const ItemDetailView: React.FC = () => {
               <Box
                 sx={{
                   display: "flex",
-
+                  justifyContent: { sm: "unset", xs: "space-between" },
                   pl: { xl: 0, lg: 0, md: 2, sm: 2, xs: 2 },
                 }}
               >
@@ -601,6 +608,7 @@ const ItemDetailView: React.FC = () => {
                       display: "flex",
                       flexWrap: "wrap",
                       p: 1,
+                      gap: 2,
                     }}
                   >
                     {sizes?.map(
@@ -620,12 +628,12 @@ const ItemDetailView: React.FC = () => {
                               fontWeight: 700,
                               color: "#FFFFFF",
                               background: "#1B2437",
-                              mr: 4,
-                              mb: 2,
+
                               cursor: "pointer",
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
+                              gap: 2,
                             }}
                             onClick={(event) => {
                               dispatch(
@@ -636,7 +644,7 @@ const ItemDetailView: React.FC = () => {
                               handleSizeChange(event, index);
                             }}
                           >
-                            {size.slug}
+                            <Typography>{size.slug}</Typography>
                           </Box>
                         ) : (
                           <Box
@@ -646,8 +654,7 @@ const ItemDetailView: React.FC = () => {
                               height: "45px",
                               border: 1,
                               borderColor: "#000000",
-                              mr: 4,
-                              mb: 2,
+
                               cursor: "pointer",
                               display: "flex",
                               justifyContent: "center",
@@ -662,7 +669,7 @@ const ItemDetailView: React.FC = () => {
                               handleSizeChange(event, index);
                             }}
                           >
-                            {size.slug}
+                            <Typography>{size.slug}</Typography>
                           </Box>
                         )
                     )}
@@ -691,6 +698,7 @@ const ItemDetailView: React.FC = () => {
                         flexWrap: "wrap",
                         alignItems: "center",
                         p: 1,
+                        gap: 2,
                       }}
                     >
                       {color?.map(
@@ -705,8 +713,7 @@ const ItemDetailView: React.FC = () => {
                                 width: "50px",
                                 height: "50px",
                                 background: `${col.haxValue}`,
-                                mr: 4,
-                                mb: 4,
+
                                 cursor: "pointer",
                                 borderRadius: 2,
                               }}
@@ -728,8 +735,7 @@ const ItemDetailView: React.FC = () => {
                                 border: 1,
                                 background: `${col.haxValue}`,
                                 borderColor: `${col.haxValue}`,
-                                mr: 4,
-                                mb: 4,
+
                                 cursor: "pointer",
                                 borderRadius: 2,
                               }}

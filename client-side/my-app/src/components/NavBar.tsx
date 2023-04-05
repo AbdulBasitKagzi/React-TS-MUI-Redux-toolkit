@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice/userSlice";
@@ -8,7 +8,6 @@ import { gender } from "../assets/Constants";
 import callVector from "../assets/icons/callVector.svg";
 import shoppingcartVector from "../assets/icons/shoppingcartVector.svg";
 import likeVector from "../assets/icons/likeVector.svg";
-import W from "../assets/icons/W.svg";
 import search from "../assets/icons/search.svg";
 import login from "../assets/icons/Login.svg";
 
@@ -29,6 +28,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import NavbarModel from "./NavbarModel";
 import { RootState } from "../store/userSlice/store";
+import { cartProducts } from "../store/userSlice/cartSlice";
 
 interface Props {
   /**
@@ -44,9 +44,9 @@ export default function DrawerAppBar(props: Props) {
   const { cartProducts } = useSelector((state: RootState) => state.cart);
   const { window } = props;
   const navigate = useNavigate();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
-  const [background, setBackground] = React.useState<string>("transparent");
+  const [background, setBackground] = useState<string>("transparent");
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -59,6 +59,20 @@ export default function DrawerAppBar(props: Props) {
     { id: 4, value: login },
     { id: 5, value: likeVector },
   ];
+
+  const [openModel, setOpenModel] = useState<boolean>(false);
+  const [value, setValue] = useState<number>(-1);
+
+  const [totalCartProducts, setTotalCartProducts] = useState<number>();
+
+  useEffect(() => {
+    let total: number;
+    total = cartProducts.reduce((acc: number, curr: cartProducts) => {
+      total = acc + curr.quantity;
+      return total;
+    }, 0);
+    setTotalCartProducts(total);
+  }, [cartProducts]);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -98,9 +112,6 @@ export default function DrawerAppBar(props: Props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
-  const [openModel, setOpenModel] = React.useState<boolean>(false);
-  const [value, setValue] = React.useState<number>(-1);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -160,7 +171,7 @@ export default function DrawerAppBar(props: Props) {
                 sm: "end",
                 xs: "end",
               },
-              mt: { xl: 0, lg: 0, md: 0, sm: "-8%", xs: -6 },
+              mt: { xl: 3, lg: 3, md: 3, sm: "-28px", xs: "-26px" },
               mr: { xl: 0, lg: 0, md: 0, sm: 0 },
             }}
           >
@@ -171,7 +182,7 @@ export default function DrawerAppBar(props: Props) {
                 fontFamily: "Josefin Sans",
                 // display: "inline-block",
                 // mr: "32px",
-                ml: { xl: "105px", lg: "105px", md: "75px" },
+                ml: { md: "75px" },
                 cursor: "pointer",
                 display: {
                   xs: "none",
@@ -180,6 +191,8 @@ export default function DrawerAppBar(props: Props) {
                   lg: "flex",
                   xl: "flex",
                 },
+
+                gap: 4,
               }}
             >
               {gender.map(
@@ -194,8 +207,8 @@ export default function DrawerAppBar(props: Props) {
                       fontFamily: "Josefin Sans",
                       fontSize: "16px",
                       display: "inline-block",
-                      mr: "32px",
-                      mt: "27px",
+                      // mr: "32px",
+                      // mt: "27px",
                       textDecoration:
                         item.id === Number(value) ? "underline" : "none",
                     }}
@@ -219,8 +232,10 @@ export default function DrawerAppBar(props: Props) {
             <Box
               sx={{
                 display: "flex",
-                marginRight: { lg: "58px", md: "30px", sm: 0 },
-                mt: { md: 0, sm: 2 },
+                marginRight: { md: "30px", sm: 0 },
+                gap: 4,
+
+                // mt: { md: 0, sm: 2 },
               }}
             >
               {navIcons.map((item) => (
@@ -231,15 +246,15 @@ export default function DrawerAppBar(props: Props) {
                     fontFamily: "Josefin Sans",
                     fontSize: "16px",
                     display: "block",
-                    mr: {
-                      xl: "32px",
-                      lg: "32px",
-                      md: "32px",
-                      sm: "32px",
-                      xs: "15px",
-                    },
+                    // mr: {
+                    //   xl: "32px",
+                    //   lg: "32px",
+                    //   md: "32px",
+                    //   sm: "32px",
+                    //   xs: "15px",
+                    // },
                     // mt: { md: "27px", sm: "40px" },
-                    mt: "27px",
+                    // mt: "27px",
                     cursor: "pointer",
                   }}
                   onClick={() => {
@@ -254,36 +269,25 @@ export default function DrawerAppBar(props: Props) {
                     }
                   }}
                 >
-                  <Box
-                    sx={
-                      {
-                        // display: "flex",
-                        // flexDirection: "column",
-                        // // justifyContent: "center",
-                        // alignItems: "end",
-                      }
-                    }
-                  >
-                    <img
-                      src={item.value}
-                      alt="item"
-                      style={{ position: "relative" }}
-                    />
-                    {item.id === 2 && (
-                      <Typography
-                        sx={{
-                          position: "relative",
-                          top: "-35px",
-                          left: 15,
-                          backgroundColor: "red",
-                          borderRadius: 4,
-                          fontSize: "16px",
-                        }}
-                      >
-                        {cartProducts.length}
-                      </Typography>
-                    )}
-                  </Box>
+                  <img
+                    src={item.value}
+                    alt="item"
+                    style={{ position: "relative" }}
+                  />
+                  {item.id === 2 && (
+                    <Typography
+                      sx={{
+                        position: "relative",
+                        top: "-35px",
+                        left: 15,
+                        backgroundColor: "red",
+                        borderRadius: 4,
+                        fontSize: "16px",
+                      }}
+                    >
+                      {totalCartProducts}
+                    </Typography>
+                  )}
                 </Typography>
               ))}
             </Box>

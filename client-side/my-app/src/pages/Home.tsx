@@ -918,18 +918,21 @@ function Home() {
                 sx={{
                   display: { sm: "flex" },
                   justifyContent: "center",
+                  gap: 1,
                 }}
               >
                 <Box
                   sx={{
                     display: "flex",
                     justifyContent: "center",
-                    background: "#EEEEEE",
 
+                    background: "#EEEEEE",
                     width: "100%",
+
                     mb: { xs: 1 },
                     // mr: 1,
-                    textAlign: "center",
+                    // textAlign: "center",
+                    mx: "auto",
                   }}
                 >
                   <Box
@@ -938,6 +941,8 @@ function Home() {
                       flexDirection: "column",
                       alignItems: { sm: "start", xs: "center" },
                       justifyContent: "center",
+                      // ml: { xl: 13, lg: 9, md: 6, sm: 6 },
+                      // mx: { xs: "auto" },
                       ml: { xl: 13, lg: 9, md: 6, sm: 6 },
                       mx: { xs: "auto" },
                     }}
@@ -1031,7 +1036,7 @@ function Home() {
                     src={womenStanding}
                     alt="womenstanding"
                     width="100%"
-                    height="100%"
+                    height="99%"
                   />
                   <Box position="relative" sx={{ bottom: 70 }}>
                     <Button variant="text">
@@ -1116,9 +1121,9 @@ function Home() {
             </Box>
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
+                // display: "flex",
+                // justifyContent: "center",
+                // alignContent: "center",
                 mt: { xl: 12, lg: 12, md: 12, sm: 8, xs: 5 },
                 maxWidth: "90%",
                 mx: "auto",
@@ -1128,13 +1133,13 @@ function Home() {
                 sx={{
                   display: { lg: "flex", md: "flex", sm: "flex" },
                   justifyContent: "center",
+                  gap: 1,
                   width: { xl: "100%" },
                   // pl: 2,
                 }}
               >
                 <Box
                   sx={{
-                    background: "#EEEEEE",
                     // width: { xl: 782, lg: 500, md: 400, sm: 300, xs: 330 },
                     // height: { xl: 782, lg: 500, md: 400, sm: 300, xs: 280 },
                     mb: { xs: 1 },
@@ -1146,7 +1151,7 @@ function Home() {
                     src={urbanStories}
                     alt="urban"
                     width="100%"
-                    height="100%"
+                    height="99%"
                     style={{ objectFit: "contain" }}
                   />
                 </Box>
@@ -1162,7 +1167,7 @@ function Home() {
                     src={countryLights}
                     alt="countylights"
                     width="100%"
-                    height="100%"
+                    height="98%"
                     style={{ objectFit: "contain" }}
                   />
                 </Box>
@@ -1205,6 +1210,7 @@ function Home() {
                 sx={{
                   display: { sm: "flex" },
                   justifyContent: "center",
+                  gap: 1,
                 }}
               >
                 <Box
@@ -1301,7 +1307,7 @@ function Home() {
                     src={formal}
                     alt="womenstanding"
                     width="100%"
-                    height="100%"
+                    height="98.8%"
                   />
                   <Box position="relative" sx={{ bottom: 70 }}>
                     <Button variant="text">

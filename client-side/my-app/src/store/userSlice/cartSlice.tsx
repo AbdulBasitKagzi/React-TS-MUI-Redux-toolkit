@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 export interface cartProducts {
   id: number;
@@ -40,15 +40,26 @@ const cartSlice = createSlice({
     addProductToCart: (state, action) => {
       console.log("action", action);
       const data = state.cartProducts.find(
-        (product: cartProducts) => product.id === action.payload.id
+        (product: cartProducts) =>
+          product.id === action.payload.id &&
+          product.selectedSize === action.payload.selectedSize &&
+          product.selectedColor === action.payload.selectedColor
       );
-      if (data) {
+
+      if (
+        data &&
+        data.selectedColor == action.payload.selectedColor &&
+        data.selectedSize == action.payload.selectedSize
+      ) {
         const index = state.cartProducts.indexOf(data);
         state.cartProducts[index].quantity++;
       } else {
         state.cartProducts.push({ ...action.payload, quantity: 1 });
       }
       state.added = true;
+      console.log("data", data && current(data));
+      console.log("selected", action.payload);
+      console.log("cartProducts", current(state.cartProducts));
     },
     increment: (state, action) => {
       console.log(action);

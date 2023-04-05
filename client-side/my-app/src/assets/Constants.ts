@@ -191,7 +191,7 @@ export const products: Array<product> = [
     id: "shoes-4",
     type: "shoes",
     category: "men",
-    image: shoes_4,
+    image: shoes_2,
     productName: "shoes",
     price: "$300",
     cancelPrice: "$400",
