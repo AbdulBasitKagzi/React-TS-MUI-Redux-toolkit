@@ -2,15 +2,15 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 // import SignIn from "../pages/Login";
 
-import NoPage from "../pages/NoPage";
+import NoPage from "../pages/Forbidden/index";
 import Loader from "../components/loader/Loader";
 
 // implementing lazyloading
-const LazyLogIn = lazy(() => import("../pages/Login"));
-const LazyHome = lazy(() => import("../pages/Home"));
-const LazyCategoryDetail = lazy(() => import("../pages/CategoryDetail"));
-const LazyItemDetailView = lazy(() => import("../pages/ItemDetailView"));
-const LazyShippingPage = lazy(() => import("../pages/ShippingPage"));
+const LazyLogIn = lazy(() => import("../pages/Login/index"));
+const LazyHome = lazy(() => import("../pages/Home/index"));
+const LazyCategoryDetail = lazy(() => import("../pages/CategoryDetail/index"));
+const LazyItemDetailView = lazy(() => import("../pages/ItemDetailView/index"));
+const LazyShippingPage = lazy(() => import("../pages/ShippingPage/index"));
 
 function MainRoutes() {
   const routes_arr = [

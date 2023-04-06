@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../store/cart/cart.slice";
-import { RootState } from "../store/store";
+import { cartActions } from "../../store/cart/cart.slice";
+import { RootState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
-import { sizeFilter, colorLists } from "../data/Constants";
-import { cartProducts } from "../store/cart/cart.types";
-import Layout from "../components/Layout";
+import { sizeFilter, colorLists } from "../../data/Constants";
+import { cartProducts } from "../../store/cart/cart.types";
+import Layout from "../../components/Layout";
 
 // mui imports
 import Stepper from "@mui/material/Stepper";
@@ -19,28 +19,19 @@ import { Select } from "@mui/material";
 
 // for date and time
 import dayjs from "dayjs";
-import DescriptionAlerts from "../components/alert/Alert";
-import AuthGuard from "../routes/AuthGuard";
-import { assets } from "../assets";
-import UserInformation from "../sections/userInformation/UserInformation";
-import UserPaymentInformation from "../sections/userPaymentInformation/UserPaymentInformation";
-import ConfirmationPage from "../sections/confirmationPage/ConfirmationPage";
-
-export interface user {
-  firstName: string;
-  lastName: string;
-  emailaddress: string;
-  phoneNumber: string;
-  city: string;
-  address: string;
-  zipCode: string;
-  date: string;
-  time: string;
-}
+import DescriptionAlerts from "../../components/alert/Alert";
+import AuthGuard from "../../routes/AuthGuard";
+import { assets } from "../../assets";
+import UserInformation from "../../forms/userInformation";
+import UserPaymentInformation from "../../forms/userPaymentInformation";
+import ConfirmationPage from "../../sections/confirmationPage/ConfirmationPage";
+import { user } from "../../forms/userInformation/userInformation.types";
+import { paymentInformation } from "../../forms/userPaymentInformation/userPaymentInformation";
 
 const ShippingPage: React.FC = () => {
   const regexp = /^((0[1-9])|(1[0-2]))[/]*((2[3-9]))$/;
   const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const string = /[a-zA-Z]/;
   const navigate = useNavigate();
   const steps = ["Shipping", "Billing", "Confirmation"];
   const { cartProducts } = useSelector((state: RootState) => state.cart);
@@ -64,19 +55,14 @@ const ShippingPage: React.FC = () => {
     date: date_time.toString(),
     time: date_time.toString(),
   });
-  const [paymentInformation, setPaymentInformation] = useState<{
-    radio_buttons: string;
-    cardName: string;
-    cardNumber: string;
-    expiration: string;
-    cvv: string;
-  }>({
-    cardName: "",
-    cardNumber: "",
-    expiration: "",
-    cvv: "",
-    radio_buttons: selectedValue,
-  });
+  const [paymentInformation, setPaymentInformation] =
+    useState<paymentInformation>({
+      cardName: "",
+      cardNumber: "",
+      expiration: "",
+      cvv: "",
+      radio_buttons: selectedValue,
+    });
 
   const [openUp, setOpenUp] = useState<boolean>(false);
   const [alert, setAlert] = useState<{
@@ -119,17 +105,23 @@ const ShippingPage: React.FC = () => {
     return filteredata;
   };
 
-  const handleUserValidation = (information: Object) => {
-    const hasEmptyFields = Object.values(information).some(
-      (element) => element === ""
-    );
-    if (hasEmptyFields) {
-      setOpenUp(hasEmptyFields);
+  const handleUserValidation = () => {
+    if (userInformation.firstName.length === 0) {
+      setOpenUp(true);
       setAlert({
         type: "error",
         title: "Error",
-        message: "Please fill all the fields.",
+        message: "Plese enter first name.",
       });
+      return;
+    } else if (userInformation.lastName.length === 0) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Plese enter last name.",
+      });
+      return;
     } else if (!emailRegexp.test(userInformation.emailaddress)) {
       setOpenUp(true);
       setAlert({
@@ -138,12 +130,28 @@ const ShippingPage: React.FC = () => {
         message: "Please enter correct email address.",
       });
       return;
+    } else if (string.test(userInformation.phoneNumber)) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Plese enter valid phone number.",
+      });
+      return;
     } else if (userInformation.phoneNumber.length < 10) {
       setOpenUp(true);
       setAlert({
         type: "error",
         title: "Error",
         message: "Please enter 10 digit phone number.",
+      });
+      return;
+    } else if (string.test(userInformation.zipCode)) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Plese enter valid phone number.",
       });
       return;
     } else if (userInformation.zipCode.length < 6) {
@@ -159,17 +167,22 @@ const ShippingPage: React.FC = () => {
     }
   };
 
-  const handlePaymentValidation = (information: Object) => {
-    const hasEmptyFields = Object.values(information).some(
-      (element) => element === ""
-    );
-    if (hasEmptyFields) {
-      setOpenUp(hasEmptyFields);
+  const handlePaymentValidation = () => {
+    if (paymentInformation.cardName.length === 0) {
+      setOpenUp(true);
       setAlert({
         type: "error",
         title: "Error",
-        message: "Please fill all the fields.",
+        message: "Please fill card holder's name.",
       });
+    } else if (string.test(paymentInformation.cardNumber)) {
+      setOpenUp(true);
+      setAlert({
+        type: "error",
+        title: "Error",
+        message: "Please enter valid card number.",
+      });
+      return;
     } else if (paymentInformation.cardNumber.length < 16) {
       setOpenUp(true);
       setAlert({
@@ -812,7 +825,6 @@ const ShippingPage: React.FC = () => {
                   {page === 2 && (
                     <Box
                       sx={{
-                        mr: 3,
                         // ml: {
                         //   xl: "10%",
                         //   lg: "10%",
@@ -845,10 +857,10 @@ const ShippingPage: React.FC = () => {
                     }}
                     onClick={() => {
                       if (page === 1) {
-                        handleUserValidation(userInformation);
+                        handleUserValidation();
                         // setPage(page + 1);
                       } else if (page === 2) {
-                        handlePaymentValidation(paymentInformation);
+                        handlePaymentValidation();
                         // setPage(page + 1);
                       } else {
                         dispatch(cartActions.emptyCart());

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../store/cart/cart.slice";
-import Layout from "../components/Layout";
-import { RootState } from "../store/store";
-import { sizeFilter, colorLists } from "../data/Constants";
-import DescriptionAlerts from "../components/alert/Alert";
+import { cartActions } from "../../store/cart/cart.slice";
+import Layout from "../../components/Layout";
+import { RootState } from "../../store/store";
+import { sizeFilter, colorLists } from "../../data/Constants";
+import DescriptionAlerts from "../../components/alert/Alert";
 import { useNavigate } from "react-router-dom";
-import { productActions } from "../store/product/product.slice";
+import { productActions } from "../../store/product/product.slice";
 
 // images and icons import
 // import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
@@ -18,9 +18,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import style from "../css/imageSwiper.module.css";
-import classes from "../css/swiper.module.css";
-import "../css/imageDetail.css";
+import style from "./imageSwiper.module.css";
+import classes from "./swiper.module.css";
+import "./imageDetail.css";
 
 // import required modules
 import { Navigation } from "swiper";
@@ -29,8 +29,8 @@ import { Navigation } from "swiper";
 import { Box, Button, Typography } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import WarningModel from "../components/warningModel/WarningModel";
-import { assets } from "../assets";
+import WarningModel from "../../components/warningModel/WarningModel";
+import { assets } from "../../assets";
 
 interface TabPanelProps {
   children?: React.ReactNode;

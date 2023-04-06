@@ -9,7 +9,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { TimePicker } from "@mui/x-date-pickers";
 import InputLabel from "@mui/material/InputLabel";
 import NativeSelect from "@mui/material/NativeSelect";
-import { user } from "../../pages/ShippingPage";
+import { user } from "./userInformation.types";
 
 interface UserInformationType {
   setOpenUp: (value: boolean) => void;
@@ -59,46 +59,6 @@ function UserInformation({
       time: newValue.toString(),
     }));
   };
-
-  // const handleUserValidation = (information: Object) => {
-  //   const hasEmptyFields = Object.values(information).some(
-  //     (element) => element === ""
-  //   );
-  //   if (hasEmptyFields) {
-  //     setOpenUp(hasEmptyFields);
-  //     setAlert({
-  //       type: "error",
-  //       title: "Error",
-  //       message: "Please fill all the fields.",
-  //     });
-  //   } else if (!emailRegexp.test(userInformation.emailaddress)) {
-  //     setOpenUp(true);
-  //     setAlert({
-  //       type: "error",
-  //       title: "Error",
-  //       message: "Please enter correct email address.",
-  //     });
-  //     return;
-  //   } else if (userInformation.phoneNumber.length < 10) {
-  //     setOpenUp(true);
-  //     setAlert({
-  //       type: "error",
-  //       title: "Error",
-  //       message: "Please enter 10 digit phone number.",
-  //     });
-  //     return;
-  //   } else if (userInformation.zipCode.length < 6) {
-  //     setOpenUp(true);
-  //     setAlert({
-  //       type: "error",
-  //       title: "Error",
-  //       message: "Please enter 6 digit zip code.",
-  //     });
-  //     return;
-  //   } else {
-  //     setPage(page + 1);
-  //   }
-  // };
 
   return (
     <>
@@ -167,7 +127,6 @@ function UserInformation({
               id="address2"
               name="phoneNumber"
               label="Phone Number"
-              type="number"
               onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
                 e.target.value = e.target.value.toString().slice(0, 10);
               }}
@@ -260,7 +219,6 @@ function UserInformation({
               id="zipcode"
               name="zipCode"
               label="Zip Code"
-              type="number"
               onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
                 e.target.value = e.target.value.toString().slice(0, 6);
               }}

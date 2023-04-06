@@ -3,6 +3,7 @@ import { useState } from "react";
 // mui imports
 import { Box, Button, Grid, TextField, Typography, Radio } from "@mui/material";
 import { assets } from "../../assets";
+import { paymentInformation } from "./userPaymentInformation";
 
 type props = {
   setOpenUp: (value: boolean) => void;
@@ -10,31 +11,13 @@ type props = {
   page: number;
   setPage: (value: number) => void;
   total: number;
-  handlePaymentValidation: (value: {
-    radio_buttons: string;
-    cardName: string;
-    cardNumber: string;
-    expiration: string;
-    cvv: string;
-  }) => void;
+  handlePaymentValidation: (value: paymentInformation) => void;
   selectedValue: string;
   setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
   setPaymentInformation: React.Dispatch<
-    React.SetStateAction<{
-      radio_buttons: string;
-      cardName: string;
-      cardNumber: string;
-      expiration: string;
-      cvv: string;
-    }>
+    React.SetStateAction<paymentInformation>
   >;
-  paymentInformation: {
-    radio_buttons: string;
-    cardName: string;
-    cardNumber: string;
-    expiration: string;
-    cvv: string;
-  };
+  paymentInformation: paymentInformation;
 };
 
 function UserPaymentInformation(props: props): JSX.Element {
@@ -235,24 +218,20 @@ function UserPaymentInformation(props: props): JSX.Element {
       </Box>
       <Box
         sx={{
-          display: { md: "flex", xs: "block" },
+          display: { sm: "flex", xs: "block" },
           justifyContent: "space-between",
           alignItems: "center",
-          mr: 3,
-          //   ml: {
-          //     xl: "10%",
-          //     lg: "10%",
-          //     md: "45%",
-          //     sm: "40%",
-          //     xs: "10%",
-          //   },
 
           mt: 5,
         }}
       >
         <Button
           variant="outlined"
-          sx={{ borderRadius: 0, mb: { md: 2, sm: 2, xs: 2 } }}
+          sx={{
+            borderRadius: 0,
+            mb: { md: 0, sm: 2, xs: 2 },
+            display: { sm: "block", xs: "none" },
+          }}
           onClick={() => props.setPage(props.page - 1)}
         >
           <Typography>Back</Typography>
@@ -264,6 +243,7 @@ function UserPaymentInformation(props: props): JSX.Element {
             backgroundColor: "#111827",
             color: "#FFFFFF",
             borderRadius: 0,
+            mb: { md: 0, sm: 2 },
             // ml: "50%",
             //   mx: "auto",
             // mt: 15,

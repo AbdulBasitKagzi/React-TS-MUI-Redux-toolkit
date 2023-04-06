@@ -1,8 +1,11 @@
-import { user } from "../../pages/ShippingPage";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart/cart.slice";
+
+// mui imports
 import { Box, Button, Typography } from "@mui/material";
+
+import { user } from "../../forms/userInformation/userInformation.types";
 
 interface confirmationPageProps {
   userInformation: user;

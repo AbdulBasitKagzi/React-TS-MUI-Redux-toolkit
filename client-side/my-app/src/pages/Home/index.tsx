@@ -1,23 +1,23 @@
-import Slider from "../components/slider/Slider";
-import Layout from "../components/Layout";
-import CategoryTab from "../components/tab/Tab";
-import Arrival from "../sections/arrival/Arrival";
-import { person_tabs, product_tabs } from "../data/Constants";
+import Slider from "../../components/slider/Slider";
+import Layout from "../../components/Layout";
+import CategoryTab from "../../components/tab/Tab";
+import Arrival from "../../sections/arrival/Arrival";
+import { person_tabs, product_tabs } from "../../data/Constants";
 import { useSelector } from "react-redux";
-import ReviewCard from "../sections/reviewCard/ReviewCard";
-import ImageSlider from "../components/imageSlider/ImageSlider";
-import CategorySlider from "../components/categoryTab/CategoryTab";
-import ImageListt from "../sections/ImageListComponent/ImageList";
-import { RootState } from "../store/store";
-import { productLists } from "../data/ProductsContant";
+import ReviewCard from "../../sections/reviewCard/ReviewCard";
+import ImageSlider from "../../components/imageSlider/ImageSlider";
+import CategorySlider from "../../components/categoryTab/CategoryTab";
+import ImageListt from "../../sections/ImageListComponent/ImageList";
+import { RootState } from "../../store/store";
+import { productLists } from "../../data/ProductsContant";
 
 // mui imports
 import { Box, Button, Typography } from "@mui/material";
-import GuestGuard from "../routes/GuestGuard";
-import { assets } from "../assets";
-import Advertise from "../sections/advertise/advertise";
-import ImageGrid from "../sections/imageGrid/ImageGrid";
-import CategoryGrid from "../sections/categorygrid/CategoryGrid";
+import GuestGuard from "../../routes/GuestGuard";
+import { assets } from "../../assets";
+import Advertise from "../../sections/advertise/advertise";
+import ImageGrid from "../../sections/imageGrid/ImageGrid";
+import CategoryGrid from "../../sections/categorygrid/CategoryGrid";
 
 function Home() {
   const { Products } = useSelector((state: RootState) => state.product);
