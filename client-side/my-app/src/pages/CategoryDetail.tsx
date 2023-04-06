@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import { useParams } from "react-router-dom";
-import FilterSlider from "../components/Filter";
-import FilterGrid from "../components/FilterGrid";
-import { gender, brandFilter, categoriesFilter } from "../assets/Constants";
+import FilterSlider from "../components/filter/Filter";
+import FilterGrid from "../components/filterGrid/FilterGrid";
+import { gender, brandFilter, categoriesFilter } from "../data/Constants";
 
 // mui imports
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import { RootState } from "../store/userSlice/store";
+import { RootState } from "../store/store";
 import { useDispatch } from "react-redux";
-import { productActions } from "../store/userSlice/productSlice";
-import Footer from "../components/Footer";
+import { productActions } from "../store/product/product.slice";
 
 interface data {
   id: number;

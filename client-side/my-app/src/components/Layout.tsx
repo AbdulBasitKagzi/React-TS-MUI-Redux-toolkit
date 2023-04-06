@@ -1,8 +1,8 @@
 import React from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "./navbar/NavBar";
 import { ReactNode } from "react";
 import { Box } from "@mui/material";
-import Footer from "./Footer";
+import Footer from "./footer/Footer";
 
 const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (

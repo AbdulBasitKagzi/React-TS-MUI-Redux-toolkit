@@ -6,6 +6,7 @@ const GuestGuard = ({ children }: { children: ReactNode }): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("here");
     if (getLocalstorage("isAuth") === "true") {
       navigate("/");
     }

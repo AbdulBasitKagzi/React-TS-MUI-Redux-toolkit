@@ -1,19 +1,18 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../store/userSlice/cartSlice";
+import { cartActions } from "../store/cart/cart.slice";
 import Layout from "../components/Layout";
-import { RootState } from "../store/userSlice/store";
-import { sizeFilter, colorLists } from "../assets/Constants";
-import DescriptionAlerts from "../components/Alert";
+import { RootState } from "../store/store";
+import { sizeFilter, colorLists } from "../data/Constants";
+import DescriptionAlerts from "../components/alert/Alert";
 import { useNavigate } from "react-router-dom";
-import { productActions } from "../store/userSlice/productSlice";
+import { productActions } from "../store/product/product.slice";
 
 // images and icons import
-import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
-import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
-import star_active from "../assets/icons/star_active.svg";
-import star_disabled from "../assets/icons/star_disabled.svg";
-import add_to_favourite from "../assets/icons/add_to_favorite.svg";
+// import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
+// import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
+// import star_active from "../assets/icons/star_active.svg";
+// import star_disabled from "../assets/icons/star_disabled.svg";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -30,7 +29,7 @@ import { Navigation } from "swiper";
 import { Box, Button, Typography } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import WarningModel from "../components/WarningModel";
+import WarningModel from "../components/warningModel/WarningModel";
 import { assets } from "../assets";
 
 interface TabPanelProps {
@@ -149,7 +148,7 @@ const ItemDetailView: React.FC = () => {
       for (let i = 0; i < reviewStars; i++) {
         result.push(
           <Box sx={{ pr: 2 }}>
-            <img src={star_active} alt="filled star" />
+            <img src={assets.icons.Star_Active} alt="filled star" />
           </Box>
         );
       }
@@ -162,7 +161,7 @@ const ItemDetailView: React.FC = () => {
     for (let i = 1; i <= stars; i++) {
       result.push(
         <Box sx={{ pr: 2 }}>
-          <img src={star_disabled} alt="filled star" />
+          <img src={assets.icons.Star_Disabled} alt="filled star" />
         </Box>
       );
     }
@@ -303,7 +302,7 @@ const ItemDetailView: React.FC = () => {
                   // className={classes.prev_arrow}
                   onClick={() => handlePrev("slider")}
                 >
-                  <img src={leftArrowIcon} alt="previous" />
+                  <img src={assets.icons.Left_Arrow_Icon} alt="previous" />
                 </Box>
                 <Box
                   sx={{
@@ -323,7 +322,7 @@ const ItemDetailView: React.FC = () => {
                   // className={classes.next_arrow}
                   onClick={() => handleNext("slider")}
                 >
-                  <img src={rightArrowIcon} alt="right" />
+                  <img src={assets.icons.Right_Arrow_Icon} alt="right" />
                 </Box>
               </Box>
 
@@ -411,7 +410,11 @@ const ItemDetailView: React.FC = () => {
                   // className={classes.prev_arrow}
                   onClick={() => handlePrev("sliderRef")}
                 >
-                  <img src={leftArrowIcon} alt="previous" className="icons" />
+                  <img
+                    src={assets.icons.Left_Arrow_Icon}
+                    alt="previous"
+                    className="icons"
+                  />
                 </Box>
                 <Box
                   sx={{
@@ -430,7 +433,11 @@ const ItemDetailView: React.FC = () => {
                   }}
                   onClick={() => handleNext("sliderRef")}
                 >
-                  <img src={rightArrowIcon} alt="right" className="icons" />
+                  <img
+                    src={assets.icons.Right_Arrow_Icon}
+                    alt="right"
+                    className="icons"
+                  />
                 </Box>
               </Box>
             </Box>
