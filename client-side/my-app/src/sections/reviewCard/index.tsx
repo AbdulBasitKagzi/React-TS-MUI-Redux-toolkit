@@ -1,9 +1,4 @@
 import React from "react";
-import leatherShoe from "./images/assets.images.leatherShoe.png";
-import makeUp from "./images/makeUp.png";
-import clothMaking from "./images/clothMaking.png";
-
-// import blackArrowicon from "../assets/icons/blackArrowicon.svg";
 
 // mui imports
 import { Box, Typography } from "@mui/material";
@@ -54,7 +49,6 @@ const ReviewCard: React.FC = () => {
     <>
       <Box
         sx={{
-          // maxWidth: "100%",
           display: {
             xl: "flex",
             lg: "flex",
@@ -63,7 +57,6 @@ const ReviewCard: React.FC = () => {
             xs: "block",
           },
           justifyContent: "center",
-          // alignContent: "center",
           mx: "auto",
           mt: { xs: 8 },
         }}
@@ -78,20 +71,9 @@ const ReviewCard: React.FC = () => {
             title: string;
             height: string;
           }) => (
-            <Box
-              key={arr.id}
-              sx={
-                {
-                  // maxWidth: { xl: 521, lg: 521, md: 521, sm: 190, xs: 330 },
-                  // maxWidth: { sm: 190, xs: 330 },
-                  // maxHeight: 1009,
-                }
-              }
-            >
+            <Box key={arr.id}>
               <Box
                 sx={{
-                  // maxWidth: { xl: 521, lg: 521, md: 521, sm: 236, xs: 330 },
-                  // maxHeight: { xl: 521, lg: 521, md: 521, sm: 521, xs: 465 },
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
@@ -109,23 +91,20 @@ const ReviewCard: React.FC = () => {
                   sx={{
                     position: "absolute",
                     top: "370px",
-                    // left: { xl: 89, lg: 89, md: 1 },
                     background: "#FCFCFC",
-                    width: { md: 304 },
-                    // height: { xl: 89, lg: 89, md: 89, sm: 63 },
-                    // display: "flex",
-                    // justifyContent: "center",
-                    // flexDirection: "column",
-                    // alignItems: "center",
+                    width: { lg: 304 },
                   }}
                 >
-                  <Box sx={{ display: "flex" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                    }}
+                  >
                     <img
                       className={styles.reviwer_image}
                       src={arr.image_1}
                       alt="women_1"
-                      // width="89px"
-                      // height="89px"
                     />
                     <Box
                       sx={{
@@ -138,20 +117,6 @@ const ReviewCard: React.FC = () => {
                       <Box
                         sx={{
                           display: "flex",
-                          // pl: {
-                          //   xl: "20.5px",
-                          //   lg: "20.5px",
-                          //   md: "20.5px",
-                          //   sm: "4.5px",
-                          //   xs: "4.5px",
-                          // },
-                          // pt: {
-                          //   xl: "37.5px",
-                          //   lg: "37.5px",
-                          //   md: "37.5px",
-                          //   sm: "21px",
-                          //   xs: "21px",
-                          // },
                         }}
                       >
                         <img
@@ -165,20 +130,6 @@ const ReviewCard: React.FC = () => {
                       <Box
                         sx={{
                           display: "flex",
-                          // pl: {
-                          //   xl: "20.5px",
-                          //   lg: "20.5px",
-                          //   md: "20.5px",
-                          //   sm: "4.5px",
-                          //   xs: "4.5px",
-                          // },
-                          // pt: {
-                          //   xl: "37.5px",
-                          //   lg: "37.5px",
-                          //   md: "37.5px",
-                          //   sm: "21px",
-                          //   xs: "21px",
-                          // },
                         }}
                       >
                         <img
@@ -192,20 +143,6 @@ const ReviewCard: React.FC = () => {
                       <Box
                         sx={{
                           display: "flex",
-                          // pl: {
-                          //   xl: "20.5px",
-                          //   lg: "20.5px",
-                          //   md: "20.5px",
-                          //   sm: "4.5px",
-                          //   xs: "4.5px",
-                          // },
-                          // pt: {
-                          //   xl: "37.5px",
-                          //   lg: "37.5px",
-                          //   md: "37.5px",
-                          //   sm: "21px",
-                          //   xs: "21px",
-                          // },
                         }}
                       >
                         <img

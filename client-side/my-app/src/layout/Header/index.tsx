@@ -27,7 +27,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import NavbarModel from "../navbarModel/NavbarModel";
+import NavbarModel from "../../components/NavbarModel/index";
 import { RootState } from "../../store/store";
 import { cartProducts } from "../../store/cart/cart.types";
 
@@ -234,7 +234,7 @@ export default function DrawerAppBar(props: Props) {
               sx={{
                 display: "flex",
                 marginRight: { md: "30px", sm: 0 },
-                gap: 4,
+                gap: { sm: 4, xs: 2 },
 
                 // mt: { md: 0, sm: 2 },
               }}
@@ -247,15 +247,7 @@ export default function DrawerAppBar(props: Props) {
                     fontFamily: "Josefin Sans",
                     fontSize: "16px",
                     display: "block",
-                    // mr: {
-                    //   xl: "32px",
-                    //   lg: "32px",
-                    //   md: "32px",
-                    //   sm: "32px",
-                    //   xs: "15px",
-                    // },
-                    // mt: { md: "27px", sm: "40px" },
-                    // mt: "27px",
+
                     cursor: "pointer",
                   }}
                   onClick={() => {
@@ -284,6 +276,7 @@ export default function DrawerAppBar(props: Props) {
                         backgroundColor: "red",
                         borderRadius: 4,
                         fontSize: "16px",
+                        textAlign: "center",
                       }}
                     >
                       {totalCartProducts}

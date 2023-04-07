@@ -1,5 +1,3 @@
-import "./App.css";
-
 import MainRoutes from "./routes/Routes";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
@@ -14,6 +12,7 @@ function App() {
     localStorage.getItem("isAuth") || ""
   );
   useEffect(() => {
+    console.log("here");
     setSave(localStorage.getItem("isAuth") || "");
   }, [User]);
   useEffect(() => {

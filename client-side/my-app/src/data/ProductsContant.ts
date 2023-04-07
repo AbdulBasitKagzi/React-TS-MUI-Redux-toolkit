@@ -1,20 +1,3 @@
-// import assets.images.blackdress from "./images/assets.images.blackdress.png";
-// import assets.images.dolce_gabbana from "./images/dolce&gabbana.png";
-// import assets.images.elgantdress from "./images/assets.images.elgantdress.png";
-// import louisactivewear from "./images/louisactivewear.png";
-// import assets.images.reddressvalentino from "./images/assets.images.reddressvalentino.png";
-// import assets.images.shinydressgivenchy from "./images/assets.images.shinydressgivenchy.png";
-// import assets.images.womenblackgucci from "./images/assets.images.womenblackgucci.png";
-// import assets.images.womenwhitejacket from "./images/assets.images.womenwhitejacket.png";
-// import weddingRing from "./images/weddingRing.png";
-// import wallet from "./images/wallet.png";
-// import handBag from "./images/handBag.png";
-// import assets.images.earring from "./images/redgemearrring.png";
-// import assets.images.shoes_1 from "./images/shoes-1.png";
-// import assets.images.shoes_2 from "./images/shoes-2.png";
-// import assets.images.womenShoeBlue from "./images/assets.images.womenShoeBlue.png";
-// import assets.images.womenShoeYellow from "./images/assets.images.womenShoeYellow.png";
-// import assets.images.leatherShoe from "./images/assets.images.leatherShoe.png";
 import { assets } from "../assets";
 import { productProps } from "../store/product/product.types";
 
@@ -267,7 +250,7 @@ export const productLists: Array<productProps> = [
   },
   {
     id: 7,
-    productName: "Red Gem assets.images.earrings",
+    productName: "Red Gem earrings",
     productImages: [
       {
         id: 1,
@@ -304,7 +287,7 @@ export const productLists: Array<productProps> = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 3,
-    slug: "redgemassets.images.earrings",
+    slug: "redgemearrings",
   },
   {
     id: 8,
@@ -390,7 +373,7 @@ export const productLists: Array<productProps> = [
   },
   {
     id: 10,
-    productName: "Red Gem assets.images.earrings",
+    productName: "Red Gem earrings",
     productImages: [
       {
         id: 1,
@@ -427,11 +410,11 @@ export const productLists: Array<productProps> = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 3,
-    slug: "redgemassets.images.earrings",
+    slug: "redgemearrings",
   },
   {
     id: 11,
-    productName: "Red Gem assets.images.earrings",
+    productName: "Red Gem earrings",
     productImages: [
       {
         id: 1,
@@ -468,11 +451,11 @@ export const productLists: Array<productProps> = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 3,
-    slug: "redgemassets.images.earrings",
+    slug: "redgemearrings",
   },
   {
     id: 12,
-    productName: "Red Gem assets.images.earrings",
+    productName: "Red Gem earrings",
     productImages: [
       {
         id: 1,
@@ -509,11 +492,11 @@ export const productLists: Array<productProps> = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemassets.images.earrings",
+    slug: "redgemearrings",
   },
   {
     id: 13,
-    productName: "Red Gem assets.images.earrings",
+    productName: "Red Gem earrings",
     productImages: [
       {
         id: 1,
@@ -550,11 +533,11 @@ export const productLists: Array<productProps> = [
     size: [2],
     color: [5],
     reviewRate: 4,
-    slug: "redgemassets.images.earrings",
+    slug: "redgemearrings",
   },
   {
     id: 14,
-    productName: "Red Gem assets.images.earrings",
+    productName: "Red Gem earrings",
     productImages: [
       {
         id: 1,
@@ -591,7 +574,7 @@ export const productLists: Array<productProps> = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: "redgemassets.images.earrings",
+    slug: "redgemearrings",
   },
   {
     id: 15,

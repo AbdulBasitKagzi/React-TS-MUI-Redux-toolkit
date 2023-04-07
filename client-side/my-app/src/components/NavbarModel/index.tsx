@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { brandFilter, categoriesFilter } from "../../data/Constants";
-import photo from "./images/photo.png";
+import { assets } from "../../assets";
 
 // mui imports
 import Box from "@mui/material/Box";
@@ -11,13 +11,12 @@ import Modal from "@mui/material/Modal";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { RootState } from "../../store/store";
-import { assets } from "../../assets";
 
 const style = {
   ml: "50%",
   mt: "53px",
-  height: { xl: "550px", sm: "350px", xs: "550px" },
-  width: { xl: "100%", lg: "100%", md: "100%", sm: "100%", xs: "90%" },
+  height: { xl: "550px", md: "350px", xs: "550px" },
+  width: { xl: "100%", lg: "100%", md: "100%", xs: "90%" },
   bgcolor: {
     xl: "#FFFFFF",
     lg: "#FFFFFF",
@@ -27,7 +26,6 @@ const style = {
   },
   border: 0,
   borderRadius: "0px 0px 25px 25px",
-  //   boxShadow: 24,
   p: 4,
   maxWidth: "1600px",
   mx: "auto",
@@ -91,13 +89,14 @@ const NavbarModel: React.FC<props> = ({
                     xl: "flex",
                     lg: "flex",
                     md: "flex",
-                    sm: "flex",
+                    sm: "block",
                     xs: "block",
                   },
+                  gap: "30px",
                   // flexWrap: "wrap",
                 }}
               >
-                <Box sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                <Box>
                   <List>
                     <ListItem
                       sx={{
@@ -133,7 +132,7 @@ const NavbarModel: React.FC<props> = ({
                     ))}
                   </List>
                 </Box>
-                <Box sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                <Box>
                   <List>
                     <ListItem
                       sx={{
@@ -169,7 +168,7 @@ const NavbarModel: React.FC<props> = ({
                     ))}
                   </List>
                 </Box>
-                <Box sx={{ paddingRight: { lg: 10, md: 5 } }}>
+                <Box>
                   <List>
                     <ListItem
                       sx={{

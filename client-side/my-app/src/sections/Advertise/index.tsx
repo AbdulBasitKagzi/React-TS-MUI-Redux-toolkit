@@ -141,7 +141,10 @@ function Advertise(props: props): JSX.Element {
             width="100%"
             height="98.5%"
           />
-          <Box position="relative" sx={{ bottom: 70 }}>
+          <Box
+            position="relative"
+            sx={{ bottom: 70, display: "flex", justifyContent: "center" }}
+          >
             <Button variant="text">
               <Typography color="#FFFFFF">
                 Outfit

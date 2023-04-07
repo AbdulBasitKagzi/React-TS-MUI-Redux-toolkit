@@ -62,6 +62,7 @@ export interface productstate {
   Products: product[];
   ProductsList: productProps[];
   // filteredProducts: Array<Object>;
+  filterByPrice: productProps[];
   filter: productProps[];
   filterByHuman: productProps[];
   filterBySize: productProps[];

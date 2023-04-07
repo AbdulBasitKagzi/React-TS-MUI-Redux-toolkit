@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import DescriptionAlerts from "../../components/alert/Alert";
+import DescriptionAlerts from "../../components/Alert";
 import { userActions } from "../../store/user/user.slice";
 // mui imports
 import Button from "@mui/material/Button";

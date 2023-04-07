@@ -12,7 +12,12 @@ const Arrival: React.FC = () => {
       <Box sx={{ mt: 4, mb: 4 }}>
         <Typography
           variant="h3"
-          sx={{ fontFamily: "Jost", fontSize: "39px", fontWeight: 700 }}
+          sx={{
+            fontFamily: "Jost",
+            fontSize: "39px",
+            fontWeight: 700,
+            textAlign: "center",
+          }}
         >
           Checkout New Arrivals
         </Typography>

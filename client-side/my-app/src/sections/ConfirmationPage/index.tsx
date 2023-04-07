@@ -23,6 +23,7 @@ function ConfirmationPage({
           fontFamily: "Roboto",
           fontSize: "24px",
           fontWeight: 700,
+          textAlign: "center",
         }}
       >
         Your order is confirmed
@@ -48,23 +49,25 @@ function ConfirmationPage({
           {new Date(userInformation.date).toDateString()}
         </Typography>
       </Box>
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor: "#111827",
-          color: "#FFFFFF",
-          borderRadius: 0,
-          // ml: "50%",
-          mx: "auto",
-          // mt: 15,
-        }}
-        onClick={() => {
-          dispatch(cartActions.emptyCart());
-          navigate("/");
-        }}
-      >
-        Continue Shopping
-      </Button>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#111827",
+            color: "#FFFFFF",
+            borderRadius: 0,
+            // ml: "50%",
+            mx: "auto",
+            // mt: 15,
+          }}
+          onClick={() => {
+            dispatch(cartActions.emptyCart());
+            navigate("/");
+          }}
+        >
+          Continue Shopping
+        </Button>
+      </Box>
     </Box>
   );
 }

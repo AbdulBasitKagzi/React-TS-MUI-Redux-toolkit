@@ -22,6 +22,7 @@ function DescriptionAlerts(props: props) {
       dispatch(cartActions.notification());
     }, props.closeDuration);
   }, []);
+
   return (
     <div>
       <Snackbar open={props.openUp} autoHideDuration={props.closeDuration}>

@@ -5,7 +5,7 @@ import { RootState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import { sizeFilter, colorLists } from "../../data/Constants";
 import { cartProducts } from "../../store/cart/cart.types";
-import Layout from "../../components/Layout";
+import Layout from "../../layout";
 
 // mui imports
 import Stepper from "@mui/material/Stepper";
@@ -19,12 +19,12 @@ import { Select } from "@mui/material";
 
 // for date and time
 import dayjs from "dayjs";
-import DescriptionAlerts from "../../components/alert/Alert";
+import DescriptionAlerts from "../../components/Alert";
 import AuthGuard from "../../routes/AuthGuard";
 import { assets } from "../../assets";
 import UserInformation from "../../forms/userInformation";
 import UserPaymentInformation from "../../forms/userPaymentInformation";
-import ConfirmationPage from "../../sections/confirmationPage/ConfirmationPage";
+import ConfirmationPage from "../../sections/ConfirmationPage/index";
 import { user } from "../../forms/userInformation/userInformation.types";
 import { paymentInformation } from "../../forms/userPaymentInformation/userPaymentInformation";
 
@@ -331,7 +331,7 @@ const ShippingPage: React.FC = () => {
               <Box
                 sx={{
                   width: { lg: "35%", md: "40%", sm: "50%", xs: "100%" },
-                  mt: 14.5,
+                  mt: { sm: 14.5, xs: 4 },
                   px: { xl: 0, lg: 0, md: 0, sm: 2, xs: 1.5 },
                 }}
               >
@@ -348,6 +348,7 @@ const ShippingPage: React.FC = () => {
                         fontWeight: 700,
                         fontSize: "18px",
                         color: "#616161",
+                        textAlign: "center",
                       }}
                     >
                       Your Order
@@ -454,7 +455,11 @@ const ShippingPage: React.FC = () => {
                                 }
                               >
                                 <Typography
-                                  sx={{ fontSize: "18px", color: "#E15113" }}
+                                  sx={{
+                                    fontSize: "18px",
+                                    color: "#E15113",
+                                    textAlign: "center",
+                                  }}
                                 >
                                   -
                                 </Typography>
@@ -478,7 +483,11 @@ const ShippingPage: React.FC = () => {
                                 }
                               >
                                 <Typography
-                                  sx={{ fontSize: "18px", color: "#E15113" }}
+                                  sx={{
+                                    fontSize: "18px",
+                                    color: "#E15113",
+                                    textAlign: "center",
+                                  }}
                                 >
                                   +
                                 </Typography>
@@ -497,9 +506,9 @@ const ShippingPage: React.FC = () => {
                             pb: 2,
                           }}
                         >
-                          <Box sx={{ display: "flex", mt: 2 }}>
+                          <Box sx={{ display: "flex", mt: 2, gap: 2 }}>
                             {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                            <Box sx={{ pl: 2, pr: 2 }}>
+                            <Box sx={{ pl: 2 }}>
                               <Typography sx={{ color: "#616161" }}>
                                 Size
                               </Typography>

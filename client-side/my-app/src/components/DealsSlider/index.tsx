@@ -1,13 +1,15 @@
-import { useRef, useCallback, useState, useEffect } from "react";
-
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { productActions } from "../../store/product/product.slice";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css/navigation";
 
 import "./swiper.css";
 import { Navigation } from "swiper";
 
-// icons & images
+// images and icons imports
 // import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 // import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
 
@@ -20,19 +22,27 @@ import { assets } from "../../assets";
 
 type Props = {
   bestDeals: {
-    id: string;
-    type: string;
-    category: string;
-    image: string | undefined;
+    id: number;
     productName: string;
-    price: string;
-    cancelPrice: string;
+    productImages: { id: number; productImage: string | undefined }[];
+    productDescription: Array<string>;
+    productOriginalPrice: number;
+    productCurrentPrice: number;
+    gender: number;
+    // human: number;
+    category: number;
+    brand: number;
+    size: Array<Number>;
+    color: Array<Number>;
+    reviewRate: number;
+    slug: string;
   }[];
 };
+const Slider: React.FC<Props> = ({ bestDeals }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
-  const sliderRef = useRef<SwiperRef>(null);
-  const [display, setDisplay] = useState("block");
+  const sliderRef = useRef<any>();
 
   const handleNext = useCallback(() => {
     if (!sliderRef.current) return;
@@ -44,14 +54,6 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
     sliderRef.current.swiper.slidePrev();
   }, []);
 
-  useEffect(() => {
-    if (bestDeals.length === 0) {
-      setDisplay("none");
-    } else {
-      setDisplay("block");
-    }
-  }, [bestDeals.length]);
-
   return (
     <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
       <Box sx={{ mx: 5, position: "relative" }}>
@@ -60,7 +62,6 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
           slidesPerView={4}
           centeredSlides={false}
           spaceBetween={30}
-          // navigation={true}
           modules={[Navigation]}
           className="mySwiper"
         >
@@ -68,9 +69,16 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
             sx={{
               display: "flex",
               overflow: {
+                xl: "hidden",
+                lg: "hidden",
+                md: "hidden",
+                sm: "hidden",
                 xs: "hidden",
               },
               overflowX: {
+                xl: "hidden",
+                lg: "hidden",
+                md: "hidden",
                 sm: "hidden",
                 xs: "auto",
               },
@@ -82,50 +90,50 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
           >
             <Box
               className="ul"
-              sx={
-                {
-                  // width: {
-                  //   xl: "389px",
-                  //   lg: "350px",
-                  //   md: "250px",
-                  //   sm: "189px",
-                  //   xs: "89px",
-                  // },
-                  // height: {
-                  //   xl: "668px",
-                  //   lg: "668px",
-                  //   md: "530px",
-                  //   sm: "515px",
-                  //   xs: "250px",
-                  // },
-                  // background: "red",
-                }
-              }
+              sx={{
+                width: {
+                  xl: "389px",
+                  lg: "350px",
+                  md: "250px",
+                  sm: "189px",
+                  xs: "89px",
+                },
+                // height: {
+                //   xl: "668px",
+                //   lg: "668px",
+                //   md: "530px",
+                //   sm: "515px",
+                //   xs: "250px",
+                // },
+                // background: "red",
+              }}
             >
               {bestDeals.length === 0 ? (
-                <Typography
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: "30px",
-                    fontFamily: "Jost",
-                    p: 2,
-                  }}
-                >
-                  No Products found
-                </Typography>
+                <Typography>No Products found</Typography>
               ) : (
                 bestDeals?.map(
                   (deals: {
-                    id: string;
-                    type: string;
-                    category: string;
-                    image: string | undefined;
+                    id: number;
                     productName: string;
-                    price: string;
-                    cancelPrice: string;
+                    productImages: {
+                      id: number;
+                      productImage: string | undefined;
+                    }[];
+                    productDescription: Array<string>;
+                    productOriginalPrice: number;
+                    productCurrentPrice: number;
+                    gender: number;
+                    // human: number;
+                    category: number;
+                    brand: number;
+                    size: Array<Number>;
+                    color: Array<Number>;
+                    reviewRate: number;
+                    slug: string;
                   }) => (
                     <SwiperSlide key={deals.id}>
                       <Box
+                        key={deals.id}
                         className="li"
                         sx={{
                           display: "flex",
@@ -137,39 +145,58 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
                             xl: "50px",
                             lg: "40px",
                             md: "50px",
-                            // sm: "30px",
+                            sm: "56px",
                             xs: "30px",
                           },
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          dispatch(productActions.selectedProduct(deals));
+                          navigate(`/itemdetailview/${deals.slug}`);
                         }}
                       >
-                        <Box
-                          sx={{
-                            width: {
-                              lg: "200px",
-                              md: "180px",
-                              sm: "100px",
-                              xs: "50px",
+                        {deals.productImages?.map(
+                          (
+                            image: {
+                              id: number;
+                              productImage: string | undefined;
                             },
-                            height: {
-                              lg: "200px",
-                              md: "180px",
-                              sm: "150px",
-                              xs: "100px",
-                            },
-                          }}
-                        >
-                          <img
-                            // className={styles.image}
-
-                            src={deals.image}
-                            alt="deals"
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "contain",
-                            }}
-                          />
-                        </Box>
+                            index: number
+                          ) => {
+                            if (index === 0) {
+                              return (
+                                <Box
+                                  sx={{
+                                    width: {
+                                      lg: "200px",
+                                      md: "180px",
+                                      sm: "100px",
+                                      xs: "50px",
+                                    },
+                                    height: {
+                                      lg: "200px",
+                                      md: "180px",
+                                      sm: "150px",
+                                      xs: "100px",
+                                    },
+                                  }}
+                                >
+                                  <img
+                                    key={image.id}
+                                    // className={styles.image}
+                                    src={image?.productImage}
+                                    alt="deals"
+                                    style={{
+                                      width: "100%",
+                                      height: "100%",
+                                      objectFit: "contain",
+                                    }}
+                                  />
+                                </Box>
+                              );
+                            }
+                          }
+                        )}
 
                         <Box
                           sx={{
@@ -201,7 +228,7 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
                             {deals.productName}
                           </Typography>
                         </Box>
-                        <Box>
+                        <Box sx={{ textAlign: "left" }}>
                           <Typography
                             sx={{
                               mr: 1,
@@ -219,7 +246,7 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
                               textDecoration: "line-through",
                             }}
                           >
-                            {deals.cancelPrice}
+                            $ {deals.productOriginalPrice}
                           </Typography>
                           <Typography
                             sx={{
@@ -236,7 +263,7 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
                               fontFamily: "Jost",
                             }}
                           >
-                            {deals.price}
+                            $ {deals.productCurrentPrice}
                           </Typography>
                         </Box>
                       </Box>
@@ -248,31 +275,32 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
           </Box>
         </Swiper>
 
-        <Button
-          variant="contained"
-          sx={{
-            background: "#212121",
-            width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
-            // height: { xl: 61, lg: 50, xs: 30, md: 40 },
-            mt: 8,
-          }}
-        >
-          View All
-        </Button>
-
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Button
+            variant="contained"
+            sx={{
+              background: "#212121",
+              width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
+              // height: { xl: 61, lg: 50, xs: 30, md: 40 },
+              mt: { sm: 8, xs: 2 },
+            }}
+          >
+            View All
+          </Button>
+        </Box>
         <Box
           sx={{
             position: "absolute",
             zIndex: 2,
             display: {
-              xl: display,
-              lg: display,
-              md: display,
+              xl: "block",
+              lg: "block",
+              md: "block",
               sm: "none",
               xs: "none",
             },
-            top: { md: "25%" },
-            left: { lg: "2%" },
+            top: { xl: "25%", lg: "25%", md: "25%" },
+            left: { xl: 0, lg: 0, md: "-2.4%" },
           }}
           // className={classes.prev_arrow}
           onClick={handlePrev}
@@ -284,9 +312,9 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
             position: "absolute",
             zIndex: 2,
             display: {
-              xl: display,
-              lg: display,
-              md: display,
+              xl: "block",
+              lg: "block",
+              md: "block",
               sm: "none",
               xs: "none",
             },
@@ -304,4 +332,4 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
   );
 };
 
-export default CategorySlider;
+export default Slider;

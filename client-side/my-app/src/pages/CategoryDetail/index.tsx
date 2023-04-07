@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Layout from "../../components/Layout";
+import Layout from "../../layout";
 import { useParams } from "react-router-dom";
-import FilterSlider from "../../components/filter/Filter";
-import FilterGrid from "../../components/filterGrid/FilterGrid";
+import FilterSlider from "../../components/Filter";
+import FilterGrid from "../../components/FilterGrid";
 import { gender, brandFilter, categoriesFilter } from "../../data/Constants";
 
 // mui imports

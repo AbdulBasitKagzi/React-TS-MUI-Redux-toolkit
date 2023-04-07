@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 // import SignIn from "../pages/Login";
 
 import NoPage from "../pages/Forbidden/index";
-import Loader from "../components/loader/Loader";
+import Loader from "../components/Loader/index";
 
 // implementing lazyloading
 const LazyLogIn = lazy(() => import("../pages/Login/index"));
