@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { productActions } from '../../store/product/product.slice';
 import { MouseEvent } from 'react';
@@ -19,27 +20,43 @@ import { RootState } from '../../store/store';
 
 const drawerWidth = 275;
 
-export default function FilterSlider() {
+interface props {
+  filterQuery: {
+    gender: number;
+    brands: Array<number> | null;
+    categories: Array<number> | null;
+    sizes: Array<number> | null;
+    priceRange: Array<number>;
+  };
+  setFilterQuery: React.Dispatch<
+    React.SetStateAction<{
+      gender: number;
+      brands: Array<number> | null;
+      categories: Array<number> | null;
+      sizes: Array<number> | null;
+      priceRange: Array<number>;
+    }>
+  >;
+}
+
+export default function FilterSlider({ filterQuery, setFilterQuery }: props): JSX.Element {
   const [BrandFilter, setBrandFilter] = useState<number[]>([]);
   const [CategoriesFilter, setCategoriesFilter] = useState<number[]>([]);
   const [SizeFilter, setSizeFilter] = useState<number[]>([]);
   const [click, setClick] = useState<boolean>(false);
-  const [min_max, setMin_Max] = useState<number[]>([20, 100]);
+  const [min_max, setMin_Max] = useState<number[]>([]);
   const [sliderState, setSliderState] = useState<boolean>(false);
+  const params = useParams();
 
-  const [filterQuery, setFilterQuery] = useState<{
-    gender: number;
-    brands: Array<number> | null;
-    categories: Array<number> | null;
-    priceRange: { min: number; max: number };
-  }>({ gender: 1, brands: [], categories: null, priceRange: { min: 0, max: 1000 } });
+  // const [filterQuery, setFilterQuery] = useState<{
+  //   gender: number;
+  //   brands: Array<number> | null;
+  //   categories: Array<number> | null;
+  //   priceRange: { min: number; max: number };
+  // }>({ gender: 1, brands: [], categories: null, priceRange: { min: 0, max: 1000 } });
 
   const dispatch = useDispatch();
   const { minValue, maxValue } = useSelector((state: RootState) => state.product);
-
-  useEffect(() => {
-    sliderState && dispatch(productActions.filterByPrice(min_max));
-  }, [min_max, dispatch]);
 
   const handleBrandFilter = (value: number, isChecked: boolean) => {
     if (isChecked) {
@@ -56,9 +73,10 @@ export default function FilterSlider() {
           };
         }
       });
-      setBrandFilter(prev => [...prev, value]);
+
+      // setBrandFilter(prev => [...prev, value]);
     } else {
-      setBrandFilter(BrandFilter.filter(state => state !== value));
+      // setBrandFilter(BrandFilter.filter(state => state !== value));
 
       setFilterQuery(prevValue => {
         if (prevValue.brands) {
@@ -76,49 +94,278 @@ export default function FilterSlider() {
     }
   };
   const handleCategoriesFilter = (value: number, isChecked: boolean) => {
+    console.log('value', value);
     if (isChecked) {
+      setFilterQuery(prevValue => {
+        if (prevValue.categories) {
+          return {
+            ...prevValue,
+            categories: [...prevValue.categories, value]
+          };
+        } else {
+          return {
+            ...prevValue,
+            categories: [value]
+          };
+        }
+      });
+    } else {
+      setFilterQuery(prevValue => {
+        if (prevValue.categories) {
+          return {
+            ...prevValue,
+            categories: [...prevValue.categories.filter(filter => filter !== value)]
+          };
+        } else {
+          return {
+            ...prevValue,
+            categories: [value]
+          };
+        }
+      });
     }
-    const handleSizeFilter = (value: number, isChecked: boolean) => {
-      if (isChecked) {
-        setSizeFilter(prev => [...prev, value]);
-      } else {
-        setSizeFilter(SizeFilter.filter(state => state !== value));
-      }
-    };
+  };
+  const handleSizeFilter = (value: number, isChecked: boolean) => {
+    if (isChecked) {
+      setFilterQuery(prevValue => {
+        if (prevValue.sizes) {
+          return {
+            ...prevValue,
+            sizes: [...prevValue.sizes, value]
+          };
+        } else {
+          return {
+            ...prevValue,
+            sizes: [value]
+          };
+        }
+      });
+    } else {
+      setFilterQuery(prevValue => {
+        if (prevValue.sizes) {
+          return {
+            ...prevValue,
+            sizes: [...prevValue.sizes.filter(filter => filter !== value)]
+          };
+        } else {
+          return {
+            ...prevValue,
+            sizes: [value]
+          };
+        }
+      });
+    }
+  };
 
-    useEffect(() => {
-      click && dispatch(productActions.filterByBrand(BrandFilter));
-    }, [BrandFilter, dispatch]);
+  useEffect(() => {
+    console.log('dispatch');
+    dispatch(productActions.filterProducts(filterQuery));
+  }, [filterQuery, dispatch]);
 
-    useEffect(() => {
-      click && dispatch(productActions.filterByCategory(CategoriesFilter));
-    }, [CategoriesFilter, dispatch]);
+  // to open menu in mobile view
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-    useEffect(() => {
-      click && dispatch(productActions.filterBySize(SizeFilter));
-    }, [SizeFilter, dispatch]);
+  const handleDrawerToggle = () => {
+    setMobileOpen(prevState => !prevState);
+  };
+  useEffect(() => {
+    setMin_Max(() => [minValue, maxValue]);
+  }, [minValue, maxValue]);
 
-    // to open menu in mobile view
-    const [mobileOpen, setMobileOpen] = useState(false);
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Box
+        sx={{
+          maxWidth: {
+            xs: '240px'
+          },
 
-    const handleDrawerToggle = () => {
-      setMobileOpen(prevState => !prevState);
-    };
-    useEffect(() => {
-      setMin_Max(() => [minValue, maxValue]);
-    }, [minValue, maxValue]);
+          backgroundColor: '#F9FAFB',
+          ml: { xs: 2 },
+          mt: { xs: 2 }
+        }}>
+        <Box sx={{ mx: 4, textAlign: 'left', mt: 8 }}>
+          <Typography
+            sx={{
+              fontFamily: 'Jost',
+              fontWeight: '600',
+              fontSize: '16px',
+              letterSpacing: '0.02em',
+              textTransform: 'uppercase',
+              color: '#1F2937',
+              mb: 3,
+              p: 1
+            }}>
+            PRICES
+          </Typography>
 
-    const drawer = (
-      <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}>
+            <Typography
+              id="range-slider"
+              gutterBottom
+              sx={{
+                fontFamily: 'Jost',
+                fontWeight: '400',
+                fontSize: '20px',
+                letterSpacing: '0.02em',
+                color: '#4B5563'
+              }}>
+              Range
+            </Typography>
+            <Typography
+              id="range-slider"
+              gutterBottom
+              sx={{
+                fontFamily: 'Jost',
+                fontWeight: '500',
+                fontSize: { sm: '20px', xs: '16px' },
+                letterSpacing: '0.02em',
+                color: '#1F2937'
+              }}>
+              ${min_max[0]}-${min_max[1]}
+            </Typography>
+          </Box>
+          <Slider
+            sx={{
+              color: '#EB5757',
+              width: {
+                xl: '376px',
+                lg: '376px',
+                md: '180px',
+                sm: '180px',
+                xs: '180px'
+              }
+            }}
+            onChange={(_, value) => {
+              setSliderState(true);
+              setMin_Max(value as [number, number]);
+            }}
+            valueLabelDisplay="auto"
+            aria-labelledby="range-slider"
+            value={min_max}
+            max={1000}
+            min={1}
+            name="price"
+            disableSwap
+            getAriaLabel={() => 'Minimum distance'}
+          />
+        </Box>
+
+        <FormGroup>
+          <Typography
+            textAlign="left"
+            sx={{
+              fontFamily: 'Jost',
+              fontWeight: 600,
+              fontSize: '16px',
+              color: 'Grey/grey-800',
+              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
+            }}>
+            Filters
+          </Typography>
+
+          <Typography
+            textAlign="left"
+            sx={{
+              fontFamily: 'Jost',
+              fontWeight: 600,
+              fontSize: '16px',
+              color: 'Grey/grey-800',
+              mt: 10,
+              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
+            }}>
+            Brands
+          </Typography>
+          {brandFilter.map((brand: { id: number; value: string; slug: string }) => (
+            <FormControlLabel
+              control={<Checkbox />}
+              label={brand.value}
+              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                setClick(true);
+                handleBrandFilter(brand.id, (e.target as unknown as { checked: boolean }).checked);
+              }}
+            />
+          ))}
+          <Typography
+            textAlign="left"
+            sx={{
+              fontFamily: 'Jost',
+              fontWeight: 600,
+              fontSize: '16px',
+              color: 'Grey/grey-800',
+              mt: 10,
+              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
+            }}>
+            Categories
+          </Typography>
+          {categoriesFilter.map(category => (
+            <FormControlLabel
+              control={<Checkbox />}
+              label={category.value}
+              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                setClick(true);
+                handleCategoriesFilter(category.id, (e.target as unknown as { checked: boolean }).checked);
+              }}
+            />
+          ))}
+          <Typography
+            textAlign="left"
+            sx={{
+              fontFamily: 'Jost',
+              fontWeight: 600,
+              fontSize: '16px',
+              color: 'Grey/grey-800',
+              mt: 10,
+              ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
+            }}>
+            Size
+          </Typography>
+          {sizeFilter.map(size => (
+            <FormControlLabel
+              control={<Checkbox />}
+              label={size.value}
+              sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
+              onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                setClick(true);
+                handleSizeFilter(size.id, (e.target as unknown as { checked: boolean }).checked);
+              }}
+            />
+          ))}
+        </FormGroup>
+      </Box>
+    </Box>
+  );
+
+  const desktop_filter = () => {
+    return (
+      <>
         <Box
           sx={{
             maxWidth: {
-              xs: '240px'
+              xl: '450px',
+              lg: '450px',
+              md: '450px',
+              sm: '255px',
+              xs: '230px'
             },
-
+            // maxHeight: { xl: "2000px", lg: "2000px" },
+            display: {
+              xl: 'block',
+              lg: 'block',
+              md: 'block',
+              sm: 'block',
+              xs: 'none'
+            },
+            border: 2,
             backgroundColor: '#F9FAFB',
-            ml: { xs: 2 },
-            mt: { xs: 2 }
+            ml: { xl: 8, lg: 6, md: 4, sm: 2 }
+            // mt: { sm: "2rem", md: "9.5rem" },
           }}>
           <Box sx={{ mx: 4, textAlign: 'left', mt: 8 }}>
             <Typography
@@ -129,12 +376,11 @@ export default function FilterSlider() {
                 letterSpacing: '0.02em',
                 textTransform: 'uppercase',
                 color: '#1F2937',
-                mb: 3,
-                p: 1
+                // marginBottom: "10px",
+                mb: 3
               }}>
               PRICES
             </Typography>
-
             <Box
               sx={{
                 display: 'flex',
@@ -158,7 +404,7 @@ export default function FilterSlider() {
                 sx={{
                   fontFamily: 'Jost',
                   fontWeight: '500',
-                  fontSize: { sm: '20px', xs: '16px' },
+                  fontSize: '20px',
                   letterSpacing: '0.02em',
                   color: '#1F2937'
                 }}>
@@ -176,6 +422,7 @@ export default function FilterSlider() {
                   xs: '180px'
                 }
               }}
+              // value={priceFilter}
               onChange={(_, value) => {
                 setSliderState(true);
                 setMin_Max(value as [number, number]);
@@ -199,24 +446,12 @@ export default function FilterSlider() {
                 fontWeight: 600,
                 fontSize: '16px',
                 color: 'Grey/grey-800',
-                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
-              }}>
-              Filters
-            </Typography>
-
-            <Typography
-              textAlign="left"
-              sx={{
-                fontFamily: 'Jost',
-                fontWeight: 600,
-                fontSize: '16px',
-                color: 'Grey/grey-800',
                 mt: 10,
-                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
+                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 }
               }}>
               Brands
             </Typography>
-            {brandFilter.map((brand: { id: number; value: string; slug: string }) => (
+            {brandFilter.map(brand => (
               <FormControlLabel
                 control={<Checkbox />}
                 label={brand.value}
@@ -235,7 +470,7 @@ export default function FilterSlider() {
                 fontSize: '16px',
                 color: 'Grey/grey-800',
                 mt: 10,
-                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
+                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 }
               }}>
               Categories
             </Typography>
@@ -258,7 +493,7 @@ export default function FilterSlider() {
                 fontSize: '16px',
                 color: 'Grey/grey-800',
                 mt: 10,
-                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 1 }
+                ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 }
               }}>
               Size
             </Typography>
@@ -275,225 +510,50 @@ export default function FilterSlider() {
             ))}
           </FormGroup>
         </Box>
-      </Box>
-    );
-
-    const desktop_filter = () => {
-      return (
-        <>
-          <Box
-            sx={{
-              maxWidth: {
-                xl: '450px',
-                lg: '450px',
-                md: '450px',
-                sm: '255px',
-                xs: '230px'
-              },
-              // maxHeight: { xl: "2000px", lg: "2000px" },
-              display: {
-                xl: 'block',
-                lg: 'block',
-                md: 'block',
-                sm: 'block',
-                xs: 'none'
-              },
-              border: 2,
-              backgroundColor: '#F9FAFB',
-              ml: { xl: 8, lg: 6, md: 4, sm: 2 }
-              // mt: { sm: "2rem", md: "9.5rem" },
-            }}>
-            <Box sx={{ mx: 4, textAlign: 'left', mt: 8 }}>
-              <Typography
-                sx={{
-                  fontFamily: 'Jost',
-                  fontWeight: '600',
-                  fontSize: '16px',
-                  letterSpacing: '0.02em',
-                  textTransform: 'uppercase',
-                  color: '#1F2937',
-                  // marginBottom: "10px",
-                  mb: 3
-                }}>
-                PRICES
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between'
-                }}>
-                <Typography
-                  id="range-slider"
-                  gutterBottom
-                  sx={{
-                    fontFamily: 'Jost',
-                    fontWeight: '400',
-                    fontSize: '20px',
-                    letterSpacing: '0.02em',
-                    color: '#4B5563'
-                  }}>
-                  Range
-                </Typography>
-                <Typography
-                  id="range-slider"
-                  gutterBottom
-                  sx={{
-                    fontFamily: 'Jost',
-                    fontWeight: '500',
-                    fontSize: '20px',
-                    letterSpacing: '0.02em',
-                    color: '#1F2937'
-                  }}>
-                  ${min_max[0]}-${min_max[1]}
-                </Typography>
-              </Box>
-              <Slider
-                sx={{
-                  color: '#EB5757',
-                  width: {
-                    xl: '376px',
-                    lg: '376px',
-                    md: '180px',
-                    sm: '180px',
-                    xs: '180px'
-                  }
-                }}
-                // value={priceFilter}
-                onChange={(_, value) => {
-                  setSliderState(true);
-                  setMin_Max(value as [number, number]);
-                }}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                value={min_max}
-                max={1000}
-                min={1}
-                name="price"
-                disableSwap
-                getAriaLabel={() => 'Minimum distance'}
-              />
-            </Box>
-
-            <FormGroup>
-              <Typography
-                textAlign="left"
-                sx={{
-                  fontFamily: 'Jost',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  color: 'Grey/grey-800',
-                  mt: 10,
-                  ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 }
-                }}>
-                Brands
-              </Typography>
-              {brandFilter.map(brand => (
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label={brand.value}
-                  sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-                  onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                    setClick(true);
-                    handleBrandFilter(brand.id, (e.target as unknown as { checked: boolean }).checked);
-                  }}
-                />
-              ))}
-              <Typography
-                textAlign="left"
-                sx={{
-                  fontFamily: 'Jost',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  color: 'Grey/grey-800',
-                  mt: 10,
-                  ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 }
-                }}>
-                Categories
-              </Typography>
-              {categoriesFilter.map(category => (
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label={category.value}
-                  sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-                  onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                    setClick(true);
-                    handleCategoriesFilter(
-                      category.id,
-                      (e.target as unknown as { checked: boolean }).checked
-                    );
-                  }}
-                />
-              ))}
-              <Typography
-                textAlign="left"
-                sx={{
-                  fontFamily: 'Jost',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  color: 'Grey/grey-800',
-                  mt: 10,
-                  ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 }
-                }}>
-                Size
-              </Typography>
-              {sizeFilter.map(size => (
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label={size.value}
-                  sx={{ ml: { xl: 4, lg: 4, md: 4, sm: 4, xs: 0 } }}
-                  onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                    setClick(true);
-                    handleSizeFilter(size.id, (e.target as unknown as { checked: boolean }).checked);
-                  }}
-                />
-              ))}
-            </FormGroup>
-          </Box>
-        </>
-      );
-    };
-
-    let desktop = desktop_filter();
-
-    return (
-      <>
-        <Box
-          onClick={handleDrawerToggle}
-          sx={{
-            display: {
-              xs: 'block',
-              sm: 'none',
-              md: 'none',
-              lg: 'none',
-              xl: 'none'
-            },
-            mt: '5rem'
-          }}>
-          <FilterListIcon />
-        </Box>
-        {desktop}
-
-        <Box component="nav">
-          <Drawer
-            // container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'block' },
-              '& .MuiDrawer-paper': {
-                boxSizing: 'border-box',
-                width: drawerWidth,
-                marginTop: '110px'
-              }
-            }}>
-            {drawer}
-          </Drawer>
-        </Box>
       </>
     );
   };
+
+  let desktop = desktop_filter();
+
+  return (
+    <>
+      <Box
+        onClick={handleDrawerToggle}
+        sx={{
+          display: {
+            xs: 'block',
+            sm: 'none',
+            md: 'none',
+            lg: 'none',
+            xl: 'none'
+          },
+          mt: '5rem'
+        }}>
+        <FilterListIcon />
+      </Box>
+      {desktop}
+
+      <Box component="nav">
+        <Drawer
+          // container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'block' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              marginTop: '110px'
+            }
+          }}>
+          {drawer}
+        </Drawer>
+      </Box>
+    </>
+  );
 }
