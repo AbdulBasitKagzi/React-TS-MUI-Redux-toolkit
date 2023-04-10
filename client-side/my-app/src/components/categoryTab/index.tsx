@@ -1,24 +1,23 @@
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState, useEffect } from 'react';
 
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
-import "swiper/css/navigation";
+import 'swiper/css/navigation';
 
-import "./swiper.css";
-import { Navigation } from "swiper";
+import './swiper.css';
+import { Navigation } from 'swiper';
 
 // icons & images
 // import leftArrowIcon from "../assets/icons/leftArrowIcon.svg";
 // import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
 
 // mui imports
-import { Box, Button } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Box, Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
-import styles from "../css/slider.module.css";
-import { assets } from "../../assets";
+import { assets } from '../../assets';
 
-type Props = {
+interface categoryProps {
   bestDeals: {
     id: string;
     type: string;
@@ -28,11 +27,11 @@ type Props = {
     price: string;
     cancelPrice: string;
   }[];
-};
+}
 
-const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
+const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
   const sliderRef = useRef<SwiperRef>(null);
-  const [display, setDisplay] = useState("block");
+  const [display, setDisplay] = useState('block');
 
   const handleNext = useCallback(() => {
     if (!sliderRef.current) return;
@@ -46,128 +45,114 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
 
   useEffect(() => {
     if (bestDeals.length === 0) {
-      setDisplay("none");
+      setDisplay('none');
     } else {
-      setDisplay("block");
+      setDisplay('block');
     }
   }, [bestDeals.length]);
 
   return (
-    <Box sx={{ maxWidth: "1600px", mx: "auto" }}>
-      <Box sx={{ mx: 5, position: "relative" }}>
+    <Box sx={{ maxWidth: '1600px', mx: 'auto' }}>
+      <Box sx={{ mx: 5, position: 'relative' }}>
         <Swiper
           ref={sliderRef}
           slidesPerView={4}
           centeredSlides={false}
           spaceBetween={30}
-          // navigation={true}
           modules={[Navigation]}
-          className="mySwiper"
-        >
+          className="mySwiper">
           <Box
             sx={{
-              display: "flex",
+              display: 'flex',
               overflow: {
-                xs: "hidden",
+                xs: 'hidden'
               },
               overflowX: {
-                sm: "hidden",
-                xs: "auto",
+                sm: 'hidden',
+                xs: 'auto'
               },
-              justifyContent: "space-between",
-              // ml: { xl: 5, lg: 5, md: 5, sm: 3, xs: 2 },
-              maxWidth: "85%",
-              mx: "auto",
-            }}
-          >
+              justifyContent: 'space-between',
+              maxWidth: '85%',
+              mx: 'auto'
+            }}>
             <Box className="ul">
               {bestDeals.length === 0 ? (
                 <Typography
                   sx={{
                     fontWeight: 700,
-                    fontSize: "30px",
-                    fontFamily: "Jost",
-                    p: 2,
-                  }}
-                >
+                    fontSize: '30px',
+                    fontFamily: 'Jost',
+                    p: 2
+                  }}>
                   No Products found
                 </Typography>
               ) : (
-                bestDeals?.map((deals) => (
+                bestDeals?.map(deals => (
                   <SwiperSlide key={deals.id}>
                     <Box
+                      key={deals.id}
                       className="li"
                       sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexDirection: "column",
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'column',
 
                         marginTop: {
-                          xl: "50px",
-                          lg: "40px",
-                          md: "50px",
-                          // sm: "30px",
-                          xs: "30px",
-                        },
-                      }}
-                    >
+                          xl: '50px',
+                          lg: '40px',
+                          md: '50px',
+                          xs: '30px'
+                        }
+                      }}>
                       <Box
                         sx={{
                           width: {
-                            lg: "200px",
-                            md: "180px",
-                            sm: "100px",
-                            xs: "50px",
+                            lg: '200px',
+                            md: '180px',
+                            sm: '100px',
+                            xs: '50px'
                           },
                           height: {
-                            lg: "200px",
-                            md: "180px",
-                            sm: "150px",
-                            xs: "100px",
-                          },
-                        }}
-                      >
+                            lg: '200px',
+                            md: '180px',
+                            sm: '150px',
+                            xs: '100px'
+                          }
+                        }}>
                         <img
-                          // className={styles.image}
-
                           src={deals.image}
                           alt="deals"
                           style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "contain",
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
                           }}
                         />
                       </Box>
 
                       <Box
                         sx={{
-                          textAlign: "left",
+                          textAlign: 'left',
                           marginTop: {
-                            xl: "55px",
-                            lg: "55px",
-                            md: "55px",
-                            sm: "30px",
-                            xs: "10px",
-                          },
-                        }}
-                      >
+                            md: '55px',
+                            sm: '30px',
+                            xs: '10px'
+                          }
+                        }}>
                         <Typography
                           sx={{
                             fontSize: {
-                              xl: "25px",
-                              lg: "25px",
-                              md: "18px",
-                              sm: "16px",
-                              xs: "8px",
+                              lg: '25px',
+                              md: '18px',
+                              sm: '16px',
+                              xs: '8px'
                             },
                             fontWeight: 700,
-                            fontFamily: "Jost",
-                            wordBreak: "break-all",
-                            padding: { xs: "1px" },
-                          }}
-                        >
+                            fontFamily: 'Jost',
+                            wordBreak: 'break-all',
+                            padding: { xs: '1px' }
+                          }}>
                           {deals.productName}
                         </Typography>
                       </Box>
@@ -175,37 +160,33 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
                         <Typography
                           sx={{
                             mr: 1,
-                            display: "inline-block",
-                            color: "#9E9E9E",
+                            display: 'inline-block',
+                            color: '#9E9E9E',
                             fontSize: {
-                              xs: 9,
-                              xl: 25,
                               lg: 25,
                               md: 18,
                               sm: 12,
+                              xs: 9
                             },
                             fontWeight: 400,
-                            fontFamily: "Jost",
-                            textDecoration: "line-through",
-                          }}
-                        >
+                            fontFamily: 'Jost',
+                            textDecoration: 'line-through'
+                          }}>
                           {deals.cancelPrice}
                         </Typography>
                         <Typography
                           sx={{
-                            display: "inline-block",
-                            color: "#FF705C",
+                            display: 'inline-block',
+                            color: '#FF705C',
                             fontSize: {
-                              xs: 9,
-                              xl: 25,
                               lg: 25,
                               md: 18,
                               sm: 12,
+                              xs: 9
                             },
                             fontWeight: 400,
-                            fontFamily: "Jost",
-                          }}
-                        >
+                            fontFamily: 'Jost'
+                          }}>
                           {deals.price}
                         </Typography>
                       </Box>
@@ -217,58 +198,53 @@ const CategorySlider: React.FC<Props> = ({ bestDeals }) => {
           </Box>
         </Swiper>
 
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             variant="contained"
             sx={{
-              background: "#212121",
+              background: '#212121',
               width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
-              // height: { xl: 61, lg: 50, xs: 30, md: 40 },
-              mt: 8,
-            }}
-          >
+
+              mt: 8
+            }}>
             View All
           </Button>
         </Box>
 
         <Box
           sx={{
-            position: "absolute",
+            position: 'absolute',
             zIndex: 2,
             display: {
               xl: display,
               lg: display,
               md: display,
-              sm: "none",
-              xs: "none",
+              sm: 'none',
+              xs: 'none'
             },
-            top: { md: "25%" },
-            left: { lg: "2%" },
+            top: { md: '25%' },
+            left: { lg: '2%' }
           }}
-          // className={classes.prev_arrow}
-          onClick={handlePrev}
-        >
-          <img src={assets.icons.Left_Arrow_Icon} alt="previous" />
+          onClick={handlePrev}>
+          <img src={assets.icons.Left_Arrow_Icon} alt="previous" width="20px" height="30px" />
         </Box>
         <Box
           sx={{
-            position: "absolute",
+            position: 'absolute',
             zIndex: 2,
             display: {
               xl: display,
               lg: display,
               md: display,
-              sm: "none",
-              xs: "none",
+              sm: 'none',
+              xs: 'none'
             },
 
-            top: { md: "25%" },
-            left: { lg: "98%", md: "100%" },
+            top: { md: '25%' },
+            left: { lg: '98%', md: '100%' }
           }}
-          // className={classes.next_arrow}
-          onClick={handleNext}
-        >
-          <img src={assets.icons.Right_Arrow_Icon} alt="right" />
+          onClick={handleNext}>
+          <img src={assets.icons.Right_Arrow_Icon} alt="right" width="20px" height="30px" />
         </Box>
       </Box>
     </Box>

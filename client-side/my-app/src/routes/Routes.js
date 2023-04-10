@@ -1,60 +1,62 @@
-import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
 // import SignIn from "../pages/Login";
 
-import NoPage from "../pages/Forbidden/index";
-import Loader from "../components/Loader/index";
+import NoPage from '../pages/Forbidden/index';
+import Loader from '../components/Loader/index';
 
 // implementing lazyloading
-const LazyLogIn = lazy(() => import("../pages/Login/index"));
-const LazyHome = lazy(() => import("../pages/Home/index"));
-const LazyCategoryDetail = lazy(() => import("../pages/CategoryDetail/index"));
-const LazyItemDetailView = lazy(() => import("../pages/ItemDetailView/index"));
-const LazyShippingPage = lazy(() => import("../pages/ShippingPage/index"));
+const LazyLogIn = lazy(() => import('../pages/Login/index'));
+const LazyHome = lazy(() => import('../pages/Home/index'));
+const LazyCategoryDetail = lazy(() => import('../pages/CategoryDetail/index'));
+const LazyItemDetailView = lazy(() => import('../pages/ItemDetailView/index'));
+const LazyShippingPage = lazy(() => import('../pages/ShippingPage/index'));
 
 function MainRoutes() {
   const routes_arr = [
     {
-      id: "login",
-      path: "/login",
+      id: 'login',
+      path: '/login',
       component: <LazyLogIn />,
-      protected: false,
+      protected: false
     },
     {
-      id: "home",
-      path: "/",
+      id: 'home',
+      path: '/',
       component: <LazyHome />,
-      protected: true,
+      protected: true
+    },
+    {
+      id: 'categorydetal',
+      path: '/categorydetail/:slug',
+      component: <LazyCategoryDetail />,
+      protected: true
     },
 
     {
-      id: "categorydetal",
-      path: "/categorydetail/:id/:type",
+      id: 'categorydetal',
+      path: '/categorydetail/:id/:type',
       component: <LazyCategoryDetail />,
-      protected: true,
+      protected: true
     },
     {
-      id: "shippingpage",
-      path: "/shippingpage",
+      id: 'shippingpage',
+      path: '/shippingpage',
       component: <LazyShippingPage />,
-      protected: true,
+      protected: true
     },
     {
-      id: "itemdetailview",
-      path: "/itemdetailview/:id",
+      id: 'itemdetailview',
+      path: '/itemdetailview/:id',
       component: <LazyItemDetailView />,
-      protected: true,
-    },
+      protected: true
+    }
   ];
   return (
     <Suspense fallback=<Loader />>
       <Routes>
-        {routes_arr.map((routes) => (
-          <Route
-            key={routes.id}
-            path={routes.path}
-            element={routes.component}
-          />
+        {routes_arr.map(routes => (
+          <Route key={routes.id} path={routes.path} element={routes.component} />
         ))}
         <Route path="*" element={<NoPage />} />
       </Routes>

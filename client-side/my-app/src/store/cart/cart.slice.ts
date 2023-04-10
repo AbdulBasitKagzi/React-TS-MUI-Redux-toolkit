@@ -1,19 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { cartProducts, cartSliceState } from "./cart.types";
+import { createSlice } from '@reduxjs/toolkit';
+import { cartSliceState } from './cart.types';
 
 const cartStates: cartSliceState = {
   cartProducts: [],
-  added: false,
+  added: false
 };
 
 const cartSlice = createSlice({
-  name: "cartSlice",
+  name: 'cartSlice',
   initialState: cartStates,
   reducers: {
     addProductToCart: (state, action) => {
-      console.log("action", action);
       const data = state.cartProducts.find(
-        (product: cartProducts) =>
+        product =>
           product.id === action.payload.id &&
           product.selectedSize === action.payload.selectedSize &&
           product.selectedColor === action.payload.selectedColor
@@ -29,9 +28,7 @@ const cartSlice = createSlice({
     },
     increment: (state, action) => {
       console.log(action);
-      const data = state.cartProducts.find(
-        (product: cartProducts) => product.id === action.payload.id
-      );
+      const data = state.cartProducts.find(product => product.id === action.payload.id);
       if (data) {
         const index = state.cartProducts.indexOf(data);
         state.cartProducts[index].quantity++;
@@ -40,32 +37,26 @@ const cartSlice = createSlice({
     decrement: (state, action) => {
       let index: number = 0;
 
-      const data = state.cartProducts.find(
-        (product: cartProducts) => product.id === action.payload.id
-      );
+      const data = state.cartProducts.find(product => product.id === action.payload.id);
       if (data) {
         index = state.cartProducts.indexOf(data);
         state.cartProducts[index].quantity--;
       }
       if (state.cartProducts[index].quantity === 0) {
-        state.cartProducts = state.cartProducts.filter(
-          (product: cartProducts) => product.id !== action.payload.id
-        );
+        state.cartProducts = state.cartProducts.filter(product => product.id !== action.payload.id);
       }
     },
     removeProduct: (state, action) => {
       console.log(action);
-      state.cartProducts = state.cartProducts.filter(
-        (product: cartProducts) => product.id !== action.payload.id
-      );
+      state.cartProducts = state.cartProducts.filter(product => product.id !== action.payload.id);
     },
-    emptyCart: (state) => {
+    emptyCart: state => {
       state.cartProducts = [];
     },
-    notification: (state) => {
+    notification: state => {
       state.added = false;
-    },
-  },
+    }
+  }
 });
 
 export const cartActions = cartSlice.actions;

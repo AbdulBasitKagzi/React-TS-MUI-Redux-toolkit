@@ -16,41 +16,24 @@ import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import { cartActions } from '../../store/cart/cart.slice';
 
-interface arr {
-  id: number;
-  productName: string;
-  productImages: { id: number; productImage: string | undefined }[];
-  productDescription: string[];
-  productOriginalPrice: number;
-  productCurrentPrice: number;
-  gender: number;
-  human: number;
-  category: number;
-  brand: number;
-  size: Array<number>;
-  color: Array<number>;
-  reviewRate: number;
-  slug: string;
-}
-
 interface data {
   id: number;
   value: string;
   slug: string;
 }
 
-type props = {
+interface filterGridProps {
   foundGender: data;
   foundBrand: data;
   foundCategory: data;
-};
+}
 
-const FilterGrid: React.FC<props> = props => {
+const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundCategory }) => {
   const { filter } = useSelector((state: RootState) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [totalPage, setTotalPage] = useState<number>();
-  const [postPerPage, setPostPerPage] = useState<number>(9);
+  let postPerPage: number = 9;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentposts, setCurrentPosts] = useState<productProps[]>(filter);
   const [save, setSave] = useState<string>(localStorage.getItem('isAuth') || '');
@@ -67,39 +50,19 @@ const FilterGrid: React.FC<props> = props => {
     filter.length !== 0 && setCurrentPosts(filter.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, filter]);
 
-  // finding min value
-  useEffect(() => {
-    let minValue: number;
-    minValue = currentposts.reduce((min, curr) => {
-      return curr.productCurrentPrice < min ? curr.productCurrentPrice : min;
-    }, currentposts[0]?.productCurrentPrice);
-
-    dispatch(productActions.setMinValue(minValue));
-  }, [currentposts, filter, dispatch]);
-
-  //finding max value
-  useEffect(() => {
-    let maxValue: number;
-    maxValue = currentposts.reduce((max, curr) => {
-      return curr.productCurrentPrice > max ? curr.productCurrentPrice : max;
-    }, currentposts[0]?.productCurrentPrice);
-    dispatch(productActions.setMaxValue(maxValue));
-  }, [currentposts, filter, dispatch]);
-
   return (
     <Box>
       <Box
         sx={{
           mt: { md: -12.9, sm: -11.8, xs: 5 },
           display: 'flex',
-          justifyContent: { xs: 'start', sm: 'start' },
+          justifyContent: { xs: 'start' },
           ml: { xs: 4 }
         }}>
         <Typography
           sx={{
             fontFamily: 'Jost',
             fontSize: {
-              xl: '44px',
               lg: '44px',
               md: '40px',
               sm: '34px',
@@ -107,8 +70,8 @@ const FilterGrid: React.FC<props> = props => {
             },
             fontWeight: 700
           }}>
-          {props.foundGender?.value} {props.foundCategory?.value} {props.foundBrand?.value}{' '}
-          {props.foundBrand?.value ? 'Products' : ''}
+          {foundGender?.value} {foundCategory?.value} {foundBrand?.value}
+          {foundBrand?.value ? 'Products' : ''}
         </Typography>
       </Box>
       <Box
@@ -140,15 +103,17 @@ const FilterGrid: React.FC<props> = props => {
           // spacing={currentposts.length === 1 ? 1 : 4}
           spacing={4}>
           {filter.length !== 0 ? (
-            currentposts.map((arr: arr) => (
+            currentposts.map(arr => (
               <Grid
+                key={arr.id}
                 item
-                xs={12}
-                sm={6}
-                md={4}
+                xl={filter.length === 1 ? 'auto' : 4}
                 lg={filter.length === 1 ? 'auto' : 4}
-                xl={filter.length === 1 ? 'auto' : 4}>
+                md={4}
+                sm={6}
+                xs={12}>
                 <Box
+                  key={arr.id}
                   sx={{
                     position: 'relative',
                     border: 1,
@@ -161,25 +126,23 @@ const FilterGrid: React.FC<props> = props => {
                     navigate(`/itemdetailview/${arr.slug}`);
                   }}>
                   <Box>
-                    {arr?.productImages?.map(
-                      (image: { id: number; productImage: string | undefined }, index: number) => {
-                        if (index === 0) {
-                          return (
-                            <>
-                              <img
-                                className="product_image"
-                                src={image.productImage}
-                                alt={image.productImage}
-                                width="100%"
-                                height="300px"
-                              />
-                            </>
-                          );
-                        } else {
-                          return;
-                        }
+                    {arr?.productImages?.map((image, index: number) => {
+                      if (index === 0) {
+                        return (
+                          <Box key={image.id}>
+                            <img
+                              className="product_image"
+                              src={image.productImage}
+                              alt={image.productImage}
+                              width="100%"
+                              height="300px"
+                            />
+                          </Box>
+                        );
+                      } else {
+                        return;
                       }
-                    )}
+                    })}
                   </Box>
 
                   <Box sx={{ position: 'absolute', top: 12, right: 15 }}>
@@ -190,12 +153,8 @@ const FilterGrid: React.FC<props> = props => {
                     sx={{
                       display: 'flex',
                       textAlign: 'left',
-                      // display: "inline-flex",
-                      // flexDirection: "column",
+
                       justifyContent: 'space-between'
-                      // mb: { xl: 1, lg: 1 },
-                      // ml: { xl: 2, lg: 2 },
-                      // mt: 5,
                     }}>
                     <Typography
                       sx={{
@@ -203,7 +162,6 @@ const FilterGrid: React.FC<props> = props => {
                         alignItems: 'center',
                         fontFamily: 'Inter',
                         fontSize: {
-                          xl: '30px',
                           lg: '30px',
                           md: '26px',
                           sm: '24px',
@@ -211,25 +169,18 @@ const FilterGrid: React.FC<props> = props => {
                         },
                         fontWeight: 400,
 
-                        height: { lg: 120, md: 120, sm: 120 },
+                        height: { sm: 120 },
                         pb: 1,
                         pl: 2
-                        // whiteSpace: { lg: "normal", md: "nowrap" },
-                        // overflow: { lg: "block", md: "hidden" },
-                        // textOverflow: { lg: "none", md: "ellipsis" },
                       }}>
                       {arr.productName}
                     </Typography>
                     <Box
                       sx={{
-                        // mr: { xl: 3, lg: 3, md: 3, sm: 3, xs: 3 },
-                        // mt: { xl: 8, lg: 8, md: 8, sm: 8, xs: 8 },
                         mr: 3,
-
                         my: 'auto',
                         display: 'flex',
                         mt: 6
-                        // ml: { md: 6 },
                       }}
                       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                         e.stopPropagation();
@@ -247,7 +198,6 @@ const FilterGrid: React.FC<props> = props => {
                       textAlign: 'left',
                       fontFamily: 'Inter',
                       fontSize: {
-                        xl: '34px',
                         lg: '34px',
                         md: '30px',
                         sm: '28px',
@@ -255,7 +205,7 @@ const FilterGrid: React.FC<props> = props => {
                       },
                       pl: 1,
                       fontWeight: 400,
-                      ml: { xl: '16px', lg: '16px' }
+                      ml: { lg: '16px' }
                     }}>
                     $ {arr.productCurrentPrice}
                   </Typography>

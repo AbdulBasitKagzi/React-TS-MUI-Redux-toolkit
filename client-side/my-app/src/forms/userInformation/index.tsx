@@ -1,74 +1,59 @@
-import { useEffect, useState } from "react";
+import { useState } from 'react';
 
 // mui imports
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import { TimePicker } from "@mui/x-date-pickers";
-import InputLabel from "@mui/material/InputLabel";
-import NativeSelect from "@mui/material/NativeSelect";
-import { user } from "./userInformation.types";
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import dayjs from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { TimePicker } from '@mui/x-date-pickers';
+import InputLabel from '@mui/material/InputLabel';
+import NativeSelect from '@mui/material/NativeSelect';
+import { user } from './userInformation.types';
 
 interface UserInformationType {
-  setOpenUp: (value: boolean) => void;
-  setAlert: (val: { type: string; title: string; message: string }) => void;
-  page: number;
-  setPage: (value: number) => void;
   userInformation: user;
   setUserInformation: React.Dispatch<React.SetStateAction<user>>;
   handleUserValidation: (value: user) => void;
 }
 
 function UserInformation({
-  page,
-  setAlert,
-  setOpenUp,
-  setPage,
   setUserInformation,
   userInformation,
-  handleUserValidation,
+  handleUserValidation
 }: UserInformationType): JSX.Element {
-  const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
   const [date_time, setDate_Time] = useState(dayjs());
 
   const handleUserInformation = (
-    event:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setUserInformation((prev) => ({
+    setUserInformation(prev => ({
       ...prev,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     }));
   };
 
   const handleDate = (newValue: any) => {
+    console.log(newValue, typeof newValue);
     setDate_Time(newValue);
-    setUserInformation((prev) => ({
+    setUserInformation(prev => ({
       ...prev,
-      date: newValue.toString(),
+      date: newValue.toString()
     }));
   };
   const handleTime = (newValue: any) => {
     setDate_Time(newValue);
-    setUserInformation((prev) => ({
+    setUserInformation(prev => ({
       ...prev,
-      time: newValue.toString(),
+      time: newValue.toString()
     }));
   };
 
   return (
     <>
-      <Box sx={{ maxWidth: "80%", mx: "auto" }}>
-        <Box sx={{ textAlign: "left", mt: 14 }}>
-          <Typography
-            variant="h6"
-            gutterBottom
-            sx={{ display: "inline-block", color: "#4F4F4F" }}
-          >
+      <Box sx={{ maxWidth: '80%', mx: 'auto' }}>
+        <Box sx={{ textAlign: 'left', mt: 14 }}>
+          <Typography variant="h6" gutterBottom sx={{ display: 'inline-block', color: '#4F4F4F' }}>
             Contact Information
           </Typography>
         </Box>
@@ -84,7 +69,7 @@ function UserInformation({
               autoComplete="given-name"
               variant="standard"
               sx={{
-                paddingBottom: 4,
+                paddingBottom: 4
               }}
               onChange={handleUserInformation}
             />
@@ -100,7 +85,7 @@ function UserInformation({
               autoComplete="family-name"
               variant="standard"
               sx={{
-                paddingBottom: 4,
+                paddingBottom: 4
               }}
               onChange={handleUserInformation}
             />
@@ -117,7 +102,7 @@ function UserInformation({
               variant="standard"
               placeholder="Youremail@gmail.com"
               sx={{
-                paddingBottom: 4,
+                paddingBottom: 4
               }}
               onChange={handleUserInformation}
             />
@@ -136,46 +121,35 @@ function UserInformation({
               variant="standard"
               placeholder="+1-(0000 000 0000)"
               sx={{
-                paddingBottom: 4,
+                paddingBottom: 4
               }}
               onChange={handleUserInformation}
             />
           </Grid>
         </Grid>
-        <Box sx={{ textAlign: "left", mt: 10, mb: 4 }}>
-          <Typography
-            variant="h6"
-            gutterBottom
-            sx={{ display: "inline-block", color: "#4F4F4F" }}
-          >
+        <Box sx={{ textAlign: 'left', mt: 10, mb: 4 }}>
+          <Typography variant="h6" gutterBottom sx={{ display: 'inline-block', color: '#4F4F4F' }}>
             Delivery Information
           </Typography>
         </Box>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-              sx={{ display: "inherit" }}
-            >
+          <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ display: 'inherit' }}>
               <DesktopDatePicker
                 label="Delivery Date"
                 value={date_time}
                 onChange={handleDate}
-                sx={{ width: "500px" }}
-                // minValue={dayjs()}
+                sx={{ width: '500px' }}
               />
             </LocalizationProvider>
           </Grid>
-          <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-              sx={{ display: "inherit" }}
-            >
+          <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ display: 'inherit' }}>
               <TimePicker
                 label="PickUp Time"
                 value={date_time}
                 onChange={handleTime}
-                sx={{ width: "500px" }}
+                sx={{ width: '500px' }}
               />
             </LocalizationProvider>
           </Grid>
@@ -184,15 +158,12 @@ function UserInformation({
               City
             </InputLabel>
             <NativeSelect
-              // defaultValue="india"
               value={userInformation.city}
-              // sx={{ width: { xs: "500px" } }}
               inputProps={{
-                name: "city",
-                id: "uncontrolled-native",
+                name: 'city',
+                id: 'uncontrolled-native'
               }}
-              onChange={handleUserInformation}
-            >
+              onChange={handleUserInformation}>
               <option value="australia">Australia</option>
               <option value="india">India</option>
               <option value="unitedkingdom">United Kingdom</option>
@@ -209,7 +180,7 @@ function UserInformation({
               variant="standard"
               placeholder="Akshya Nagar 1st"
               sx={{
-                paddingBottom: 4,
+                paddingBottom: 4
               }}
               onChange={handleUserInformation}
             />
@@ -228,7 +199,7 @@ function UserInformation({
               variant="standard"
               placeholder="000000"
               sx={{
-                paddingBottom: 4,
+                paddingBottom: 4
               }}
               onChange={handleUserInformation}
             />
@@ -237,18 +208,16 @@ function UserInformation({
         <Button
           variant="contained"
           sx={{
-            display: { sm: "block", xs: "none" },
-            backgroundColor: "#111827",
-            color: "#FFFFFF",
+            display: { sm: 'block', xs: 'none' },
+            backgroundColor: '#111827',
+            color: '#FFFFFF',
             borderRadius: 0,
-            // ml: "50%",
-            mx: "auto",
-            mt: { lg: 10, sm: 5 },
+            mx: 'auto',
+            mt: { lg: 10, sm: 5 }
           }}
           onClick={() => {
             handleUserValidation(userInformation);
-          }}
-        >
+          }}>
           Proceed to Payment
         </Button>
       </Box>

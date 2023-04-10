@@ -25,11 +25,17 @@ function Home() {
   return (
     <GuestGuard>
       <Box>
-        <Box sx={{ position: 'relative', width: '100%', height: '500px', zIndex: 2 }}>
+        <Box
+          sx={{
+            position: 'relative',
+            width: '100%',
+            height: { xl: '745px', lg: '600px', md: '475px', sm: '395px', xs: '230px' },
+            zIndex: 2
+          }}>
           <img
             src={assets.images.background}
             alt="Background img"
-            style={{ position: 'absolute', height: '100%', width: '100%', zIndex: 3, opacity: 0.85 }}
+            style={{ position: 'absolute', height: '100%', width: '100%', opacity: 0.85 }}
           />
           <Box
             sx={{
@@ -41,7 +47,7 @@ function Home() {
               background: '#FFFFFF'
             }}
           />
-          <Box sx={{ position: 'absolute', zIndex: 4 }}>
+          <Box sx={{ position: 'absolute', zIndex: 4, width: '100%' }}>
             <Layout>
               <Box maxWidth="1600px" sx={{ mx: 'auto' }}>
                 <Box sx={{ mt: { xl: 7, zIndex: -1 } }}>
@@ -94,7 +100,6 @@ function Home() {
                       backgroundRepeat: 'no-repeat',
                       backgroundSize: 'cover',
                       width: '100%',
-                      // backgroundPosition: "center center",
                       height: {
                         xl: '700px',
                         lg: '650px',
@@ -111,15 +116,13 @@ function Home() {
                       sx={{
                         background: '#FFFFFF',
                         width: {
-                          xl: '256px',
-                          lg: '256px',
                           md: '256px',
                           sm: '185px',
                           xs: '64px'
                         },
 
                         fontFamily: 'Josefin Sans',
-                        fontSize: { xl: 20, lg: 20, md: 20, sm: 15, xs: 8 },
+                        fontSize: { md: 20, sm: 15, xs: 8 },
                         color: '#424242',
                         fontWeight: 700
                       }}>
@@ -130,7 +133,7 @@ function Home() {
                     sx={{
                       backgroundImage: `url(${assets.images.ForHim})`,
                       backgroundSize: 'cover',
-                      // backgroundPosition: "center center",
+
                       width: '100%',
                       height: {
                         xl: '700px',
@@ -148,15 +151,13 @@ function Home() {
                       sx={{
                         background: '#FFFFFF',
                         width: {
-                          xl: '256px',
-                          lg: '256px',
                           md: '256px',
                           sm: '185px',
                           xs: '64px'
                         },
 
                         fontFamily: 'Josefin Sans',
-                        fontSize: { xl: 20, lg: 20, md: 20, sm: 15, xs: 8 },
+                        fontSize: { md: 20, sm: 15, xs: 8 },
                         color: '#424242',
                         fontWeight: 700
                       }}>
@@ -209,10 +210,24 @@ function Home() {
                   </Typography>
 
                   <Box sx={{ mt: 7, mb: 7 }}>
-                    <CategoryTab tabs={person_tabs} />
+                    <CategoryTab
+                      tabs={person_tabs}
+                      textColor="#757575"
+                      selectedTextColor="#212121"
+                      backgroundColor="#FFFFFF"
+                      borderBottom="1px solid black"
+                      border="0"
+                    />
                   </Box>
                   <Box>
-                    <CategoryTab tabs={product_tabs} />
+                    <CategoryTab
+                      tabs={product_tabs}
+                      textColor="#000000"
+                      selectedTextColor="#000000"
+                      backgroundColor="#E0E0E0"
+                      borderBottom="none"
+                      border="1px solid #F5F5F5"
+                    />
                   </Box>
                   <Box>
                     <CategorySlider bestDeals={Products} />

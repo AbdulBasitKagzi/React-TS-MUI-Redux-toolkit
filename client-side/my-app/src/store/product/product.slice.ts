@@ -1,28 +1,13 @@
-import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
-import { products, gender, brandFilter, categoriesFilter } from '../../data/Constants';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { products } from '../../data/Constants';
 import { productLists } from '../../data/ProductsContant';
-import { product, productProps, productstate } from '../product/product.types';
+import { productstate } from '../product/product.types';
 
 const productState: productstate = {
   Products: products,
   ProductsList: productLists,
-  // filteredProducts: [],
-  filterByPrice: [],
   filter: [],
-  filterByHuman: [],
-  filterBySize: [],
-  filterByCategory: [],
-  filterByBrand: [],
-  mainArray: [],
-  filteredGender: {},
-  filteredCategory: {},
-  fitleredBrand: {},
-  gender: gender,
-  brand: brandFilter,
-  category: categoriesFilter,
-  selectedProduct: null,
-  minValue: 0,
-  maxValue: 0
+  selectedProduct: null
 };
 
 const productSlice = createSlice({
@@ -38,7 +23,7 @@ const productSlice = createSlice({
         brands: Array<number> | null;
         categories: Array<number> | null;
         sizes: Array<number> | null;
-        priceRange: Array<number>;
+        priceRange: { min: number; max: number };
       }>
     ) => {
       let updatedProducts = [...productLists];
@@ -46,12 +31,12 @@ const productSlice = createSlice({
       if (payload?.gender) {
         updatedProducts = updatedProducts.filter(item => item.gender === payload.gender);
       }
-      if (payload?.priceRange !== null && payload?.priceRange?.length !== 0) {
-        console.log(payload?.priceRange[0], payload?.priceRange[1]);
+      if (payload?.priceRange) {
+        console.log(payload?.priceRange.min, payload?.priceRange.max);
         updatedProducts = updatedProducts?.filter(
           item =>
-            item.productCurrentPrice >= payload?.priceRange[0] &&
-            item.productCurrentPrice <= payload?.priceRange[1]
+            item.productCurrentPrice >= payload?.priceRange.min &&
+            item.productCurrentPrice <= payload?.priceRange.max
         );
       }
       if (payload.brands !== null && payload.brands.length !== 0) {
@@ -75,12 +60,7 @@ const productSlice = createSlice({
       }
       state.filter = [...updatedProducts];
     },
-    setMinValue: (state, action) => {
-      state.minValue = action.payload;
-    },
-    setMaxValue: (state, action) => {
-      state.maxValue = action.payload;
-    },
+
     selectedProduct: (state, action) => {
       state.selectedProduct = { ...state.selectedProduct, ...action.payload };
     },
@@ -92,7 +72,7 @@ const productSlice = createSlice({
     },
     filterProduct: (state, action) => {
       state.Products = products;
-      let filteredProducts = state.Products.filter((prod: product) => action.payload === prod.type);
+      let filteredProducts = state.Products.filter(prod => action.payload === prod.type);
       state.Products = filteredProducts;
     }
   }

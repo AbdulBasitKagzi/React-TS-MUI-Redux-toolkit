@@ -29,26 +29,17 @@ const Footer: React.FC = () => {
         <Box
           sx={{
             display: {
-              xl: 'flex',
-              lg: 'flex',
-              md: 'flex',
               sm: 'flex'
-              // xs: "flex",
             },
             justifyContent: 'space-between'
-
-            // mt: 14,
           }}>
           <Box
             sx={{
               display: {
-                xl: 'flex',
-                lg: 'flex',
-                md: 'flex',
                 sm: 'flex',
                 xs: 'block'
-              }
-              // flexWrap: "wrap",
+              },
+              gap: { lg: '100px', md: '50px', sm: '10px' }
             }}>
             <Box sx={{ textAlign: { xs: 'center' } }}>
               <List>
@@ -65,8 +56,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -81,8 +70,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -97,8 +84,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -140,8 +125,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -170,8 +153,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -186,8 +167,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -215,8 +194,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -231,8 +208,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -247,8 +222,6 @@ const Footer: React.FC = () => {
                   sx={{
                     fontFamily: 'Jost',
                     fontSize: {
-                      xl: '16px',
-                      lg: '16px',
                       md: '16px',
                       sm: '14px',
                       xs: '11px'
@@ -272,19 +245,14 @@ const Footer: React.FC = () => {
               }}>
               Signup For The Latest News
             </Typography>
-            <FormControl sx={{ m: 1, width: { xl: '275px', lg: '275px' } }} variant="outlined">
+            <FormControl sx={{ m: 1, width: { lg: '275px' } }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">Enter Email</InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
                 type="text"
                 endAdornment={
                   <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      //   onClick={handleClickShowPassword}
-                      //   onMouseDown={handleMouseDownPassword}
-                      edge="end">
-                      {/* {showPassword ? <VisibilityOff /> : <Visibility />} */}
+                    <IconButton aria-label="toggle password visibility" edge="end">
                       <ArrowForwardIcon />
                     </IconButton>
                   </InputAdornment>
@@ -298,8 +266,8 @@ const Footer: React.FC = () => {
                 fontSize: '16px',
                 fontWeight: 400,
                 color: '#616161',
-                mt: { xl: 7, lg: 7, md: 7, sm: 7, xs: 2 },
-                ml: { xs: 4, sm: 0, md: 0, lg: 0, xl: 0 },
+                mt: { sm: 7, xs: 2 },
+                ml: { sm: 0, xs: 4 },
                 display: 'flex',
                 gap: 1
               }}>
@@ -312,9 +280,9 @@ const Footer: React.FC = () => {
                 fontSize: '16px',
                 fontWeight: 400,
                 color: '#616161',
-                mt: { xl: 2, lg: 2, md: 2, sm: 2, xs: 2 },
+                mt: { xs: 2 },
                 mb: 2,
-                ml: { xs: 4, sm: 0, md: 0, lg: 0, xl: 0 },
+                ml: { sm: 0, xs: 4 },
                 display: 'flex',
                 gap: 1
               }}>
@@ -323,7 +291,7 @@ const Footer: React.FC = () => {
             </Box>
           </Box>
         </Box>
-        <Box sx={{ mb: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 } }}>
+        <Box sx={{ mb: { xs: 2 } }}>
           <FacebookIcon sx={{ mr: 6 }} />
           <InstagramIcon sx={{ mr: 6 }} />
           <YouTubeIcon sx={{ mr: 6 }} />

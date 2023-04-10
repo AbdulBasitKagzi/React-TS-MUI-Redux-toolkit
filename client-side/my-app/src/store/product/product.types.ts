@@ -61,21 +61,6 @@ export interface categoryProps {
 export interface productstate {
   Products: product[];
   ProductsList: productProps[];
-  // filteredProducts: Array<Object>;
-  filterByPrice: productProps[];
   filter: productProps[];
-  filterByHuman: productProps[];
-  filterBySize: productProps[];
-  filterByCategory: productProps[];
-  filterByBrand: productProps[];
-  filteredGender: any;
-  filteredCategory: any;
-  fitleredBrand: any;
-  gender: genderProps[];
-  brand: brandProps[];
-  category: categoryProps[];
   selectedProduct: SelectedProductProps | null;
-  minValue: number;
-  maxValue: number;
-  mainArray: productProps[];
 }
