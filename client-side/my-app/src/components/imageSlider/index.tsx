@@ -5,9 +5,10 @@ import { Navigation } from 'swiper';
 import './swiperstyles.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { assets } from '../../assets';
 const ImageSlider: React.FC = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -27,10 +28,6 @@ const ImageSlider: React.FC = () => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center'
-              // background: `url (${assets.images.outletBerlin})`,
-              // backgroundRepeat: 'no-repeat',
-              // height: '100%',
-              // width: '100%'
             }}>
             <img src={assets.images.outletBerlin} alt="india" style={{ zIndex: 3 }} />
             <Box
@@ -53,7 +50,7 @@ const ImageSlider: React.FC = () => {
                     xs: '15px'
                   },
                   fontWeight: 400,
-                  color: '#FFFFFF'
+                  color: theme.palette.success.dark
                 }}>
                 Visit our outlets in{' '}
                 <Typography
@@ -62,7 +59,8 @@ const ImageSlider: React.FC = () => {
                       lg: '95px',
                       sm: '75px',
                       xs: '45px'
-                    }
+                    },
+                    color: theme.palette.success.main
                   }}>
                   Berlin
                 </Typography>
@@ -101,7 +99,7 @@ const ImageSlider: React.FC = () => {
                     xs: '15px'
                   },
                   fontWeight: 400,
-                  color: '#FFFFFF'
+                  color: theme.palette.success.dark
                 }}>
                 Visit our outlets in{' '}
                 <Typography
@@ -110,7 +108,8 @@ const ImageSlider: React.FC = () => {
                       lg: '95px',
                       sm: '75px',
                       xs: '45px'
-                    }
+                    },
+                    color: theme.palette.success.main
                   }}>
                   India
                 </Typography>

@@ -7,10 +7,11 @@ import { assets } from '../../assets';
 
 // mui imports
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { RootState } from '../../store/store';
+import { useTheme } from '@mui/material';
 
 const style = {
   ml: '50%',
@@ -26,7 +27,8 @@ const style = {
   p: 4,
   maxWidth: '1600px',
   mx: 'auto',
-  overflowX: 'auto'
+  overflowX: 'auto',
+  zIndex: 10
 };
 
 interface menuProps {
@@ -37,160 +39,152 @@ interface menuProps {
 }
 
 const NavbarModel: React.FC<menuProps> = ({ openModel, setOpenModel, setBackground, setValue }) => {
-  const handleClose = () => {
-    setBackground('transparent');
-    setOpenModel(false);
-    setValue(-1);
-  };
+  const theme = useTheme();
   const { routeValue } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Modal
-        sx={{
-          '.MuiModal-backdrop': {
-            background: 'none'
-          }
-        }}
-        open={openModel}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title">
-        <Box sx={style}>
-          <Box>
-            <Box
-              sx={{
-                maxWidth: '90%',
-                display: 'flex',
-                mx: 'auto',
-                justifyContent: {
-                  sm: 'space-between',
-                  xs: 'center'
-                },
-                overflowX: 'auto'
-              }}>
-              <Box
-                sx={{
-                  display: {
-                    md: 'flex',
-                    xs: 'block'
-                  },
-                  gap: '120px'
-                }}>
-                <Box>
-                  <List>
+    <Box sx={style} onMouseEnter={() => setOpenModel(true)} onMouseLeave={() => setOpenModel(false)}>
+      <Box>
+        <Box
+          sx={{
+            maxWidth: '90%',
+            display: 'flex',
+            mx: 'auto',
+            justifyContent: {
+              sm: 'space-between',
+              xs: 'center'
+            },
+            overflowX: 'auto',
+            gap: '120px'
+          }}>
+          <Box
+            sx={{
+              display: {
+                md: 'flex',
+                xs: 'block'
+              },
+              gap: '120px'
+            }}>
+            <Box>
+              <List>
+                <ListItem
+                  sx={{
+                    fontFamily: 'Inter',
+                    fontSize: '24px',
+                    fontWeight: 400,
+                    color: theme.palette.primary.light,
+                    display: 'block'
+                  }}>
+                  Products
+                </ListItem>
+                <Box sx={{ mt: 4 }}>
+                  {categoriesFilter.map(category => (
+                    <ListItem
+                      key={category.id}
+                      sx={{
+                        fontFamily: 'Inter',
+                        fontSize: '16px',
+                        fontWeight: 400,
+                        cursor: 'pointer',
+                        '&:hover': {
+                          textDecoration: 'underline'
+                        },
+                        color: theme.palette.secondary.dark,
+                        display: 'block'
+                      }}
+                      onClick={() => {
+                        navigate(`/categorydetail/${routeValue}/${category.slug}`);
+                      }}>
+                      {category.value}
+                    </ListItem>
+                  ))}
+                </Box>
+              </List>
+            </Box>
+            <Box>
+              <List>
+                <ListItem
+                  sx={{
+                    fontFamily: 'Inter',
+                    fontSize: '24px',
+                    fontWeight: 400,
+                    color: theme.palette.primary.light,
+                    display: 'block'
+                  }}>
+                  Designers
+                </ListItem>
+                <Box sx={{ mt: 4 }}>
+                  {brandFilter.map(brand => (
+                    <ListItem
+                      key={brand.id}
+                      sx={{
+                        fontFamily: 'Inter',
+                        fontSize: '16px',
+                        fontWeight: 400,
+                        cursor: 'pointer',
+                        '&:hover': {
+                          textDecoration: 'underline'
+                        },
+                        color: theme.palette.secondary.dark,
+                        display: 'block'
+                      }}
+                      onClick={() => {
+                        navigate(`/categorydetail/${routeValue}/${brand.slug}`);
+                      }}>
+                      {brand.value}
+                    </ListItem>
+                  ))}
+                </Box>
+              </List>
+            </Box>
+            <Box>
+              <List>
+                <ListItem
+                  sx={{
+                    fontFamily: 'Inter',
+                    fontSize: '24px',
+                    fontWeight: 400,
+                    color: theme.palette.primary.light,
+                    display: 'block'
+                  }}>
+                  Archived collections
+                </ListItem>
+                <Box sx={{ mt: 4 }}>
+                  {categoriesFilter.map(category => (
                     <ListItem
                       sx={{
                         fontFamily: 'Inter',
-                        fontSize: '24px',
-                        fontWeight: 400
+                        fontSize: '16px',
+                        fontWeight: 400,
+                        cursor: 'pointer',
+                        '&:hover': {
+                          textDecoration: 'underline'
+                        },
+                        color: theme.palette.secondary.dark,
+                        display: 'block'
                       }}>
-                      Products
+                      {category.value}
                     </ListItem>
-                    <Box sx={{ mt: 4 }}>
-                      {categoriesFilter.map(category => (
-                        <ListItem
-                          key={category.id}
-                          sx={{
-                            fontFamily: 'Inter',
-                            fontSize: '16px',
-                            fontWeight: 400,
-                            cursor: 'pointer',
-                            '&:hover': {
-                              textDecoration: 'underline'
-                            },
-                            color: '#8E8E93'
-                          }}
-                          onClick={() => {
-                            handleClose();
-                            navigate(`/categorydetail/${routeValue}/${category.slug}`);
-                          }}>
-                          {category.value}
-                        </ListItem>
-                      ))}
-                    </Box>
-                  </List>
+                  ))}
                 </Box>
-                <Box>
-                  <List>
-                    <ListItem
-                      sx={{
-                        fontFamily: 'Inter',
-                        fontSize: '24px',
-                        fontWeight: 400
-                      }}>
-                      Designers
-                    </ListItem>
-                    <Box sx={{ mt: 4 }}>
-                      {brandFilter.map(brand => (
-                        <ListItem
-                          key={brand.id}
-                          sx={{
-                            fontFamily: 'Inter',
-                            fontSize: '16px',
-                            fontWeight: 400,
-                            cursor: 'pointer',
-                            '&:hover': {
-                              textDecoration: 'underline'
-                            },
-                            color: '#8E8E93'
-                          }}
-                          onClick={() => {
-                            handleClose();
-                            navigate(`/categorydetail/${routeValue}/${brand.slug}`);
-                          }}>
-                          {brand.value}
-                        </ListItem>
-                      ))}
-                    </Box>
-                  </List>
-                </Box>
-                <Box>
-                  <List>
-                    <ListItem
-                      sx={{
-                        fontFamily: 'Inter',
-                        fontSize: '24px',
-                        fontWeight: 400
-                      }}>
-                      Archived collections
-                    </ListItem>
-                    <Box sx={{ mt: 4 }}>
-                      {categoriesFilter.map(category => (
-                        <ListItem
-                          sx={{
-                            fontFamily: 'Inter',
-                            fontSize: '16px',
-                            fontWeight: 400,
-                            cursor: 'pointer',
-                            '&:hover': {
-                              textDecoration: 'underline'
-                            },
-                            color: '#8E8E93'
-                          }}>
-                          {category.value}
-                        </ListItem>
-                      ))}
-                    </Box>
-                  </List>
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  width: { md: '450px', sm: '350px' },
-                  height: '340px',
-                  display: {
-                    sm: 'block',
-                    xs: 'none'
-                  }
-                }}>
-                <img src={assets.images.photo} alt="abdul" width="100%" />
-              </Box>
+              </List>
             </Box>
           </Box>
+          <Box
+            sx={{
+              width: { md: '450px', sm: '350px' },
+              height: '340px',
+              display: {
+                sm: 'block',
+                xs: 'none'
+              }
+            }}>
+            <img src={assets.images.photo} alt="abdul" width="100%" />
+          </Box>
         </Box>
-      </Modal>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

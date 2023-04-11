@@ -28,7 +28,7 @@ function MainRoutes() {
     },
     {
       id: 'categorydetal',
-      path: '/categorydetail/:slug',
+      path: '/categorydetail/:id',
       component: <LazyCategoryDetail />,
       protected: true
     },

@@ -15,6 +15,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Slider from '@mui/material/Slider';
 import { Drawer } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { useTheme } from '@mui/material';
 
 const drawerWidth = 275;
 
@@ -38,6 +39,7 @@ interface filterProps {
 }
 
 export default function FilterSlider({ filterQuery, setFilterQuery }: filterProps): JSX.Element {
+  const theme = useTheme();
   const [min_max, setMin_Max] = useState<Array<number>>([
     filterQuery.priceRange.min,
     filterQuery.priceRange.max
@@ -77,7 +79,6 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
     }
   };
   const handleCategoriesFilter = (value: number, isChecked: boolean) => {
-    console.log('value', value);
     if (isChecked) {
       setFilterQuery(prevValue => {
         if (prevValue.categories) {
@@ -164,7 +165,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
       <Box
         sx={{
           width: '240px',
-          backgroundColor: '#F9FAFB',
+          backgroundColor: theme.palette.info.light,
           ml: 2,
           mt: 2
         }}>
@@ -176,7 +177,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               fontSize: '16px',
               letterSpacing: '0.02em',
               textTransform: 'uppercase',
-              color: '#1F2937',
+              color: theme.palette.warning.main,
               mb: 3,
               pt: 1
             }}>
@@ -196,7 +197,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 fontWeight: '400',
                 fontSize: '20px',
                 letterSpacing: '0.02em',
-                color: '#4B5563'
+                color: theme.palette.warning.light
               }}>
               Range
             </Typography>
@@ -208,7 +209,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 fontWeight: '500',
                 fontSize: { sm: '20px', xs: '16px' },
                 letterSpacing: '0.02em',
-                color: '#1F2937'
+                color: theme.palette.warning.main
               }}>
               ${filterQuery.priceRange.min}-${filterQuery.priceRange.max}
             </Typography>
@@ -216,7 +217,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
 
           <Slider
             sx={{
-              color: '#EB5757',
+              color: theme.palette.warning.dark,
               width: '180px'
             }}
             onChange={(_, value) => {
@@ -240,7 +241,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               fontFamily: 'Jost',
               fontWeight: 600,
               fontSize: '16px',
-              color: '#1F2937',
+              color: theme.palette.warning.main,
               mt: 4,
               mb: 3
             }}>
@@ -251,7 +252,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               key={brand.id}
               control={<Checkbox />}
               label={brand.value}
-              sx={{ color: '#1F2937' }}
+              sx={{ color: theme.palette.warning.main }}
               onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 handleBrandFilter(brand.id, (e.target as unknown as { checked: boolean }).checked);
               }}
@@ -263,7 +264,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               fontFamily: 'Jost',
               fontWeight: 600,
               fontSize: '16px',
-              color: '#1F2937',
+              color: theme.palette.warning.main,
               mt: 10,
 
               mb: 3
@@ -275,7 +276,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               key={category.id}
               control={<Checkbox />}
               label={category.value}
-              sx={{ color: '#1F2937' }}
+              sx={{ color: theme.palette.warning.main }}
               onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 handleCategoriesFilter(category.id, (e.target as unknown as { checked: boolean }).checked);
               }}
@@ -287,7 +288,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               fontFamily: 'Jost',
               fontWeight: 600,
               fontSize: '16px',
-              color: '#1F2937',
+              color: theme.palette.warning.main,
               mt: 10,
 
               mb: 3
@@ -299,7 +300,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               key={size.id}
               control={<Checkbox />}
               label={size.value}
-              sx={{ color: '#1F2937' }}
+              sx={{ color: theme.palette.warning.main }}
               onClick={(e: MouseEvent<HTMLLabelElement>) => {
                 handleSizeFilter(size.id, (e.target as unknown as { checked: boolean }).checked);
               }}
@@ -321,7 +322,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               xs: 'none'
             },
 
-            backgroundColor: '#F9FAFB',
+            backgroundColor: theme.palette.info.light,
             ml: { xl: 8, lg: 6, md: 4, sm: 2 }
           }}>
           <Box sx={{ mx: 4, textAlign: 'left', mt: 8 }}>
@@ -332,8 +333,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 fontSize: '16px',
                 letterSpacing: '0.02em',
                 textTransform: 'uppercase',
-                color: '#1F2937',
-
+                color: theme.palette.warning.main,
                 mb: 3
               }}>
               PRICES
@@ -350,7 +350,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                   fontWeight: '400',
                   fontSize: '20px',
                   letterSpacing: '0.02em',
-                  color: '#4B5563',
+                  color: theme.palette.warning.light,
                   mb: 3
                 }}>
                 Range
@@ -362,7 +362,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                   fontWeight: '500',
                   fontSize: '20px',
                   letterSpacing: '0.02em',
-                  color: '#1F2937',
+                  color: theme.palette.warning.main,
                   mb: 3
                 }}>
                 ${filterQuery.priceRange.min}-${filterQuery.priceRange.max}
@@ -370,7 +370,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
             </Box>
             <Slider
               sx={{
-                color: '#EB5757',
+                color: theme.palette.warning.dark,
                 width: { md: '280px', sm: '180px' }
               }}
               onChange={(_, value) => {
@@ -394,7 +394,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 fontFamily: 'Jost',
                 fontWeight: 600,
                 fontSize: '16px',
-                color: '#1F2937',
+                color: theme.palette.warning.main,
                 mt: 10,
                 mb: { sm: 3 }
               }}>
@@ -405,7 +405,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 key={brand.id}
                 control={<Checkbox />}
                 label={brand.value}
-                sx={{ color: '#1F2937' }}
+                sx={{ color: theme.palette.warning.main }}
                 onClick={(e: MouseEvent<HTMLLabelElement>) => {
                   handleBrandFilter(brand.id, (e.target as unknown as { checked: boolean }).checked);
                 }}
@@ -417,7 +417,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 fontFamily: 'Jost',
                 fontWeight: 600,
                 fontSize: '16px',
-                color: '#1F2937',
+                color: theme.palette.warning.main,
                 mt: 10,
                 mb: { sm: 3 }
               }}>
@@ -428,7 +428,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 key={category.id}
                 control={<Checkbox />}
                 label={category.value}
-                sx={{ color: '#1F2937' }}
+                sx={{ color: theme.palette.warning.main }}
                 onClick={(e: MouseEvent<HTMLLabelElement>) => {
                   handleCategoriesFilter(category.id, (e.target as unknown as { checked: boolean }).checked);
                 }}
@@ -440,7 +440,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 fontFamily: 'Jost',
                 fontWeight: 600,
                 fontSize: '16px',
-                color: '#1F2937',
+                color: theme.palette.warning.main,
                 mt: 10,
 
                 mb: { sm: 3 }
@@ -452,7 +452,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
                 key={size.id}
                 control={<Checkbox />}
                 label={size.value}
-                sx={{ color: '#1F2937' }}
+                sx={{ color: theme.palette.warning.main }}
                 onClick={(e: MouseEvent<HTMLLabelElement>) => {
                   handleSizeFilter(size.id, (e.target as unknown as { checked: boolean }).checked);
                 }}

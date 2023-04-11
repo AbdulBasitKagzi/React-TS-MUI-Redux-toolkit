@@ -1,12 +1,13 @@
 import React from 'react';
 
 // mui imports
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 
 import styles from './reviewer.module.css';
 import { assets } from '../../assets';
 
 const ReviewCard: React.FC = () => {
+  const theme = useTheme();
   let arr: {
     id: string;
     image: string | undefined;
@@ -124,7 +125,8 @@ const ReviewCard: React.FC = () => {
                         md: '16px',
                         sm: '12px'
                       },
-                      fontWeight: 700
+                      fontWeight: 700,
+                      color: theme.palette.primary.main
                     }}>
                     {arr.name}
                   </Typography>
@@ -135,7 +137,8 @@ const ReviewCard: React.FC = () => {
                       fontSize: {
                         md: '16px',
                         sm: '12px'
-                      }
+                      },
+                      color: theme.palette.primary.main
                     }}>
                     {arr.profession}
                   </Typography>
@@ -155,7 +158,8 @@ const ReviewCard: React.FC = () => {
                   fontWeight: 700,
                   fontSize: { xl: 26, lg: 23, md: 21, sm: 16, xs: 20 },
                   wordBreak: 'inherit',
-                  msWordBreak: 'break-all'
+                  msWordBreak: 'break-all',
+                  color: theme.palette.primary.dark
                 }}>
                 {arr.title}
               </Typography>
@@ -166,7 +170,8 @@ const ReviewCard: React.FC = () => {
                   fontFamily: 'Lato',
                   textAlign: 'left',
                   lineHeight: '22.4px',
-                  mt: { sm: 4 }
+                  mt: { sm: 4 },
+                  color: theme.palette.primary.main
                 }}>
                 Is it possible to assess a person just on the basis of their footwear? Obviously, nobody
                 should criticize, but certainly, shoes say a lot about someone. It matters for the outsiders
@@ -180,7 +185,12 @@ const ReviewCard: React.FC = () => {
                 ml: { lg: 8, md: 1, xs: 1 },
                 my: { sm: 8, xs: 2 }
               }}>
-              <Typography>Read More</Typography>
+              <Typography
+                sx={{
+                  color: theme.palette.primary.main
+                }}>
+                Read More
+              </Typography>
               <img
                 src={assets.icons.blackArrowicon}
                 alt="arrowicon"

@@ -11,7 +11,8 @@ import {
   List,
   ListItem,
   OutlinedInput,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -23,6 +24,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 const Footer: React.FC = () => {
+  const theme = useTheme();
   return (
     <Box sx={{ maxWidth: '1600px', mx: 'auto' }}>
       <Box sx={{ maxWidth: '90%', mx: 'auto', mt: 5 }}>
@@ -48,7 +50,7 @@ const Footer: React.FC = () => {
                     fontFamily: 'Jost',
                     fontSize: '20px',
                     fontWeight: 700,
-                    color: '#212121'
+                    color: theme.palette.primary.dark
                   }}>
                   Company Info
                 </ListItem>
@@ -61,7 +63,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   About Us
@@ -75,7 +77,8 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
+
                     cursor: 'pointer'
                   }}>
                   Affiliate
@@ -89,7 +92,8 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
+
                     cursor: 'pointer'
                   }}>
                   Fashion Blogger
@@ -103,7 +107,7 @@ const Footer: React.FC = () => {
                     fontFamily: 'Jost',
                     fontSize: '20px',
                     fontWeight: 700,
-                    color: '#212121'
+                    color: theme.palette.primary.dark
                   }}>
                   Help & Support
                 </ListItem>
@@ -116,7 +120,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   Shipping Info
@@ -130,7 +134,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   Refunds
@@ -144,7 +148,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   How to Order
@@ -158,7 +162,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   How to Track
@@ -172,7 +176,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   Size Guides
@@ -186,7 +190,7 @@ const Footer: React.FC = () => {
                     fontFamily: 'Jost',
                     fontSize: '20px',
                     fontWeight: 700,
-                    color: '#212121'
+                    color: theme.palette.primary.dark
                   }}>
                   Customer Care
                 </ListItem>
@@ -199,7 +203,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   Contact Us
@@ -213,7 +217,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   Payment Methods
@@ -227,7 +231,7 @@ const Footer: React.FC = () => {
                       xs: '11px'
                     },
                     fontWeight: 400,
-                    color: '#616161',
+                    color: theme.palette.error.dark,
                     cursor: 'pointer'
                   }}>
                   Bonus Point
@@ -241,7 +245,7 @@ const Footer: React.FC = () => {
                 fontFamily: 'Jost',
                 fontSize: '20px',
                 fontWeight: 700,
-                color: '#212121'
+                color: theme.palette.primary.dark
               }}>
               Signup For The Latest News
             </Typography>
@@ -265,29 +269,29 @@ const Footer: React.FC = () => {
                 fontFamily: 'Jost',
                 fontSize: '16px',
                 fontWeight: 400,
-                color: '#616161',
+                color: theme.palette.error.dark,
                 mt: { sm: 7, xs: 2 },
                 ml: { sm: 0, xs: 4 },
                 display: 'flex',
                 gap: 1
               }}>
-              <MailOutlineIcon sx={{ color: '#212121' }} />
-              <Typography>something@email.com</Typography>
+              <MailOutlineIcon sx={{ color: theme.palette.primary.dark }} />
+              <Typography sx={{ color: theme.palette.error.dark }}>something@email.com</Typography>
             </Box>
             <Box
               sx={{
                 fontFamily: 'Jost',
                 fontSize: '16px',
                 fontWeight: 400,
-                color: '#616161',
+                color: theme.palette.error.dark,
                 mt: { xs: 2 },
                 mb: 2,
                 ml: { sm: 0, xs: 4 },
                 display: 'flex',
                 gap: 1
               }}>
-              <PhoneIcon sx={{ color: '#212121' }} />
-              <Typography>+2321354524</Typography>
+              <PhoneIcon sx={{ color: theme.palette.primary.dark }} />
+              <Typography sx={{ color: theme.palette.error.dark }}>+2321354524</Typography>
             </Box>
           </Box>
         </Box>
@@ -305,7 +309,7 @@ const Footer: React.FC = () => {
             sx={{
               fontFamily: 'Jost',
               fontSize: '14px',
-              color: '#7E92B2',
+              color: theme.palette.error.light,
               mr: 1
             }}>
             All rights Reserved
@@ -314,7 +318,7 @@ const Footer: React.FC = () => {
             sx={{
               fontFamily: 'Jost',
               fontSize: '14px',
-              color: '#7E92B2',
+              color: theme.palette.error.light,
               fontWeight: 700
             }}>
             &copy; Your Company, 2021

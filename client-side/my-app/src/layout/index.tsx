@@ -10,7 +10,6 @@ const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
       <NavBar />
       {children}
       <Footer />
-      {/* <Footer /> */}
     </Box>
   );
 };

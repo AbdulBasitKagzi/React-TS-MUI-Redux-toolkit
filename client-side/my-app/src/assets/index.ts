@@ -25,6 +25,9 @@ import User_Circle_Vector from './icons/userVector.svg';
 import User_Vector from './icons/userVector.svg';
 import blackArrowicon from '../assets/icons/blackArrowicon.svg';
 import Cart from './icons/Cart.svg';
+import W from './icons/W.svg';
+import stepperIncomplete from './icons/stepperIncomplete.svg';
+import stepperComplete from './icons/stepperComplete.svg';
 
 // images
 import fullbodyoutfit from './images/fullbodyoutfit.png';
@@ -157,6 +160,9 @@ export const assets = {
     User_Circle_Vector,
     User_Vector,
     blackArrowicon,
-    Cart
+    Cart,
+    W,
+    stepperIncomplete,
+    stepperComplete
   }
 };

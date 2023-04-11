@@ -18,9 +18,11 @@ import { assets } from '../../assets';
 import Advertise from '../../sections/Advertise/index';
 import ImageGrid from '../../sections/ImageGrid/index';
 import CategoryGrid from '../../sections/Categorygrid/index';
+import { useTheme } from '@mui/material';
 
 function Home() {
   const { Products } = useSelector((state: RootState) => state.product);
+  const theme = useTheme();
 
   return (
     <GuestGuard>
@@ -44,7 +46,7 @@ function Home() {
               width: '100%',
               zIndex: 3,
               opacity: 0.85,
-              background: '#FFFFFF'
+              background: theme.palette.success.main
             }}
           />
           <Box sx={{ position: 'absolute', zIndex: 4, width: '100%' }}>
@@ -61,7 +63,7 @@ function Home() {
                         sm: '30px'
                       },
                       fontWeight: 400,
-                      color: '#424242',
+                      color: theme.palette.primary.main,
                       textAlign: 'center'
                     }}>
                     With an outstanding style, only for you
@@ -79,7 +81,7 @@ function Home() {
                         xs: '22px'
                       },
                       fontWeight: 700,
-                      color: '#212121',
+                      color: theme.palette.primary.dark,
                       textAlign: 'center'
                     }}>
                     {' '}
@@ -123,7 +125,7 @@ function Home() {
 
                         fontFamily: 'Josefin Sans',
                         fontSize: { md: 20, sm: 15, xs: 8 },
-                        color: '#424242',
+                        color: theme.palette.primary.dark,
                         fontWeight: 700
                       }}>
                       For Her
@@ -158,7 +160,7 @@ function Home() {
 
                         fontFamily: 'Josefin Sans',
                         fontSize: { md: 20, sm: 15, xs: 8 },
-                        color: '#424242',
+                        color: theme.palette.primary.dark,
                         fontWeight: 700
                       }}>
                       For Him
@@ -176,7 +178,8 @@ function Home() {
                       fontFamily: 'Jost',
                       fontSize: '39px',
                       fontWeight: 700,
-                      textAlign: 'center'
+                      textAlign: 'center',
+                      color: theme.palette.primary.dark
                     }}>
                     Best Deals
                   </Typography>
@@ -190,6 +193,7 @@ function Home() {
                 100 percent stylish. Be smart & trendy with us."
                   buttontitle="Explore"
                   image={assets.images.womenStanding}
+                  background="#EEEEEE"
                 />
                 <Box>
                   <CategoryGrid />
@@ -204,7 +208,8 @@ function Home() {
                       fontFamily: 'Jost',
                       fontSize: '39px',
                       fontWeight: 700,
-                      textAlign: 'center'
+                      textAlign: 'center',
+                      color: theme.palette.primary.dark
                     }}>
                     Shop By Category
                   </Typography>
@@ -212,9 +217,9 @@ function Home() {
                   <Box sx={{ mt: 7, mb: 7 }}>
                     <CategoryTab
                       tabs={person_tabs}
-                      textColor="#757575"
-                      selectedTextColor="#212121"
-                      backgroundColor="#FFFFFF"
+                      textColor={theme.palette.error.main}
+                      selectedTextColor={theme.palette.primary.dark}
+                      backgroundColor={theme.palette.success.main}
                       borderBottom="1px solid black"
                       border="0"
                     />
@@ -222,9 +227,9 @@ function Home() {
                   <Box>
                     <CategoryTab
                       tabs={product_tabs}
-                      textColor="#000000"
-                      selectedTextColor="#000000"
-                      backgroundColor="#E0E0E0"
+                      textColor={theme.palette.info.dark}
+                      selectedTextColor={theme.palette.info.dark}
+                      backgroundColor={theme.palette.success.dark}
                       borderBottom="none"
                       border="1px solid #F5F5F5"
                     />
@@ -268,6 +273,7 @@ function Home() {
                 and comfortable. Stay connect."
                   buttontitle="Explore Collection"
                   image={assets.images.formal}
+                  background={theme.palette.success.main}
                 />
                 <Box
                   sx={{

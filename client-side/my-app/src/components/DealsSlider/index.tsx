@@ -14,6 +14,7 @@ import { Box, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import { assets } from '../../assets';
+import { useTheme } from '@mui/material';
 
 interface dealsProps {
   bestDeals: {
@@ -48,6 +49,8 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slidePrev();
   }, []);
+
+  const theme = useTheme();
 
   return (
     <Box sx={{ maxWidth: '1600px', mx: 'auto' }}>
@@ -164,7 +167,8 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
                             fontWeight: 700,
                             fontFamily: 'Jost',
                             wordBreak: 'break-all',
-                            padding: { xs: '1px' }
+                            padding: { xs: '1px' },
+                            color: theme.palette.primary.dark
                           }}>
                           {deals.productName}
                         </Typography>
@@ -174,7 +178,7 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
                           sx={{
                             mr: 1,
                             display: 'inline-block',
-                            color: '#9E9E9E',
+                            color: theme.palette.secondary.light,
                             fontSize: {
                               lg: 25,
                               md: 18,
@@ -190,7 +194,7 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
                         <Typography
                           sx={{
                             display: 'inline-block',
-                            color: '#FF705C',
+                            color: theme.palette.secondary.main,
                             fontSize: {
                               lg: 25,
                               md: 18,
@@ -215,9 +219,10 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
           <Button
             variant="contained"
             sx={{
-              background: '#212121',
+              background: theme.palette.primary.dark,
               width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
-              mt: { sm: 8, xs: 2 }
+              mt: { sm: 8, xs: 2 },
+              color: theme.palette.success.main
             }}>
             View All
           </Button>

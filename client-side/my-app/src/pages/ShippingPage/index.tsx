@@ -11,11 +11,14 @@ import Layout from '../../layout';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, StepIcon, Typography, useTheme } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { MenuItem } from '@mui/material';
 import { Select } from '@mui/material';
+import { assets } from '../../assets';
+import AdjustIcon from '@mui/icons-material/Adjust';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 // for date and time
 import dayjs from 'dayjs';
@@ -28,6 +31,7 @@ import { user } from '../../forms/userInformation/userInformation.types';
 import { paymentInformation } from '../../forms/userPaymentInformation/userPaymentInformation';
 
 const ShippingPage: React.FC = () => {
+  const theme = useTheme();
   const regexp = /^((0[1-9])|(1[0-2]))[/]*((2[3-9]))$/;
   const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const string = /[a-zA-Z]/;
@@ -89,10 +93,7 @@ const ShippingPage: React.FC = () => {
   ) => {
     let filteredata;
     filteredata = data.map(data => {
-      return array.filter(
-        (fill: { id?: number; value?: string; slug?: string; haxValue?: string; name?: string }) =>
-          fill.id === data
-      );
+      return array.filter(fill => fill.id === data);
     });
 
     return filteredata;
@@ -204,6 +205,22 @@ const ShippingPage: React.FC = () => {
       setPage(page + 1);
     }
   };
+  function CustomStepIcon(props: any) {
+    const { active, completed } = props;
+    return (
+      <StepIcon
+        icon={
+          completed ? (
+            <img src={assets.icons.stepperComplete} alt="stepperComplete" />
+          ) : (
+            <img src={assets.icons.stepperIncomplete} alt="stepperIncomplete" />
+          )
+        }
+        active={active}
+        completed={completed}
+      />
+    );
+  }
 
   useEffect(() => {
     let totalAmount: number;
@@ -225,6 +242,7 @@ const ShippingPage: React.FC = () => {
             title={alert.title}
             message={alert.message}
             closeDuration={2000}
+            backgroundColor="#cc0000"
           />
         )}
         <Layout>
@@ -243,7 +261,6 @@ const ShippingPage: React.FC = () => {
                   sm: '50%',
                   xs: '100%'
                 }
-                // border: 2,
               }}>
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Box
@@ -258,19 +275,19 @@ const ShippingPage: React.FC = () => {
                     ml: { sm: 'unset', xs: 'auto' }
                   }}>
                   <Stepper
-                    activeStep={1}
+                    activeStep={page}
                     alternativeLabel
                     sx={{
                       '.MuiStep-root': {
-                        color: '#111827'
+                        color: theme.palette.primary.contrastText
                       },
                       '.Mui-completed': {
-                        color: '#111827'
+                        color: theme.palette.primary.contrastText
                       }
                     }}>
                     {steps.map(label => (
                       <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
+                        <StepLabel StepIconComponent={CustomStepIcon}>{label}</StepLabel>
                       </Step>
                     ))}
                   </Stepper>
@@ -309,7 +326,7 @@ const ShippingPage: React.FC = () => {
                 }}>
                 <Box
                   sx={{
-                    backgroundColor: '#EFEFF4',
+                    backgroundColor: theme.palette.info.contrastText,
                     borderRadius: 8
                   }}>
                   <Box sx={{ pt: 2, mb: 2 }}>
@@ -318,7 +335,7 @@ const ShippingPage: React.FC = () => {
                         fontFamily: 'Inter',
                         fontWeight: 700,
                         fontSize: '18px',
-                        color: '#616161',
+                        color: theme.palette.info.main,
                         textAlign: 'left',
                         mx: 4
                       }}>
@@ -327,7 +344,7 @@ const ShippingPage: React.FC = () => {
                   </Box>
                   <Divider />
                   {cartProducts.length ? (
-                    cartProducts.map((product: cartProducts) => (
+                    cartProducts.map(product => (
                       <>
                         <Box
                           sx={{
@@ -341,7 +358,7 @@ const ShippingPage: React.FC = () => {
                               fontFamily: 'Inter',
                               fontWeight: 800,
                               fontSize: '18px',
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               wordBreak: 'break-all'
                             }}>
                             {product.productName}
@@ -375,7 +392,7 @@ const ShippingPage: React.FC = () => {
                                     sx={{
                                       fontFamily: 'Inter',
                                       fontSize: '14px',
-                                      color: '#616161',
+                                      color: theme.palette.info.main,
                                       wordBreak: 'break-all',
                                       textAlign: 'left',
 
@@ -413,7 +430,7 @@ const ShippingPage: React.FC = () => {
                                 <Typography
                                   sx={{
                                     fontSize: '18px',
-                                    color: '#E15113',
+                                    color: theme.palette.secondary.contrastText,
                                     textAlign: 'center'
                                   }}>
                                   -
@@ -425,7 +442,7 @@ const ShippingPage: React.FC = () => {
                                   width: '26px',
                                   height: '26px',
                                   border: 1,
-                                  borderColor: '#E15113',
+                                  borderColor: theme.palette.secondary.contrastText,
                                   borderRadius: 2,
                                   cursor: 'pointer'
                                 }}
@@ -433,7 +450,7 @@ const ShippingPage: React.FC = () => {
                                 <Typography
                                   sx={{
                                     fontSize: '18px',
-                                    color: '#E15113',
+                                    color: theme.palette.secondary.contrastText,
                                     textAlign: 'center'
                                   }}>
                                   +
@@ -454,7 +471,7 @@ const ShippingPage: React.FC = () => {
                           <Box sx={{ display: 'flex', mt: 2, gap: 2 }}>
                             {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
                             <Box sx={{ pl: 2 }}>
-                              <Typography sx={{ color: '#616161' }}>Size</Typography>
+                              <Typography sx={{ color: theme.palette.info.main }}>Size</Typography>
                               <Select
                                 sx={{ width: { md: '137px', sm: '100px', xs: '100px' } }}
                                 labelId="demo-simple-select-label"
@@ -472,7 +489,7 @@ const ShippingPage: React.FC = () => {
                               </Select>
                             </Box>
                             <Box sx={{ pl: 0.5 }}>
-                              <Typography sx={{ color: '#616161' }}>Color</Typography>
+                              <Typography sx={{ color: theme.palette.info.main }}>Color</Typography>
                               <Select
                                 sx={{ width: { sm: '75px', xs: '50px' } }}
                                 labelId="demo-simple-select-label"
@@ -505,7 +522,7 @@ const ShippingPage: React.FC = () => {
                                 fontSize: { sm: '16px', xs: '18px' },
                                 fontFamily: 'Jost',
                                 fontWeight: 700,
-                                color: '#616161',
+                                color: theme.palette.info.main,
                                 pr: { md: 6, sm: 2, xs: 0 }
                               }}>
                               $ {product.quantity * product.productCurrentPrice}
@@ -541,10 +558,9 @@ const ShippingPage: React.FC = () => {
                               fontWeight: 800,
                               fontSize: {
                                 md: '18px',
-
                                 xs: '16px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pl: 5,
                               wordBreak: 'break-all'
@@ -559,10 +575,9 @@ const ShippingPage: React.FC = () => {
                               fontWeight: 800,
                               fontSize: {
                                 md: '18px',
-
                                 xs: '16px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pr: 5,
                               wordBreak: 'break-all'
@@ -586,7 +601,7 @@ const ShippingPage: React.FC = () => {
 
                                 xs: '15px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pl: 5,
                               wordBreak: 'break-all'
@@ -601,10 +616,9 @@ const ShippingPage: React.FC = () => {
                               fontWeight: 800,
                               fontSize: {
                                 md: '18px',
-
                                 xs: '16px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pr: 5,
                               wordBreak: 'break-all'
@@ -625,10 +639,9 @@ const ShippingPage: React.FC = () => {
                               fontWeight: 800,
                               fontSize: {
                                 md: '18px',
-
                                 xs: '16px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pl: 5,
                               wordBreak: 'break-all'
@@ -643,10 +656,9 @@ const ShippingPage: React.FC = () => {
                               fontWeight: 800,
                               fontSize: {
                                 md: '18px',
-
                                 xs: '16px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pr: 5,
                               wordBreak: 'break-all'
@@ -668,10 +680,9 @@ const ShippingPage: React.FC = () => {
                               fontWeight: 800,
                               fontSize: {
                                 md: '24px',
-
                                 xs: '20px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pl: 5,
                               wordBreak: 'break-all'
@@ -686,10 +697,9 @@ const ShippingPage: React.FC = () => {
                               fontWeight: 800,
                               fontSize: {
                                 md: '24px',
-
                                 xs: '20px'
                               },
-                              color: '#616161',
+                              color: theme.palette.info.main,
                               py: 2,
                               pr: { md: '16px', xs: '24px' },
                               wordBreak: 'break-all'
@@ -731,8 +741,8 @@ const ShippingPage: React.FC = () => {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: '#111827',
-                      color: '#FFFFFF',
+                      backgroundColor: theme.palette.primary.contrastText,
+                      color: theme.palette.success.main,
                       borderRadius: 0,
                       // ml: "50%",
                       mx: 'auto',

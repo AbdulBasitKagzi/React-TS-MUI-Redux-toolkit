@@ -1,35 +1,30 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import DescriptionAlerts from "../../components/Alert";
-import { userActions } from "../../store/user/user.slice";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import DescriptionAlerts from '../../components/Alert';
+import { userActions } from '../../store/user/user.slice';
 // mui imports
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import GuestGuard from "../../routes/GuestGuard";
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import GuestGuard from '../../routes/GuestGuard';
 
 function Copyright(props: any) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{" "}
+      </Link>{' '}
       {new Date().getFullYear()}
-      {"."}
+      {'.'}
     </Typography>
   );
 }
@@ -41,15 +36,15 @@ export default function SignIn() {
     email: string;
     password: string;
   }>({
-    email: "",
-    password: "",
+    email: '',
+    password: ''
   });
   let empty: boolean | undefined = undefined;
   const [alert, setAlert] = useState<boolean>(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    empty = Object.values(userCredentials).some((ele) => ele === "");
+    empty = Object.values(userCredentials).some(ele => ele === '');
     empty && setAlert(empty);
 
     if (!empty) {
@@ -60,9 +55,9 @@ export default function SignIn() {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserCredentials((prev) => ({
+    setUserCredentials(prev => ({
       ...prev,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     }));
   };
 
@@ -78,7 +73,8 @@ export default function SignIn() {
             message="Please fill all the fields"
             openUp={alert}
             setOpenUp={setAlert}
-            closeDuration={6000}
+            closeDuration={2000}
+            backgroundColor=" #cc0000"
           />
         )}
         <Container component="main" maxWidth="xs">
@@ -86,20 +82,14 @@ export default function SignIn() {
           <Box
             sx={{
               marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -122,16 +112,8 @@ export default function SignIn() {
                 autoComplete="current-password"
                 onChange={handleChange}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
+              <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 Sign In
               </Button>
               <Grid container>

@@ -12,7 +12,7 @@ import { Navigation } from 'swiper';
 // import rightArrowIcon from "../assets/icons/rightArrowIcon.svg";
 
 // mui imports
-import { Box, Button } from '@mui/material';
+import { Box, Button, useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import { assets } from '../../assets';
@@ -30,6 +30,7 @@ interface categoryProps {
 }
 
 const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
+  const theme = useTheme();
   const sliderRef = useRef<SwiperRef>(null);
   const [display, setDisplay] = useState('block');
 
@@ -151,7 +152,8 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
                             fontWeight: 700,
                             fontFamily: 'Jost',
                             wordBreak: 'break-all',
-                            padding: { xs: '1px' }
+                            padding: { xs: '1px' },
+                            color: theme.palette.primary.dark
                           }}>
                           {deals.productName}
                         </Typography>
@@ -161,7 +163,6 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
                           sx={{
                             mr: 1,
                             display: 'inline-block',
-                            color: '#9E9E9E',
                             fontSize: {
                               lg: 25,
                               md: 18,
@@ -170,14 +171,15 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
                             },
                             fontWeight: 400,
                             fontFamily: 'Jost',
-                            textDecoration: 'line-through'
+                            textDecoration: 'line-through',
+                            color: theme.palette.secondary.main
                           }}>
                           {deals.cancelPrice}
                         </Typography>
                         <Typography
                           sx={{
                             display: 'inline-block',
-                            color: '#FF705C',
+                            color: theme.palette.primary.main,
                             fontSize: {
                               lg: 25,
                               md: 18,
@@ -202,10 +204,10 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
           <Button
             variant="contained"
             sx={{
-              background: '#212121',
+              background: theme.palette.primary.dark,
               width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
-
-              mt: 8
+              mt: 8,
+              color: theme.palette.success.main
             }}>
             View All
           </Button>

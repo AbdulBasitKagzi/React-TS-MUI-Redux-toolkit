@@ -15,6 +15,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import { cartActions } from '../../store/cart/cart.slice';
+import { useTheme } from '@mui/material';
 
 interface data {
   id: number;
@@ -29,6 +30,7 @@ interface filterGridProps {
 }
 
 const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundCategory }) => {
+  const theme = useTheme();
   const { filter } = useSelector((state: RootState) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -68,7 +70,8 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
               sm: '34px',
               xs: '28px'
             },
-            fontWeight: 700
+            fontWeight: 700,
+            color: theme.palette.primary.dark
           }}>
           {foundGender?.value} {foundCategory?.value} {foundBrand?.value}
           {foundBrand?.value ? 'Products' : ''}
@@ -85,7 +88,8 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
             fontFamily: 'Jost',
             fontWeight: '400',
             fontSize: '20px',
-            pb: 1
+            pb: 1,
+            color: theme.palette.warning.light
           }}>
           {filter.length} results
         </Typography>
@@ -118,7 +122,7 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
                     position: 'relative',
                     border: 1,
                     borderColor: '#E5E7EB',
-                    width: currentposts.length === 1 ? '300px' : '100%',
+                    width: { sm: currentposts.length === 1 ? '300px' : '100%', xs: '100%' },
                     cursor: 'pointer'
                   }}
                   onClick={() => {
@@ -171,7 +175,8 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
 
                         height: { sm: 120 },
                         pb: 1,
-                        pl: 2
+                        pl: 2,
+                        color: theme.palette.info.dark
                       }}>
                       {arr.productName}
                     </Typography>
@@ -205,7 +210,8 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
                       },
                       pl: 1,
                       fontWeight: 400,
-                      ml: { lg: '16px' }
+                      ml: { lg: '16px' },
+                      color: theme.palette.primary.light
                     }}>
                     $ {arr.productCurrentPrice}
                   </Typography>
@@ -227,6 +233,17 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
         {filter.length !== 0 && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 10 }}>
             <Pagination
+              sx={{
+                '.MuiPaginationItem-root': {
+                  border: '1px solid #D1D5DB',
+                  color: theme.palette.error.dark,
+                  fontSize: '20px',
+                  fontWeight: 700,
+                  borderRadius: 0,
+                  width: '38px',
+                  height: '38px'
+                }
+              }}
               count={totalPage}
               variant="outlined"
               shape="rounded"

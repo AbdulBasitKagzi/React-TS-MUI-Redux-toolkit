@@ -1,5 +1,5 @@
 // mui imports
-import { Box, Button, Grid, TextField, Typography, Radio } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography, Radio, useTheme } from '@mui/material';
 import { assets } from '../../assets';
 import { paymentInformation } from './userPaymentInformation';
 
@@ -24,6 +24,7 @@ function UserPaymentInformation({
   paymentInformation,
   setSelectedValue
 }: userPaymentInformationprops): JSX.Element {
+  const theme = useTheme();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(event.target.value);
     setPaymentInformation(prev => ({
@@ -47,7 +48,7 @@ function UserPaymentInformation({
           gutterBottom
           sx={{
             display: 'inline-block',
-            color: '#4F4F4F',
+            color: theme.palette.error.contrastText,
             fontWeight: 700,
             mb: 5
           }}>
@@ -80,9 +81,9 @@ function UserPaymentInformation({
             name="radio_buttons"
             inputProps={{ 'aria-label': 'B' }}
             sx={{
-              color: '#111827',
+              color: theme.palette.primary.contrastText,
               '&.Mui-checked': {
-                color: '#111827'
+                color: theme.palette.primary.contrastText
               }
             }}
           />
@@ -101,9 +102,9 @@ function UserPaymentInformation({
             name="radio_buttons"
             inputProps={{ 'aria-label': 'B' }}
             sx={{
-              color: '#111827',
+              color: theme.palette.primary.contrastText,
               '&.Mui-checked': {
-                color: '#111827'
+                color: theme.palette.primary.contrastText
               }
             }}
           />
@@ -116,7 +117,7 @@ function UserPaymentInformation({
           gutterBottom
           sx={{
             display: 'inline-block',
-            color: '#4F4F4F',
+            color: theme.palette.error.contrastText,
             fontWeight: 700,
             mb: 5
           }}>
@@ -205,7 +206,7 @@ function UserPaymentInformation({
         <Typography
           sx={{
             display: 'inline-block',
-            color: '#C4C4C4',
+            color: theme.palette.warning.contrastText,
             fontSize: '18px'
           }}>
           By Clicking *Confirm Payment* I agree to company terms of services
@@ -233,8 +234,8 @@ function UserPaymentInformation({
           variant="contained"
           sx={{
             display: { sm: 'block', xs: 'none' },
-            backgroundColor: '#111827',
-            color: '#FFFFFF',
+            backgroundColor: theme.palette.primary.contrastText,
+            color: theme.palette.success.main,
             borderRadius: 0,
             mb: { md: 0, sm: 2 }
           }}

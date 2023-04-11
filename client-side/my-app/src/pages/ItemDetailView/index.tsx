@@ -8,7 +8,7 @@ import DescriptionAlerts from '../../components/Alert';
 import { useNavigate } from 'react-router-dom';
 import { productActions } from '../../store/product/product.slice';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -20,7 +20,7 @@ import './imageDetail.css';
 import { Navigation } from 'swiper';
 
 // mui imports
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, useTheme } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import WarningModel from '../../components/WarningModel';
@@ -34,6 +34,7 @@ interface TabPanelProps {
 }
 
 const ItemDetailView: React.FC = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state: RootState) => state.product);
@@ -104,7 +105,7 @@ const ItemDetailView: React.FC = () => {
   }, [cartProducts]);
 
   const handlePrev = useCallback((value: string) => {
-    if (value === 'slider') {
+    if (value === 'slider' && slider.current) {
       slider.current.swiper.slidePrev();
     }
     if (!sliderRef.current) return;
@@ -112,9 +113,8 @@ const ItemDetailView: React.FC = () => {
   }, []);
 
   const handleNext = useCallback((value: string) => {
-    if (value === 'slider') {
+    if (value === 'slider' && slider.current) {
       setImage('');
-      console.log('slider', slider.current.swiper.slideNext);
       slider.current.swiper.slideNext();
     }
     if (!sliderRef.current) return;
@@ -193,6 +193,7 @@ const ItemDetailView: React.FC = () => {
                 openUp={openUp}
                 setOpenUp={setOpenUp}
                 closeDuration={2000}
+                backgroundColor="#4caf50"
               />
             )}
             {open && <WarningModel open={open} setOpen={setOpen} />}
@@ -223,43 +224,41 @@ const ItemDetailView: React.FC = () => {
                     ref={slider}
                     modules={[Navigation]}
                     className="mySwiper">
-                    {selectedProduct?.productImages?.map(
-                      (images: { id: number; productImage: string | undefined }) => (
-                        <SwiperSlide className={style.swiperImage} key={images.id}>
-                          {image ? (
-                            <Box sx={{ width: '280px', height: '436px' }}>
-                              <img
-                                src={image}
-                                alt="women"
-                                style={{
-                                  borderInlineColor: 'black',
-                                  border: 2,
-                                  borderColor: '#E5E5EA',
-                                  borderStyle: 'solid',
-                                  borderRadius: 10,
-                                  boxShadow: '0px 10px 10px',
-                                  marginBottom: '10px',
-                                  width: '100%',
-                                  height: '95%'
-                                }}
-                              />
-                            </Box>
-                          ) : (
-                            <Box sx={{ width: '280px', height: '436px' }}>
-                              <img
-                                src={images.productImage}
-                                alt="women"
-                                style={{
-                                  objectFit: 'cover',
-                                  width: '100%',
-                                  height: '100%'
-                                }}
-                              />
-                            </Box>
-                          )}
-                        </SwiperSlide>
-                      )
-                    )}
+                    {selectedProduct?.productImages?.map(images => (
+                      <SwiperSlide className={style.swiperImage} key={images.id}>
+                        {image ? (
+                          <Box sx={{ width: '280px', height: '436px' }}>
+                            <img
+                              src={image}
+                              alt="women"
+                              style={{
+                                borderInlineColor: 'black',
+                                border: 2,
+                                borderColor: '#E5E5EA',
+                                borderStyle: 'solid',
+                                borderRadius: 10,
+                                boxShadow: '0px 10px 10px',
+                                marginBottom: '10px',
+                                width: '100%',
+                                height: '95%'
+                              }}
+                            />
+                          </Box>
+                        ) : (
+                          <Box sx={{ width: '280px', height: '436px' }}>
+                            <img
+                              src={images.productImage}
+                              alt="women"
+                              style={{
+                                objectFit: 'cover',
+                                width: '100%',
+                                height: '100%'
+                              }}
+                            />
+                          </Box>
+                        )}
+                      </SwiperSlide>
+                    ))}
                   </Swiper>
                   <Box
                     sx={{
@@ -403,9 +402,6 @@ const ItemDetailView: React.FC = () => {
               <Box
                 sx={{
                   maxWidth: {
-                    xl: '50%',
-                    lg: '50%',
-                    md: '50%',
                     sm: '50%',
                     xs: '100%'
                   },
@@ -416,7 +412,7 @@ const ItemDetailView: React.FC = () => {
                     sx={{
                       width: '142px',
                       height: '48px',
-                      background: '#E5E5EA',
+                      background: theme.palette.success.contrastText,
                       borderRadius: 3,
                       textAlign: 'center',
                       display: 'flex',
@@ -429,7 +425,8 @@ const ItemDetailView: React.FC = () => {
                         fontFamily: 'Inter',
                         fontWeight: 700,
                         fontSize: '14px',
-                        my: 'auto'
+                        my: 'auto',
+                        color: theme.palette.primary.light
                       }}>
                       Popular
                     </Typography>
@@ -460,7 +457,8 @@ const ItemDetailView: React.FC = () => {
                         md: '48px',
                         sm: '35px',
                         xs: '28px'
-                      }
+                      },
+                      color: theme.palette.primary.light
                     }}>
                     {selectedProduct?.productName}
                   </Typography>
@@ -472,7 +470,8 @@ const ItemDetailView: React.FC = () => {
                     sx={{
                       fontFamily: 'Inter',
                       fontWeight: 400,
-                      fontSize: '14px'
+                      fontSize: '14px',
+                      color: theme.palette.primary.light
                     }}>
                     132 Reviews
                   </Typography>
@@ -492,10 +491,10 @@ const ItemDetailView: React.FC = () => {
                       variant="fullWidth"
                       sx={{
                         '.MuiTab-root': {
-                          color: '#1B2437'
+                          color: theme.palette.primary.light
                         },
                         '.MuiTab-root.Mui-selected': {
-                          color: '#111827',
+                          color: theme.palette.primary.contrastText,
                           pb: 2.5,
                           fontFamily: 'Inter',
                           fontSize: '16px',
@@ -523,7 +522,8 @@ const ItemDetailView: React.FC = () => {
                             sm: '14px'
                           },
                           textAlign: 'left',
-                          wordBreak: 'break-all'
+                          wordBreak: 'break-all',
+                          color: theme.palette.secondary.dark
                         }}>
                         Dress with tulle and collar Peter Pan from REDValentino (Red Valentino). Peter Pan
                         collar, tulle panels, sleeveless model, concealed back zipper and pleated skirt. Black
@@ -544,11 +544,11 @@ const ItemDetailView: React.FC = () => {
                         fontFamily: 'Inter',
                         fontSize: '16px',
                         fontWeight: 400,
-                        color: '#1B2437',
                         textAlign: 'left',
                         mt: 4,
                         mb: 4,
-                        p: 1
+                        p: 1,
+                        color: theme.palette.primary.light
                       }}>
                       Sizes
                     </Typography>
@@ -559,7 +559,7 @@ const ItemDetailView: React.FC = () => {
                         p: 1,
                         gap: 2
                       }}>
-                      {sizes?.map((size: { id: number; value: string; slug: string }, index: number) =>
+                      {sizes?.map((size, index: number) =>
                         sizeValue === index ? (
                           <Box
                             // label={size.slug}
@@ -570,9 +570,8 @@ const ItemDetailView: React.FC = () => {
                               fontFamily: 'Inter',
                               fontSize: '16px',
                               fontWeight: 700,
-                              color: '#FFFFFF',
-                              background: '#1B2437',
-
+                              color: theme.palette.success.main,
+                              background: theme.palette.primary.light,
                               cursor: 'pointer',
                               display: 'flex',
                               justifyContent: 'center',
@@ -596,8 +595,7 @@ const ItemDetailView: React.FC = () => {
                               width: '81px',
                               height: '45px',
                               border: 1,
-                              borderColor: '#000000',
-
+                              borderColor: theme.palette.info.dark,
                               cursor: 'pointer',
                               display: 'flex',
                               justifyContent: 'center',
@@ -624,7 +622,7 @@ const ItemDetailView: React.FC = () => {
                         fontFamily: 'Inter',
                         fontSize: '16px',
                         fontWeight: 400,
-                        color: '#1B2437',
+                        color: theme.palette.primary.light,
                         textAlign: 'left',
                         mt: 4,
                         mb: 4,
@@ -641,7 +639,7 @@ const ItemDetailView: React.FC = () => {
                           p: 1,
                           gap: 2
                         }}>
-                        {color?.map((col: { id: number; name: string; haxValue: string }, index: number) =>
+                        {color?.map((col, index: number) =>
                           colorValue === index ? (
                             <Box
                               key={index}
@@ -649,7 +647,6 @@ const ItemDetailView: React.FC = () => {
                                 width: '50px',
                                 height: '50px',
                                 background: `${col.haxValue}`,
-
                                 cursor: 'pointer',
                                 borderRadius: 2
                               }}
@@ -702,7 +699,7 @@ const ItemDetailView: React.FC = () => {
                       fontFamily: 'Inter',
                       fontSize: '24px',
                       fontWeight: 400,
-                      color: '#1B2437',
+                      color: theme.palette.primary.light,
                       mt: 4,
                       mb: 4
                     }}>
@@ -714,7 +711,7 @@ const ItemDetailView: React.FC = () => {
                       fontFamily: 'Inter',
                       fontSize: '34px',
                       fontWeight: 400,
-                      color: '#1B2437',
+                      color: theme.palette.primary.light,
                       mt: 4,
                       mb: 4,
                       ml: 1
@@ -724,13 +721,7 @@ const ItemDetailView: React.FC = () => {
                 </Box>
                 <Box
                   sx={{
-                    display: {
-                      xl: 'flex',
-                      lg: 'flex',
-                      md: 'flex',
-                      sm: 'flex',
-                      xs: 'flex'
-                    },
+                    display: 'flex',
                     gap: { sm: 7, xs: 3 },
                     justifyContent: { sm: 'left', xs: 'center' },
                     mt: { sm: 8, xs: 4 },
@@ -739,13 +730,13 @@ const ItemDetailView: React.FC = () => {
                   <Button
                     variant="outlined"
                     sx={{
-                      background: '#1B2437',
+                      background: theme.palette.primary.light,
                       maxWidth: '167px',
                       height: '54px',
                       fontSize: '18px',
                       fontFamily: 'Inter',
                       fontWeight: 700,
-                      color: '#FFFFFF',
+                      color: theme.palette.success.main,
                       ml: { sm: 1 },
                       borderRadius: 0
                     }}
@@ -763,13 +754,13 @@ const ItemDetailView: React.FC = () => {
                     variant="outlined"
                     sx={{
                       border: 1,
-                      borderColor: '#111827',
+                      borderColor: theme.palette.primary.contrastText,
                       maxWidth: '167px',
                       height: '54px',
                       fontSize: '18px',
                       fontFamily: 'Inter',
                       fontWeight: 700,
-                      color: '#111827',
+                      color: theme.palette.primary.contrastText,
                       mr: { sm: 1 },
 
                       borderRadius: 0

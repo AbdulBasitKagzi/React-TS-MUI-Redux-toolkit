@@ -1,9 +1,10 @@
 import { newArrival } from '../../data/Constants';
 
 // mui imports
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 
 const Arrival: React.FC = () => {
+  const theme = useTheme();
   return (
     <>
       <Box sx={{ mt: 4, mb: 4 }}>
@@ -13,7 +14,8 @@ const Arrival: React.FC = () => {
             fontFamily: 'Jost',
             fontSize: '39px',
             fontWeight: 700,
-            textAlign: 'center'
+            textAlign: 'center',
+            color: theme.palette.primary.dark
           }}>
           Checkout New Arrivals
         </Typography>

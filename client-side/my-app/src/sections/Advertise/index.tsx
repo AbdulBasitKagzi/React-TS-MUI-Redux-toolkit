@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, useTheme } from '@mui/material';
 import { assets } from '../../assets';
 
 interface advertiseProps {
@@ -7,8 +7,17 @@ interface advertiseProps {
   message: string;
   buttontitle: string;
   image: string | undefined;
+  background?: string | undefined;
 }
-function Advertise({ title, subtitle, message, buttontitle, image }: advertiseProps): JSX.Element {
+function Advertise({
+  title,
+  subtitle,
+  message,
+  buttontitle,
+  image,
+  background
+}: advertiseProps): JSX.Element {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -27,7 +36,7 @@ function Advertise({ title, subtitle, message, buttontitle, image }: advertisePr
             display: 'flex',
             justifyContent: 'center',
 
-            background: '#EEEEEE',
+            background: background,
             width: '100%',
 
             mb: { xs: 1 },
@@ -55,8 +64,7 @@ function Advertise({ title, subtitle, message, buttontitle, image }: advertisePr
                   xs: '20px'
                 },
                 fontWeight: 700,
-                color: '#616161',
-
+                color: theme.palette.primary.main,
                 paddingTop: { xs: '40px' }
               }}>
               {title}
@@ -71,7 +79,7 @@ function Advertise({ title, subtitle, message, buttontitle, image }: advertisePr
                   xs: '29px'
                 },
                 fontWeight: 700,
-                color: '#212121',
+                color: theme.palette.primary.dark,
                 wordBreak: 'break-all'
               }}>
               {subtitle}
@@ -87,7 +95,7 @@ function Advertise({ title, subtitle, message, buttontitle, image }: advertisePr
                   xs: '12px'
                 },
                 fontWeight: 400,
-                color: '#212121',
+                color: theme.palette.primary.main,
 
                 width: {
                   lg: '423px',
@@ -101,9 +109,10 @@ function Advertise({ title, subtitle, message, buttontitle, image }: advertisePr
             </Typography>
 
             <Button
-              variant="contained"
+              // variant="contained"
               sx={{
-                background: '#212121',
+                background: theme.palette.primary.dark,
+                color: theme.palette.success.main,
                 width: {
                   xl: 256,
                   lg: 200,

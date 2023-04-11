@@ -1,34 +1,47 @@
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import Snackbar from "@mui/material/Snackbar";
-import { useEffect } from "react";
-import { cartActions } from "../../store/cart/cart.slice";
-import { useDispatch } from "react-redux";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Snackbar from '@mui/material/Snackbar';
+import { useEffect } from 'react';
+import { cartActions } from '../../store/cart/cart.slice';
+import { useDispatch } from 'react-redux';
 
-type props = {
+interface alertProps {
   type: any;
   title: string;
   message: string;
   openUp: boolean;
   closeDuration: number;
   setOpenUp: (val: boolean) => void;
-};
+  backgroundColor: string;
+}
 
-function DescriptionAlerts(props: props) {
+function DescriptionAlerts({
+  type,
+  title,
+  message,
+  openUp,
+  closeDuration,
+  setOpenUp,
+  backgroundColor
+}: alertProps) {
   const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
-      props.setOpenUp(false);
+      setOpenUp(false);
       dispatch(cartActions.notification());
-    }, props.closeDuration);
+    }, closeDuration);
   }, []);
 
   return (
     <div>
-      <Snackbar open={props.openUp} autoHideDuration={props.closeDuration}>
-        <Alert severity={props.type}>
-          <AlertTitle>{props.title}</AlertTitle>
-          {props.message}
+      <Snackbar open={openUp} autoHideDuration={closeDuration}>
+        <Alert
+          severity={type}
+          sx={{
+            backgroundColor: backgroundColor
+          }}>
+          <AlertTitle>{title}</AlertTitle>
+          {message}
         </Alert>
       </Snackbar>
     </div>

@@ -7,7 +7,7 @@ import { gender, brandFilter, categoriesFilter } from '../../data/Constants';
 
 // mui imports
 import { Box } from '@mui/system';
-import { Typography } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 
 interface data {
   id: number;
@@ -15,6 +15,7 @@ interface data {
   slug: string;
 }
 const CategoryDetail: React.FC = () => {
+  const theme = useTheme();
   const [foundGender, setFoundGender] = useState<data>();
   const [foundBrand, setFoundBrand] = useState<data>();
   const [foundCategory, setFoundCategory] = useState<data>();
@@ -90,7 +91,8 @@ const CategoryDetail: React.FC = () => {
                   sm: 'block',
                   xs: 'none'
                 },
-                mt: { sm: '2rem', md: '9.5rem' }
+                mt: { sm: '2rem', md: '9.5rem' },
+                color: theme.palette.primary.dark
               }}>
               Filter
             </Typography>

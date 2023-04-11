@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // mui imports
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography, useTheme } from '@mui/material';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -22,6 +22,7 @@ function UserInformation({
   userInformation,
   handleUserValidation
 }: UserInformationType): JSX.Element {
+  const theme = useTheme();
   const [date_time, setDate_Time] = useState(dayjs());
 
   const handleUserInformation = (
@@ -180,7 +181,8 @@ function UserInformation({
               variant="standard"
               placeholder="Akshya Nagar 1st"
               sx={{
-                paddingBottom: 4
+                paddingBottom: 4,
+                marginTop: 1
               }}
               onChange={handleUserInformation}
             />
@@ -199,7 +201,8 @@ function UserInformation({
               variant="standard"
               placeholder="000000"
               sx={{
-                paddingBottom: 4
+                paddingBottom: 4,
+                marginTop: 1
               }}
               onChange={handleUserInformation}
             />
@@ -209,8 +212,8 @@ function UserInformation({
           variant="contained"
           sx={{
             display: { sm: 'block', xs: 'none' },
-            backgroundColor: '#111827',
-            color: '#FFFFFF',
+            backgroundColor: theme.palette.primary.contrastText,
+            color: theme.palette.success.main,
             borderRadius: 0,
             mx: 'auto',
             mt: { lg: 10, sm: 5 }
