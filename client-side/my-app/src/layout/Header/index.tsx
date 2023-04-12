@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, createSearchParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../store/user/user.slice';
 import { gender } from '../../data/Constants';
@@ -43,6 +43,7 @@ export default function DrawerAppBar(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
   const [background, setBackground] = useState<string | undefined>('transparent');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleDrawerToggle = () => {
     setMobileOpen(prevState => !prevState);
@@ -181,45 +182,49 @@ export default function DrawerAppBar(props: Props) {
                   zIndex: 5
                 }}>
                 {gender.map(item => (
-                  <Typography
-                    key={item.id}
-                    sx={{
-                      color: theme.palette.primary.dark,
-                      fontFamily: 'Josefin Sans',
-                      fontSize: '16px',
-                      display: 'inline-block',
-                      textDecoration: item.id === Number(value) ? 'underline' : 'none',
-                      zIndex: 10
-                    }}
-                    onClick={() => {
-                      if (item.id === 0) {
-                        navigate('/');
-                        setOpenModel(false);
-                      } else {
-                        navigate(`/categorydetail/${item.slug}/`);
-                      }
-                    }}
-                    onMouseEnter={() => {
-                      if (item.id !== 0) {
-                        dispatch(userActions.makeRoute(item.slug));
-                        setOpenModel(true);
-                        setBackground(theme.palette.success.main);
-                        setValue(item.id);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      console.log('MOUSE Leave');
-                      if (item.id !== 0) {
-                        setOpenModel(false);
-                        setBackground('transparent');
-                        setValue(-1);
-                      }
-                    }}>
-                    {item.id === 0 && (
-                      <img src={assets.icons.W} alt="icon" style={{ paddingRight: '5px', width: '30px' }} />
-                    )}
-                    {item.value}
-                  </Typography>
+                  <Link
+                    to={item.id === 0 ? `/` : `/product?gender=${item.slug}`}
+                    style={{ textDecoration: 'none' }}>
+                    <Typography
+                      key={item.id}
+                      sx={{
+                        color: theme.palette.primary.dark,
+                        fontFamily: 'Josefin Sans',
+                        fontSize: '16px',
+                        display: 'inline-block',
+                        textDecoration: item.id === Number(value) ? 'underline' : 'none',
+                        zIndex: 10
+                      }}
+                      onClick={() => {
+                        if (item.id === 0) {
+                          // navigate('/');
+                          setOpenModel(false);
+                        } else {
+                          // navigate(`/product?gender=${item.slug}`);
+                          setSearchParams({ gender: item.slug });
+                        }
+                      }}
+                      onMouseEnter={() => {
+                        if (item.id !== 0) {
+                          dispatch(userActions.makeRoute(item.slug));
+                          setOpenModel(true);
+                          setBackground(theme.palette.success.main);
+                          setValue(item.id);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (item.id !== 0) {
+                          // setOpenModel(false);
+                          setBackground('transparent');
+                          setValue(-1);
+                        }
+                      }}>
+                      {item.id === 0 && (
+                        <img src={assets.icons.W} alt="icon" style={{ paddingRight: '5px', width: '30px' }} />
+                      )}
+                      {item.value}
+                    </Typography>
+                  </Link>
                 ))}
               </Box>
               <Box

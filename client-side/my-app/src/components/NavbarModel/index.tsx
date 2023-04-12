@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { brandFilter, categoriesFilter } from '../../data/Constants';
 import { assets } from '../../assets';
@@ -80,24 +80,28 @@ const NavbarModel: React.FC<menuProps> = ({ openModel, setOpenModel, setBackgrou
                 </ListItem>
                 <Box sx={{ mt: 4 }}>
                   {categoriesFilter.map(category => (
-                    <ListItem
-                      key={category.id}
-                      sx={{
-                        fontFamily: 'Inter',
-                        fontSize: '16px',
-                        fontWeight: 400,
-                        cursor: 'pointer',
-                        '&:hover': {
-                          textDecoration: 'underline'
-                        },
-                        color: theme.palette.secondary.dark,
-                        display: 'block'
-                      }}
-                      onClick={() => {
-                        navigate(`/categorydetail/${routeValue}/${category.slug}`);
-                      }}>
-                      {category.value}
-                    </ListItem>
+                    <Link
+                      to={`/product?gender=${routeValue}&categories=${category.slug}`}
+                      style={{ textDecoration: 'none' }}>
+                      <ListItem
+                        key={category.id}
+                        sx={{
+                          fontFamily: 'Inter',
+                          fontSize: '16px',
+                          fontWeight: 400,
+                          cursor: 'pointer',
+                          '&:hover': {
+                            textDecoration: 'underline'
+                          },
+                          color: theme.palette.secondary.dark,
+                          display: 'block'
+                        }}
+                        onClick={() => {
+                          navigate(`/categorydetail/${routeValue}/${category.slug}`);
+                        }}>
+                        {category.value}
+                      </ListItem>
+                    </Link>
                   ))}
                 </Box>
               </List>
@@ -116,24 +120,28 @@ const NavbarModel: React.FC<menuProps> = ({ openModel, setOpenModel, setBackgrou
                 </ListItem>
                 <Box sx={{ mt: 4 }}>
                   {brandFilter.map(brand => (
-                    <ListItem
-                      key={brand.id}
-                      sx={{
-                        fontFamily: 'Inter',
-                        fontSize: '16px',
-                        fontWeight: 400,
-                        cursor: 'pointer',
-                        '&:hover': {
-                          textDecoration: 'underline'
-                        },
-                        color: theme.palette.secondary.dark,
-                        display: 'block'
-                      }}
-                      onClick={() => {
-                        navigate(`/categorydetail/${routeValue}/${brand.slug}`);
-                      }}>
-                      {brand.value}
-                    </ListItem>
+                    <Link
+                      to={`/product?gender=${routeValue}&brand=${brand.slug}`}
+                      style={{ textDecoration: 'none' }}>
+                      <ListItem
+                        key={brand.id}
+                        sx={{
+                          fontFamily: 'Inter',
+                          fontSize: '16px',
+                          fontWeight: 400,
+                          cursor: 'pointer',
+                          '&:hover': {
+                            textDecoration: 'underline'
+                          },
+                          color: theme.palette.secondary.dark,
+                          display: 'block'
+                        }}
+                        onClick={() => {
+                          // navigate(`/categorydetail/${routeValue}/${brand.slug}`);
+                        }}>
+                        {brand.value}
+                      </ListItem>
+                    </Link>
                   ))}
                 </Box>
               </List>

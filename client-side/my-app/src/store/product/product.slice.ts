@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { products } from '../../data/Constants';
 import { productLists } from '../../data/ProductsContant';
-import { productstate } from '../product/product.types';
+import { SelectedProductProps, productstate } from '../product/product.types';
 
 const productState: productstate = {
   Products: products,
   ProductsList: productLists,
   filter: [],
-  selectedProduct: null
+  selectedProduct: undefined
 };
 
 const productSlice = createSlice({
@@ -62,7 +62,16 @@ const productSlice = createSlice({
     },
 
     selectedProduct: (state, action) => {
-      state.selectedProduct = { ...state.selectedProduct, ...action.payload };
+      if (!action.payload.slug) {
+        if (productLists !== undefined) {
+          state.selectedProduct = productLists?.find(product => product.slug === action.payload.id);
+        }
+      } else {
+        state.selectedProduct = { ...state.selectedProduct, ...action.payload };
+        if (state.selectedProduct) {
+          state.selectedProduct = { ...state.selectedProduct, selectedColor: 0, selectedSize: 0 };
+        }
+      }
     },
     addSize: (state, action) => {
       state.selectedProduct = { ...state.selectedProduct, ...action.payload };

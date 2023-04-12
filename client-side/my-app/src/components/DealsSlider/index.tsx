@@ -28,8 +28,8 @@ interface dealsProps {
     // human: number;
     category: number;
     brand: number;
-    size: Array<Number>;
-    color: Array<Number>;
+    size: Array<number>;
+    color: Array<number>;
     reviewRate: number;
     slug: string;
   }[];
@@ -71,7 +71,6 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
                 xs: 'auto'
               },
               justifyContent: 'space-between',
-
               maxWidth: '85%',
               mx: 'auto'
             }}>
@@ -111,7 +110,7 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
                       }}
                       onClick={() => {
                         dispatch(productActions.selectedProduct(deals));
-                        navigate(`/itemdetailview/${deals.slug}`);
+                        navigate(`/product/${deals.slug}`);
                       }}>
                       {deals.productImages?.map((image, index: number) => {
                         if (index === 0) {
@@ -220,9 +219,17 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
             variant="contained"
             sx={{
               background: theme.palette.primary.dark,
-              width: { xl: 256, lg: 200, md: 150, xs: 100, sm: 110 },
+              width: {
+                xl: 256,
+                lg: 200,
+                md: 150,
+                xs: 100,
+                sm: 110
+              },
+              height: { xl: 61, lg: 50, xs: 30 },
               mt: { sm: 8, xs: 2 },
-              color: theme.palette.success.main
+              color: theme.palette.success.main,
+              borderRadius: 0
             }}>
             View All
           </Button>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+
 import Layout from '../../layout';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams, useLocation } from 'react-router-dom';
 import FilterSlider from '../../components/Filter';
 import FilterGrid from '../../components/FilterGrid';
 import { gender, brandFilter, categoriesFilter } from '../../data/Constants';
@@ -16,33 +17,35 @@ interface data {
 }
 const CategoryDetail: React.FC = () => {
   const theme = useTheme();
+
   const [foundGender, setFoundGender] = useState<data>();
   const [foundBrand, setFoundBrand] = useState<data>();
   const [foundCategory, setFoundCategory] = useState<data>();
   const [filterQuery, setFilterQuery] = useState<{
     gender: number;
-    brands: Array<number> | null;
+    brands: Array<number>;
     categories: Array<number> | null;
     sizes: Array<number> | null;
     priceRange: { min: number; max: number };
   }>({ gender: 1, brands: [], categories: [], sizes: [], priceRange: { min: 200, max: 500 } });
   const { id, type } = useParams();
 
-  useEffect(() => {
-    setFoundGender(gender.find(gender => gender.slug === id));
-  }, [id, type]);
+  const location = useLocation();
 
   useEffect(() => {
-    setFoundBrand(brandFilter.find(brand => brand.slug === type));
-  }, [id, type]);
+    setFilterQuery(prev => ({
+      ...prev,
+      brands: [],
+      categories: []
+    }));
 
-  useEffect(() => {
-    setFoundCategory(
-      categoriesFilter?.find(
-        (category: { id: number; value: string; slug: string }) => category?.slug === type
-      )
-    );
-  }, [id, type]);
+    const genderQuery = location.search.split('=');
+    const newGender = genderQuery[1].split('&');
+
+    setFoundGender(gender.find(gender => gender.slug === newGender[0]));
+    setFoundBrand(brandFilter.find(brand => brand.slug === genderQuery[2]));
+    setFoundCategory(categoriesFilter?.find(category => category?.slug === genderQuery[2]));
+  }, [location]);
 
   useEffect(() => {
     if (foundGender?.id) {
@@ -51,7 +54,7 @@ const CategoryDetail: React.FC = () => {
         gender: foundGender?.id
       }));
     }
-  }, [foundGender]);
+  }, [foundGender, foundBrand, foundCategory]);
 
   useEffect(() => {
     if (foundBrand?.id) {
@@ -60,13 +63,13 @@ const CategoryDetail: React.FC = () => {
         brands: [foundBrand.id]
       }));
     }
-  }, [foundBrand]);
+  }, [foundGender, foundBrand, foundCategory]);
 
   useEffect(() => {
     if (foundCategory?.id) {
       setFilterQuery(prev => ({
         ...prev,
-        categories: [foundCategory.id]
+        categories: [foundCategory.id] || []
       }));
     }
   }, [foundCategory]);

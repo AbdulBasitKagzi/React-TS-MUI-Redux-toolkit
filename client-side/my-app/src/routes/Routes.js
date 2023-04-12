@@ -27,18 +27,18 @@ function MainRoutes() {
       protected: true
     },
     {
-      id: 'categorydetal',
-      path: '/categorydetail/:id',
+      id: 'categorydetail',
+      path: '/product',
       component: <LazyCategoryDetail />,
       protected: true
     },
 
-    {
-      id: 'categorydetal',
-      path: '/categorydetail/:id/:type',
-      component: <LazyCategoryDetail />,
-      protected: true
-    },
+    // {
+    //   id: 'categorydetail',
+    //   path: '/categorydetail/:id/:type',
+    //   component: <LazyCategoryDetail />,
+    //   protected: true
+    // },
     {
       id: 'shippingpage',
       path: '/shippingpage',
@@ -46,14 +46,14 @@ function MainRoutes() {
       protected: true
     },
     {
-      id: 'itemdetailview',
-      path: '/itemdetailview/:id',
+      id: 'product',
+      path: '/product/:id',
       component: <LazyItemDetailView />,
       protected: true
     }
   ];
   return (
-    <Suspense fallback=<Loader />>
+    <Suspense fallback={<Loader />}>
       <Routes>
         {routes_arr.map(routes => (
           <Route key={routes.id} path={routes.path} element={routes.component} />

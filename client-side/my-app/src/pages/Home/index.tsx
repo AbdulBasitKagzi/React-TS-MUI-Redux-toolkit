@@ -115,6 +115,7 @@ function Home() {
                       justifyContent: 'center'
                     }}>
                     <Button
+                      variant="outlined"
                       sx={{
                         background: '#FFFFFF',
                         width: {
@@ -123,6 +124,7 @@ function Home() {
                           xs: '64px'
                         },
 
+                        border: 0,
                         fontFamily: 'Josefin Sans',
                         fontSize: { md: 20, sm: 15, xs: 8 },
                         color: theme.palette.primary.dark,
@@ -150,6 +152,7 @@ function Home() {
                       justifyContent: 'center'
                     }}>
                     <Button
+                      variant="outlined"
                       sx={{
                         background: '#FFFFFF',
                         width: {
@@ -157,7 +160,7 @@ function Home() {
                           sm: '185px',
                           xs: '64px'
                         },
-
+                        border: 0,
                         fontFamily: 'Josefin Sans',
                         fontSize: { md: 20, sm: 15, xs: 8 },
                         color: theme.palette.primary.dark,

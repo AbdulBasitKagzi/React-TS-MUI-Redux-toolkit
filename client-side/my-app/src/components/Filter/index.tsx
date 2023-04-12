@@ -22,7 +22,7 @@ const drawerWidth = 275;
 interface filterProps {
   filterQuery: {
     gender: number;
-    brands: Array<number> | null;
+    brands: Array<number>;
     categories: Array<number> | null;
     sizes: Array<number> | null;
     priceRange: { min: number; max: number };
@@ -30,7 +30,7 @@ interface filterProps {
   setFilterQuery: React.Dispatch<
     React.SetStateAction<{
       gender: number;
-      brands: Array<number> | null;
+      brands: Array<number>;
       categories: Array<number> | null;
       sizes: Array<number> | null;
       priceRange: { min: number; max: number };
@@ -44,11 +44,12 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
     filterQuery.priceRange.min,
     filterQuery.priceRange.max
   ]);
-
+  const [check, setCheck] = useState<boolean>();
   const dispatch = useDispatch();
 
   const handleBrandFilter = (value: number, isChecked: boolean) => {
     if (isChecked) {
+      setCheck(isChecked);
       setFilterQuery(prevValue => {
         if (prevValue.brands) {
           return {
@@ -311,12 +312,16 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
     </Box>
   );
 
+  useEffect(() => {
+    console.log('sfdsff', filterQuery.brands?.length);
+  }, [filterQuery]);
+
   const desktop_filter = () => {
     return (
       <>
         <Box
           sx={{
-            width: { md: '450px', sm: '245px' },
+            width: { lg: '450px', sm: '245px' },
             display: {
               sm: 'block',
               xs: 'none'
@@ -371,7 +376,7 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
             <Slider
               sx={{
                 color: theme.palette.warning.dark,
-                width: { md: '280px', sm: '180px' }
+                width: { lg: '280px', sm: '180px' }
               }}
               onChange={(_, value) => {
                 setPriceRange(value as [number, number]);
@@ -400,17 +405,19 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
               }}>
               Brands
             </Typography>
-            {brandFilter.map(brand => (
-              <FormControlLabel
-                key={brand.id}
-                control={<Checkbox />}
-                label={brand.value}
-                sx={{ color: theme.palette.warning.main }}
-                onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                  handleBrandFilter(brand.id, (e.target as unknown as { checked: boolean }).checked);
-                }}
-              />
-            ))}
+            {brandFilter.map(brand => {
+              return (
+                <FormControlLabel
+                  key={brand.id}
+                  control={<Checkbox />}
+                  label={brand.value}
+                  sx={{ color: theme.palette.warning.main }}
+                  onClick={(e: MouseEvent<HTMLLabelElement>) => {
+                    handleBrandFilter(brand.id, (e.target as unknown as { checked: boolean }).checked);
+                  }}
+                />
+              );
+            })}
             <Typography
               textAlign="left"
               sx={{
@@ -426,12 +433,17 @@ export default function FilterSlider({ filterQuery, setFilterQuery }: filterProp
             {categoriesFilter.map(category => (
               <FormControlLabel
                 key={category.id}
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    color="primary"
+                    style={{ color: 'grey' }}
+                    onChange={e => {
+                      handleCategoriesFilter(category.id, e.target.checked);
+                    }}
+                  />
+                }
                 label={category.value}
                 sx={{ color: theme.palette.warning.main }}
-                onClick={(e: MouseEvent<HTMLLabelElement>) => {
-                  handleCategoriesFilter(category.id, (e.target as unknown as { checked: boolean }).checked);
-                }}
               />
             ))}
             <Typography

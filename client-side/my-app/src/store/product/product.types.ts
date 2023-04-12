@@ -2,19 +2,19 @@ export interface SelectedProductProps {
   id: number;
   productName: string;
   productImages: { id: number; productImage: string | undefined }[];
-  productDescription: string;
+  productDescription: string[];
   productOriginalPrice: number;
   productCurrentPrice: number;
   gender: number;
   human: number;
   category: number;
   brand: number;
-  size: Array<Number>;
-  color: Array<Number>;
+  size: Array<number>;
+  color: Array<number>;
   reviewRate: number;
   slug: string;
-  selectedSize: number;
-  selectedColor: number;
+  selectedSize?: number;
+  selectedColor?: number;
 }
 
 export interface productProps {
@@ -62,5 +62,5 @@ export interface productstate {
   Products: product[];
   ProductsList: productProps[];
   filter: productProps[];
-  selectedProduct: SelectedProductProps | null;
+  selectedProduct: SelectedProductProps | null | undefined;
 }

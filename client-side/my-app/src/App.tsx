@@ -3,22 +3,29 @@ import { useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { log } from 'console';
 
 function App() {
   const { User } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
   const [save, setSave] = useState<string>(localStorage.getItem('isAuth') || '');
+
   useEffect(() => {
     setSave(localStorage.getItem('isAuth') || '');
   }, [User]);
+
   useEffect(() => {
     // to protect routes
     if (save === 'true') {
       if (location.pathname === '/login') {
         navigate('/');
       } else {
-        navigate(location.pathname);
+        if (location.search) {
+          navigate(`${location.pathname}${location.search}`);
+        } else {
+          navigate(`${location.pathname}`);
+        }
       }
     }
   }, [save, navigate, location.pathname]);

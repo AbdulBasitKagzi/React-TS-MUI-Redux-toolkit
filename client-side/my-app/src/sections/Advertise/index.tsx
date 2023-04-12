@@ -123,7 +123,8 @@ function Advertise({
                 height: { xl: 61, lg: 50, xs: 30 },
                 mt: { lg: 10, md: 5, xs: 3 },
                 mb: 2,
-                fontSize: { lg: '15px', xs: '9px' }
+                fontSize: { lg: '15px', xs: '9px' },
+                borderRadius: 0
               }}>
               {buttontitle}
             </Button>

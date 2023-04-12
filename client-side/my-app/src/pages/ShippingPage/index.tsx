@@ -38,6 +38,7 @@ const ShippingPage: React.FC = () => {
   const navigate = useNavigate();
   const steps = ['Shipping', 'Billing', 'Confirmation'];
   const { cartProducts } = useSelector((state: RootState) => state.cart);
+  console.log('cart', cartProducts);
   const dispatch = useDispatch();
 
   const [page, setPage] = useState<number>(1);

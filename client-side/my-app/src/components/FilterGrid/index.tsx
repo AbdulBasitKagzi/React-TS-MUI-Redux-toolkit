@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { productActions } from '../../store/product/product.slice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { productProps } from '../../store/product/product.types';
 import WarningModel from '../WarningModel';
@@ -102,120 +102,119 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
           mr: 6.25
         }}>
         {open && <WarningModel open={open} setOpen={setOpen} />}
-        <Grid
-          container
-          // spacing={currentposts.length === 1 ? 1 : 4}
-          spacing={4}>
+
+        <Grid container spacing={4}>
           {filter.length !== 0 ? (
             currentposts.map(arr => (
               <Grid
                 key={arr.id}
                 item
-                xl={filter.length === 1 ? 'auto' : 4}
-                lg={filter.length === 1 ? 'auto' : 4}
-                md={4}
+                xl={filter.length === 1 ? 'auto' : filter.length === 2 ? 6 : 4}
+                lg={filter.length === 1 ? 'auto' : filter.length === 2 ? 6 : 4}
+                md={filter.length === 1 ? 'auto' : filter.length === 2 ? 6 : 4}
                 sm={6}
                 xs={12}>
-                <Box
-                  key={arr.id}
-                  sx={{
-                    position: 'relative',
-                    border: 1,
-                    borderColor: '#E5E7EB',
-                    width: { sm: currentposts.length === 1 ? '300px' : '100%', xs: '100%' },
-                    cursor: 'pointer'
-                  }}
-                  onClick={() => {
-                    dispatch(productActions.selectedProduct(arr));
-                    navigate(`/itemdetailview/${arr.slug}`);
-                  }}>
-                  <Box>
-                    {arr?.productImages?.map((image, index: number) => {
-                      if (index === 0) {
-                        return (
-                          <Box key={image.id}>
-                            <img
-                              className="product_image"
-                              src={image.productImage}
-                              alt={image.productImage}
-                              width="100%"
-                              height="300px"
-                            />
-                          </Box>
-                        );
-                      } else {
-                        return;
-                      }
-                    })}
-                  </Box>
-
-                  <Box sx={{ position: 'absolute', top: 12, right: 15 }}>
-                    <img src={assets.icons.Heart_Group} alt="heartgroup" width="40px" />
-                  </Box>
-
+                <Link to={`/product/${arr.slug}`} style={{ textDecoration: 'none' }}>
                   <Box
+                    key={arr.id}
                     sx={{
-                      display: 'flex',
-                      textAlign: 'left',
-
-                      justifyContent: 'space-between'
+                      position: 'relative',
+                      border: 1,
+                      borderColor: '#E5E7EB',
+                      width: { sm: currentposts.length === 1 ? '300px' : '100%', xs: '100%' },
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => {
+                      dispatch(productActions.selectedProduct(arr));
                     }}>
-                    <Typography
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        fontFamily: 'Inter',
-                        fontSize: {
-                          lg: '30px',
-                          md: '26px',
-                          sm: '24px',
-                          xs: '22px'
-                        },
-                        fontWeight: 400,
+                    <Box>
+                      {arr?.productImages?.map((image, index: number) => {
+                        if (index === 0) {
+                          return (
+                            <Box key={image.id}>
+                              <img
+                                className="product_image"
+                                src={image.productImage}
+                                alt={image.productImage}
+                                width="100%"
+                                height="300px"
+                              />
+                            </Box>
+                          );
+                        } else {
+                          return;
+                        }
+                      })}
+                    </Box>
 
-                        height: { sm: 120 },
-                        pb: 1,
-                        pl: 2,
-                        color: theme.palette.info.dark
-                      }}>
-                      {arr.productName}
-                    </Typography>
+                    <Box sx={{ position: 'absolute', top: 12, right: 15 }}>
+                      <img src={assets.icons.Heart_Group} alt="heartgroup" width="40px" />
+                    </Box>
+
                     <Box
                       sx={{
-                        mr: 3,
-                        my: 'auto',
                         display: 'flex',
-                        mt: 6
-                      }}
-                      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-                        e.stopPropagation();
-                        if (save) {
-                          dispatch(cartActions.addProductToCart(arr));
-                        } else {
-                          setOpen(true);
-                        }
+                        textAlign: 'left',
+
+                        justifyContent: 'space-between'
                       }}>
-                      <img src={assets.icons.Shopping_Cart_Vector} alt="cart" />
+                      <Typography
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontFamily: 'Inter',
+                          fontSize: {
+                            lg: '30px',
+                            md: '26px',
+                            sm: '24px',
+                            xs: '22px'
+                          },
+                          fontWeight: 400,
+
+                          height: { sm: 120 },
+                          pb: 1,
+                          pl: 2,
+                          color: theme.palette.info.dark
+                        }}>
+                        {arr.productName}
+                      </Typography>
+                      <Box
+                        sx={{
+                          mr: 3,
+                          my: 'auto',
+                          display: 'flex',
+                          mt: 6
+                        }}
+                        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                          e.stopPropagation();
+                          if (save) {
+                            dispatch(cartActions.addProductToCart(arr));
+                          } else {
+                            setOpen(true);
+                          }
+                        }}>
+                        <img src={assets.icons.Shopping_Cart_Vector} alt="cart" />
+                      </Box>
                     </Box>
+                    <Typography
+                      sx={{
+                        textAlign: 'left',
+                        fontFamily: 'Inter',
+                        fontSize: {
+                          lg: '34px',
+                          md: '30px',
+                          sm: '28px',
+                          xs: '22px'
+                        },
+                        pl: 1,
+                        fontWeight: 400,
+                        ml: { lg: '16px' },
+                        color: theme.palette.primary.light
+                      }}>
+                      $ {arr.productCurrentPrice}
+                    </Typography>
                   </Box>
-                  <Typography
-                    sx={{
-                      textAlign: 'left',
-                      fontFamily: 'Inter',
-                      fontSize: {
-                        lg: '34px',
-                        md: '30px',
-                        sm: '28px',
-                        xs: '22px'
-                      },
-                      pl: 1,
-                      fontWeight: 400,
-                      ml: { lg: '16px' },
-                      color: theme.palette.primary.light
-                    }}>
-                    $ {arr.productCurrentPrice}
-                  </Typography>
-                </Box>
+                </Link>
               </Grid>
             ))
           ) : (
@@ -230,6 +229,7 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
             </Typography>
           )}
         </Grid>
+
         {filter.length !== 0 && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 10 }}>
             <Pagination

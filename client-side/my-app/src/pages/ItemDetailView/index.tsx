@@ -5,7 +5,7 @@ import Layout from '../../layout';
 import { RootState } from '../../store/store';
 import { sizeFilter, colorLists } from '../../data/Constants';
 import DescriptionAlerts from '../../components/Alert';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { productActions } from '../../store/product/product.slice';
 
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
@@ -26,6 +26,7 @@ import Tab from '@mui/material/Tab';
 import WarningModel from '../../components/WarningModel';
 import { assets } from '../../assets';
 import AuthGuard from '../../routes/AuthGuard';
+import { SelectedProductProps } from '../../store/product/product.types';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -37,11 +38,12 @@ const ItemDetailView: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
   const { selectedProduct } = useSelector((state: RootState) => state.product);
   const { cartProducts, added } = useSelector((state: RootState) => state.cart);
   const [tabs, setTabs] = useState<Array<string>>(['Info', 'Brand', 'Delivery']);
-  const sliderRef = useRef<any>();
-  const slider = useRef<any>();
+  const sliderRef = useRef<SwiperRef | null>(null);
+  const slider = useRef<SwiperRef | null>(null);
 
   const [stars, setStars] = useState<number>(5);
   const [sizes, setSizes] = useState<
@@ -61,14 +63,27 @@ const ItemDetailView: React.FC = () => {
   const [openUp, setOpenUp] = useState<boolean>(false);
   const [image, setImage] = useState<string | undefined>();
   const [imageValue, setImageValue] = useState<number>(0);
-
   const [save, setSave] = useState<string>(localStorage.getItem('isAuth') || '');
   const [open, setOpen] = useState<boolean>(false);
+  const [product, setProduct] = useState<SelectedProductProps | null | undefined>(null);
 
   useEffect(() => {
-    dispatch(productActions.addSize({ selectedSize: selectedProduct?.size[0] }));
-    dispatch(productActions.addColor({ selectedColor: selectedProduct?.color[0] }));
-  }, [dispatch]);
+    //   dispatch(productActions.addSize({ selectedSize: selectedProduct?.size[0] }));
+    //   dispatch(productActions.addColor({ selectedColor: selectedProduct?.color[0] }));
+    dispatch(productActions.selectedProduct(params));
+  }, []);
+
+  useEffect(() => {
+    console.log('useeffect');
+    if (selectedProduct?.size && selectedProduct?.color) {
+      console.log('here');
+      setProduct({
+        ...selectedProduct,
+        selectedSize: selectedProduct.size[0],
+        selectedColor: selectedProduct?.color[0]
+      });
+    }
+  }, []);
 
   useEffect(() => {
     let fitleredata;
@@ -769,7 +784,11 @@ const ItemDetailView: React.FC = () => {
                       if (!save) {
                         setOpen(true);
                       } else {
-                        dispatch(cartActions.addProductToCart(selectedProduct));
+                        if (!product) {
+                          dispatch(cartActions.addProductToCart(selectedProduct));
+                        } else {
+                          dispatch(cartActions.addProductToCart(product));
+                        }
                       }
                     }}>
                     Add to cart
