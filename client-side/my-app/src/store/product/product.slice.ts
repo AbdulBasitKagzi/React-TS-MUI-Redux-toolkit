@@ -65,11 +65,25 @@ const productSlice = createSlice({
       if (!action.payload.slug) {
         if (productLists !== undefined) {
           state.selectedProduct = productLists?.find(product => product.slug === action.payload.id);
+          if (state.selectedProduct) {
+            state.selectedProduct = {
+              ...state.selectedProduct,
+              selectedSize: state.selectedProduct.size[0],
+              selectedColor: state.selectedProduct.color[0],
+              remainingStars: 5 - state.selectedProduct.reviewRate
+            };
+          }
         }
       } else {
         state.selectedProduct = { ...state.selectedProduct, ...action.payload };
+
         if (state.selectedProduct) {
-          state.selectedProduct = { ...state.selectedProduct, selectedColor: 0, selectedSize: 0 };
+          state.selectedProduct = {
+            ...state.selectedProduct,
+            selectedSize: state.selectedProduct.size[0],
+            selectedColor: state.selectedProduct.color[0],
+            remainingStars: 5 - state.selectedProduct.reviewRate
+          };
         }
       }
     },

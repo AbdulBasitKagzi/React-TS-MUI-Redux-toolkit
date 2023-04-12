@@ -65,24 +65,9 @@ const ItemDetailView: React.FC = () => {
   const [imageValue, setImageValue] = useState<number>(0);
   const [save, setSave] = useState<string>(localStorage.getItem('isAuth') || '');
   const [open, setOpen] = useState<boolean>(false);
-  const [product, setProduct] = useState<SelectedProductProps | null | undefined>(null);
 
   useEffect(() => {
-    //   dispatch(productActions.addSize({ selectedSize: selectedProduct?.size[0] }));
-    //   dispatch(productActions.addColor({ selectedColor: selectedProduct?.color[0] }));
-    dispatch(productActions.selectedProduct(params));
-  }, []);
-
-  useEffect(() => {
-    console.log('useeffect');
-    if (selectedProduct?.size && selectedProduct?.color) {
-      console.log('here');
-      setProduct({
-        ...selectedProduct,
-        selectedSize: selectedProduct.size[0],
-        selectedColor: selectedProduct?.color[0]
-      });
-    }
+    if (!selectedProduct) dispatch(productActions.selectedProduct(params));
   }, []);
 
   useEffect(() => {
@@ -108,12 +93,6 @@ const ItemDetailView: React.FC = () => {
       setColor(filteredColor);
     }
   }, [selectedProduct]);
-
-  useEffect(() => {
-    if (selectedProduct?.reviewRate) {
-      setStars(stars - selectedProduct.reviewRate);
-    }
-  }, []);
 
   useEffect(() => {
     setOpenUp(added);
@@ -480,7 +459,8 @@ const ItemDetailView: React.FC = () => {
                 </Box>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', pt: 2, gap: 1 }}>
                   {printStars(selectedProduct?.reviewRate)}
-                  {printRemainingStars(stars)}
+                  {selectedProduct?.remainingStars && printRemainingStars(selectedProduct?.remainingStars)}
+
                   <Typography
                     sx={{
                       fontFamily: 'Inter',
@@ -784,11 +764,9 @@ const ItemDetailView: React.FC = () => {
                       if (!save) {
                         setOpen(true);
                       } else {
-                        if (!product) {
-                          dispatch(cartActions.addProductToCart(selectedProduct));
-                        } else {
-                          dispatch(cartActions.addProductToCart(product));
-                        }
+                        dispatch(cartActions.addProductToCart(selectedProduct));
+
+                        // dispatch(cartActions.addProductToCart(product));
                       }
                     }}>
                     Add to cart

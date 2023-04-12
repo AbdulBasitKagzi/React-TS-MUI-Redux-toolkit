@@ -15,6 +15,7 @@ export interface SelectedProductProps {
   slug: string;
   selectedSize?: number;
   selectedColor?: number;
+  remainingStars?: number;
 }
 
 export interface productProps {
