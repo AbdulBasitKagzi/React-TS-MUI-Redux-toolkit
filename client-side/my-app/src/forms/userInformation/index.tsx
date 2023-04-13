@@ -1,7 +1,16 @@
 import { useState } from 'react';
 
 // mui imports
-import { Box, Button, Grid, TextField, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Grid,
+  InputAdornment,
+  TextField,
+  Typography,
+  useTheme,
+  IconButton
+} from '@mui/material';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -11,6 +20,9 @@ import InputLabel from '@mui/material/InputLabel';
 import NativeSelect from '@mui/material/NativeSelect';
 import { user } from './userInformation.types';
 
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import SearchIcon from '@mui/icons-material/Search';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 interface UserInformationType {
   userInformation: user;
   setUserInformation: React.Dispatch<React.SetStateAction<user>>;
@@ -140,7 +152,18 @@ function UserInformation({
                 label="Delivery Date"
                 value={date_time}
                 onChange={handleDate}
-                sx={{ width: '500px' }}
+                disablePast={true}
+                components={{ OpenPickerButton: DateRangeIcon as any }}
+                sx={{
+                  width: '500px',
+                  '.MuiPickersDay-root.Mui-selected': {
+                    backgroundColor: 'red'
+                  },
+                  '.MuiPickersDay-root': {
+                    backgroundColor: 'red',
+                    borderRadius: 0
+                  }
+                }}
               />
             </LocalizationProvider>
           </Grid>
@@ -149,6 +172,8 @@ function UserInformation({
               <TimePicker
                 label="PickUp Time"
                 value={date_time}
+                disablePast={true}
+                components={{ OpenPickerButton: AccessTimeIcon as any }}
                 onChange={handleTime}
                 sx={{ width: '500px' }}
               />
@@ -185,6 +210,15 @@ function UserInformation({
                 marginTop: 1
               }}
               onChange={handleUserInformation}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton>
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={4}>

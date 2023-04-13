@@ -124,7 +124,10 @@ function Advertise({
                 mt: { lg: 10, md: 5, xs: 3 },
                 mb: 2,
                 fontSize: { lg: '15px', xs: '9px' },
-                borderRadius: 0
+                borderRadius: 0,
+                '&:hover': {
+                  background: theme.palette.primary.dark
+                }
               }}>
               {buttontitle}
             </Button>

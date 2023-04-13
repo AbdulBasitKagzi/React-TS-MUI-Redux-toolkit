@@ -1,5 +1,5 @@
 // mui imports
-import { Box, Button, Grid, TextField, Typography, Radio, useTheme } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography, Radio, useTheme, InputAdornment } from '@mui/material';
 import { assets } from '../../assets';
 import { paymentInformation } from './userPaymentInformation';
 
@@ -70,7 +70,6 @@ function UserPaymentInformation({
               }
             }}
           />
-
           <img src={assets.icons.Credit_Card} alt="creditcard" style={{ paddingRight: '20px' }} />
         </Box>
         <Box>
@@ -160,6 +159,13 @@ function UserPaymentInformation({
               paddingBottom: 4
             }}
             onChange={handlePaymentInformation}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <img src={assets.images.visa} alt="visa" />
+                </InputAdornment>
+              )
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>

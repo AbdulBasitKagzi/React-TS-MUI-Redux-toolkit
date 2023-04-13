@@ -4,8 +4,9 @@ import { cartActions } from '../../store/cart/cart.slice';
 import { RootState } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
 import { sizeFilter, colorLists } from '../../data/Constants';
-import { cartProducts } from '../../store/cart/cart.types';
 import Layout from '../../layout';
+import { user } from '../../forms/userInformation/userInformation.types';
+import { paymentInformation } from '../../forms/userPaymentInformation/userPaymentInformation';
 
 // mui imports
 import Stepper from '@mui/material/Stepper';
@@ -17,8 +18,6 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { MenuItem } from '@mui/material';
 import { Select } from '@mui/material';
 import { assets } from '../../assets';
-import AdjustIcon from '@mui/icons-material/Adjust';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 // for date and time
 import dayjs from 'dayjs';
@@ -27,8 +26,6 @@ import AuthGuard from '../../routes/AuthGuard';
 import UserInformation from '../../forms/userInformation';
 import UserPaymentInformation from '../../forms/userPaymentInformation';
 import ConfirmationPage from '../../sections/ConfirmationPage/index';
-import { user } from '../../forms/userInformation/userInformation.types';
-import { paymentInformation } from '../../forms/userPaymentInformation/userPaymentInformation';
 
 const ShippingPage: React.FC = () => {
   const theme = useTheme();
@@ -467,11 +464,12 @@ const ShippingPage: React.FC = () => {
                               sm: 'space-between',
                               xs: 'space-between'
                             },
-                            pb: 2
+                            pb: 2,
+                            mx: 4
                           }}>
                           <Box sx={{ display: 'flex', mt: 2, gap: 2 }}>
                             {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                            <Box sx={{ pl: 2 }}>
+                            <Box sx={{ pl: { xl: 0, xs: 0 } }}>
                               <Typography sx={{ color: theme.palette.info.main }}>Size</Typography>
                               <Select
                                 sx={{ width: { md: '137px', sm: '100px', xs: '100px' } }}
@@ -520,11 +518,11 @@ const ShippingPage: React.FC = () => {
                             }}>
                             <Typography
                               sx={{
-                                fontSize: { sm: '16px', xs: '18px' },
+                                fontSize: { sm: '18px', xs: '16px' },
                                 fontFamily: 'Jost',
                                 fontWeight: 700,
-                                color: theme.palette.info.main,
-                                pr: { md: 6, sm: 2, xs: 0 }
+                                color: theme.palette.info.main
+                                // pr: { md: 5, sm: 2, xs: 0 }
                               }}>
                               $ {product.quantity * product.productCurrentPrice}
                               .00
@@ -562,8 +560,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '16px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pl: 5,
+                              // py: 2,
+                              // pl: 5,
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             Subtotal
@@ -579,8 +579,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '16px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pr: 5,
+                              // py: 2,
+                              // pr: 5,
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             $ {total}.00
@@ -603,8 +605,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '15px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pl: 5,
+                              // py: 2,
+                              // pl: 5,
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             Shipping
@@ -620,8 +624,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '16px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pr: 5,
+                              // py: 2,
+                              // pr: 5,
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             $ 0{shipping}.00
@@ -643,8 +649,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '16px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pl: 5,
+                              // py: 2,
+                              // pl: 5,
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             Vat,tax
@@ -660,8 +668,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '16px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pr: 5,
+                              // py: 2,
+                              // pr: 5,
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             $ 0{vat_tax}.00
@@ -684,8 +694,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '20px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pl: 5,
+                              // py: 2,
+                              // pl: 5,
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             Total
@@ -701,8 +713,10 @@ const ShippingPage: React.FC = () => {
                                 xs: '20px'
                               },
                               color: theme.palette.info.main,
-                              py: 2,
-                              pr: { md: '16px', xs: '24px' },
+                              // py: 2,
+                              // pr: { md: '16px', xs: '24px' },
+                              mx: 4,
+                              my: 2,
                               wordBreak: 'break-all'
                             }}>
                             $ {total + vat_tax + shipping}.00

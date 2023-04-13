@@ -22,6 +22,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { assets } from '../../assets';
 
 const Footer: React.FC = () => {
   const theme = useTheme();
@@ -271,7 +272,7 @@ const Footer: React.FC = () => {
                 fontWeight: 400,
                 color: theme.palette.error.dark,
                 mt: { sm: 7, xs: 2 },
-                ml: { sm: 0, xs: 4 },
+                ml: 1,
                 display: 'flex',
                 gap: 1
               }}>
@@ -286,7 +287,7 @@ const Footer: React.FC = () => {
                 color: theme.palette.error.dark,
                 mt: { xs: 2 },
                 mb: 2,
-                ml: { sm: 0, xs: 4 },
+                ml: 1,
                 display: 'flex',
                 gap: 1
               }}>
@@ -295,11 +296,11 @@ const Footer: React.FC = () => {
             </Box>
           </Box>
         </Box>
-        <Box sx={{ mb: { xs: 2 } }}>
-          <FacebookIcon sx={{ mr: 6 }} />
-          <InstagramIcon sx={{ mr: 6 }} />
-          <YouTubeIcon sx={{ mr: 6 }} />
-          <TwitterIcon sx={{ mr: 6 }} />
+        <Box sx={{ mb: { xs: 2 }, mt: { xs: 10 }, display: 'flex', justifyContent: 'center' }}>
+          <img src={assets.icons.facebook} alt="facebook" style={{ marginRight: '48px' }} />
+          <img src={assets.icons.instagram} alt="instagram" style={{ marginRight: '48px' }} />
+          <img src={assets.icons.youtube} alt="youtube" style={{ marginRight: '48px' }} />
+          <img src={assets.icons.twitter} alt="twitter" style={{ marginRight: '48px' }} />
         </Box>
         <Box>
           <Divider variant="middle" />

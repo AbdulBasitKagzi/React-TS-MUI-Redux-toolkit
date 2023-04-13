@@ -117,7 +117,7 @@ function Home() {
                     <Button
                       variant="outlined"
                       sx={{
-                        background: '#FFFFFF',
+                        background: theme.palette.success.main,
                         width: {
                           md: '256px',
                           sm: '185px',
@@ -128,7 +128,10 @@ function Home() {
                         fontFamily: 'Josefin Sans',
                         fontSize: { md: 20, sm: 15, xs: 8 },
                         color: theme.palette.primary.dark,
-                        fontWeight: 700
+                        fontWeight: 700,
+                        '&:hover': {
+                          background: theme.palette.success.main
+                        }
                       }}>
                       For Her
                     </Button>
@@ -154,7 +157,7 @@ function Home() {
                     <Button
                       variant="outlined"
                       sx={{
-                        background: '#FFFFFF',
+                        background: theme.palette.success.main,
                         width: {
                           md: '256px',
                           sm: '185px',
@@ -164,7 +167,10 @@ function Home() {
                         fontFamily: 'Josefin Sans',
                         fontSize: { md: 20, sm: 15, xs: 8 },
                         color: theme.palette.primary.dark,
-                        fontWeight: 700
+                        fontWeight: 700,
+                        '&:hover': {
+                          background: theme.palette.success.main
+                        }
                       }}>
                       For Him
                     </Button>
@@ -175,18 +181,7 @@ function Home() {
                   sx={{
                     mt: 12
                   }}>
-                  <Typography
-                    variant="h3"
-                    sx={{
-                      fontFamily: 'Jost',
-                      fontSize: '39px',
-                      fontWeight: 700,
-                      textAlign: 'center',
-                      color: theme.palette.primary.dark
-                    }}>
-                    Best Deals
-                  </Typography>
-                  <Slider bestDeals={productLists} />
+                  <Slider title="Deals" bestDeals={productLists} />
                 </Box>
 
                 <Advertise
@@ -196,7 +191,7 @@ function Home() {
                 100 percent stylish. Be smart & trendy with us."
                   buttontitle="Explore"
                   image={assets.images.womenStanding}
-                  background="#EEEEEE"
+                  background={theme.palette.success.light}
                 />
                 <Box>
                   <CategoryGrid />
@@ -217,7 +212,7 @@ function Home() {
                     Shop By Category
                   </Typography>
 
-                  <Box sx={{ mt: 7, mb: 7 }}>
+                  <Box sx={{ mt: { sm: 7, xs: 4 }, mb: { sm: 7, xs: 4 } }}>
                     <CategoryTab
                       tabs={person_tabs}
                       textColor={theme.palette.error.main}
@@ -245,19 +240,7 @@ function Home() {
                   <ImageGrid />
                 </Box>
                 <Box sx={{ mt: 12 }}>
-                  <Box>
-                    <Typography
-                      variant="h3"
-                      sx={{
-                        fontFamily: 'Jost',
-                        fontSize: '39px',
-                        fontWeight: 700,
-                        textAlign: 'center'
-                      }}>
-                      Best Sellers
-                    </Typography>
-                  </Box>
-                  <Slider bestDeals={productLists} />
+                  <Slider title="Seller" bestDeals={productLists} />
                 </Box>
                 <Box
                   sx={{

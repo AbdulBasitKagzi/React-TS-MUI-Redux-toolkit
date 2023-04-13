@@ -197,24 +197,23 @@ export default function DrawerAppBar(props: Props) {
                       }}
                       onClick={() => {
                         if (item.id === 0) {
-                          // navigate('/');
                           setOpenModel(false);
                         } else {
-                          // navigate(`/product?gender=${item.slug}`);
                           setSearchParams({ gender: item.slug });
                         }
                       }}
                       onMouseEnter={() => {
-                        if (item.id !== 0) {
+                        if (item.id !== 0 && item.id !== 3 && item.id !== 4) {
                           dispatch(userActions.makeRoute(item.slug));
                           setOpenModel(true);
                           setBackground(theme.palette.success.main);
                           setValue(item.id);
+                        } else {
+                          setOpenModel(false);
                         }
                       }}
                       onMouseLeave={() => {
                         if (item.id !== 0) {
-                          // setOpenModel(false);
                           setBackground('transparent');
                           setValue(-1);
                         }
@@ -245,10 +244,6 @@ export default function DrawerAppBar(props: Props) {
                       cursor: 'pointer'
                     }}
                     onClick={() => {
-                      // item.id === 2 && cartProducts.length !== 0
-                      //   ? navigate('/shippingpage')
-                      //   : console.log('hi');
-
                       if (item.id === 2 && cartProducts.length !== 0) {
                         navigate('/shippingpage');
                       } else if (item.id === 4) {

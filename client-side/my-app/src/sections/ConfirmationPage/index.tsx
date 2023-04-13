@@ -42,7 +42,8 @@ function ConfirmationPage({ userInformation }: confirmationPageProps): JSX.Eleme
               xs: '16px'
             },
             color: theme.palette.info.dark,
-            fontWeight: 400
+            fontWeight: 400,
+            px: 4
           }}>
           Thank you for shopping with us Your order will reach you on{' '}
           {new Date(userInformation.date).toDateString()}

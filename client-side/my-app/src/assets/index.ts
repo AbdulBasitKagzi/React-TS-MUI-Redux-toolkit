@@ -28,6 +28,10 @@ import Cart from './icons/Cart.svg';
 import W from './icons/W.svg';
 import stepperIncomplete from './icons/stepperIncomplete.svg';
 import stepperComplete from './icons/stepperComplete.svg';
+import facebook from './icons/facebook.svg';
+import instagram from './icons/instagram.svg';
+import youtube from './icons/youtube.svg';
+import twitter from './icons/twitter.svg';
 
 // images
 import fullbodyoutfit from './images/fullbodyoutfit.png';
@@ -80,6 +84,7 @@ import women_1 from './images/women-1.png';
 import women_2 from './images/women-2.png';
 import women_3 from './images/women-3.png';
 import background from './images/HomeBackgroundImage.png';
+import visa from './images/visa.png';
 
 export const assets = {
   images: {
@@ -132,7 +137,8 @@ export const assets = {
     women_1,
     women_2,
     women_3,
-    background
+    background,
+    visa
   },
   icons: {
     ADD_TO_FAVOURITE,
@@ -163,6 +169,10 @@ export const assets = {
     Cart,
     W,
     stepperIncomplete,
-    stepperComplete
+    stepperComplete,
+    facebook,
+    instagram,
+    youtube,
+    twitter
   }
 };

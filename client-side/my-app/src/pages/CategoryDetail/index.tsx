@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import Layout from '../../layout';
-import { useParams, useSearchParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import FilterSlider from '../../components/Filter';
 import FilterGrid from '../../components/FilterGrid';
 import { gender, brandFilter, categoriesFilter } from '../../data/Constants';
@@ -18,6 +18,9 @@ interface data {
 const CategoryDetail: React.FC = () => {
   const theme = useTheme();
 
+  const [category, setCategory] = useState<string[]>([]);
+  const [brand, setBrand] = useState<string[]>([]);
+
   const [foundGender, setFoundGender] = useState<data>();
   const [foundBrand, setFoundBrand] = useState<data>();
   const [foundCategory, setFoundCategory] = useState<data>();
@@ -28,7 +31,6 @@ const CategoryDetail: React.FC = () => {
     sizes: Array<number> | null;
     priceRange: { min: number; max: number };
   }>({ gender: 1, brands: [], categories: [], sizes: [], priceRange: { min: 200, max: 500 } });
-  const { id, type } = useParams();
 
   const location = useLocation();
 
@@ -41,6 +43,8 @@ const CategoryDetail: React.FC = () => {
 
     const genderQuery = location.search.split('=');
     const newGender = genderQuery[1].split('&');
+    setCategory([genderQuery[2]]);
+    setBrand([genderQuery[2]]);
 
     setFoundGender(gender.find(gender => gender.slug === newGender[0]));
     setFoundBrand(brandFilter.find(brand => brand.slug === genderQuery[2]));
@@ -74,6 +78,24 @@ const CategoryDetail: React.FC = () => {
     }
   }, [foundCategory]);
 
+  const [state, setState] = useState({
+    bottom: false
+  });
+
+  type Anchor = 'bottom';
+
+  const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    console.log(anchor, open);
+    if (
+      event &&
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+
   return (
     <>
       <Layout>
@@ -100,11 +122,21 @@ const CategoryDetail: React.FC = () => {
               Filter
             </Typography>
             <Box sx={{ display: 'flex' }}>
-              <FilterSlider filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
+              <FilterSlider
+                filterQuery={filterQuery}
+                setFilterQuery={setFilterQuery}
+                selectedCategory={category}
+                setCategory={setCategory}
+                selectedBrand={brand}
+                setBrand={setBrand}
+                toggleDrawer={toggleDrawer}
+                state={state}
+              />
               <FilterGrid
                 foundGender={foundGender as data}
                 foundBrand={foundBrand as data}
                 foundCategory={foundCategory as data}
+                toggleDrawer={toggleDrawer}
               />
             </Box>
           </Box>

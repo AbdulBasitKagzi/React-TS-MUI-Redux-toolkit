@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { products } from '../../data/Constants';
 import { productLists } from '../../data/ProductsContant';
-import { SelectedProductProps, productstate } from '../product/product.types';
+import { productstate } from '../product/product.types';
 
 const productState: productstate = {
   Products: products,
@@ -32,7 +32,6 @@ const productSlice = createSlice({
         updatedProducts = updatedProducts.filter(item => item.gender === payload.gender);
       }
       if (payload?.priceRange) {
-        console.log(payload?.priceRange.min, payload?.priceRange.max);
         updatedProducts = updatedProducts?.filter(
           item =>
             item.productCurrentPrice >= payload?.priceRange.min &&

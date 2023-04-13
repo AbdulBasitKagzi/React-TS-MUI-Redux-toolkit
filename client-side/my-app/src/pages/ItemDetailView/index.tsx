@@ -244,7 +244,7 @@ const ItemDetailView: React.FC = () => {
                               src={images.productImage}
                               alt="women"
                               style={{
-                                objectFit: 'cover',
+                                objectFit: 'none',
                                 width: '100%',
                                 height: '100%'
                               }}
@@ -295,7 +295,7 @@ const ItemDetailView: React.FC = () => {
                     position: 'relative',
                     top: {
                       xl: '120px',
-                      lg: '50px',
+
                       md: '50px',
                       sm: '45px'
                       // xs: "510px",

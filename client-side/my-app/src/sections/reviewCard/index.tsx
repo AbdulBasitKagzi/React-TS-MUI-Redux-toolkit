@@ -86,7 +86,7 @@ const ReviewCard: React.FC = () => {
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 3,
+                      gap: { md: 3, sm: 1, xs: 2 },
                       justifyContent: 'space-between'
                     }}>
                     <Box

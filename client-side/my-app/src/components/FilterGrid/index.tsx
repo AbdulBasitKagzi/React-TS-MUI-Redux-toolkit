@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import { cartActions } from '../../store/cart/cart.slice';
 import { useTheme } from '@mui/material';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 interface data {
   id: number;
@@ -27,12 +28,13 @@ interface filterGridProps {
   foundGender: data;
   foundBrand: data;
   foundCategory: data;
+  toggleDrawer: (anchor: 'bottom', open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
 }
 
-const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundCategory }) => {
+const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundCategory, toggleDrawer }) => {
   const theme = useTheme();
   const { filter } = useSelector((state: RootState) => state.product);
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [totalPage, setTotalPage] = useState<number>();
   let postPerPage: number = 9;
@@ -73,9 +75,13 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
             fontWeight: 700,
             color: theme.palette.primary.dark
           }}>
-          {foundGender?.value} {foundCategory?.value} {foundBrand?.value}
-          {foundBrand?.value ? 'Products' : ''}
+          {/* {foundGender?.value} {foundCategory?.value} {foundBrand?.value}
+          {foundBrand?.value ? 'Products' : ''} */}
+          {foundGender?.value} Products
         </Typography>
+        <Box onClick={toggleDrawer('bottom', true)}>
+          <FilterListIcon />
+        </Box>
       </Box>
       <Box
         sx={{
@@ -138,6 +144,7 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
                                 alt={image.productImage}
                                 width="100%"
                                 height="300px"
+                                style={{ objectFit: 'none' }}
                               />
                             </Box>
                           );

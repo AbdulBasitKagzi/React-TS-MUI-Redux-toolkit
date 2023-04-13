@@ -33,8 +33,9 @@ interface dealsProps {
     reviewRate: number;
     slug: string;
   }[];
+  title: string;
 }
-const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
+const Slider: React.FC<dealsProps> = ({ bestDeals, title }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -54,6 +55,18 @@ const Slider: React.FC<dealsProps> = ({ bestDeals }) => {
 
   return (
     <Box sx={{ maxWidth: '1600px', mx: 'auto' }}>
+      <Box>
+        <Typography
+          variant="h3"
+          sx={{
+            fontFamily: 'Jost',
+            fontSize: '39px',
+            fontWeight: 700,
+            textAlign: 'center'
+          }}>
+          Best {title}
+        </Typography>
+      </Box>
       <Box sx={{ mx: 5, position: 'relative' }}>
         <Swiper
           ref={sliderRef}
