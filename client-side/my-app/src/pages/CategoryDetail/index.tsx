@@ -18,9 +18,6 @@ interface data {
 const CategoryDetail: React.FC = () => {
   const theme = useTheme();
 
-  const [category, setCategory] = useState<string[]>([]);
-  const [brand, setBrand] = useState<string[]>([]);
-
   const [foundGender, setFoundGender] = useState<data>();
   const [foundBrand, setFoundBrand] = useState<data>();
   const [foundCategory, setFoundCategory] = useState<data>();
@@ -43,8 +40,6 @@ const CategoryDetail: React.FC = () => {
 
     const genderQuery = location.search.split('=');
     const newGender = genderQuery[1].split('&');
-    setCategory([genderQuery[2]]);
-    setBrand([genderQuery[2]]);
 
     setFoundGender(gender.find(gender => gender.slug === newGender[0]));
     setFoundBrand(brandFilter.find(brand => brand.slug === genderQuery[2]));
@@ -121,14 +116,10 @@ const CategoryDetail: React.FC = () => {
               }}>
               Filter
             </Typography>
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: { sm: 'flex', xs: 'block' } }}>
               <FilterSlider
                 filterQuery={filterQuery}
                 setFilterQuery={setFilterQuery}
-                selectedCategory={category}
-                setCategory={setCategory}
-                selectedBrand={brand}
-                setBrand={setBrand}
                 toggleDrawer={toggleDrawer}
                 state={state}
               />

@@ -56,7 +56,7 @@ const NavbarModel: React.FC<menuProps> = ({ openModel, setOpenModel, setBackgrou
               xs: 'center'
             },
             overflowX: 'auto',
-            gap: '120px'
+            gap: '60px'
           }}>
           <Box
             sx={{
@@ -64,7 +64,7 @@ const NavbarModel: React.FC<menuProps> = ({ openModel, setOpenModel, setBackgrou
                 md: 'flex',
                 xs: 'block'
               },
-              gap: '120px'
+              gap: '60px'
             }}>
             <Box>
               <List>

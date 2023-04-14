@@ -127,7 +127,7 @@ export default function DrawerAppBar(props: Props) {
             }
           }}>
           {openModel && (
-            <Box sx={{ position: 'absolute' }}>
+            <Box sx={{ position: 'absolute', width: '100%' }}>
               <NavbarModel
                 openModel={openModel}
                 setOpenModel={setOpenModel}

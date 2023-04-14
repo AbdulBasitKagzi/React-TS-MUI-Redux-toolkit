@@ -32,6 +32,7 @@ import facebook from './icons/facebook.svg';
 import instagram from './icons/instagram.svg';
 import youtube from './icons/youtube.svg';
 import twitter from './icons/twitter.svg';
+import paypal from './icons/Group 1.svg';
 
 // images
 import fullbodyoutfit from './images/fullbodyoutfit.png';
@@ -173,6 +174,7 @@ export const assets = {
     facebook,
     instagram,
     youtube,
-    twitter
+    twitter,
+    paypal
   }
 };

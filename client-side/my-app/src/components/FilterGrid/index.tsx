@@ -60,7 +60,7 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
         sx={{
           mt: { md: -12.9, sm: -11.8, xs: 5 },
           display: 'flex',
-          justifyContent: { xs: 'start' },
+          justifyContent: 'space-between',
           ml: { xs: 4 }
         }}>
         <Typography
@@ -75,12 +75,12 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
             fontWeight: 700,
             color: theme.palette.primary.dark
           }}>
-          {/* {foundGender?.value} {foundCategory?.value} {foundBrand?.value}
-          {foundBrand?.value ? 'Products' : ''} */}
           {foundGender?.value} Products
         </Typography>
-        <Box onClick={toggleDrawer('bottom', true)}>
-          <FilterListIcon />
+        <Box
+          onClick={toggleDrawer('bottom', true)}
+          sx={{ display: { sm: 'none', xs: 'block' }, alignSelf: 'self-end' }}>
+          <FilterListIcon sx={{ mr: 5 }} />
         </Box>
       </Box>
       <Box
@@ -104,8 +104,7 @@ const FilterGrid: React.FC<filterGridProps> = ({ foundGender, foundBrand, foundC
       <Box
         sx={{
           flexGrow: 1,
-          ml: 4,
-          mr: 6.25
+          marginInline: '25px'
         }}>
         {open && <WarningModel open={open} setOpen={setOpen} />}
 

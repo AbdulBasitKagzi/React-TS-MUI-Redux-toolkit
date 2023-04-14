@@ -97,68 +97,6 @@ const ShippingPage: React.FC = () => {
     return filteredata;
   };
 
-  const handleUserValidation = () => {
-    if (userInformation.firstName.length === 0) {
-      setOpenUp(true);
-      setAlert({
-        type: 'error',
-        title: 'Error',
-        message: 'Plese enter first name.'
-      });
-      return;
-    } else if (userInformation.lastName.length === 0) {
-      setOpenUp(true);
-      setAlert({
-        type: 'error',
-        title: 'Error',
-        message: 'Plese enter last name.'
-      });
-      return;
-    } else if (!emailRegexp.test(userInformation.emailaddress)) {
-      setOpenUp(true);
-      setAlert({
-        type: 'error',
-        title: 'Error',
-        message: 'Please enter correct email address.'
-      });
-      return;
-    } else if (string.test(userInformation.phoneNumber)) {
-      setOpenUp(true);
-      setAlert({
-        type: 'error',
-        title: 'Error',
-        message: 'Plese enter valid phone number.'
-      });
-      return;
-    } else if (userInformation.phoneNumber.length < 10) {
-      setOpenUp(true);
-      setAlert({
-        type: 'error',
-        title: 'Error',
-        message: 'Please enter 10 digit phone number.'
-      });
-      return;
-    } else if (string.test(userInformation.zipCode)) {
-      setOpenUp(true);
-      setAlert({
-        type: 'error',
-        title: 'Error',
-        message: 'Plese enter valid phone number.'
-      });
-      return;
-    } else if (userInformation.zipCode.length < 6) {
-      setOpenUp(true);
-      setAlert({
-        type: 'error',
-        title: 'Error',
-        message: 'Please enter 6 digit zip code.'
-      });
-      return;
-    } else {
-      setPage(page + 1);
-    }
-  };
-
   const handlePaymentValidation = () => {
     if (paymentInformation.cardName.length === 0) {
       setOpenUp(true);
@@ -244,82 +182,53 @@ const ShippingPage: React.FC = () => {
           />
         )}
         <Layout>
+          <Box sx={{}}>
+            <Box
+              sx={{
+                width: {
+                  lg: '1000px',
+                  md: '725px',
+                  sm: '600px',
+                  xs: '100%'
+                },
+                paddingTop: '43px',
+                ml: { sm: page === 3 ? 'auto' : 0, xs: 'auto' },
+                mr: { sm: page === 3 ? 'auto' : 0, xs: 'auto' }
+                // mx: page === 3 ? 'auto' : 0
+              }}>
+              <Stepper
+                activeStep={page}
+                alternativeLabel
+                sx={{
+                  '.MuiStep-root': {
+                    color: theme.palette.primary.contrastText
+                  },
+                  '.Mui-completed': {
+                    color: theme.palette.primary.contrastText
+                  }
+                }}>
+                {steps.map(label => (
+                  <Step key={label}>
+                    <StepLabel StepIconComponent={CustomStepIcon}>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Box>
+          </Box>
           <Box
             sx={{
               display: {
                 sm: 'flex',
                 xs: 'block'
               },
-
-              justifyContent: 'space-evenly'
+              justifyContent: 'space-evenly',
+              flexDirection: 'row-reverse'
             }}>
-            <Box
-              sx={{
-                maxWidth: {
-                  sm: '50%',
-                  xs: '100%'
-                }
-              }}>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Box
-                  sx={{
-                    width: {
-                      md: '608px',
-                      sm: '400px',
-                      xs: '300px'
-                    },
-                    paddingTop: '43px',
-                    mr: 'auto',
-                    ml: { sm: 'unset', xs: 'auto' }
-                  }}>
-                  <Stepper
-                    activeStep={page}
-                    alternativeLabel
-                    sx={{
-                      '.MuiStep-root': {
-                        color: theme.palette.primary.contrastText
-                      },
-                      '.Mui-completed': {
-                        color: theme.palette.primary.contrastText
-                      }
-                    }}>
-                    {steps.map(label => (
-                      <Step key={label}>
-                        <StepLabel StepIconComponent={CustomStepIcon}>{label}</StepLabel>
-                      </Step>
-                    ))}
-                  </Stepper>
-                </Box>
-              </Box>
-              {page === 1 && (
-                <UserInformation
-                  userInformation={userInformation}
-                  setUserInformation={setUserInformation}
-                  handleUserValidation={handleUserValidation}
-                />
-              )}
-
-              {page === 2 && (
-                <UserPaymentInformation
-                  page={page}
-                  setPage={setPage}
-                  total={total + vat_tax + shipping}
-                  setSelectedValue={setSelectedValue}
-                  setPaymentInformation={setPaymentInformation}
-                  paymentInformation={paymentInformation}
-                  selectedValue={selectedValue}
-                  handlePaymentValidation={handlePaymentValidation}
-                />
-              )}
-              {page === 3 && <ConfirmationPage userInformation={userInformation} />}
-            </Box>
-
-            {/*product card  */}
             {page !== 3 && (
               <Box
                 sx={{
                   width: { lg: '35%', md: '40%', sm: '50%', xs: '100%' },
-                  mt: { sm: 14.5, xs: 4 },
+                  mt: { xs: 4 },
                   px: { md: 0, sm: 2, xs: 1.5 }
                 }}>
                 <Box
@@ -731,7 +640,7 @@ const ShippingPage: React.FC = () => {
                   {/* enter code above */}
                 </Box>
                 {/* button on small screen */}
-                <Box
+                {/* <Box
                   sx={{
                     display: {
                       sm: 'none',
@@ -766,7 +675,7 @@ const ShippingPage: React.FC = () => {
                     }}
                     onClick={() => {
                       if (page === 1) {
-                        handleUserValidation();
+                        // handleUserValidation();
                       } else if (page === 2) {
                         handlePaymentValidation();
                       } else {
@@ -782,9 +691,42 @@ const ShippingPage: React.FC = () => {
                         : 'Proceed to Payment'}
                     </Typography>
                   </Button>
-                </Box>
+                </Box> */}
               </Box>
             )}
+            <Box
+              sx={{
+                maxWidth: {
+                  sm: '50%',
+                  xs: '100%'
+                }
+              }}>
+              {/*product card  */}
+
+              {page === 1 && (
+                <UserInformation
+                  userInformation={userInformation}
+                  setUserInformation={setUserInformation}
+                  setPage={setPage}
+                  page={page}
+                  // handleUserValidation={handleUserValidation}
+                />
+              )}
+
+              {page === 2 && (
+                <UserPaymentInformation
+                  page={page}
+                  setPage={setPage}
+                  total={total + vat_tax + shipping}
+                  setSelectedValue={setSelectedValue}
+                  setPaymentInformation={setPaymentInformation}
+                  paymentInformation={paymentInformation}
+                  selectedValue={selectedValue}
+                  // handlePaymentValidation={handlePaymentValidation}
+                />
+              )}
+              {page === 3 && <ConfirmationPage userInformation={userInformation} />}
+            </Box>
           </Box>
         </Layout>
       </Box>

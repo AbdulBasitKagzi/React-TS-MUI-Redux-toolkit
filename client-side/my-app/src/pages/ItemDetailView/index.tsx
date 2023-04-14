@@ -457,7 +457,7 @@ const ItemDetailView: React.FC = () => {
                     {selectedProduct?.productName}
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', pt: 2, gap: 1 }}>
+                <Box sx={{ display: 'flex', pt: 2, gap: 1 }}>
                   {printStars(selectedProduct?.reviewRate)}
                   {selectedProduct?.remainingStars && printRemainingStars(selectedProduct?.remainingStars)}
 

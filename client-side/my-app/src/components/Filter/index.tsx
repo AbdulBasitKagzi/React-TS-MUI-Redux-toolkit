@@ -16,17 +16,8 @@ import Slider from '@mui/material/Slider';
 import { Drawer } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useTheme } from '@mui/material';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import SwipeableTemporaryDrawer from '../testNavbar';
+
+import SwipeableTemporaryDrawer from '../FilterProductDrawer/index';
 
 type Anchor = 'bottom';
 
@@ -49,10 +40,7 @@ interface filterProps {
       priceRange: { min: number; max: number };
     }>
   >;
-  selectedCategory: string[];
-  selectedBrand: string[];
-  setCategory: (value: any) => void;
-  setBrand: (value: any) => void;
+
   state: {
     bottom: boolean;
   };
@@ -62,10 +50,6 @@ interface filterProps {
 export default function FilterSlider({
   filterQuery,
   setFilterQuery,
-  selectedCategory,
-  setCategory,
-  selectedBrand,
-  setBrand,
   state,
   toggleDrawer
 }: filterProps): JSX.Element {
@@ -79,8 +63,6 @@ export default function FilterSlider({
 
   const handleBrandFilter = (value: number, isChecked: boolean, brand: string) => {
     if (isChecked) {
-      setBrand((prev: string[]) => [...prev, brand]);
-
       setFilterQuery(prevValue => {
         if (prevValue.brands) {
           return {
@@ -95,7 +77,6 @@ export default function FilterSlider({
         }
       });
     } else {
-      setBrand(selectedBrand.filter(state => state !== brand));
       setFilterQuery(prevValue => {
         if (prevValue.brands) {
           return {
@@ -113,7 +94,6 @@ export default function FilterSlider({
   };
   const handleCategoriesFilter = (value: number, isChecked: boolean, category: string) => {
     if (isChecked) {
-      setCategory((prev: string[]) => [...prev, category]);
       setFilterQuery(prevValue => {
         if (prevValue.categories) {
           return {
@@ -128,7 +108,6 @@ export default function FilterSlider({
         }
       });
     } else {
-      setCategory(selectedCategory.filter(state => state !== category));
       setFilterQuery(prevValue => {
         if (prevValue.categories) {
           return {
@@ -181,223 +160,12 @@ export default function FilterSlider({
     setMin_Max([filterQuery.priceRange.min, filterQuery.priceRange.max]);
   }, [filterQuery, dispatch]);
 
-  // to open menu in mobile view
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(prevState => !prevState);
-  };
-
   const setPriceRange = (value: Array<number>) => {
     setFilterQuery(prev => ({
       ...prev,
       priceRange: { min: value[0], max: value[1] }
     }));
   };
-
-  // const [state, setState] = useState({
-  //   bottom: false
-  // });
-
-  // const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-  //   if (
-  //     event &&
-  //     event.type === 'keydown' &&
-  //     ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')
-  //   ) {
-  //     return;
-  //   }
-  //   setState({ ...state, [anchor]: open });
-  // };
-
-  // const list = (anchor: Anchor) => (
-  //   <Box
-  //     sx={{ width: anchor === 'bottom' ? 'auto' : 250 }}
-  //     role="presentation"
-  //     onClick={toggleDrawer(anchor, false)}
-  //     onKeyDown={toggleDrawer(anchor, false)}>
-  //     <List>
-  //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-  //         <ListItem key={text} disablePadding>
-  //           <ListItemButton>
-  //             <ListItemIcon>Abdulbasit</ListItemIcon>
-  //             <ListItemText primary={text} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //     <Divider />
-  //     <List>
-  //       {['All mail', 'Trash', 'Spam'].map((text, index) => (
-  //         <ListItem key={text} disablePadding>
-  //           <ListItemButton>
-  //             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-  //             <ListItemText primary={text} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Box>
-  // );
-
-  // const drawer = (
-  //   <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-  //     <Box
-  //       sx={{
-  //         width: '240px',
-  //         backgroundColor: theme.palette.info.light,
-  //         ml: 2,
-  //         mt: 2
-  //       }}>
-  //       <Box sx={{ mx: 4, textAlign: 'left' }}>
-  //         <Typography
-  //           sx={{
-  //             fontFamily: 'Jost',
-  //             fontWeight: '600',
-  //             fontSize: '16px',
-  //             letterSpacing: '0.02em',
-  //             textTransform: 'uppercase',
-  //             color: theme.palette.warning.main,
-  //             mb: 3,
-  //             pt: 1
-  //           }}>
-  //           PRICES
-  //         </Typography>
-
-  //         <Box
-  //           sx={{
-  //             display: 'flex',
-  //             justifyContent: 'space-between'
-  //           }}>
-  //           <Typography
-  //             id="range-slider"
-  //             gutterBottom
-  //             sx={{
-  //               fontFamily: 'Jost',
-  //               fontWeight: '400',
-  //               fontSize: '20px',
-  //               letterSpacing: '0.02em',
-  //               color: theme.palette.warning.light
-  //             }}>
-  //             Range
-  //           </Typography>
-  //           <Typography
-  //             id="range-slider"
-  //             gutterBottom
-  //             sx={{
-  //               fontFamily: 'Jost',
-  //               fontWeight: '500',
-  //               fontSize: { sm: '20px', xs: '16px' },
-  //               letterSpacing: '0.02em',
-  //               color: theme.palette.warning.main
-  //             }}>
-  //             ${filterQuery.priceRange.min}-${filterQuery.priceRange.max}
-  //           </Typography>
-  //         </Box>
-
-  //         <Slider
-  //           sx={{
-  //             color: theme.palette.warning.dark,
-  //             width: '180px'
-  //           }}
-  //           onChange={(_, value) => {
-  //             setPriceRange(value as [number, number]);
-  //           }}
-  //           valueLabelDisplay="auto"
-  //           aria-labelledby="range-slider"
-  //           value={min_max}
-  //           max={1000}
-  //           min={1}
-  //           name="price"
-  //           disableSwap
-  //           getAriaLabel={() => 'Minimum distance'}
-  //         />
-  //       </Box>
-
-  //       <FormGroup sx={{ mx: 4, textAlign: 'left', mt: 4, height: '1300px' }}>
-  //         <Typography
-  //           textAlign="left"
-  //           sx={{
-  //             fontFamily: 'Jost',
-  //             fontWeight: 600,
-  //             fontSize: '16px',
-  //             color: theme.palette.warning.main,
-  //             mt: 4,
-  //             mb: 3
-  //           }}>
-  //           Brands
-  //         </Typography>
-  //         {brandFilter.map(brand => (
-  //           <FormControlLabel
-  //             key={brand.id}
-  //             control={<Checkbox />}
-  //             label={brand.value}
-  //             sx={{ color: theme.palette.warning.main }}
-  //             onClick={(e: MouseEvent<HTMLLabelElement>) => {
-  //               handleBrandFilter(
-  //                 brand.id,
-  //                 (e.target as unknown as { checked: boolean }).checked,
-  //                 brand.slug
-  //               );
-  //             }}
-  //           />
-  //         ))}
-  //         <Typography
-  //           textAlign="left"
-  //           sx={{
-  //             fontFamily: 'Jost',
-  //             fontWeight: 600,
-  //             fontSize: '16px',
-  //             color: theme.palette.warning.main,
-  //             mt: 10,
-
-  //             mb: 3
-  //           }}>
-  //           Categories
-  //         </Typography>
-  //         {categoriesFilter.map(category => (
-  //           <FormControlLabel
-  //             key={category.id}
-  //             control={<Checkbox />}
-  //             label={category.value}
-  //             sx={{ color: theme.palette.warning.main }}
-  //             onClick={(e: MouseEvent<HTMLLabelElement>) => {
-  //               handleCategoriesFilter(
-  //                 category.id,
-  //                 (e.target as unknown as { checked: boolean }).checked,
-  //                 category.slug
-  //               );
-  //             }}
-  //           />
-  //         ))}
-  //         <Typography
-  //           textAlign="left"
-  //           sx={{
-  //             fontFamily: 'Jost',
-  //             fontWeight: 600,
-  //             fontSize: '16px',
-  //             color: theme.palette.warning.main,
-  //             mt: 10,
-
-  //             mb: 3
-  //           }}>
-  //           Size
-  //         </Typography>
-  //         {sizeFilter.map(size => (
-  //           <FormControlLabel
-  //             key={size.id}
-  //             control={<Checkbox />}
-  //             label={size.value}
-  //             sx={{ color: theme.palette.warning.main }}
-  //             onClick={(e: MouseEvent<HTMLLabelElement>) => {
-  //               handleSizeFilter(size.id, (e.target as unknown as { checked: boolean }).checked);
-  //             }}
-  //           />
-  //         ))}
-  //       </FormGroup>
-  //     </Box>
-  //   </Box>
-  // );
 
   const desktop_filter = () => {
     return (
@@ -497,7 +265,7 @@ export default function FilterSlider({
                     <Checkbox
                       color="primary"
                       style={{ color: '#374151', border: '1.5 px solid ' }}
-                      checked={selectedBrand?.includes(brand.slug) ? true : false}
+                      checked={filterQuery.brands.includes(brand.id) ? true : false}
                     />
                   }
                   label={brand.value}
@@ -531,7 +299,9 @@ export default function FilterSlider({
                   key={category.id}
                   control={
                     <Checkbox
-                      checked={selectedCategory?.includes(category.slug) ? true : false}
+                      checked={
+                        filterQuery.categories && filterQuery.categories.includes(category.id) ? true : false
+                      }
                       color="primary"
                       style={{ color: '#374151', border: '1.5 px solid ' }}
                       onChange={e => {
@@ -578,14 +348,16 @@ export default function FilterSlider({
   return (
     <>
       {desktop}
-      {/* <SwipeableDrawer
-        anchor="bottom"
-        open={state['bottom']}
-        onClose={toggleDrawer('bottom', false)}
-        onOpen={toggleDrawer('bottom', true)}>
-        {list('bottom')}
-      </SwipeableDrawer> */}
-      <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer} />
+      <SwipeableTemporaryDrawer
+        state={state}
+        toggleDrawer={toggleDrawer}
+        min_max={min_max}
+        setPriceRange={setPriceRange}
+        filterQuery={filterQuery}
+        handleSizeFilter={handleSizeFilter}
+        handleBrandFilter={handleBrandFilter}
+        handleCategoriesFilter={handleCategoriesFilter}
+      />
     </>
   );
 }
