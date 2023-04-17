@@ -35,22 +35,12 @@ interface UserInformationType {
 
 function UserInformation({
   setUserInformation,
-  userInformation,
   setPage,
   page
 }: // handleUserValidation
 UserInformationType): JSX.Element {
   const theme = useTheme();
   const [date_time, setDate_Time] = useState(dayjs());
-
-  const handleUserInformation = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setUserInformation(prev => ({
-      ...prev,
-      [event.target.name]: event.target.value
-    }));
-  };
 
   const handleDate = (newValue: any) => {
     console.log(newValue, typeof newValue);
@@ -91,8 +81,7 @@ UserInformationType): JSX.Element {
       zipCode: Yup.string().min(6, 'Please enter 6 digit zip code').required('Zipcode is required')
     }),
 
-    onSubmit: (values, error) => {
-      console.log({ error });
+    onSubmit: values => {
       setUserInformation(prev => ({
         ...prev,
         ...values
@@ -377,12 +366,13 @@ UserInformationType): JSX.Element {
                 color: theme.palette.success.main,
                 borderRadius: 0,
                 mx: 'auto',
-                mt: { lg: 10, sm: 5 }
+                mt: { lg: 10, sm: 5 },
+                textTransform: 'capitalize'
               }}
               onClick={() => {
                 // handleUserValidation(userInformation);
               }}>
-              Proceed to Payment
+              Procedd to Payment
             </Button>
           </Box>
         </Box>

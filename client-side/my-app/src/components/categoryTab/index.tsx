@@ -72,7 +72,7 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
                 sm: 'hidden',
                 xs: 'auto'
               },
-              justifyContent: 'space-between',
+              justifyContent: 'center',
               maxWidth: '85%',
               mx: 'auto'
             }}>
@@ -81,9 +81,10 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
                 <Typography
                   sx={{
                     fontWeight: 700,
-                    fontSize: '30px',
+                    fontSize: { sm: '30px', xs: '18px' },
                     fontFamily: 'Jost',
-                    p: 2
+                    p: 2,
+                    textAlign: 'center'
                   }}>
                   No Products found
                 </Typography>
@@ -212,10 +213,12 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
                 xs: 100,
                 sm: 110
               },
-              height: { xl: 61, lg: 50, xs: 30 },
-              mt: 8,
+              height: { xl: 61, md: 50, xs: 30 },
+              mt: { sm: 8, xs: 3 },
               color: theme.palette.success.main,
-              borderRadius: 0
+              borderRadius: 0,
+              textTransform: 'capitalize',
+              fontFamily: 'Jost'
             }}>
             View All
           </Button>
@@ -229,7 +232,6 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
               xl: display,
               lg: display,
               md: display,
-              sm: 'none',
               xs: 'none'
             },
             top: { md: '25%' },
@@ -246,10 +248,8 @@ const CategorySlider: React.FC<categoryProps> = ({ bestDeals }) => {
               xl: display,
               lg: display,
               md: display,
-              sm: 'none',
               xs: 'none'
             },
-
             top: { md: '25%' },
             left: { lg: '98%', md: '100%' }
           }}

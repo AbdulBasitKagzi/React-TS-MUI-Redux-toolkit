@@ -673,7 +673,6 @@ const ItemDetailView: React.FC = () => {
                                     selectedColor: col.id
                                   })
                                 );
-
                                 handleColorChange(event, index);
                               }}
                             />
@@ -733,7 +732,11 @@ const ItemDetailView: React.FC = () => {
                       fontWeight: 700,
                       color: theme.palette.success.main,
                       ml: { sm: 1 },
-                      borderRadius: 0
+                      borderRadius: 0,
+                      textTransform: 'capitalize',
+                      '&:hover': {
+                        background: theme.palette.primary.light
+                      }
                     }}
                     onClick={() => {
                       if (!save) {
@@ -757,7 +760,7 @@ const ItemDetailView: React.FC = () => {
                       fontWeight: 700,
                       color: theme.palette.primary.contrastText,
                       mr: { sm: 1 },
-
+                      textTransform: 'capitalize',
                       borderRadius: 0
                     }}
                     onClick={() => {

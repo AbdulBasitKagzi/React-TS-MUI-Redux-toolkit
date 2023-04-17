@@ -129,6 +129,8 @@ function Home() {
                         fontSize: { md: 20, sm: 15, xs: 8 },
                         color: theme.palette.primary.dark,
                         fontWeight: 700,
+                        textTransform: 'capitalize',
+
                         '&:hover': {
                           background: theme.palette.success.main
                         }
@@ -140,7 +142,6 @@ function Home() {
                     sx={{
                       backgroundImage: `url(${assets.images.ForHim})`,
                       backgroundSize: 'cover',
-
                       width: '100%',
                       height: {
                         xl: '700px',
@@ -168,6 +169,7 @@ function Home() {
                         fontSize: { md: 20, sm: 15, xs: 8 },
                         color: theme.palette.primary.dark,
                         fontWeight: 700,
+                        textTransform: 'capitalize',
                         '&:hover': {
                           background: theme.palette.success.main
                         }

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import DescriptionAlerts from '../../components/Alert';
 import { userActions } from '../../store/user/user.slice';
+import formik, { useFormik } from 'formik';
+import * as Yup from 'yup';
 // mui imports
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -42,97 +44,114 @@ export default function SignIn() {
   let empty: boolean | undefined = undefined;
   const [alert, setAlert] = useState<boolean>(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    empty = Object.values(userCredentials).some(ele => ele === '');
-    empty && setAlert(empty);
-
-    if (!empty) {
-      dispatch(userActions.login({ userCredentials }));
-    } else {
-      return;
-    }
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserCredentials(prev => ({
-      ...prev,
-      [event.target.name]: event.target.value
-    }));
-  };
-
   const dispatch = useDispatch();
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email('Invalid email address').required('Please enter your email address.'),
+      password: Yup.string()
+        .min(6, 'Password should be six or more then six characters long.')
+        .required('Password is required.')
+    }),
+    onSubmit: values => {
+      setUserCredentials(prev => ({
+        ...prev,
+        ...values
+      }));
+      dispatch(userActions.login({ userCredentials }));
+    },
+    validateOnBlur: true
+  });
 
   return (
     <GuestGuard>
-      <ThemeProvider theme={theme}>
-        {alert && (
-          <DescriptionAlerts
-            type="error"
-            title="Error"
-            message="Please fill all the fields"
-            openUp={alert}
-            setOpenUp={setAlert}
-            closeDuration={2000}
-            backgroundColor=" #cc0000"
-          />
-        )}
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
-            }}>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={handleChange}
-              />
-              <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.email && formik.touched.email ? (
+              <Box
+                sx={{
+                  background: '#f44336',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  p: 1
+                }}>
+                {formik.errors.email}
+              </Box>
+            ) : null}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.password && formik.touched.password ? (
+              <Box
+                sx={{
+                  background: '#f44336',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  p: 1
+                }}>
+                {formik.errors.password}
+              </Box>
+            ) : null}
+            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, backgroundColor: '#1976d2', color: '#fff', fontWeight: 500 }}>
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
               </Grid>
-            </Box>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
-        </Container>
-      </ThemeProvider>
+        </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
     </GuestGuard>
   );
 }

@@ -35,12 +35,9 @@ function Advertise({
           sx={{
             display: 'flex',
             justifyContent: 'center',
-
             background: background,
             width: '100%',
-
             mb: { xs: 1 },
-
             mx: 'auto'
           }}>
           <Box
@@ -125,6 +122,8 @@ function Advertise({
                 mb: 2,
                 fontSize: { lg: '15px', xs: '9px' },
                 borderRadius: 0,
+                textTransform: 'capitalize',
+                fontFamily: 'Jost',
                 '&:hover': {
                   background: theme.palette.primary.dark
                 }

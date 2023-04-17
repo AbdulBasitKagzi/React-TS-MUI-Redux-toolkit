@@ -298,7 +298,8 @@ function UserPaymentInformation({
               borderRadius: 0,
               mb: { md: 0, sm: 2, xs: 0 },
               width: '30%',
-              height: '60px'
+              height: '60px',
+              textTransform: 'capitalize'
             }}
             onClick={() => setPage(page - 1)}>
             Back
@@ -312,7 +313,8 @@ function UserPaymentInformation({
               borderRadius: 0,
               mb: { md: 0, sm: 2 },
               width: '70%',
-              height: '60px'
+              height: '60px',
+              textTransform: 'capitalize'
             }}
             onClick={() => {
               // handlePaymentValidation(paymentInformation);

@@ -27,23 +27,20 @@ function ConfirmationPage({ userInformation }: confirmationPageProps): JSX.Eleme
         }}>
         Your order is confirmed
       </Typography>
-      <Box sx={{ mx: 'auto', mt: 2 }}>
+      <Box sx={{ mx: 'auto', mt: 2, width: { md: '490px', sm: '335px', xs: '283px' } }}>
         <Typography
           sx={{
-            py: 4,
             textAlign: 'center',
             wordBreak: 'break-all',
             fontFamily: 'Roboto',
             fontSize: {
-              xl: '22px',
-              lg: '22px',
-              md: '22px',
-              sm: '22px',
+              sm: '18px',
               xs: '16px'
             },
             color: theme.palette.info.dark,
             fontWeight: 400,
-            px: 4
+            px: 4,
+            py: 4
           }}>
           Thank you for shopping with us Your order will reach you on{' '}
           {new Date(userInformation.date).toDateString()}
@@ -56,9 +53,10 @@ function ConfirmationPage({ userInformation }: confirmationPageProps): JSX.Eleme
             backgroundColor: theme.palette.primary.contrastText,
             color: theme.palette.success.main,
             borderRadius: 0,
-            // ml: "50%",
-            mx: 'auto'
-            // mt: 15,
+            mx: 'auto',
+            textTransform: 'capitalize',
+            width: { xs: '50%' },
+            height: '51px'
           }}
           onClick={() => {
             dispatch(cartActions.emptyCart());

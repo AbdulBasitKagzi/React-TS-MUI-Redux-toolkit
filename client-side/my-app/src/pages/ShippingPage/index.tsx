@@ -182,7 +182,7 @@ const ShippingPage: React.FC = () => {
           />
         )}
         <Layout>
-          <Box sx={{}}>
+          <Box sx={{ display: 'flex', justifyContent: 'start' }}>
             <Box
               sx={{
                 width: {
@@ -639,59 +639,6 @@ const ShippingPage: React.FC = () => {
 
                   {/* enter code above */}
                 </Box>
-                {/* button on small screen */}
-                {/* <Box
-                  sx={{
-                    display: {
-                      sm: 'none',
-                      xs: 'flex'
-                    },
-                    justifyContent: 'start',
-                    flexWrap: 'wrap',
-                    mt: 6
-                  }}>
-                  {page === 2 && (
-                    <Box
-                      sx={{
-                        mb: { sm: 2, xs: 2 },
-                        mx: 'auto'
-                      }}>
-                      <Button variant="outlined" sx={{ borderRadius: 0 }} onClick={() => setPage(page - 1)}>
-                        <Typography>Back</Typography>
-                      </Button>
-                    </Box>
-                  )}
-
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: theme.palette.primary.contrastText,
-                      color: theme.palette.success.main,
-                      borderRadius: 0,
-                      // ml: "50%",
-                      mx: 'auto',
-                      mb: { sm: 2, xs: 2 }
-                      // mt: 15,
-                    }}
-                    onClick={() => {
-                      if (page === 1) {
-                        // handleUserValidation();
-                      } else if (page === 2) {
-                        handlePaymentValidation();
-                      } else {
-                        dispatch(cartActions.emptyCart());
-                        navigate('/');
-                      }
-                    }}>
-                    <Typography sx={{ ml: 5, mr: 5 }}>
-                      {page === 2
-                        ? `Confirm Payment of: $ ${total + vat_tax + shipping}.00`
-                        : page === 3
-                        ? 'Continue Shopping'
-                        : 'Proceed to Payment'}
-                    </Typography>
-                  </Button>
-                </Box> */}
               </Box>
             )}
             <Box

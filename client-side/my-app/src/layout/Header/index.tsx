@@ -121,10 +121,7 @@ export default function DrawerAppBar(props: Props) {
             boxShadow: 'none',
             position: 'relative',
             maxWidth: '1600px',
-            mx: 'auto',
-            '&:hover': {
-              backgroundColor: theme.palette.success.main
-            }
+            mx: 'auto'
           }}>
           {openModel && (
             <Box sx={{ position: 'absolute', width: '100%' }}>
@@ -171,7 +168,6 @@ export default function DrawerAppBar(props: Props) {
                 sx={{
                   color: '#fff',
                   fontFamily: 'Josefin Sans',
-
                   ml: { md: '75px' },
                   cursor: 'pointer',
                   display: {
@@ -240,7 +236,6 @@ export default function DrawerAppBar(props: Props) {
                       fontFamily: 'Josefin Sans',
                       fontSize: '16px',
                       display: 'block',
-
                       cursor: 'pointer'
                     }}
                     onClick={() => {

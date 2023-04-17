@@ -56,7 +56,7 @@ const CategoryTab: FC<categoryTabProps> = ({
             sx={{
               color: textColor,
               border: border,
-
+              textTransform: 'capitalize',
               mr: 1,
               fontSize: {
                 sm: '0.875rem',

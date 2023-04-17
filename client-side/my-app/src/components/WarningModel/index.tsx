@@ -48,7 +48,10 @@ const WarningModel: React.FC<warningModelProps> = ({ setOpen, open }) => {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Please login to add products to cart
             </Typography>
-            <Button variant="contained" sx={{ mt: 2 }} onClick={() => navigate('/login')}>
+            <Button
+              variant="contained"
+              sx={{ mt: 2, textTransform: 'capitalize' }}
+              onClick={() => navigate('/login')}>
               Login
             </Button>
           </Box>

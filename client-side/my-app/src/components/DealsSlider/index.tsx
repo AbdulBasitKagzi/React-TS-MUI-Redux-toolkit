@@ -242,7 +242,8 @@ const Slider: React.FC<dealsProps> = ({ bestDeals, title }) => {
               height: { xl: 61, lg: 50, xs: 30 },
               mt: { sm: 8, xs: 2 },
               color: theme.palette.success.main,
-              borderRadius: 0
+              borderRadius: 0,
+              textTransform: 'capitalize'
             }}>
             View All
           </Button>
