@@ -23,7 +23,6 @@ const ImageSlider: React.FC = () => {
           <Box
             sx={{
               position: 'relative',
-
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
